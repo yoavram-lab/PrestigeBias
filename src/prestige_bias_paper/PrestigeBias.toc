@@ -1,0 +1,33 @@
+\contentsline {section}{Introduction}{2}%
+\contentsline {section}{Models}{4}%
+\contentsline {paragraph}{Reminder:}{4}%
+\contentsline {paragraph}{Model.}{4}%
+\contentsline {paragraph}{Success bias.}{5}%
+\contentsline {paragraph}{Random choice transmission.}{5}%
+\contentsline {paragraph}{Influence bias.}{6}%
+\contentsline {section}{General Binomial Distribution Approximation}{7}%
+\contentsline {paragraph}{Proposition:}{7}%
+\contentsline {paragraph}{Proof: }{7}%
+\contentsline {paragraph}{Corollary 1: }{7}%
+\contentsline {paragraph}{Corollary 2: }{8}%
+\contentsline {paragraph}{Proof: }{8}%
+\contentsline {section}{Dirichlet-Multinomial Distribution Approximation}{8}%
+\contentsline {paragraph}{Reminder: \textit {Pólya urn model}}{8}%
+\contentsline {paragraph}{Proposition:}{9}%
+\contentsline {paragraph}{Proof:}{9}%
+\contentsline {paragraph}{Corollary 1:}{9}%
+\contentsline {paragraph}{Numeric validation:}{10}%
+\contentsline {section}{The binary model}{10}%
+\contentsline {section}{Fixation probability and time - binary model}{13}%
+\contentsline {paragraph}{Kimura's approximation:}{13}%
+\contentsline {paragraph}{Proposition:}{13}%
+\contentsline {paragraph}{Proof:}{13}%
+\contentsline {paragraph}{Proposition:}{14}%
+\contentsline {paragraph}{Proof:}{14}%
+\contentsline {section}{Changing environment}{16}%
+\contentsline {paragraph}{Proposition:}{16}%
+\contentsline {paragraph}{Proof by induction:}{17}%
+\contentsline {section}{Conclusion}{21}%
+\contentsline {section}{Appendix A - Time table}{22}%
+\contentsline {paragraph}{Today - Oct 2021:}{22}%
+\contentsline {paragraph}{Nov - Mar 2021:}{22}%

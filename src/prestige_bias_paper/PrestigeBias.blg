@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: PrestigeBias.aux
+The style file: apalike.bst
+Database file #1: refs.bib
+Warning--there's a number but no series in transmissionVectorsBook
+Warning--there's a number but no volume in dirichlet
+Warning--empty publisher in dualEvolution
+You've used 21 entries,
+            1935 wiz_defined-function locations,
+            626 strings with 7666 characters,
+and the built_in function-call counts, 8575 in all, are:
+= -- 810
+> -- 399
+< -- 12
++ -- 140
+- -- 136
+* -- 782
+:= -- 1515
+add.period$ -- 64
+call.type$ -- 21
+change.case$ -- 168
+chr.to.int$ -- 21
+cite$ -- 24
+duplicate$ -- 297
+empty$ -- 585
+format.name$ -- 167
+if$ -- 1640
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 26
+newline$ -- 108
+num.names$ -- 63
+pop$ -- 153
+preamble$ -- 1
+purify$ -- 173
+quote$ -- 0
+skip$ -- 212
+stack$ -- 0
+substring$ -- 576
+swap$ -- 24
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 116
+warning$ -- 3
+while$ -- 64
+width$ -- 0
+write$ -- 271
+(There were 3 warnings)
