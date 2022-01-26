@@ -325,15 +325,15 @@ To do that we simplify our model to a binary model, so the simulations of the mo
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.3\textwidth}
-    \includegraphics[width=\linewidth]{../../graphs/chi_square_stats/chi_hist_homogenous_0_01.pdf}
+    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_01.pdf}
     \subcaption{Error scale is 0.01}
     \end{subfigure}
     \begin{subfigure}[a]{0.3\textwidth}
-    \includegraphics[width=\linewidth]{../../graphs/chi_square_stats/chi_hist_homogenous_0_1.pdf} 
+    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_1.pdf} 
     \subcaption{Error scale is 0.1}
     \end{subfigure}
     \begin{subfigure}[a]{0.3\textwidth}
-    \includegraphics[width=\linewidth]{../../graphs/chi_square_stats/chi_hist_homogenous_J.pdf}
+    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_J.pdf}
   \subcaption{Error scale is 1(=J)}  
   \end{subfigure}
   \caption{DM approximation vs iterative process. Population size 2000. 			Aggregated values of 400 simulations}	
@@ -352,7 +352,7 @@ In the first generation there is a single individual with $\hat{A}$, and the res
 We're interesting in studying the difference between the real binary model as we defined in eq. \ref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../../graphs/binary/num_sims.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
   \caption{Population size $N=1000$, $\alpha=0.5$, $J=1$, $\hat{A}=1$,$A=0.7$, $\beta(A)=0.956$}	
   \label{fig:num_sims}
 \end{figure}
@@ -365,7 +365,7 @@ First we relaxed our assumption of no mutation. To include mutation in the binar
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../../graphs/binary/full_vs_dm_mutation.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
   \caption{$5000$ simulations per data point, $N=1000$, $\alpha=0.1$,$\hat{A}=1$,$A=0.7$, $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis}	
   \label{fig:hetro_mutation}
 \end{figure}
@@ -375,7 +375,7 @@ In fig. \ref{fig:hetro_mutation} we see the comparison when heterogeneous mutati
 We can see that even when the standard deviation is $0.1$, the metrics of both models are both similar, and close to the Kimura approximation (more details in the next section). 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../../graphs/binary/full_vs_dm_changing_alpha.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_changing_alpha.pdf}
   \caption{$5000$ simulations per data point, $N=1000$, $\alpha\sim N(0.5,x^2)$,$\hat{A}=1$,$A=0.7$, $J=1$, $\beta(A)=0.956$}	
   \label{fig:hetro_alpha}
 \end{figure}
@@ -502,10 +502,10 @@ In both cases we can see that the two models behave similarly, and both are appr
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
-    \includegraphics[width=\linewidth]{../../graphs/binary/fix_prob_var_alpha.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/fix_prob_var_alpha.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
-    \includegraphics[width=\linewidth]{../../graphs/binary/fix_time_var_alpha.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/fix_time_var_alpha.pdf}
    \end{subfigure}
   \end{center}
   \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$1-\beta=0.044$}
@@ -515,10 +515,10 @@ In both cases we can see that the two models behave similarly, and both are appr
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
-    \includegraphics[width=\linewidth]{../../graphs/binary/fix_prob_var_beta.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/fix_prob_var_beta.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
-    \includegraphics[width=\linewidth]{../../graphs/binary/fix_time_var_beta.pdf}
+    \includegraphics[width=\linewidth]{../figures/binary/fix_time_var_beta.pdf}
    \end{subfigure}
   \end{center}
   \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$\alpha=0.01$}
@@ -662,11 +662,11 @@ In fig.\ref{fig:ch_env_alpha_beta} we can see that $\alpha$ on it's own doesn't 
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
   \caption{$1-\beta=s=0.005$}
-    \includegraphics[width=\linewidth]{../../graphs/changed_env/ch_env_var_alpha.pdf}
+    \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_alpha.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
    \caption{$\alpha=0.1$}
-    \includegraphics[width=\linewidth]{../../graphs/changed_env/ch_env_var_beta.pdf}
+    \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_beta.pdf}
    \end{subfigure}
   \end{center}
   \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.9$, $J=1$}
@@ -682,10 +682,10 @@ We then also tried changing the composition of the cycle, by keeping a constant 
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
-    \includegraphics[width=\linewidth]{../../graphs/changed_env/ch_env_var_k_div_l.pdf}
+    \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_k_div_l.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
-    \includegraphics[width=\linewidth]{../../graphs/changed_env/ch_env_var_k_min_l.pdf}
+    \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_k_min_l.pdf}
    \end{subfigure}
   \end{center}
   \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.8$, $J=1$, $1-\beta=s=0.02$, $\alpha=0.1$}
