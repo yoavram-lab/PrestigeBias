@@ -531,8 +531,12 @@ After finding good estimations for our model in a constant environment, when the
 For that we will find an expression for the expected and variance of the change in frequency between $t$ generations.
 Let $s_t=N(1-\beta_t)$, and $S_n=\sum\limits_{i=1}^n s_i$, where $\beta_t$ is $\beta(A)$ at time/generation $t$.
 
+
 \paragraph{Proposition:} $E[\frac{X_t}{N}-x]\simeq \frac{1}{N}S_tx(1-x)$ , $V(\frac{X_t}{N})\simeq\frac{1}{N_e}tx(1-x)$, where $x$ is the initial frequency of the favorable/invading trait and $X_t$ is the number of individuals with the trait at time $t$.
-\paragraph{Proof by induction:} From eq. \ref{eq:expec_freq} we know that
+
+The proof is based on the proof of \citet{changeEnv}, proving a similar scenario.
+\paragraph{Proof by induction:}
+From eq. \ref{eq:expec_freq} we know that
 \begin{equation}\label{eq:ch_1}
 \begin{split}
 E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\bigg|X_t\right] &= \frac{X_t}{N}\left(1-\frac{X_t}{N}\right)(1-\beta_{t+1}) \\\\
@@ -647,9 +651,9 @@ proving the second part of our preposition.
 
 Following our proof, we can say that after many cycles, we can use a modified version of our fixation probability:
 \begin{equation}
-P_{fix} = \frac{1-e^{-2 S_n N_e x}}{1-e^{-2 S_n N_e}}
+P_{fix} = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}}
 \end{equation}
-where $S_n = ((k-l)/(k+l))*(1-beta)$, $n=k+l$. Put into words, we use the average selection coefficient of a cycle ($k+l$) as the selection coefficient in our original equation.
+where $\frac{S_n}{n} = \frac{k-l}{k+l}(1-beta)$, $n=k+l$. Put into words, we use the average selection coefficient of a cycle ($k+l$) as the selection coefficient in our original equation.
 In our proof we showed that the expected change in frequency and variance is only manifested in the selection coefficient $S_n$, and that we can use those modified equation as a base for Kimura's equation.
 
 We wanted again to validate our results, using simulations.
@@ -677,7 +681,7 @@ We plotted along the modified estimation the original Kimura's estimation, as a 
 
 In the larger values of $beta$ we even see a deviation from the original estimation environment, but it's to be expected, because Kimura's equations are only viable for small $s$ values.
 
-We then also tried changing the composition of the cycle, by keeping a constant $n$, but changing $k,l$ accordingly.
+We then also tried changing the composition of the cycle, by keeping a constant $n=40$, but changing $k,l$ accordingly.
 
 \begin{figure}[t]
   \begin{center}
@@ -692,9 +696,8 @@ We then also tried changing the composition of the cycle, by keeping a constant 
   \label{fig:ch_env_k_l}
 \end{figure}
 
-In fig.\ref{fig:ch_env_k_l} we see again that the simulations results are mostly above our modified estimation, but still contained in the area between it and the original (constant environment) estimation.
-We see that the larger $k$ in relation to $l$, the closer the simulation results to the original estimation.
-This was again to be expected - the larger $k$ than $l$, the more time the ideal trait has to be acquired in the population, resulting in a state where the influence alone will accelerate its fixation. So when the cycle reaches the $l$ part, the frequency of the trait is high enough to not be affected by the negative change in the environment, due to the influence.
+In fig.\ref{fig:ch_env_k_l} we see that the larger $k$ relative to $l$, the closer the modified equation is to the original estimation of the constant environment. 
+When using higher values of $n$, the simulation results doesn't fit the equation result as with lower values. This is due to the fact that our proof, and therefore our equation is more accurate when more cycles occur. When $n$ is high, there will be less cycles, and the simulations will get closer to the constant environment equation.
 
 \section{Conclusion}
 Cultural transmission is the phenomenon of which cultural elements, in the form of attitudes, values, beliefs, and behavioral patterns, are transmitted between individuals, typically via copying.
