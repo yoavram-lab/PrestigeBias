@@ -67,6 +67,12 @@
 
 \clearpage
 
+\section{Abstract}
+Copying our role-models have always been an efficient method of acquiring knowledge. Copying successful role-model is one of the methods of cultural transmission of traits. In this paper, we study the various biases and their effects of the population and it's evolution. The most common bias when choosing a role-model to copy is \textit{success bias}, i.e copying whoever appears successful to us. This estimation is based on the performance of the role-model alone, without any other factors. Here, we study another factor we believe aids to better model the cultural inheritance of traits in a large population. \textit{Influence bias} is a bias evaluated by the number of copiers a role-model already has. In our model we combine these components to what we call the \textbf{Prestige bias} and analyze its relationship to the dynamics of the population. We successfully found mathematical approximations to our model, easing the mathematical analysis and the computation power required for simulations. We show the value of these approximations using simulations, and their robustness to variations such as mutation and other relaxations required for the mathematical proofs.
+In the binary form of our model, we found alternatives to \textit{Kimura's} equations for approximating fixation probability and time to fixation of an invading advantageous trait, in both a constant and changing environment. We show that \textit{Influence} solely affects the effective population size.
+We found that influence acts as an accelerator for a state of the population, matching the \textit{rich getting richer} it was based on.
+We believe such model better describes how humans acquire knowledge from one another, mainly in the last years where social networks are very popular. Social networks allow easy access to estimate number of copiers a role-model has, with little to no effort.
+
 % what is cultural transmission, and its not only in humans
 \section{Introduction}
 Traits transmission is when an individual passes on a trait, genetic or behavioral, to another individual. Transmission in nature manifests in two main ways: genetic and cultural.
@@ -137,12 +143,13 @@ With a more accurate model of prestige bias, we may understand better how cultur
 Moreover, we could better explain the cause for the spread of maladaptive traits, or the acceleration of adaptive traits often seen in humans.
 
 
-\section{Models}
+\section{Models and Methods}
 \paragraph{Reminder:} A \textit{Wright–Fisher model} is a mathematical model meant to describe a genetic drift process. This model assumes that generations do not overlap and that each copy of the gene found in the new generation is drawn independently at random from all copies of the gene in the old generation.
 
 A \textit{Moran model} assumes overlapping generations. At each time step, one individual is chosen to reproduce and one individual is chosen to die. In our models we harness these two models and modify them to describe new mathematical models that we use to expand the basic indirect bias model \citet{evolutionBook} suggest.
 
-\paragraph{Model.} Consider a population of N individuals, each individual has one trait on a continuous scale. Every generation, $N$ naive individuals (\textit{copiers}) must choose a trait to copy from one of the individuals of the previous generation (\textit{role-models}). Similar to a Wright–Fisher model, we assume the generations don’t overlap. We base our model on the model of \citet{evolutionBook}, by assuming only oblique transmission of the traits (\textit{Indicator trait - A}). Unlike their model, we omit a second trait called \textbf{Indirectly biased trait} to lower complexity. The model’s state at time $t$ can be described by:
+\subsection{Continuous Model}
+Consider a population of N individuals, each individual has one trait on a continuous scale. Every generation, $N$ naive individuals (\textit{copiers}) must choose a trait to copy from one of the individuals of the previous generation (\textit{role-models}). Similar to a Wright–Fisher model, we assume the generations don’t overlap. We base our model on the model of \citet{evolutionBook}, by assuming only oblique transmission of the traits (\textit{Indicator trait - A}). Unlike their model, we omit a second trait called \textbf{Indirectly biased trait} to lower complexity. The model’s state at time $t$ can be described by:
 \begin{equation}
 \vec{A}_t=(A_{t,1}, \ldots, A_{t,N})
 \end{equation}
@@ -211,8 +218,21 @@ where the weight $\alpha_j$ is a characteristic of role-model~$j$ that determine
 \begin{equation}
 W_i = \sum_{j=1}^N{\Big(\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}\Big)}.
 \end{equation}
-\\
 
+
+\subsection{Binary model} The indicator trait can now manifest in only two phenotypes, and for simplicity we define they can be either $\hat{A}$ or $A$. In the binary model, the influence is determined by the number of copiers already chosen \textbf{any} role-model with either $A$ or $\hat{A}$, as all role-models with $A$ will contribute to the probability of the trait to be inherited just the same (can be proved with simple induction). Simply put, assuming there are two role-models with the $A$ trait, the probability a copier will copy from either role-model will be the same, and the probability the $A$ trait will be inherited is the sum of both role-models.
+In the general case, the probability of the $i$-th individual to inherit trait $A$, based on eq.\ref{copier_choose} is:
+\begin{equation}\label{eq:binary-model}
+P_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
+\end{equation}
+where $X$ is the number of role-models with trait $\hat{A}$ and $K_A$ is the number of copiers that already chose $A$.\\
+The model begins with the first generation having a single individual with $\hat{A}$, and the rest have $A$. The process itself is the same stochastic process as the continuous model.
+
+\subsection{Methods}
+The main methods we used to experiment and compare our models is using computer generated simulations. In order to establish our claims and base our mathematical approximations of our models, we used the $\chi^2$ test for the full continuous model, and the Kimura's equations of fixation probability and time to fixation for the binary model.
+
+\section{Results}
+\subsection{Approximations}
 Currently $\big\{\vec{K}_i\big\}_{i=1}^N$ is a stochastic process where each state depends on the previous state, i.e a Markov chain.
 We wanted to find an equivalent stochastic process that has the same joint distribution on $\big\{\vec{K}_i\big\}_{i=1}^N$, but it is possible to evaluate the joint distribution directly without evaluating all the marginal conditional distributions (eq. \ref{eq:recurrence},\ref{eq:recPrestige}).
 
@@ -235,7 +255,7 @@ Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and th
 \end{enumerate}
 
 
-\section{General Binomial Distribution Approximation}
+\subsection{General Binomial Distribution Approximation}
 The general binomial distribution (GBD) is achieved by a series of Bernoulli experiments, with possible dependency between experiments.
 \paragraph{Proposition:} The number of copiers $K_{i,j}$ follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A'_j))$, when $e_l=e_m$ for all $l,m \in N$ and $A'_j=A_j + e$ 
 \paragraph{Proof: } We'll denote $Q_j(k,i)=P(K_{i,j} = k | K_{i-1,j})$ as the probability that exactly $k$ out of $i$ copiers choose role-model $j$, using conditional probability and equation \ref{eq:recurrence}:
@@ -282,7 +302,7 @@ We can then denote $L = 1/\overline{\beta(A')}$ and write:
 \end{equation}
 
 
-\section{Dirichlet-Multinomial Distribution Approximation}
+\subsection{Dirichlet-Multinomial Distribution Approximation}
 \paragraph{Reminder: \textit{Pólya urn model}}  is a stochastic process that is defined as such: 
 The process consists of $N$ draws from an urn with an initial amount of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same colour.\\
 Let $\vec{U_i} = \{u_{i,1},u_{i,2},...,u_{i,M}\}$  where $u_{i,j}$ is the number of balls of the $j$-th color in the urn after $i$ draws.
@@ -341,14 +361,8 @@ To do that we simplify our model to a binary model, so the simulations of the mo
   \end{center}
 \end{figure}
 
-\section{The binary model} The indicator trait can now manifest in only two phenotypes, and for simplicity we define they can be either $\hat{A}$ or $A$. In the binary model, the influence is determined by the number of copiers already chosen \textbf{any} role-model with either $A$ or $\hat{A}$, as all role-models with $A$ will contribute to the probability of the trait to be inherited just the same (can be proved with simple induction). Simply put, assuming there are two role-models with the $A$ trait, the probability a copier will copy from either role-model will be the same, and the probability the $A$ trait will be inherited is the sum of both role-models.
-In the general case, the probability of the $i$-th individual to inherit trait $A$, based on eq.\ref{copier_choose} is:
-\begin{equation}\label{eq:binary-model}
-P_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
-\end{equation}
-where $X$ is the number of role-models with trait $\hat{A}$ and $K_A$ is the number of copiers that already chose $A$.\\
 
-In the first generation there is a single individual with $\hat{A}$, and the rest have $A$.
+\subsection{Numeric comparisons}
 We're interesting in studying the difference between the real binary model as we defined in eq. \ref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
 
 \begin{figure}
@@ -382,7 +396,7 @@ We can see that even when the standard deviation is $0.1$, the metrics of both m
 
 In fig. \ref{fig:hetro_alpha} we relaxed our assumption of a homogeneous $\alpha$, and used a heterogeneous $\alpha$ instead. Similar to the mutation comparison, we drew $\alpha_j$ for each role-model $j$ from a normal distribution with varying scale. We again see that the metrics of both models are similar in the entire spectrum of our x-axis, and the Kimura approximation is within both confidence intervals.
 
-\section{Fixation probability and time - binary model}
+\subsection{Fixation probability and time - binary model}
 \paragraph{Kimura's approximation:}
 After establishing a case in the favor of our DM approximation, we wanted to use it to examine the behavior of the population. Specifically, we wanted to analyze the influence of the indicator weight ($\alpha$) on the fixation probability and time to fixation of the favored phenotype in a binary model.
 For simplicity, we don't include mutation rate in the binary model approximations.
@@ -525,7 +539,7 @@ In both cases we can see that the two models behave similarly, and both are appr
   \label{fig:var_beta}
 \end{figure}
 
-\section{Changing environment}
+\subsection{Changing environment}
 After finding good estimations for our model in a constant environment, when the favorable trait is always $\hat{A}$, we want to find an estimation for our model in a changing environment.
 
 For that we will find an expression for the expected and variance of the change in frequency between $t$ generations.
@@ -699,15 +713,18 @@ We then also tried changing the composition of the cycle, by keeping a constant 
 In fig.\ref{fig:ch_env_k_l} we see that the larger $k$ relative to $l$, the closer the modified equation is to the original estimation of the constant environment. 
 When using higher values of $n$, the simulation results doesn't fit the equation result as with lower values. This is due to the fact that our proof, and therefore our equation is more accurate when more cycles occur. When $n$ is high, there will be less cycles, and the simulations will get closer to the constant environment equation.
 
-\section{Conclusion}
+\section{Discussion}
 Cultural transmission is the phenomenon of which cultural elements, in the form of attitudes, values, beliefs, and behavioral patterns, are transmitted between individuals, typically via copying.
 Some cultural traits can be more likely to be copied by others, regardless of their frequency in the population.  
 Such transmission biases are common in cultural transmission processes. 
 Many models are based on the assumption that success can be correctly identified, and easily copied.
 Here we assume that success isn't correctly identified, therefore individuals may use other indicators to try and estimate the success of potential role-models.
-We believe, as \citet{complexityPaper} suggest, that \textit{prestige biases} are more common in nature than success biases, since estimating success is probably harder.
+We believe, as \citet{complexityPaper} suggest, that \textit{prestige biases} are more common in nature than success biases, since estimating success is harder.
 We believe prestige is composed of two main components: a trait that indicates success (but doesn't guarantee it), and the influence the individual already has on others, i.e number of individuals already chose him as a role-model.
-We suggest a model for \textit{prestige bias}, following the \textit{indirect bias} model \citet{evolutionBook} have suggested, and added the \textit{influence trait} to it.
+We suggest a model for \textit{prestige bias}, inspired by the model \citet{evolutionBook} have suggested, and added the \textit{influence bias} to it.
+We approximated our models using various distributions, and compared them to the original model using simulations.
+We showed that a \textit{Rich getting richer} type of model can be approximated well by the general binomial distribution and the dirichlet multinomial distribution.
+We experimented with constant and changing environment in our model, and created a variation of a binary model for easier mathematical and computational analysis.
 We believe that in this era of social media it is easy to estimate one's influence over others.
 It is therefore crucial to model the cultural biases more realistically than success bias based model, and we believe including influence is crucial for that purpose.\\
 With a more realistic model of a common cultural transmission bias, we may be able to better understand decision-making processes in humans, including life-changing choices such as occupation or a life partner. 
