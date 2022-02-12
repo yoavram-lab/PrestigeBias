@@ -356,7 +356,7 @@ To do that we simplify our model to a binary model, so the simulations of the mo
     \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_J.pdf}
   \subcaption{Error scale is 1(=J)}  
   \end{subfigure}
-  \caption{DM approximation vs iterative process. Population size 2000. 			Aggregated values of 400 simulations}	
+  \caption{DM approximation vs iterative process. Population size 2000. 			Aggregated values of 400 simulations. Demonstrates the similarities between the $\chi ^2$ metric of both models.}	
   \label{fig:chiSquaredHist}
   \end{center}
 \end{figure}
@@ -367,7 +367,8 @@ We're interesting in studying the difference between the real binary model as we
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
-  \caption{Population size $N=1000$, $\alpha=0.5$, $J=1$, $\hat{A}=1$,$A=0.7$, $\beta(A)=0.956$}	
+  \caption{Population size $N=1000$, $\alpha=0.5$, $J=1$, $\hat{A}=1$,$A=0.7$, $\beta(A)=0.956$.
+  Used to support the number of simulations needed for the DM approximation.}	
   \label{fig:num_sims}
 \end{figure}
 
@@ -380,7 +381,8 @@ First we relaxed our assumption of no mutation. To include mutation in the binar
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
-  \caption{$5000$ simulations per data point, $N=1000$, $\alpha=0.1$,$\hat{A}=1$,$A=0.7$, $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis}	
+  \caption{$5000$ simulations per data point, $N=1000$, $\alpha=0.1$,$\hat{A}=1$,$A=0.7$, $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis.
+  Comparison of the DM approximation and the full model when mutation is included}	
   \label{fig:hetro_mutation}
 \end{figure}
 
@@ -390,7 +392,8 @@ We can see that even when the standard deviation is $0.1$, the metrics of both m
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_changing_alpha.pdf}
-  \caption{$5000$ simulations per data point, $N=1000$, $\alpha\sim N(0.5,x^2)$,$\hat{A}=1$,$A=0.7$, $J=1$, $\beta(A)=0.956$}	
+  \caption{$5000$ simulations per data point, $N=1000$, $\alpha\sim N(0.5,x^2)$,$\hat{A}=1$,$A=0.7$, $J=1$, $\beta(A)=0.956$.
+  Comparison of the DM approximation and the full model when the indicator weight is homogeneous}	
   \label{fig:hetro_alpha}
 \end{figure}
 
@@ -522,7 +525,8 @@ In both cases we can see that the two models behave similarly, and both are appr
     \includegraphics[width=\linewidth]{../figures/binary/fix_time_var_alpha.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$1-\beta=0.044$}
+  \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$1-\beta=0.044$.
+  Comparison of the DM approximation and the WF model for different values of the effective population size}
   \label{fig:var_alpha}
 \end{figure}
 
@@ -535,7 +539,8 @@ In both cases we can see that the two models behave similarly, and both are appr
     \includegraphics[width=\linewidth]{../figures/binary/fix_time_var_beta.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$\alpha=0.01$}
+  \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$\alpha=0.01$.
+  Comparison of the DM approximation and the WF model for different values of the selection coefficient}
   \label{fig:var_beta}
 \end{figure}
 
@@ -687,7 +692,8 @@ In fig.\ref{fig:ch_env_alpha_beta} we can see that $\alpha$ on it's own doesn't 
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_beta.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.9$, $J=1$}
+  \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.9$, $J=1$.
+  Model simulations compared with both the constant environment and the changing environment equations with different effective populations sizes and selection coefficients}
   \label{fig:ch_env_alpha_beta}
 \end{figure}
 
@@ -706,7 +712,8 @@ We then also tried changing the composition of the cycle, by keeping a constant 
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_k_min_l.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.8$, $J=1$, $1-\beta=s=0.02$, $\alpha=0.1$}
+  \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.8$, $J=1$, $1-\beta=s=0.02$, $\alpha=0.1$.
+  Model simulations compared with both the constant environment and the changing environment equations for different compositions of the environment cycle}
   \label{fig:ch_env_k_l}
 \end{figure}
 
