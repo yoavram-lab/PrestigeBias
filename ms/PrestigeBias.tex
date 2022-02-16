@@ -165,7 +165,7 @@ $F$ is a function over the $t$ generation traits vector, and is defined differen
 
 \paragraph{Success bias.} \citet[Ch.8, p.247-249]{evolutionBook} describe a method of inheritance using a \textit{blend}, i.e weighted average of the trait of the entire generation. They define $F$ as a weighted average  of the role-models' traits in a single generation:
 \begin{equation}
-F_i(\vec{X}) = \sum_{j=1}^N \Big(G_{ij}\cdot X_{ij}\Big) \\\\
+F_i(\vec{X}) = \sum_{j=1}^N \Big(G_{ij}\cdot X_{ij}\Big) \\
 \end{equation}
 where $G_{i,j}$ is: 
 \begin{equation}
@@ -310,7 +310,7 @@ Let $\vec{U_i} = \{u_{i,1},u_{i,2},...,u_{i,M}\}$  where $u_{i,j}$ is the number
 Let $S_{i,j}=1$ when drawing a $j$ colored ball on the $i$-th draw, and $0$ otherwise. The probability that $S_{i,j}=1$ given $\vec{U_{i-1}}$ is:
 \begin{equation}\label{polya}
 \begin{split}
-P(S_{i,j} = 1 | \vec{U_{i-1}}) & = \frac{u_{i-1,j}}{\sum\limits_{m=1}^{M} u_{i-1,m}} = \frac{o_j + w_{i-1,j}}{\sum\limits_{m=1}^{M} o_m + w_{i-1,m}}\\\\
+P(S_{i,j} = 1 | \vec{U_{i-1}}) & = \frac{u_{i-1,j}}{\sum\limits_{m=1}^{M} u_{i-1,m}} = \frac{o_j + w_{i-1,j}}{\sum\limits_{m=1}^{M} o_m + w_{i-1,m}}\\
  & = \frac{o_j + w_{i-1,j}}{i-1 + \sum\limits_{m=1}^{M} o_m}
 \end{split}
 \end{equation}
@@ -322,8 +322,8 @@ We denote $\alpha'$ as the odds ratio between the weights of the indicator and t
 Using \cref{prestige_eq} we get:
 \begin{equation}\label{copier_choose}
 \begin{split}
-G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cdot \frac{1-\alpha}{1-\alpha} \\\\
-&= \frac{\alpha'\beta(A'_j) + K_{i-1,j}}{\sum\limits_{m=1}^{N} \alpha'\beta(A'_m) + K_{i-1,m}}\\\\
+G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cdot \frac{1-\alpha}{1-\alpha} \\
+&= \frac{\alpha'\beta(A'_j) + K_{i-1,j}}{\sum\limits_{m=1}^{N} \alpha'\beta(A'_m) + K_{i-1,m}}\\
 & =\frac{\alpha'\beta(A'_j) + K_{i-1,j}}{i-1 + \sum\limits_{m=1}^{N} \alpha'\beta(A'_m)}
 \end{split}
 \end{equation}
@@ -423,7 +423,7 @@ E[x'] = E[\frac{X'}{N}] = \frac{1}{N}E[X']
 Putting it together we get:
 \begin{equation}
 \begin{split}
-E[x'] &= \frac{1}{N}N\frac{\alpha' xN}{\alpha' xN + \alpha' N (1-x)\beta}\\\\
+E[x'] &= \frac{1}{N}N\frac{\alpha' xN}{\alpha' xN + \alpha' N (1-x)\beta}\\
 	 &= \frac{x}{x + (1-x)\beta}
 \end{split}
 \end{equation}
@@ -475,23 +475,23 @@ V(x') & \approx  \frac{1}{N} x(1-x)
 \end{equation}
 
 Again following Durret we want to calculate:
-\begin{equation}
+\begin{equation}\label{eq:var_diff_durret}
 V(x'-x) = V(x') - V(x) \approx  x(1-x)(\frac{1 + \alpha'}{1 + \alpha' N})
 \end{equation}
 because $x$ is a constant so $V(x) = 0$
 
 In our model, $\alpha'$ is the odds ratio of a parameter we called "indicator weight", denoted in our model as $\alpha$, so:
-\begin{equation}
+\begin{equation}\label{eq:success_ratio}
 \alpha' = \frac{\alpha}{1-\alpha}
 \end{equation}
 
-And combining with the previous equations we get:
+Combining \cref{eq:var_diff_durret} and \cref{eq:success_ratio} we get:
 \begin{equation}\label{eq:const_var}
 \begin{split}
-V(x'-x) & \approx x(1-x)(\frac{1 + \frac{\alpha}{1-\alpha}}{1 + \frac{\alpha}{1-\alpha} N})\\\\
- &= x(1-x)(\frac{\frac{1-\alpha+\alpha}{1-\alpha}}{\frac{1-\alpha+\alpha N}{1-\alpha}})\\\\
- &= x(1-x)(\frac{1}{1- \alpha(1-N)})\\\\
-  &= x(1-x)(\frac{1}{\alpha N + (1-\alpha)})\\\\
+V(x'-x) & \approx x(1-x)(\frac{1 + \frac{\alpha}{1-\alpha}}{1 + \frac{\alpha}{1-\alpha} N})\\
+ &= x(1-x)(\frac{\frac{1-\alpha+\alpha}{1-\alpha}}{\frac{1-\alpha+\alpha N}{1-\alpha}})\\
+ &= x(1-x)(\frac{1}{1- \alpha(1-N)})\\
+  &= x(1-x)(\frac{1}{\alpha N + (1-\alpha)})\\
   &= x(1-x)\frac{1}{N_e}
 \end{split}
 \end{equation}
@@ -565,15 +565,15 @@ The proof is based on the proof of \citet{changeEnv}, proving a similar scenario
 From \cref{eq:expec_freq} we know that
 \begin{equation}\label{eq:ch_1}
 \begin{split}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\bigg|X_t\right] &= \frac{X_t}{N}\left(1-\frac{X_t}{N}\right)(1-\beta_{t+1}) \\\\
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\bigg|X_t\right] &= \frac{X_t}{N}\left(1-\frac{X_t}{N}\right)(1-\beta_{t+1}) \\
 &= \frac{1}{N}\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)s_{t+1}
 \end{split}
 \end{equation}
 Also note that using the definition of $V(y)=E[y^2]-(E[y])^2$
 \begin{equation}
 \begin{split}
-E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] &= E\left[\frac{X_t}{N}-\left(\frac{X_t}{N}\right)^2\right] \\\\
-&= E\left[\frac{X_t}{N}\right]-E\left[\left(\frac{X_t}{N}\right)^2\right] \\\\
+E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] &= E\left[\frac{X_t}{N}-\left(\frac{X_t}{N}\right)^2\right] \\
+&= E\left[\frac{X_t}{N}\right]-E\left[\left(\frac{X_t}{N}\right)^2\right] \\
 &= E\left[\frac{X_t}{N}\right] - V\left(\frac{X_t}{N}\right) - \left(E\left[\frac{X_t}{N}\right]\right)^2
 \end{split}
 \end{equation}
@@ -588,8 +588,8 @@ E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right)-\frac{1}{N
 From \cref{eq:ch_1} we know that
 \begin{equation}
 \begin{split}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &= \frac{1}{N}s_{t+1}E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] \\\\
-&\simeq \frac{1}{N}s_{t+1}\left(E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e}tx(1-x)\right) \\\\
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &= \frac{1}{N}s_{t+1}E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] \\
+&\simeq \frac{1}{N}s_{t+1}\left(E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e}tx(1-x)\right) \\
 &\simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e N}s_{t+1}tx(1-x)
 \end{split}
 \end{equation}
@@ -612,7 +612,7 @@ E\left[\frac{X_t}{N}\right] &\simeq \frac{1}{N} S_t x(1-x)+x \\
 we'll use both expressions in \cref{eq:ch_2} and get
 \begin{equation}\label{eq:ch_3}
 \begin{split}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &\simeq \frac{1}{N}s_{t+1} \left(\frac{1}{N} S_t x(1-x)+x \right)\left(1- \frac{1}{N} S_t x(1-x)+x \right) \\\\
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &\simeq \frac{1}{N}s_{t+1} \left(\frac{1}{N} S_t x(1-x)+x \right)\left(1- \frac{1}{N} S_t x(1-x)+x \right) \\
 &\simeq  \frac{1}{N}s_{t+1}\cdot x(1-x)
 \end{split}
 \end{equation}
@@ -639,7 +639,7 @@ V\left(\frac{X_{t+1}}{N}\right) = E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \rig
 using \cref{eq:ch_1} we see that:
 \begin{equation}\label{eq:ch_var1}
 \begin{split}
-E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] - E\left[\frac{X_{t}}{N} \bigg|X_t \right] &= \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \\\\
+E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] - E\left[\frac{X_{t}}{N} \bigg|X_t \right] &= \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \\
 E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] = \frac{X_t}{N} &+ \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right)
 \end{split}
 \end{equation}
