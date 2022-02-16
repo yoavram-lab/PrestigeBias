@@ -9,6 +9,7 @@
 \usepackage[super]{nth}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{cleveref}
 \usepackage{subcaption}
 \usepackage{mathtools}
 \usepackage[displaymath, mathlines]{lineno}
@@ -209,7 +210,7 @@ G_{i,j}=P(S_{i,j}=1| S_{1,j},S_{2,j},...,S_{i-1,j})
 \end{equation}
 is the prestige of role-model $j$ in the eyes of copier $i$.
 This prestige $G_{i,j}$ is determined as follows.
-First, role-model~$j$ is characterized by its indicator value $A_j$ as before, and the estimated indicator value by copier $i$, $A_{i,j}$ remains as Eq. \ref{eq:relativeIndicator}.
+First, role-model~$j$ is characterized by its indicator value $A_j$ as before, and the estimated indicator value by copier $i$, $A_{i,j}$ remains as \cref{eq:relativeIndicator}.
 Finally, the prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by the estimated biased indicator value $\beta(A_{i,j})$ and the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, 
 \begin{equation}\label{prestige_eq}
 G_{i,j} = \frac{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}{W_i},
@@ -221,7 +222,7 @@ W_i = \sum_{j=1}^N{\Big(\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-
 
 
 \subsection{Binary model} The indicator trait can now manifest in only two phenotypes, and for simplicity we define they can be either $\hat{A}$ or $A$. In the binary model, the influence is determined by the number of copiers already chosen \textbf{any} role-model with either $A$ or $\hat{A}$, as all role-models with $A$ will contribute to the probability of the trait to be inherited just the same (can be proved with simple induction). Simply put, assuming there are two role-models with the $A$ trait, the probability a copier will copy from either role-model will be the same, and the probability the $A$ trait will be inherited is the sum of both role-models.
-In the general case, the probability of the $i$-th individual to inherit trait $A$, based on eq.\ref{copier_choose} is:
+In the general case, the probability of the $i$-th individual to inherit trait $A$, based on \cref{copier_choose} is:
 \begin{equation}\label{eq:binary-model}
 P_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
 \end{equation}
@@ -234,7 +235,7 @@ The main methods we used to experiment and compare our models is using computer 
 \section{Results}
 \subsection{Approximations}
 Currently $\big\{\vec{K}_i\big\}_{i=1}^N$ is a stochastic process where each state depends on the previous state, i.e a Markov chain.
-We wanted to find an equivalent stochastic process that has the same joint distribution on $\big\{\vec{K}_i\big\}_{i=1}^N$, but it is possible to evaluate the joint distribution directly without evaluating all the marginal conditional distributions (eq. \ref{eq:recurrence},\ref{eq:recPrestige}).
+We wanted to find an equivalent stochastic process that has the same joint distribution on $\big\{\vec{K}_i\big\}_{i=1}^N$, but it is possible to evaluate the joint distribution directly without evaluating all the marginal conditional distributions: \cref{eq:recurrence}, \cref{eq:recPrestige}.
 
 We found two approximations to our process, which are summarized here and explained in detail later on:
 \begin{enumerate}
@@ -245,7 +246,7 @@ Moreover, $\mathbb{E}[K_{N,j}] = N \cdot G_{1,j}$ if $e=e_l=e_m$ for all $l,m$.
  In addition, we find that when $\alpha$ is homogeneous, $\alpha_l=\alpha_m$ for all $l,m$, then $\mathbb{E}[K_{N,j}] = \beta(A'_j) \; / \; \overline{\beta(A') }$, where $A'_j$ is the estimated indicator value $A'_j=A_j+e$, and 
  $\overline{ \beta(A') }$ is the population mean estimated indicator value. 
  That is, the expected number of copiers of a role-model equals its relative biased indicator value, similar to the role of relative fitness in population-genetic models.
-\item The role-model choice process (equation~\ref{eq:process}) is equivalent to a P\'{o}lya urn model if $e_l=e_m$ for all $l,m$. 
+\item The role-model choice process \cref{eq:process} is equivalent to a P\'{o}lya urn model if $e_l=e_m$ for all $l,m$. 
 Therefore, $\vec{K}_i = (K_{i,1}, \ldots, K_{i,N})$ follows a Dirichlet-Multinomial distribution,
 \begin{equation}
 \vec{K}_i \sim \mathit{DM}\big(N, \vec{G}_1\big), 
@@ -258,15 +259,15 @@ Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and th
 \subsection{General Binomial Distribution Approximation}
 The general binomial distribution (GBD) is achieved by a series of Bernoulli experiments, with possible dependency between experiments.
 \paragraph{Proposition:} The number of copiers $K_{i,j}$ follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A'_j))$, when $e_l=e_m$ for all $l,m \in N$ and $A'_j=A_j + e$ 
-\paragraph{Proof: } We'll denote $Q_j(k,i)=P(K_{i,j} = k | K_{i-1,j})$ as the probability that exactly $k$ out of $i$ copiers choose role-model $j$, using conditional probability and equation \ref{eq:recurrence}:
+\paragraph{Proof: } We'll denote $Q_j(k,i)=P(K_{i,j} = k | K_{i-1,j})$ as the probability that exactly $k$ out of $i$ copiers choose role-model $j$, using conditional probability and \cref{eq:recurrence}:
 \begin{equation}\label{recursive}
 Q_j(k,i) = P_j(S_{i,j}=1 | k-1,i-1) \cdot Q_j(k-1,i-1) + P_j(S_{i,j} =0 | k,i-1) \cdot Q_j(k,i-1)
 \end{equation}
 where $S_{i,j} =1 $ when the $i$-th copier chooses role-model $j$.
 
-Equation \ref{recursive} is equivalent to equation 2.1 that \citet{GBD} define.
+We see that \cref{recursive} is equivalent to eq. (2.1) that \citet{GBD} define.
 $Q_j(k,N)$ is the probability that $k$ out of $N$ copiers choose role-model $j$ at the end of the process, which by our previous notation is $k=K_{N,j}$.
-By describing the process of equation \ref{eq:process} as \citep{GBD} did, we've completed the proof.
+By describing the process of \cref{eq:process} as \citep{GBD} did, we've completed the proof.
 
 \paragraph{Corollary 1: } $\mathbb{E}[K_{N,j}] = N \cdot G_{1,j}$.\\
 In \citep[equation 2.3]{GBD}, they show that the expected value of $k$ is: \\
@@ -275,16 +276,16 @@ $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any choic
 $Q_j(1,1) = G_{1,j}$ by definition, therefore we can say that $\mathbb{E}[K_{N,j}]=N \cdot G_{1,j}$.\\
 
 \paragraph{Corollary 2: } $\mathbb{E}[K_{Nj}] = \alpha_j \cdot \beta(A'_j) / \overline{\alpha \cdot \beta(A')}$.
-\paragraph{Proof: } The initial prestige of role-model $j$ based on equation \ref{prestige_eq} is:
+\paragraph{Proof: } The initial prestige of role-model $j$ based on \cref{prestige_eq} is:
 \begin{equation}\label{initial_prob}
 G_{1,j} = \frac{\alpha_j\cdot\beta(A'_j)}{\sum\limits_{m=1}^{N}\alpha_m\cdot\beta(A'_m)}
 \end{equation}
-The denominator of equation \ref{initial_prob} can also be formulated as:
+The denominator of \cref{initial_prob} can also be formulated as:
 \begin{equation}\label{denominator}
  \sum\limits_{m=1}^{N}\alpha_m\beta(A'_m) = N \cdot \overline{\alpha \cdot \beta(A')}
 \end{equation}
 where $\overline{\alpha\beta(A')}$ is the mean value of $\alpha_m\cdot\beta(A'_m)$ for all $m$.
-Using equation \ref{denominator} we get:
+Using \cref{denominator} we get:
 \begin{equation}
 \mathbb{E}[K_{Nj}] = \alpha_j \cdot \beta(A'_j) \bigg/ \overline{\alpha \cdot \beta(A')}
 \end{equation},
@@ -318,7 +319,7 @@ where $o_j$ is the initial number of balls of the colour $j$ in the urn, and $w_
 \paragraph{Proposition:} process $\big\{\vec{K}_i\big\}_{i=1}^N$ is equivalent to a \textit{Pólya urn model} when $e=e_i=e_j$ and $\alpha=\alpha_j=\alpha_i$ for all $i,j \in N$.
 \paragraph{Proof:} 
 We denote $\alpha'$ as the odds ratio between the weights of the indicator and the influence ($\alpha'=\frac{\alpha}{1-\alpha}$). 
-Using equation \ref{prestige_eq} we get:
+Using \cref{prestige_eq} we get:
 \begin{equation}\label{copier_choose}
 \begin{split}
 G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cdot \frac{1-\alpha}{1-\alpha} \\\\
@@ -326,7 +327,7 @@ G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cd
 & =\frac{\alpha'\beta(A'_j) + K_{i-1,j}}{i-1 + \sum\limits_{m=1}^{N} \alpha'\beta(A'_m)}
 \end{split}
 \end{equation}
-Equations \ref{polya} and \ref{copier_choose} are equivalent when setting $M=N$, $o_j = \alpha'\beta(A'_j)$, $w_{i,j} = K_{i,j}$, completing the proof.
+We see that \cref{polya} and \cref{copier_choose} are equivalent when setting $M=N$, $o_j = \alpha'\beta(A'_j)$, $w_{i,j} = K_{i,j}$, completing the proof.
 
 \paragraph{Corollary 1:}
 In their paper, \citet[section 2]{dirichlet} prove that the proportion of different colored balls in a \textit{Pólya urn model} will converge to the Dirichlet distribution as the number of draws approaches infinity, based on \textit{Martingale Convergence Theorem} \citep{martingaleBook}.
@@ -334,7 +335,7 @@ We therefore have an approximation for the relative "weight" or the proportion e
 We can therefore sample from a Dirichlet-Multinomial distribution to approximate how many copiers each of the role-models will have:
 $\vec{K_i} \sim DM(N,\vec{G_1})$.
 
-\paragraph{Numeric validation:} We showed our process is DM (Dirichlet-Multinomial) distributed when there are no errors when copying or evaluating the traits, and when $\alpha$ is homogeneous in the population. To test if our process is still DM distributed when there are copying errors in the population, we ran 400 simulations for three different error scales ($\eta$). To check the resemblance of the DM approximation to the original iterative process, we measure the $\chi^2$ statistic of both processes and the results can be seen in Fig. \ref{fig:chiSquaredHist}.
+\paragraph{Numeric validation:} We showed our process is DM (Dirichlet-Multinomial) distributed when there are no errors when copying or evaluating the traits, and when $\alpha$ is homogeneous in the population. To test if our process is still DM distributed when there are copying errors in the population, we ran 400 simulations for three different error scales ($\eta$). To check the resemblance of the DM approximation to the original iterative process, we measure the $\chi^2$ statistic of both processes and the results can be seen in \cref{fig:chiSquaredHist}.
 Even with a relatively high error scales (1\% and 10\% of J) we can see the distributions of the $\chi^2$ metrics are very similar.
 With a higher $\eta$ (e.g $\eta=J$), which is approximately 100\% error when evaluating a trait, the distributions are noticeably different.
 
@@ -345,65 +346,65 @@ To do that we simplify our model to a binary model, so the simulations of the mo
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.3\textwidth}
+  \subcaption{Error scale is 0.01}
     \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_01.pdf}
-    \subcaption{Error scale is 0.01}
     \end{subfigure}
     \begin{subfigure}[a]{0.3\textwidth}
-    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_1.pdf} 
     \subcaption{Error scale is 0.1}
+    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_1.pdf} 
     \end{subfigure}
     \begin{subfigure}[a]{0.3\textwidth}
+     \subcaption{Error scale is 1(=J)}
     \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_J.pdf}
-  \subcaption{Error scale is 1(=J)}  
   \end{subfigure}
-  \caption{DM approximation vs iterative process. Population size 2000. 			Aggregated values of 400 simulations. Demonstrates the similarities between the $\chi ^2$ metric of both models.}	
+  \caption{Demonstrates the similarities between the $\chi ^2$ metric of 	           the DM approximation and the full model, showing the approximation is good until a very high error rate. Population size $N=2000$. 400 simulations per figure}	
   \label{fig:chiSquaredHist}
   \end{center}
 \end{figure}
 
 
 \subsection{Numeric comparisons}
-We're interesting in studying the difference between the real binary model as we defined in eq. \ref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
+We're interesting in studying the difference between the real binary model as we defined in \cref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
-  \caption{Population size $N=1000$, $\alpha=0.5$, $J=1$, $\hat{A}=1$,$A=0.7$, $\beta(A)=0.956$.
-  Used to support the number of simulations needed for the DM approximation.}	
+  \caption{The number of simulations needed to get a good approximation. At $1,000$ the approximation is good enough. Error bars represent 95\% confidence interval. Population size $N=1000$, $\alpha=0.5$, $J=1$, $\hat{A}=1$,$A=0.7$, $\beta(A)=0.956$.}	
   \label{fig:num_sims}
 \end{figure}
 
 
-The first step was to find the number of simulations needed to sufficiently approximate the real model with the DM approximation. From fig. \ref{fig:num_sims} we see that $1000$ simulations or higher is enough.
+The first step was to find the number of simulations needed to sufficiently approximate the real model with the DM approximation. From \cref{fig:num_sims} we see that $1000$ simulations or higher is enough.
 
 The next step was to see how the observed metrics (fixation probability and time) varies when relaxing our assumptions we used to prove the DM approximation.
-First we relaxed our assumption of no mutation. To include mutation in the binary model, it needs to be redefined, since in the original model it was based on the fact the traits are drawn from a continuous scale. In the binary model mutation will be manifested as an error when evaluating the bias itself. This is easily done by using a heterogeneous $J$ parameter, which controls the strength of the success bias (see eq. \ref{eq:success_bias}).
+First we relaxed our assumption of no mutation. To include mutation in the binary model, it needs to be redefined, since in the original model it was based on the fact the traits are drawn from a continuous scale. In the binary model mutation will be manifested as an error when evaluating the bias itself. This is easily done by using a heterogeneous $J$ parameter, which controls the strength of the success bias in \cref{eq:success_bias}.
 
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
-  \caption{$5000$ simulations per data point, $N=1000$, $\alpha=0.1$,$\hat{A}=1$,$A=0.7$, $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis.
-  Comparison of the DM approximation and the full model when mutation is included}	
+  \caption{Comparison of the DM approximation and the full model when mutation is included. Even high mutation rate doesn't worsen the approximation, and the data points are close to the mathematical estimation (Kimura's). Error bars are 95\% confidence intervals, and are condensed (+- 0.01 probability and +-40 generations)
+  $5000$ simulations per data point, $N=1000$, $\alpha=0.1$,$\hat{A}=1$,$A=0.7$, $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis.
+  }	
   \label{fig:hetro_mutation}
 \end{figure}
 
 
-In fig. \ref{fig:hetro_mutation} we see the comparison when heterogeneous mutation is applied to both models. When mutation is applied, we sample $J_i$ for each copier $i$ from a normal distribution with varying scale (variance).
+In \cref{fig:hetro_mutation} we see the comparison when heterogeneous mutation is applied to both models. When mutation is applied, we sample $J_i$ for each copier $i$ from a normal distribution with varying scale (variance).
 We can see that even when the standard deviation is $0.1$, the metrics of both models are both similar, and close to the Kimura approximation (more details in the next section). 
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_changing_alpha.pdf}
-  \caption{$5000$ simulations per data point, $N=1000$, $\alpha\sim N(0.5,x^2)$,$\hat{A}=1$,$A=0.7$, $J=1$, $\beta(A)=0.956$.
-  Comparison of the DM approximation and the full model when the indicator weight is homogeneous}	
+  \caption{Comparison of the DM approximation and the full model when success weight is heterogeneous. High success weight variance distances the approximation and the full model of generations to fixation from the Kimura's approximation, but not by much (confidence intervals still cover it). Error bars are 95\% confidence intervals, and are less condensed (+- 0.03 probability and +-40 generations)
+  $5000$ simulations per data point, $N=1000$, $\alpha\sim N(0.5,x^2)$,$\hat{A}=1$,$A=0.7$, $J=1$, $\beta(A)=0.956$.}	
   \label{fig:hetro_alpha}
 \end{figure}
 
-In fig. \ref{fig:hetro_alpha} we relaxed our assumption of a homogeneous $\alpha$, and used a heterogeneous $\alpha$ instead. Similar to the mutation comparison, we drew $\alpha_j$ for each role-model $j$ from a normal distribution with varying scale. We again see that the metrics of both models are similar in the entire spectrum of our x-axis, and the Kimura approximation is within both confidence intervals.
+In \cref{fig:hetro_alpha} we relaxed our assumption of a homogeneous $\alpha$, and used a heterogeneous $\alpha$ instead. Similar to the mutation comparison, we drew $\alpha_j$ for each role-model $j$ from a normal distribution with varying scale. We again see that the metrics of both models are similar in the entire spectrum of our x-axis, and the Kimura approximation is within both confidence intervals.
 
 \subsection{Fixation probability and time - binary model}
 \paragraph{Kimura's approximation:}
 After establishing a case in the favor of our DM approximation, we wanted to use it to examine the behavior of the population. Specifically, we wanted to analyze the influence of the indicator weight ($\alpha$) on the fixation probability and time to fixation of the favored phenotype in a binary model.
 For simplicity, we don't include mutation rate in the binary model approximations.
-Following \citet{durret}, we used our DM approximation of the model to find the effective population size. From eq. \ref{eq:binary-model} we can derive that the process of inheritance in our binary model is DM distributed with a parameters vector of size two: $\vec{V}=(\alpha'X,(N-X)\alpha'\beta(A))$.
+Following \citet{durret}, we used our DM approximation of the model to find the effective population size. From \cref{eq:binary-model} we can derive that the process of inheritance in our binary model is DM distributed with a parameters vector of size two: $\vec{V}=(\alpha'X,(N-X)\alpha'\beta(A))$.
 
 \paragraph{Proposition:} $1-\beta(A)$ is equivalent to the selection coefficient $s$ in a classic Wright-Fisher model in the diffusion equations meant to approximate the fixation probability and time of the advantageous trait.
 
@@ -414,7 +415,7 @@ The expected number of individuals of a DM distribution is:
 \begin{equation}
 E[X'] = N  \frac{\alpha_1}{\alpha_1+\alpha_2},
 \end{equation}
-where $\alpha_1 = \alpha' X$ and $\alpha_2 = \alpha'(N-X)\beta$, from eq. \ref{eq:binary-model}.
+where $\alpha_1 = \alpha' X$ and $\alpha_2 = \alpha'(N-X)\beta$, from  \cref{eq:binary-model}.
 We want to use frequencies instead of quantities to follow Durret's process so:
 \begin{equation}
 E[x'] = E[\frac{X'}{N}] = \frac{1}{N}E[X']
@@ -511,36 +512,42 @@ T_{fix}=\frac{1-P_{fix}}{1-\beta}\int_0^x\frac{e^{2(1-\beta) \xi}-1}{\xi(1-\xi)}
 where the integrals cannot be solved in closed form, so we can only estimate them numerically.
 
 To validate our math we ran multiple simulations comparing our binary model with the classic Wright-Fisher model, using different $\alpha$ and $\beta$ each time, and using the corresponding values of $s$ and $N_e$ for the WF simulations.
-In fig \ref{fig:var_alpha} we changed $\alpha$ (and $N_e$ accordingly) and used a constant $\beta$.
-In fig \ref{fig:var_beta} we changed $\beta$ and used a constant $\alpha$.
-In both cases we can see that the two models behave similarly, and both are approximated well by the Kimura's equations (eq. \ref{eq:kimura_p} and \ref{eq:kimura_t})
+In \cref{fig:var_alpha} we changed $\alpha$ (and $N_e$ accordingly) and used a constant $\beta$.
+In \cref{fig:var_beta} we changed $\beta$ and used a constant $\alpha$.
+In both cases we can see that the two models behave similarly, and both are approximated well by the Kimura's equations: \cref{eq:kimura_p} and \cref{eq:kimura_t}.
 
 
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
+    \caption{}
     \includegraphics[width=\linewidth]{../figures/binary/fix_prob_var_alpha.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
+     \caption{}
     \includegraphics[width=\linewidth]{../figures/binary/fix_time_var_alpha.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$1-\beta=0.044$.
-  Comparison of the DM approximation and the WF model for different values of the effective population size}
+  \caption{Comparison of the DM approximation and the WF model for different values of the effective population size. The approximation seems very good, and is also condensed around the mathematical equation expectancy. Error bars are 95\% confidence intervals.
+  Effective population calculated by $N_e=\alpha N + (1-\alpha)$.
+  $5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$1-\beta=s=0.044$.}
   \label{fig:var_alpha}
 \end{figure}
 
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
+  \caption{}
     \includegraphics[width=\linewidth]{../figures/binary/fix_prob_var_beta.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
+    \caption{}
     \includegraphics[width=\linewidth]{../figures/binary/fix_time_var_beta.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$\alpha=0.01$.
-  Comparison of the DM approximation and the WF model for different values of the selection coefficient}
+  \caption{Comparison of the DM approximation and the WF model for different values of the selection coefficient, manifested as success bias in our model. The approximation seems good, and is also condensed around the mathematical equation expectancy. Error bars are 95\% confidence intervals.
+  Effective population calculated by $N_e=\alpha N + (1-\alpha)$.
+  $5,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.7$,$J=1$,$\alpha=0.01$.}
   \label{fig:var_beta}
 \end{figure}
 
@@ -555,7 +562,7 @@ Let $s_t=N(1-\beta_t)$, and $S_n=\sum\limits_{i=1}^n s_i$, where $\beta_t$ is $\
 
 The proof is based on the proof of \citet{changeEnv}, proving a similar scenario.
 \paragraph{Proof by induction:}
-From eq. \ref{eq:expec_freq} we know that
+From \cref{eq:expec_freq} we know that
 \begin{equation}\label{eq:ch_1}
 \begin{split}
 E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\bigg|X_t\right] &= \frac{X_t}{N}\left(1-\frac{X_t}{N}\right)(1-\beta_{t+1}) \\\\
@@ -578,7 +585,7 @@ E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] &\simeq
 E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right)-\frac{1}{N_e}tx(1-x)
 \end{split}
 \end{equation}
-From eq. \ref{eq:ch_1} we know that
+From \cref{eq:ch_1} we know that
 \begin{equation}
 \begin{split}
 E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &= \frac{1}{N}s_{t+1}E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] \\\\
@@ -602,7 +609,7 @@ E\left[\frac{X_t}{N}\right] &\simeq \frac{1}{N} S_t x(1-x)+x \\
 1 - E\left[\frac{X_t}{N}\right] &\simeq 1- \frac{1}{N} S_t x(1-x)+x
 \end{split}
 \end{equation}
-we'll use both expressions in eq. \ref{eq:ch_2} and get
+we'll use both expressions in \cref{eq:ch_2} and get
 \begin{equation}\label{eq:ch_3}
 \begin{split}
 E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &\simeq \frac{1}{N}s_{t+1} \left(\frac{1}{N} S_t x(1-x)+x \right)\left(1- \frac{1}{N} S_t x(1-x)+x \right) \\\\
@@ -614,7 +621,7 @@ To conclude our proof, we see that
 \begin{equation}
 E\left[\frac{X_{t+1}}{N}-x\right] = E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] + E\left[\frac{X_t}{N}-x\right]
 \end{equation}
-so again using the induction assumption, together with eq. \ref{eq:ch_3} we get
+so again using the induction assumption, together with \cref{eq:ch_3} we get
 \begin{equation}
 \begin{split}
 E\left[\frac{X_{t+1}}{N}-x\right] &\simeq \frac{1}{N}s_{t+1}\cdot x(1-x) + \frac{1}{N}S_t\cdot x(1-x) \\
@@ -629,7 +636,7 @@ For the second part, we'll use a property of variance:
 V\left(\frac{X_{t+1}}{N}\right) = E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \right)\right] + V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right)
 \end{equation}
 
-using eq.\ref{eq:ch_1} we see that:
+using \cref{eq:ch_1} we see that:
 \begin{equation}\label{eq:ch_var1}
 \begin{split}
 E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] - E\left[\frac{X_{t}}{N} \bigg|X_t \right] &= \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \\\\
@@ -637,17 +644,17 @@ E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] = \frac{X_t}{N} &+ \frac{1}{N}s_{t+1}
 \end{split}
 \end{equation}
 
-Using eq.\ref{eq:const_var} we get:
+Using \cref{eq:const_var} we get:
 \begin{equation}
 V\left(\frac{X_{t+1}}{N} \bigg|X_t \right) = \frac{1}{N_e}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right)
 \end{equation}
 
-and using the equation $y'(1-y') \simeq y(1-y)$ on the first part of eq.\ref{eq:ch_var} we get:
+and using the equation $y'(1-y') \simeq y(1-y)$ on the first part of \cref{eq:ch_var} we get:
 \begin{equation}\label{eq:ch_var2}
 E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \right)\right] = \frac{1}{N_e}E\left[\frac{X_t}{N}\left(1- \frac{X_t}{N}\right) \right] \simeq \frac{1}{N_e} x(1-x)
 \end{equation}
 
-and moving on to simplify the second part of eq.\ref{eq:ch_var} using eq.\ref{eq:ch_var1}:
+and moving on to simplify the second part of \cref{eq:ch_var} using \cref{eq:ch_var1}:
 \begin{equation}
 V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) = V\left(\frac{X_t}{N} + \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \right)
 \end{equation}
@@ -662,7 +669,7 @@ Combining our equations we get:
 V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) = V\left(\frac{X_t}{N}\right) + O\left(\frac{1}{N^2}\right)\simeq V\left(\frac{X_t}{N}\right)
 \end{equation}
 
-Using the induction assumption and eq.\ref{eq:ch_var2}:
+Using the induction assumption and \cref{eq:ch_var2}:
 \begin{equation}
 V\left(\frac{X_{t+1}}{N}\right) \simeq \frac{1}{N_e}x(1-x) + \frac{1}{N_e}tx(1-x) \simeq \frac{1}{N_e}x(1-x)(t+1)
 \end{equation}
@@ -679,21 +686,21 @@ We wanted again to validate our results, using simulations.
 This time, the number of parameters increased: in addition to $\alpha,\beta$, there are also $k,l$ as model parameters.
 
 We again tried different variations of the parameters, changing only one of them at a time.
-In fig.\ref{fig:ch_env_alpha_beta} we can see that $\alpha$ on it's own doesn't cause any deviation for the the estimation. $\beta$ however affects the results greatly.
+In \cref{fig:ch_env_alpha_beta} we can see that $\alpha$ on it's own doesn't cause any deviation for the the estimation. $\beta$ however affects the results greatly.
 
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
-  \caption{$1-\beta=s=0.005$}
+  \caption{success bias/selection coefficient is: $1-\beta=s=0.005$}
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_alpha.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
-   \caption{$\alpha=0.1$}
+   \caption{success weight is: $\alpha=0.1$}
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_beta.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.9$, $J=1$.
-  Model simulations compared with both the constant environment and the changing environment equations with different effective populations sizes and selection coefficients}
+  \caption{Model simulations compared with both the constant environment and the changing environment equations with different effective populations sizes and selection coefficients. Changing the effective population size doesn't affect the approximation, and it is condensed the mathematical expected values across all values. High values of success bias ($s>0.1$) will distance the simulations from the changing environment expected values. Very high values ($s>0.35$) will even deviate from the constant environment expected values. This is expected because Kimura's approximation are only viable for low selection coefficient values.
+  $10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.9$, $J=1$.}
   \label{fig:ch_env_alpha_beta}
 \end{figure}
 
@@ -706,18 +713,20 @@ We then also tried changing the composition of the cycle, by keeping a constant 
 \begin{figure}[t]
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
+  \caption{}
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_k_div_l.pdf}
    \end{subfigure}
    \begin{subfigure}[a]{0.49\linewidth}
+   \caption{}
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_k_min_l.pdf}
    \end{subfigure}
   \end{center}
-  \caption{$10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.8$, $J=1$, $1-\beta=s=0.02$, $\alpha=0.1$.
-  Model simulations compared with both the constant environment and the changing environment equations for different compositions of the environment cycle}
+  \caption{Model simulations compared with both the constant environment and the changing environment equations for different compositions of the environment cycle. When $k<l$ the approximation is good. When $k>l$, the approximation and the simulations are both very close to the constant environment approximation. 
+  $10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.8$, $J=1$, $1-\beta=s=0.02$, $\alpha=0.1$.}
   \label{fig:ch_env_k_l}
 \end{figure}
 
-In fig.\ref{fig:ch_env_k_l} we see that the larger $k$ relative to $l$, the closer the modified equation is to the original estimation of the constant environment. 
+In \cref{fig:ch_env_k_l} we see that the larger $k$ relative to $l$, the closer the modified equation is to the original estimation of the constant environment. 
 When using higher values of $n$, the simulation results doesn't fit the equation result as with lower values. This is due to the fact that our proof, and therefore our equation is more accurate when more cycles occur. When $n$ is high, there will be less cycles, and the simulations will get closer to the constant environment equation.
 
 \section{Discussion}
