@@ -335,32 +335,20 @@ We therefore have an approximation for the relative "weight" or the proportion e
 We can therefore sample from a Dirichlet-Multinomial distribution to approximate how many copiers each of the role-models will have:
 $\vec{K_i} \sim DM(N,\vec{G_1})$.
 
-\paragraph{Numeric validation:} We showed our process is DM (Dirichlet-Multinomial) distributed when there are no errors when copying or evaluating the traits, and when $\alpha$ is homogeneous in the population. To test if our process is still DM distributed when there are copying errors in the population, we ran 400 simulations for three different error scales ($\eta$). To check the resemblance of the DM approximation to the original iterative process, we measure the $\chi^2$ statistic of both processes and the results can be seen in \cref{fig:chiSquaredHist}.
-Even with a relatively high error scales (1\% and 10\% of J) we can see the distributions of the $\chi^2$ metrics are very similar.
-With a higher $\eta$ (e.g $\eta=J$), which is approximately 100\% error when evaluating a trait, the distributions are noticeably different.
+\paragraph{Numeric validation:} We showed our process is DM (Dirichlet-Multinomial) distributed when there are no errors when copying or evaluating the traits, and when $\alpha$ is homogeneous in the population. To support our proof, we tested our approximation empirically using computer simulations.
+To test our hypothesis, we used a \textit{goodness of fit} method known as \textit{Pearson's chi-squared test}. In this test, one can reject or accept the null hypothesis, which in our case is the hypothesis that the simulations results were drawn from a DM distribution.
 
-In addition to the chi-squared test, we want to observe how well does the Dirichlet-Multinomial distribution approximates our entire model, and not just one generation in it.
-To do that we simplify our model to a binary model, so the simulations of the model to run in a feasible amount of time.
+To use this test, we ran many simulations of our original model, and used the mean distribution of copiers. This mean distribution is our observed distribution, and we tested it with the DM expected distribution, using said chi-squared test.
+We tested multiple variations of the trait weight parameter ($\alpha$).
 
+In all our tests, the p-value was \textbf{1}. This means that the probability to reject the null hypothesis is essentially nonexistent (the usual threshold for a p-value needed to reject $H_0$ is 0.05 or lower). 
+In addition, we found out that for high $\alpha$ values (above 0.5), very few simulations are needed to reach p-value 1. (less than five simulations for $\alpha=0.9$, and less than 20 for $\alpha=0.7$)
+For very low $\alpha$ values, which means very high influence weight, the number of simulations needed was 100, which is still a relatively small amount.
+To verify our codes results, we also ran the test for different distributions, for example the uniform distribution (all role-models have exactly one copier).
 
-\begin{figure}[t]
-  \begin{center}
-  \begin{subfigure}[a]{0.3\textwidth}
-  \subcaption{Error scale is 0.01}
-    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_01.pdf}
-    \end{subfigure}
-    \begin{subfigure}[a]{0.3\textwidth}
-    \subcaption{Error scale is 0.1}
-    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_0_1.pdf} 
-    \end{subfigure}
-    \begin{subfigure}[a]{0.3\textwidth}
-     \subcaption{Error scale is 1(=J)}
-    \includegraphics[width=\linewidth]{../figures/chi_square_stats/chi_hist_homogenous_J.pdf}
-  \end{subfigure}
-  \caption{Demonstrates the similarities between the $\chi ^2$ metric of 	           the DM approximation and the full model, showing the approximation is good until a very high error rate. Population size $N=2000$. 400 simulations per figure}	
-  \label{fig:chiSquaredHist}
-  \end{center}
-\end{figure}
+All these tests resulted in a p-value 0, which means we can likely reject $H_0$ for these distributions, as expected.
+
+Once we validated our proof for a single iteration of the model, we went on to more complex validations for the entire model.
 
 
 \subsection{Numeric comparisons}
@@ -746,16 +734,17 @@ It is therefore crucial to model the cultural biases more realistically than suc
 With a more realistic model of a common cultural transmission bias, we may be able to better understand decision-making processes in humans, including life-changing choices such as occupation or a life partner. 
 Our model can be expanded in multiple ways: observing the effects of different bias functions, including errors in estimating the influence, combining factors of cost when copying from an influential role model (not all could afford to copy from the most popular role-model), and analyzing the differences when including several optimal values for the indicator trait (multiple preference traits in the population).
 
+
+
+
 \clearpage
-\section{Appendix A - Time table}
-
-\paragraph{Today - Oct 2021:}
-Find approximation replacing Durrett's equations for the time to fixation.
-
-\paragraph{Nov - Mar 2021:}
-Combining the findings to a paper and a thesis.
-
-
+\section{Summaries}
+\subsection{Animal leadership \citep{animal_leadership}}
+There are two main approaches to decision makings of groups in nature: leadership and consensus. Prey leaders would lead the pact when traveling, while other animal group leaders will decide on a nesting site or foraging patches. They found out that leadership is observed mostly when there is a profound social network in the group, and when there are individuals that present leadership behavior. Leaders would usually be high ranking members in the group, such as elders, individuals with many kin relations, or posses other dominant traits. When no individual posses such traits, or when the social network is lacking, a consensus is more likely to occur.
+When a leader is present, they will have greater selection costs, such as higher risk for predation, being poisoned by unknown experimental patch, but also greater benefits. For example, given the route to the foraging site was successful, the leader and his closest followers would gain most of the food, unlike in a consensus, where the food would be shared more equally.
+It appears leaders appear in simple organisms as well, like fish. In these organisms however, the leader would usually be the hungriest or the weakest, while the rest would prefer to follow, minimizing their costs. In baboons however, \citet{animal_leadership} describe many benefits for the closest associates of the dominant male, such as protection from predators. This is an instance of sexual-selection, where the leader, whose survival chances are lower, gains more sexual partners due to the benefits. ("The greater the risk, the greater the reward")
+In humans, leadership also has its perks and costs. Leaders can make decisions that would benefit them and their closest followers the most, while still maintaining group cohesion. However, wrong decision making that would harm the group could result in harm (media, social status, even violent behavior of subjects on certain cases).
+In our binary model, we consider a single trait. Consider this trait a trait that would be seen as desirable for a leader. Assuming that, our binary model could be used to predict and explain leader-selection processes, from prom-king to president.
 
 \clearpage
 \bibliography{refs}
