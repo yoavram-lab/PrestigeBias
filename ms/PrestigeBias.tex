@@ -744,7 +744,31 @@ There are two main approaches to decision makings of groups in nature: leadershi
 When a leader is present, they will have greater selection costs, such as higher risk for predation, being poisoned by unknown experimental patch, but also greater benefits. For example, given the route to the foraging site was successful, the leader and his closest followers would gain most of the food, unlike in a consensus, where the food would be shared more equally.
 It appears leaders appear in simple organisms as well, like fish. In these organisms however, the leader would usually be the hungriest or the weakest, while the rest would prefer to follow, minimizing their costs. In baboons however, \citet{animal_leadership} describe many benefits for the closest associates of the dominant male, such as protection from predators. This is an instance of sexual-selection, where the leader, whose survival chances are lower, gains more sexual partners due to the benefits. ("The greater the risk, the greater the reward")
 In humans, leadership also has its perks and costs. Leaders can make decisions that would benefit them and their closest followers the most, while still maintaining group cohesion. However, wrong decision making that would harm the group could result in harm (media, social status, even violent behavior of subjects on certain cases).
-In our binary model, we consider a single trait. Consider this trait a trait that would be seen as desirable for a leader. Assuming that, our binary model could be used to predict and explain leader-selection processes, from prom-king to president.
+
+
+
+\subsection{Prestige as a type of leadership \citep{dual_leadership}}
+In their paper, \citet{dual_leadership} suggest a different view of leadership. They say that most discussions assume there is one type of leadership, and so they differ in their definition. \citet{dual_leadership} suggest a way to solve said contradiction by defining two types of leaderships: prestige-based and dominance-based.
+They present classical views of leaderships by Confucius and Machiavelli. Confucius views leaders as role models who exercise influence through possessing superior knowledge, skills,
+and (outstanding) personal qualities. This description is very similar to our indicator trait. By contrast, Machiavelli views leaders as rulers who exercise influence by imposing costs through (the threat of) punishment. They say that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view into the complex and dynamic processes of leadership. 
+
+Our current model doesn't reflect the model described in this article, but several adjustments could be made in order to match it. If we assume there's a correlation between trait value to a type of leadership (so in our binary model, one trait would be of prestige, and the other of dominance) we can implement their suggested model. For that we would need to add cost-benefit parameters, so the ones choosing prestige will be rewarded, but pay more, while the ones choosing dominance would pay less, but gain less benefits. It could be interesting to see the dynamics and relations between our model parameters and these cost-benefit parameters.
+
+\subsection{Evidence from Fijian villages for adaptive learning biases \citep{fijian_social_bias}}
+\citet{fijian_social_bias} researched Fijian villages, looking for evidence of social learning biases and their origins. They mention that:
+\begin{quote}
+evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information.
+\end{quote}
+Their goal is to bridge from the laboratory to the field by examining if and how these biases emerge in a small-scale society.
+During their research they found that:
+\begin{quote}
+Fijian villagers (ages 10 and up) are biased to learn from others perceived as more successful/knowledgeable, both within and across domains (prestige effects).
+\end{quote}
+Their research shows promising evidence for our prestige model, suggesting that copying from others who are \textit{perceived} as successful, rather than actually are successful. In their paper, they show that the social networks representing copier-role-model relationships are centralized, suggesting:
+\begin{quote}
+This degree of centralization is consistent with the prediction that people substantially share notions about who is a good cultural model (network centrality), but that individuals’ model selections are influenced by multiple factors.
+\end{quote}
+We see here support for both our indicator trait and our influence bias in their data.
 
 \clearpage
 \bibliography{refs}
