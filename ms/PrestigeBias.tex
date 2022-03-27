@@ -140,93 +140,95 @@ We define a model for prestige bias that combines both success and influence bia
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Models and Methods}
-\paragraph{Reminder:} A \textit{Wright–Fisher model} is a mathematical model meant to describe a genetic drift process. This model assumes that generations do not overlap and that each copy of the gene found in the new generation is drawn independently at random from all copies of the gene in the old generation.
 
-A \textit{Moran model} assumes overlapping generations. At each time step, one individual is chosen to reproduce and one individual is chosen to die. In our models we harness these two models and modify them to describe new mathematical models that we use to expand the basic indirect bias model \citet{evolutionBook} suggest.
+%A \textit{Wright–Fisher model} describes an evolutionary process with random genetic. This model assumes non-overlapping generations such that the entire population is replaced in every generation by the offspring population. The parent of each offspring is independently drawn at random from the parental generation.
+%A \textit{Moran model} also describes an evolutionary process with drift, but assumes overlapping generations. At each time step, one individual is chosen to reproduce and one individual is chosen to die. 
 
-\subsection{Continuous Model}
-Consider a population of N individuals, each individual has one trait on a continuous scale. Every generation, $N$ naive individuals (\textit{copiers}) must choose a trait to copy from one of the individuals of the previous generation (\textit{role-models}). Similar to a Wright–Fisher model, we assume the generations don’t overlap. We base our model on the model of \citet{evolutionBook}, by assuming only oblique transmission of the traits (\textit{Indicator trait - A}). Unlike their model, we omit a second trait called \textbf{Indirectly biased trait} to lower complexity. The model’s state at time $t$ can be described by:
-\begin{equation}
-\vec{A}_t=(A_{t,1}, \ldots, A_{t,N})
-\end{equation}
-where $\vec{A}_t$ is a vector describing the indicator traits at time $t$, and $\vec{A}_0$ is drawn from a standard normal distribution.
-Each individual from generation $t+1$, a \textit{copier}, inherits traits like so:
-\begin{equation}
-A_i' = F_i(\vec{A}_t)
-\end{equation}
-where $A_i'$ is the indicator and indirect trait values correspondingly, that copier $i$ acquires.
-We use $A_i'$ as an alias for $A_{i,(t+1)}$ for simplicity for the transition between generations $t \rightarrow t+1$.
-$F$ is a function over the $t$ generation traits vector, and is defined differently for every implementation of the \textbf{Generic model}.
+We begin with a continuous trait model with indirect bias suggested by \citet{evolutionBook}, develop an extension with influence bias, and then develop a model with a dichotomous trait.
+We implemented our stochastic models and approximations, performed statistical analyses, and produced figures using Python with NumPy and Matplotlib. % TODO references: 
+%- Van Rossum, G. & others. Python Programming Language. in USENIX Annual Technical Conference (2007).
+%- van der Walt, S., Colbert, S. C. & Varoquaux, G. The NumPy Array: A Structure for Efficient Numerical Computation. Comput. Sci. Eng. 13, 22–30 (2011). 
+%- Hunter, J. D. Matplotlib: A 2D Graphics Environment. Comput. Sci. Eng. 9, 90–95 (2007).
+Source code is available at % TODO GitHub link; currently it is private but will be public when paper is accepted.
 
-\paragraph{Success bias.} \citet[Ch.8, p.247-249]{evolutionBook} describe a method of inheritance using a \textit{blend}, i.e weighted average of the trait of the entire generation. They define $F$ as a weighted average  of the role-models' traits in a single generation:
-\begin{equation}
-F_i(\vec{X}) = \sum_{j=1}^N \Big(G_{ij}\cdot X_{ij}\Big) \\
+\subsection{Continuous trait}
+We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the indicator trait and omitting the indirect trait in order to reduce model complexity. 
+We consider a population of $N$ individuals, described by a single indicator trait with a continuous value.
+Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright–Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
+The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$. We assume the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
+Cultural transmission is modeled by a function $F$ such that 
+\begin{equation}\label{eq:transmission}
+A_{i}(t+1) = F_i(\vec{A}(t)) \;.
 \end{equation}
-where $G_{i,j}$ is: 
-\begin{equation}
-G_{ij} = \frac{\beta(A_{ij})}{\sum_{l=1}^{N} \beta(A_{il})}
+
+\paragraph{Success bias.}
+\citet[Ch.8, p.247-249]{evolutionBook} describe a blended transmission algorithm by defining $F$ as a weighted average of the traits of all role-models, 
+\begin{equation}\label{eq:boydF}
+% TODO I changed X to A, and Aij to Aj, verify its ok
+F_i(\vec{A}) = \sum_{j=1}^N G_{i,j}\cdot A_{j} \;, 
 \end{equation}
-We define $G_{ij}$ to be the \textit{Success bias} of role-model $j$ in the eyes of copier $i$.
-$A_{i,j}$ is the absolute indicator trait value copier $i$ estimates role-model $j$ has:
+where $G_{i,j}$ is the success bias of role-model $j$ in the eyes of copier $i$,
+\begin{equation}\label{eq:boydG}
+G_{i,j} = \frac{\beta(A_{i,j})}{\sum_{k=1}^{N} \beta(A_{i,k})} \;,
+\end{equation}
+$A_{i,j}$ is the absolute indicator trait value copier $i$ estimates for role-model $j$ with some error $e_i \sim N(0,\frac{1}{\eta^2})$,
 \begin{equation}\label{eq:relativeIndicator}
 A_{i,j} = A_j + e_i,
 \end{equation}
-where $e_i$ is the copier's error of estimation, $\vec{e} \sim N(0,\frac{1}{\eta^2})$.
-$\beta(X)$ is the bias function, meant to quantify the success bias of a role-model:
+and $\beta(\cdot)$ is the bias function that quantifies the success bias of a role-model,
 \begin{equation}\label{eq:success_bias}
-\beta(A_{i,j}) = b \cdot \exp^{\Big(-\frac{(A_{i,j} - \hat{A})^2}{2J}\Big)},
+\beta(A_{i,j}) = b \cdot \exp{\Big(-\frac{(A_{i,j} - \hat{A})^2}{2J}\Big)},
 \end{equation} 
-where $\hat{A}$ is the optimal indicator value and $J,b$ are model parameters to control the "strength" of the bias.
-$G_{i,j}$ is therefore the relative success score copier $i$ assigns to role-model $j$, resembling \textit{relative fitness} in genetic transmission models.
+with $\hat{A}$ as the arbitrary optimal indicator value, and $J$ and $b$ as parameters that control the bias strength.
+Therefore, $G_{i,j}$ is a relative success score that copier $i$ assigns to role-model $j$, equivalent to relative fitness in evolutionary-genetic transmission models.
 
-\paragraph{Random choice transmission.}
-\citet{evolutionBook} note that the method of transmission they use in their model has alternatives. We follow their suggestion and create a model similar to theirs, with random choice as a transmission method: The probability of copier $i$ to choose role-model $j$ as his role-model to copy its traits from is $G_{i,j}$.
-Once a copier chose its role-model, it will copy both its traits only from his role-model, instead of a weighted average of the entire role-model generation:
-\begin{equation}
-A_i' = A_{i,j}
+\citet{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We thus develop a similar stochastic model with transmission from a single random role-model. Instead of \cref{eq:boydF}, we define the transmission function $F$ as a random variable with its distribution given by 
+\begin{equation}\label{eq:ourF}
+\Pr\big(F_i(\vec{A}) = A_{j}\big) = G_{i,j} \;,
 \end{equation}
+such that $G_{i,j}$ gives the probability of copier $i$ to choose to copy the trait of role-model $j$.
 
 \paragraph{Influence bias.}
-Copiers choose their role-models one by one.
-After copier $i$ chose a role-model, we denote $K_{ij}$ as the number of copiers that chose role-model $j$ until that point, such that $\sum_{j=1}^N{K_{i,j}} = i$. 
+Here we introduce a new element to the model.
+We assume that in each generation, copiers choose their role-models one by one.
+We denote $K_{i,j}$ as the number of copiers that chose role-model $j$ after copier $i$ chose a role-model. Thus, $i$ out of $N$ copiers already chose a role-model, $\sum_{j=1}^N{K_{i,j}} = i$, and there are $N-i$ copiers that have yet to choose a role-model.
 The stochastic process of role-model choice, 
 \begin{equation} \label{eq:process}
-\big\{\vec{K}_i\big\}_{i=1}^N, \quad \vec{K}_i=(K_{i1}, \ldots, K_{iN}),
+\big\{\vec{K}_i = (K_{i,1}, \ldots, K_{i,N}) \big\}_{i=1}^N \;,
 \end{equation}
 is described by the recurrence equation
 \begin{equation} \label{eq:recurrence}
-K_{i,j} = K_{i-1,j} + S_{i,j}, \quad i,j=1,2,\ldots,N
+K_{i,j} = K_{i-1,j} + S_{i,j}, \quad i,j=1,2,\ldots,N \;,
 \end{equation}
 where $S_{i,j}=1$ if the $i$-th copier chose role-model~$j$ and 0 otherwise, and the initial state is $K_{0,j}=0$.
 
-The probability that the $i$-th copier chose role-model $j$
+Following \cref{eq:ourF}, the probability that the $i$-th copier chose role-model $j$ is given by the prestige of role-model $j$ in the eyes of copier $i$,
 \begin{equation}\label{eq:recPrestige}
-G_{i,j}=P(S_{i,j}=1| S_{1,j},S_{2,j},...,S_{i-1,j})
+Pr(S_{i,j}=1 \mid S_{1,j},S_{2,j},...,S_{i-1,j}) = G_{i,j} \;.
 \end{equation}
-is the prestige of role-model $j$ in the eyes of copier $i$.
-This prestige $G_{i,j}$ is determined as follows.
-First, role-model~$j$ is characterized by its indicator value $A_j$ as before, and the estimated indicator value by copier $i$, $A_{i,j}$ remains as \cref{eq:relativeIndicator}.
-Finally, the prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by the estimated biased indicator value $\beta(A_{i,j})$ and the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, 
-\begin{equation}\label{prestige_eq}
-G_{i,j} = \frac{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}{W_i},
+The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by the estimated biased indicator value $\beta(A_{i,j})$ and the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} of \citet{evolutionBook} with
+\begin{equation}\label{eq:prestige}
+G_{i,j} = \frac{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}{W_i} \;.
 \end{equation}
-where the weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of the indicator and the influence in the prestige, and $W_i$ is a normalizing factor to ensure $\sum_{j=1}^N{G_{i,j}}=1$,
-\begin{equation}
-W_i = \sum_{j=1}^N{\Big(\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}\Big)}.
-\end{equation}
+Here, the weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of success and influence in his prestige, the indicator value of role-model $j$ estimates by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeIndicator}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
+%\begin{equation}
+%W_i = \sum_{j=1}^N{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}.
+%\end{equation}
 
 
-\subsection{Binary model} The indicator trait can now manifest in only two phenotypes, and for simplicity we define they can be either $\hat{A}$ or $A$. In the binary model, the influence is determined by the number of copiers already chosen \textbf{any} role-model with either $A$ or $\hat{A}$, as all role-models with $A$ will contribute to the probability of the trait to be inherited just the same (can be proved with simple induction). Simply put, assuming there are two role-models with the $A$ trait, the probability a copier will copy from either role-model will be the same, and the probability the $A$ trait will be inherited is the sum of both role-models.
-In the general case, the probability of the $i$-th individual to inherit trait $A$, based on \cref{copier_choose} is:
+\subsection{Dichotomous trait}
+To allow for mathematical analysis of the model, we introduce a simplified version where the indicator trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
+All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
+Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
+% based on \cref{eq:copier_choose} is % TODO you refer an equation that did not yet appear!
 \begin{equation}\label{eq:binary-model}
-P_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_A}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
+P_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X} % TODO should it be G_{i,A} rather than P_i,A ?
 \end{equation}
-where $X$ is the number of role-models with trait $\hat{A}$ and $K_A$ is the number of copiers that already chose $A$.\\
-The model begins with the first generation having a single individual with $\hat{A}$, and the rest have $A$. The process itself is the same stochastic process as the continuous model.
+where $X$ is the number of role-models with trait $\hat{A}$ and $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model.
+% TODO what is alpha' ?
+Initially, we assume the population has a single individual with phenotype $\hat{A}$ and $N-1$ individuals with phenotype $A$. The rest of the details follow the continuous trait model.
 
-\subsection{Methods}
-The main methods we used to experiment and compare our models is using computer generated simulations. In order to establish our claims and base our mathematical approximations of our models, we used the $\chi^2$ test for the full continuous model, and the Kimura's equations of fixation probability and time to fixation for the binary model.
-
+%%%%%%%
 \section{Results}
 \subsection{Approximations}
 Currently $\big\{\vec{K}_i\big\}_{i=1}^N$ is a stochastic process where each state depends on the previous state, i.e a Markov chain.
@@ -271,7 +273,7 @@ $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any choic
 $Q_j(1,1) = G_{1,j}$ by definition, therefore we can say that $\mathbb{E}[K_{N,j}]=N \cdot G_{1,j}$.\\
 
 \paragraph{Corollary 2: } $\mathbb{E}[K_{Nj}] = \alpha_j \cdot \beta(A'_j) / \overline{\alpha \cdot \beta(A')}$.
-\paragraph{Proof: } The initial prestige of role-model $j$ based on \cref{prestige_eq} is:
+\paragraph{Proof: } The initial prestige of role-model $j$ based on \cref{eq:prestige} is:
 \begin{equation}\label{initial_prob}
 G_{1,j} = \frac{\alpha_j\cdot\beta(A'_j)}{\sum\limits_{m=1}^{N}\alpha_m\cdot\beta(A'_m)}
 \end{equation}
@@ -314,15 +316,15 @@ where $o_j$ is the initial number of balls of the colour $j$ in the urn, and $w_
 \paragraph{Proposition:} process $\big\{\vec{K}_i\big\}_{i=1}^N$ is equivalent to a \textit{Pólya urn model} when $e=e_i=e_j$ and $\alpha=\alpha_j=\alpha_i$ for all $i,j \in N$.
 \paragraph{Proof:} 
 We denote $\alpha'$ as the odds ratio between the weights of the indicator and the influence ($\alpha'=\frac{\alpha}{1-\alpha}$). 
-Using \cref{prestige_eq} we get:
-\begin{equation}\label{copier_choose}
+Using \cref{eq:prestige} we get:
+\begin{equation}\label{eq:copier_choose}
 \begin{split}
 G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cdot \frac{1-\alpha}{1-\alpha} \\
 &= \frac{\alpha'\beta(A'_j) + K_{i-1,j}}{\sum\limits_{m=1}^{N} \alpha'\beta(A'_m) + K_{i-1,m}}\\
 & =\frac{\alpha'\beta(A'_j) + K_{i-1,j}}{i-1 + \sum\limits_{m=1}^{N} \alpha'\beta(A'_m)}
 \end{split}
 \end{equation}
-We see that \cref{polya} and \cref{copier_choose} are equivalent when setting $M=N$, $o_j = \alpha'\beta(A'_j)$, $w_{i,j} = K_{i,j}$, completing the proof.
+We see that \cref{polya} and \cref{eq:copier_choose} are equivalent when setting $M=N$, $o_j = \alpha'\beta(A'_j)$, $w_{i,j} = K_{i,j}$, completing the proof.
 
 \paragraph{Corollary 1:}
 In their paper, \citet[section 2]{dirichlet} prove that the proportion of different colored balls in a \textit{Pólya urn model} will converge to the Dirichlet distribution as the number of draws approaches infinity, based on \textit{Martingale Convergence Theorem} \citep{martingaleBook}.
