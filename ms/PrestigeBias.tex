@@ -24,9 +24,9 @@
 \DeclareMathOperator*{\E}{\mathbb{E}}
  
 \author{
-	Dr. Yoav Ram
-	\and
 	Saar Egozi
+	\and
+	Yoav Ram
 }
  
 \begin{document}
@@ -44,13 +44,13 @@
 
 \vspace{1cm}
 
-{\large together with Yoav Ram}
+{\large supervised by Dr. Yoav Ram}
 
 \vspace{2cm}
 
 \vfill
 
-{\large Efi Arazi School of Computer Science, IDC Herzliya}
+{\large Efi Arazi School of Computer Science, Reichman University}
 
 \vspace{1cm}
 
@@ -69,82 +69,76 @@
 \clearpage
 
 \section{Abstract}
-Copying our role-models have always been an efficient method of acquiring knowledge \citep{strategiesPaper}. \textbf{In this paper, we study the effects of prestige as a cultural transmission bias} on the population. A common bias when choosing a role-model to copy is \textit{success bias}, i.e copying whoever appears successful to us \citep{evolution_of_cultural_evolution}. This estimation is based on the performance of the role-model alone, without any other factors. We propose an additional factor we believe aids to better model the cultural inheritance of traits in a large population. \textit{Influence bias} is a bias evaluated by the number of copiers a role-model already has \citep{prestige_evolution}.We combine these components to what we call the \textit{prestige bias} and analyze its effects on the dynamics of the population. \textbf{We present a model of prestige bias} as we defined it, and \textbf{observe the dynamics of the population using computer simulations}. We also \textbf{analyze our model using mathematical approximations}. We successfully found mathematical approximations to our model, easing the mathematical analysis and the computation power required for simulations. We show the value of these approximations using simulations, and their robustness to variations such as mutation and other relaxations required for the mathematical proofs.
-In the binary form of our model, we found alternatives to \textit{Kimura's} equations for approximating fixation probability and time to fixation of an invading advantageous trait, in both a constant and changing environment. We show that \textit{Influence} solely affects the effective population size.
-We found that influence acts as an accelerator for a state of the population, matching the \textit{rich getting richer} it was based on.
-\textbf{We believe such model better describes how humans acquire knowledge from one another, mainly in the last years where social networks are very popular}.
-Furthermore, we believe that our model could predict various phenomena in human culture once supplemented with more natural concepts like natural selection and costs.
+Copying role-models can be an efficient method of acquiring knowledge \citep{strategiesPaper}. \textbf{Here, we study the effects of prestige as a cultural transmission bias} in cultural-evolution model. A common bias when choosing a role-model to copy is \textit{success bias}, i.e copying whoever appears more successful \citep{evolution_of_cultural_evolution}. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: \textit{Influence bias}, which is evaluated by the number of individuals that have already copied a specific role-model \citep{prestige_evolution}. We combine these biases together to a \textit{prestige bias} and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
+For a dichotomous cultural trait, we find  an approximation to the fixation probability and the fixation time of an invading advantageous cultural trait, in both a constant and changing environment, which resembles Kimura's classical formulas.
+These approximations show that influence effectively reduces the population size. % TODO reduce or increase?
+We also find that influence accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
+Our model may provide a better description of how human cultural transmission, 
+especially in the last years where social networks are very popular. % TODO to discuss this last sentence
+Further work is needed to test if this model could predict various phenomena in human cultural evolution when extended with the effects of selection and innovation.
 
-% what is cultural transmission, and its not only in humans
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Traits transmission is when an individual passes on a trait, genetic or behavioral, to another individual. Transmission in nature manifests in two main ways: genetic and cultural.
-Genetic transmission is when an individual, or several, transmit their genes to their offspring by duplication of their own cells.
-Cultural transmission is the way individuals transmit cultural traits (i.e behavior) from one another, typically via teaching and demonstrating.
- Cultural transmission is most common in humans \citep[pg. 3]{transmissionVectorsBook} and in primates like chimpanzees \citep{chimpsPrestige, chimpsCopy}.
- The common cultural traits in humans are behavioral patterns, like personalities and habits, transmitted via observations and verbal discussions.
-\citet{dualEvolution} suggest that cultural learning may be particular to humans, but \citet{elepahntsRepo} suggest that it appears in other mammals as well, elephants for example:
- \begin{quote}
-	   ... the possession of enhanced discriminatory abilities by the oldest individual [matriarch] in a group can influence the social knowledge of the group as a whole.
- \end{quote}
- They showed that once a matriarch is removed from the group, the group's survival instincts are inferior.
- They support their hypothesis by exacting an experiment: playing audio recordings of African elephants, showing that groups with a matriarch recognize and react better to hostile or friendly calls than the groups without one.
-Moreover, cultural transmission appears in other species, even simpler than mammals, such as \textit{Drosophila}.
-\citet{fliesPaper} show that oviposition site choice in fruit flies is culturally transmitted.
-They showed that flies without experience in choosing sites, after spending some time with "experienced" flies, chose the same type of site without directly observing this behavior. 
-\citet{fliesPaper} mention that how the information is transferred is still an open question, but suggest that the flies may use olfactory cues, like other animals such as rodents and bees.\\ 
 
-%the differences and similarities between cultural and genetic transmission 
-Cultural transmission is similar to genetic transmission in many ways, while different in others.
-Similar to genetic transmission, the effects of culturally transmitted traits can be physiological rather than behavioral, and transmitted from parents to offspring.
- For example, parents can teach their children to be strong or tall, within some biological limits, by instructing them to maintain a healthy diet and engage in physical activity.
-Contrary to genetic transmission, the sources of the traits can be many, and not only parents. They can even be unrelated, like teachers, celebrities, coaches, the media, or any stranger that comes in contact with them. 
- Cultural transmission can be vertical, where parents transmit to their children, but also oblique, where other adults transmit traits to children (not their own).
-  Horizontal transmission is also possible, where peers transmit traits to one another. 
-   Lastly, vertical transmission in the opposite direction is possible too, where parents copy traits from their children (e.g playing video games) as \citet{transmissionVectorsBook} and \citet{transmissionVectors} suggest. 
-In addition, even when a cultural trait is disfavored by natural selection, it still may spread across a population given transmission biases strong enough to negate the selection bias \citep[Ch. 8 pg. 279]{evolutionBook}.\\ 
+\paragraph{Cultural transmission.}
+In cultural transmission, individuals transmit cultural traits (i.e., behavior, beliefs, norms) to one another, typically via learning and demonstrating \citep{transmissionVectorsBook}.
+Examples for cultural traits in humans are behavioral patterns, such as personalities and habits, transmitted via both verbally and by observations. % TODO reference
+Although cultural transmission is most common in humans, it is also observed in other animals such as chimpanzees \citep{chimpsPrestige, chimpsCopy}. % TODO but also birds, Cetacea (Whitehead, PNAS 2017)
+In elephants, \citet{elepahntsRepo} showed that once a matriarch is removed from the group, the group's survival instincts are inferior and that ``the possession of enhanced discriminatory abilities by the oldest individual [matriarch] in a group can influence the social knowledge of the group as a whole.''
+By playing audio recordings of African elephants, they showed that groups with a matriarch recognize and react better to hostile or friendly calls than groups without a matriarch.
+\citet{fliesPaper} showed that choice of oviposition site in fruit flies is culturally transmitted: inexperiences flies that spent some time with experienced flies chose the same type of oviposition site even without directly observing this behavior. How the information is transmitted is still an open question, but it has been suggested that flies may use olfactory cues like other animals, such as rodents and bees.
 
-%transmission biases - what they are, what are the types.
-Transmission bias occurs when a trait has a disproportionate probability from its frequency in the population to be transmitted.
-For example, \citet{wtfGene} show that there are genes of yeast called \textit{wtf genes}, that bias their transmission to the gametes.
-They secrete a long life expectancy poison, together with a short life expectancy antidote, so a gamete without the gene will perish (the poison will outlive the antidote).
-Transmission biases, though exist in genetic transmission, are probably more common in cultural transmission.
-Much like mutation in genetic evolution, one could learn behavioral patterns or traits on his own, usually referred to as \textit{innovation}, also called individual learning, and just like mutation, without it humans might have been remained at the stone age, or even go extinct.
-\citet{strategiesPaper} suggest that success biased social transmission contribute more to the general success of the population than individual learning.
- They conducted a tournament for developing learning strategies of a population, where each participant need to devise a strategy.
- Each strategy must define when individuals should observe and copy from others, and when to engage in individual learning.
- The best strategies contained a high percentage of social learning relative to individual learning, even when the error when copying was as high as almost 0.5. It is important to add that all of the strategies include some percentage of individual learning, and without it the results would be a lot worse.
-In addition to \citet{strategiesPaper}, \citet{complexityPaper} define different types of transmission biases based on success.
-They define several types of role-model choosing methods, all assuming that the copier correctly identifies the successful ones.
-Both studies assume that individuals can successfully evaluate successful individuals.
-\citet[Ch. 5]{evolutionBook} suggest that the \textbf{evaluation} of success can be divided into three groups: \textit{direct bias}, \textit{indirect bias} and \textit{frequency-dependent bias}.
-A direct bias is when a variation of a trait is more attractive than others, and is evaluated by \textit{directly} testing the variation of the trait.
-For example, an individual observing a Ping-Pong match between two others can try both of the paddle grips it observed, and decide what grip is better for it.
-An indirect bias is when an individual uses the value of one trait to determine the attractiveness of another, so it \textit{indirectly} evaluates the attractiveness of the role-model.
-Continuing with the example, a bystander could copy the paddle grip of the Ping-Pong player who scored more points in the match.
-A frequency-dependent bias is when an individual has a probability to copy a variant of the trait that is nonlinear to the trait's frequency in the parent's generation. 
-Continuing with the example, when an individual is 80\% likely to copy the common paddle grip even when only 60\% of the population is using it, it is said to be frequency-biased.\\
-Frequency bias could be negative too. \citet{negativeFrequency} show that societies under competitive conditions are likely to develop diversity in foraging specialization rather than uniformity.
+\paragraph{Direction of transmission.}
+Similar to genetic transmission, culturally transmitted traits can be transmitted from parents to offspring, and their effects of can be physiological rather than behavioral.
+For example, parents can "teach" their children to be strong or tall, within some biological limits, by instructing them to maintain a specific diet and engage in physical activity.
+Contrary to genetic transmission, cultural transmission can be non-vertical, that is, traits may be transmitted via social learning from non-parental individuals, and even unrelated individuals such as teachers, leaders, media, or any stranger that interacts with the learning individual.
+Thus, cultural transmission may combine vertical transmission, where parents transmit to their offspring; oblique transmission, where adults transmit traits to unrelated offspring; and horizontal transmission, where peers from the same age cohort transmit to one another. 
+Vertical transmission is also possible in the opposite direction: parents may copy traits from their offspring (e.g playing video games)\citep{transmissionVectorsBook,transmissionVectors}.  % TODO did they suggest video games or did they have some other trait? not sure I want to mention video games...
+
+\paragraph{Transmission biases.}
+In social learning, transmission biases cause a trait to have a disproportionate probability to be transmitted compared to its frequency in the population.
+Although more common in cultural transmission, transmission biases do occur in genetic transmission. For example, \textit{wtf genes} in yeast bias their transmission to the gamete by secreting a long life-expectancy poison together with a short life-expectancy antidote, so that a gamete without the gene will perish because the poison will outlive the antidote \citep{wtfGene}.
+Importantly, even when a trait is disfavored by natural selection, it may still spread in a population due to transmission biases that are strong enough to overcome selection \citep[Ch. 8 pg. 279]{evolutionBook}.
+% TODO we have an example of this in Dor's paper, in which cooperation can evolve due to horizontal transmission bias even when the benefit is zero:
+% 1. Cohen, D., Lewin-Epstein, O., Feldman, M. W. & Ram, Y. Non-vertical cultural transmission, assortment and the evolution of cooperation. Proc. R. Soc. B Biol. Sci. 288, 20203162 (2021).
+
+\paragraph{Success bias.}
+\citet{strategiesPaper} have conducted a tournament between learning strategies. Each strategy defines when individuals observe and copy from others, and when they engage in individual learning, in which an individual learns a cultural trait on his own. The best strategies had a high frequency of social learning relative to individual learning, even when the transmission error was almost 50\%. It is important to note that all of the strategies included some frequency of individual learning. 
+%The authors suggested that success-biased social transmission contribute more to the general success of the population than individual learning. % TODO how is the last sentence related to the results of the tournament? did the best strategies use success-bias? it is not clear
+
+% TODO do we need the following paragraph? it doesn't say much, and the paragraph after it covers "different type of success evaluation", so what is this paragraph doing?
+%\citet{complexityPaper} define different types of transmission biases based on success. They define several types of role-model choice methods, all assuming that the copier correctly identifies the successful role-models.
+
+\paragraph{Evaluating success.}
+\citet[Ch. 5]{evolutionBook} suggest that the evaluation of success can be divided into three groups: \textit{direct bias}, \textit{indirect bias} and \textit{frequency-dependent bias}.
+A direct bias occurs when a variation of a trait is more attractive than others, and is evaluated by \textit{directly} testing the variation of the trait.
+For example, an individual observing a Ping-Pong match can attempt both of the observed paddle grips to determine which grip is better.
+An indirect bias occurs when an individual uses the value of one trait to determine the attractiveness of another, so it \textit{indirectly} evaluates the attractiveness of the role-model.
+For example, an observer may copy the paddle grip of the Ping-Pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
+A frequency-dependent bias occurs when an individual has a probability to copy a variant of the trait that higher or lower than trait's frequency among demonstrators. 
+For example, when an individual is 80\% likely to copy the common paddle grip even when only 60\% of the population is using it, it is said to be frequency-biased, or in this case, conformist.
+Frequency bias could be negative, i.e., non-conformist bias. 
+Conformity and non-conformity are well-known biases in cultural transmission \citep{conformism}, and its effect on cultural evolution have been studied with both models (Denton 2020 PNAS; Denton TPB 2021) and experiments \citet{negativeFrequency} 
+% TODO references for the above
+% 1. Denton, K. K., Ram, Y. & Feldman, M. W. Conformity and content-biased cultural transmission in the evolution of altruism. Theor. Popul. Biol. (2021) doi:10.1016/j.tpb.2021.10.004.
+% 2. Denton, K. K., Ram, Y., Liberman, U. & Feldman, M. W. Cultural evolution of conformity and anticonformity. Proc. Natl. Acad. Sci. U. S. A. 202004102 (2020) doi:10.1073/pnas.2004102117.
  
-%prestige bias - what is it, what's missing
-Prestige means having a good reputation or high-esteem, therefore does not directly signify success (although it may imply it), making it an \textit{indirect bias}.
-Both \citet[Ch. 8]{evolutionBook} and \citet{complexityPaper} claim that prestige biases are probably more common in humans than success biases.
-\citet[Ch. 8]{evolutionBook} add that maladaptive traits may spread widely in a population, if the indirect bias is strong enough.
-They claim the bias could lead to a \textit{runaway process}, caused by a cultural equivalent of \textit{sexual selection} \citep{sexualSelectionBook}.
-On the other hand, \citet{fijian_social_bias} claim that prestige biases, over generations, can lead to cultural adaptations.
-According to them, prestige can make a maladaptive trait spread in the population, but can also accelerate the spread of adaptive traits as well.
-\textit{Prestige bias} is often mentioned in the literature, but seldom modeled.
-\citet{evolutionBook} have modeled the prestige bias, but didn't include the effects the copiers of a role-model has on the probability of other individuals to choose the same role model.\\
-This effect is similar to \textit{conformity} \citep{conformity}, which is usually modeled as a different bias.
-\textit{Conformist learning} (imitating locally common behaviors) is a known bias in cultural transmission \citep{conformism}, and we suggest that prestige bias is made up by both indirect bias and a new type of conformity.
-Our new component, \textit{influence}, is assigned to a role-model, contrary to conformity, which refers to the frequency of a trait in the population, regardless which individuals posses it.
-\textbf{The goal of this study is to define a more realistic model for prestige bias and analyze the dynamics of the population it causes}.
+\paragraph{Prestige.}
+Prestige means having a good reputation or high esteem, therefore does not directly signify success (although it may imply it), making it an indirect bias.
+Both \citet[Ch. 8]{evolutionBook} and \citet{complexityPaper} suggest that prestige biases are probably more common in humans than success biases.
+\citet[Ch. 8]{evolutionBook} add that maladaptive traits may spread widely in a population if indirect biases are strong enough.
+They suggest that such biases could lead to a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
+On the other hand, \citet{fijian_social_bias} suggest that prestige biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
+Prestige is often mentioned in the cultural-evolution literature, but seldom modeled, although \citet{evolutionBook} have modeled prestige via success bias. % TODO is this correct?
+
+\paragraph{Influence bias.}
+Today, social media provides an easy way to estimate the influence individuals have over others, and therefore may have a major effect on human decision making. For example, the number of "followers" a person has on social networks such as \textit{Facebook} or \textit{Instagram} may significantly affect how his beliefs are perceived by the population. % TODO this must have some reference in the literature.
+Here we propose an indirect bias that we call \textit{influence bias}, in which the choice of a role-model depends on the the choices made by other individuals that have already chosen a role-model. 
+This is a context bias, % TODO right?
+ which depends on the role-model rather than the trait, in contrast to frequency biases such as conformity, which depend on the frequency of a trait in the population or in a sample of role-models. 
+We define a model for prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
  
-Today, due to social media, it is easier than ever to estimate the influence individuals have over others, therefore it is probably a major part of humans decision-making process. For example, the number of \textit{followers} a person has in the mobile application \textit{Instagram} may significantly affect how his beliefs are perceived by the population.
-We want to create a model that better fits reality and simulate scenarios that better mimic cultural transmission dynamics.
-With a more accurate model of prestige bias, we may understand better how cultural traits are transmitted, and why.
-Moreover, we could better explain the cause for the spread of maladaptive traits, or the acceleration of adaptive traits often seen in humans.
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Models and Methods}
 \paragraph{Reminder:} A \textit{Wright–Fisher model} is a mathematical model meant to describe a genetic drift process. This model assumes that generations do not overlap and that each copy of the gene found in the new generation is drawn independently at random from all copies of the gene in the old generation.
 
