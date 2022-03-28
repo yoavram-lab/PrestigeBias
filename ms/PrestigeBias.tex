@@ -8,7 +8,7 @@ top=20mm,
 headheight=12pt
 }
 
-%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
 \usepackage{amsthm, amsmath, amssymb}
 \usepackage[font=small]{caption, subcaption}
@@ -21,17 +21,55 @@ headheight=12pt
 \usepackage{cleveref}
 \usepackage{subcaption}
 \usepackage{mathtools}
-\usepackage[round,colon,authoryear]{natbib}
 \usepackage[all]{nowidow}
 \usepackage{wrapfig}
 \usepackage{pdfpages}
 \usepackage{authblk}
+
+% unbreakable dashes
+\usepackage[shortcuts]{extdash}
+% footnotes
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% less space before sections 
+% \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{2ex plus 1ex minus .2ex}{2ex plus .2ex}
+\titlespacing*{\subsection}
+{0pt}{1ex plus 1ex minus .2ex}{1ex plus .2ex}
+\titlespacing*{\paragraph}
+{0pt}{1ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+%SetFonts
+% newtxtext+newtxmath
+\usepackage{newtxtext} %loads helv for ss, txtt for tt
+\usepackage{amsmath}
+\usepackage[bigdelims]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+%SetFonts
 
 % line numbers
 \usepackage[displaymath, mathlines]{lineno}
  \renewcommand\linenumberfont{\normalfont\small\sffamily}
 \linenumbers
 \modulolinenumbers[2]
+
+% Supplementary
+\newcommand{\beginsupplement}{%
+      	\setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+}
+
+% NatBib
+%\usepackage[super,comma]{natbib}
+\usepackage[round,colon,authoryear]{natbib}
+%\use-package[numbers,super,sort&compress]{natbib}
+\renewcommand{\bibsection}{}
+%\renewcommand{\bibfont}{\small}
 
 % math stuff
 \DeclareMathOperator*{\E}{{\rm I\kern-.3em E}}
@@ -54,12 +92,13 @@ headheight=12pt
 % title page stuff
 \title{Prestige as a Driving Force in Cultural Transmission}
 
+\renewcommand\Affilfont{\small}
 \author[1]{Saar Egozi}
 \author[2,3,*]{Yoav Ram}
-\affil[1]{School of Computer Science, Reichman University, Herzliya, Israel}
-\affil[2]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv, Israel}
-\affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv, Israel}
-\affil[*]{Corresponding author: yoav@yoavram.com}
+\affil[1]{School of Computer Science, Reichman University, Herzliya 4610101, Israel}
+\affil[2]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel}
+\affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel}
+\affil[*]{Corresponding author: yoav@yoavram.com, ORCID 0000-0002-9653-4458}
  
 \date{\today}
 
@@ -68,7 +107,7 @@ headheight=12pt
 \maketitle
 
 \begin{abstract}
-Copying role-models can be an efficient method of acquiring knowledge. Here, we study the effects of prestige as a cultural transmission bias in cultural-evolution model. A common bias when choosing a role-model to copy is success bias, i.e copying whoever appears more successful. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, which is evaluated by the number of individuals that have already copied a specific role-model . We combine these biases together to a prestige bias and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
+Copying role-models can be an efficient method of acquiring knowledge. Here, we study the effects of prestige as a cultural transmission bias in cultural-evolution model. A common bias when choosing a role-model to copy is success bias, i.e copying whoever appears more successful. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, which is evaluated by the number of individuals that have already copied a specific role-model. We combine these biases together to a prestige bias and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
 For a dichotomous cultural trait, we find  an approximation to the fixation probability and the fixation time of an invading advantageous cultural trait, in both a constant and changing environment, which resembles Kimura's classical formulas.
 These approximations show that influence effectively reduces the population size. % TODO reduce or increase?
 We also find that influence accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
@@ -76,7 +115,7 @@ Our model may provide a better description of how human cultural transmission,
 especially in the last years where social networks are very popular. % TODO to discuss this last sentence
 Further work is needed to test if this model could predict various phenomena in human cultural evolution when extended with the effects of selection and innovation.
 \end{abstract}
-
+\pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Introduction}
 
@@ -819,6 +858,10 @@ They build on the hypothesis of \citet{social_brains} that shows that larger, mo
 In short, they suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e transmission biases, such as prestige.
 
 \pagebreak
+
+\section*{References}
+\nolinenumbers
 \bibliography{refs}
+%\bibliographystyle{agsm}
 \bibliographystyle{apalike}
 \end{document}
