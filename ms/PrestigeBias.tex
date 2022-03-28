@@ -11,7 +11,7 @@ headheight=12pt
 \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
 \usepackage{amsmath, amssymb, amsthm}
-\usepackage[font=small]{caption, subcaption}
+\usepackage[font=small,labelfont=bf]{caption, subcaption}
 \usepackage{setspace}\onehalfspacing
 \usepackage[loose,nice]{units}
 \usepackage{array}
@@ -250,7 +250,7 @@ The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined
 \begin{equation}\label{eq:prestige}
 G_{i,j} = \frac{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}{W_i} \;.
 \end{equation}
-Here, the weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of success and influence in his prestige, the indicator value of role-model $j$ estimates by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeIndicator}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
+Here, the bias weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of success and influence in his prestige, the indicator value of role-model $j$ estimates by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeIndicator}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
 %\begin{equation}
 %W_i = \sum_{j=1}^N{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}.
 %\end{equation}
@@ -279,12 +279,12 @@ We found two approximations such processes, summarized here and explained in det
 The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore,
 \begin{enumerate}\item the expected number of copiers of role-model~$j$ equals its prestige in the eyes of the first copier, multiplied by the total number of copiers, that is,
 $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all copiers ($e=e_i$ for $i=1, \ldots, N$).
-\item the expected number of copiers of each role-model equals its relative biased indicator value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the success weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated indicator value. 
+\item the expected number of copiers of each role-model equals its relative biased indicator value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the bias weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated indicator value. 
 \end{enumerate}
 \item The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$). 
 Therefore, the number of copiers of all role-models, $\vec{K}_i = (K_{i,1}, \ldots, K_{i,N})$, follows a Dirichlet-Multinomial distribution,
 $\vec{K}_i \sim \mathit{DM}\big(N, \vec{G}_1\big)$, where $\vec{G}_1 = (G_{1,1}, \ldots, G_{1,N})$ is the prestige vector of all role-models in the "eyes" of the first copier.
-Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and the weights $\alpha_j$, as the estimation error is uniform. % TODO correct? anything else need to be assumed?
+Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and the bias weights $\alpha_j$, as the estimation error is uniform. % TODO correct? anything else need to be assumed?
 \end{enumerate}
 
 
@@ -339,7 +339,7 @@ Using \cref{eq:denominator} we get, % TODO something is missing here? how did yo
 completing the proof.
 \end{proof}
 
-The special case where the weight is uniform for all role-models ($\alpha = \alpha_j$ for $j=1,\ldots, N$) is interesting, because we can evaluate the expected number of copiers using a linear equation
+The special case where the bias weight is uniform for all role-models ($\alpha = \alpha_j$ for $j=1,\ldots, N$) is interesting, because we can evaluate the expected number of copiers using a linear equation
 \begin{equation}
 \E[K_{Nj}]= N\cdot\frac{\alpha\cdot\beta(A_j+e)}{\sum\limits_{m=1}^{N}\alpha\cdot\beta(A_m+e)} =\beta(A_j+e) \bigg/ \overline{\beta(A+e)} \;,
 \end{equation}
@@ -369,11 +369,11 @@ where $o_j$ is the initial number of balls of the color $j$ in the urn, and $w_{
 \\
 
 \begin{result}[P{\'{o}}lya urn model]\label{result:polya}
-The role-model choice process, $\big\{\vec{K}_i\big\}_{i=1}^N$, is equivalent to a \textit{P\'{o}lya urn model} if both trait estimation error and success weight are uniform in the population, $e=e_j$ and $\alpha=\alpha_j$ for all $j=1,\ldots,N$.
+The role-model choice process, $\big\{\vec{K}_i\big\}_{i=1}^N$, is equivalent to a \textit{P\'{o}lya urn model} if both trait estimation error and bias weight are uniform in the population, $e=e_j$ and $\alpha=\alpha_j$ for all $j=1,\ldots,N$.
 \end{result}
 
 \begin{proof} 
-Denote $\alpha'=\frac{\alpha}{1-\alpha}$ as the odds ratio between the weights of success and influence bias and $A'_j=A_j+e$. From \cref{eq:prestige} and because $\sum_{j=1}^{N}{K_{i,j}}=i$, we have
+Denote $\alpha'=\frac{\alpha}{1-\alpha}$ as the bias weight ratio, and $A'_j=A_j+e$. From \cref{eq:prestige} and because $\sum_{j=1}^{N}{K_{i,j}}=i$, we have
 \begin{equation}\label{eq:copier_choose}
 G_{i,j} = 
 \frac{\alpha'\beta(A'_j) + K_{i-1,j}}{\sum\limits_{m=1}^{N} \alpha'\beta(A'_m) + K_{i-1,m}}
@@ -402,31 +402,51 @@ When testing our observed distributions against different distributions, for exa
 % TODO figure of observed vs expected distribution, and maybe also for other distributions such as uniform
 % TODO maybe it would be better to compute a test score for multiple distributions and show it is lowest (highest?) for DM ? do model comparison this way?
 
-\subsection*{Numeric comparisons} % TODO rename section
-We're interesting in studying the difference between the real binary model as we defined in \cref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
-
-\begin{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
-  \caption{The number of simulations needed to get a good approximation. At $1,000$ the approximation is good enough. Error bars represent 95\% confidence interval. Population size $N=1000$, $\alpha=0.5$, $J=1$, $\hat{A}=1$,$A=0.7$, $\beta(A)=0.956$.}	
+  \caption{
+  \textbf{Number of simulations needed to get a good approximation.}
+  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations. % 1000 simulations of the model or of DM ??
+  Markers for average value across simulations, error bars for 95\% confidence interval.
+  Here, population size, $N=1000$; bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:num_sims}
+  % TODO
+  % remove legend
+  % change y labels: "Fixation probability" "Fixation time"
+  % change x label: "Number of simulations"
+  % Kimura - black solid line
+  % I removed J as you give beta(A) below, ok
+  % it is not clear what "number of simulations needed" means.
+  % what does "good enough" mean?
+  % maybe y axis should be in relative error?
+  % you should point to the equation for kimura.
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection*{Numeric comparisons} % TODO rename section
 
-The first step was to find the number of simulations needed to sufficiently approximate the real model with the DM approximation. From \cref{fig:num_sims} we see that $1000$ simulations or higher is enough.
+Here we examine the difference between the dichotomous trait model defined in \cref{eq:binary-model} and the Dirichlet-Multinomial approximation we presented in \cref{cor:dirichlet}. We focus on the fixation probability and fixation time of the advantageous phenotype $\hat{A}$ when invading a population of phenotype $A$.
 
-The next step was to see how the observed metrics (fixation probability and time) varies when relaxing our assumptions we used to prove the DM approximation.
-First we relaxed our assumption of no mutation. To include mutation in the binary model, it needs to be redefined, since in the original model it was based on the fact the traits are drawn from a continuous scale. In the binary model mutation will be manifested as an error when evaluating the bias itself. This is easily done by using a heterogeneous $J$ parameter, which controls the strength of the success bias in \cref{eq:success_bias}.
-
+First, we find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1000$ (\Cref{fig:num_sims}).
+Next, we examined the robustness of the DM approximation to relaxing the approximation assumptions
+First we relaxed our assumption of no mutation. % TODO what is the mutation parameters? e? I thought this was estimation error. does it only affect the bias or also the copying? we should discuss!
+To include mutation in the dichotomous trait model, it needs to be redefined, since in the original model it was based on the fact the traits are drawn from a continuous scale. In the dichotomous trait model mutation will be manifested as an error when evaluating the bias itself. This is easily done by using a heterogeneous $J$ parameter, which controls the strength of the success bias in \cref{eq:success_bias}. % NOT CLEAR AT ALL - do you redefine now the model? or is this leftover from before??? 
+% I dont like that we call this mutation, we should call it copying error or something else, see if Boyd or Fogarty has a name for it.
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
-  \caption{Comparison of the DM approximation and the full model when mutation is included. Even high mutation rate doesn't worsen the approximation, and the data points are close to the mathematical estimation (Kimura's). Error bars are 95\% confidence intervals, and are condensed (+- 0.01 probability and +-40 generations)
-  $5000$ simulations per data point, $N=1000$, $\alpha=0.1$,$\hat{A}=1$,$A=0.7$, $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis.
+  \caption{
+  \textbf{Robustness of DM approximations to inclusion of mutation.} Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high mutation rate. Markers for average across simulations, error bars for 95\% confidence intervals.
+  % and are condensed (+- 0.01 probability and +-40 generations) % what does that mean?
+  5,000 simulations per data point; population size, $N=1000$; bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; $J\sim N(1,x^2)$ where $x$ is the mutation scale in the x-axis. % not clear enough.
   }	
+  % TODO
+  % see comments in previous figure
   \label{fig:hetro_mutation}
 \end{figure}
 
-
+% YOAV HERE
 In \cref{fig:hetro_mutation} we see the comparison when heterogeneous mutation is applied to both models. When mutation is applied, we sample $J_i$ for each copier $i$ from a normal distribution with varying scale (variance).
 We can see that even when the standard deviation is $0.1$, the metrics of both models are both similar, and close to the Kimura approximation (more details in the next section). 
 
@@ -733,7 +753,7 @@ We wanted again to validate our results, using simulations.
 This time, the number of parameters increased: in addition to $\alpha,\beta$, there are also $k,l$ as model parameters.
 
 We again tried different variations of the parameters, changing only one of them at a time.
-In \cref{fig:ch_env_alpha_beta} we can see that $\alpha$ on it's own doesn't cause any deviation for the the estimation. $\beta$ however affects the results greatly.
+In \cref{fig:ch_env_alpha_beta} we can see that $\alpha$ on its own does not cause any deviation for the the estimation. $\beta$ however affects the results greatly.
 
 \begin{figure}[t]
   \begin{center}
