@@ -10,7 +10,7 @@ headheight=12pt
 
 \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
-\usepackage{amsthm, amsmath, amssymb}
+\usepackage{amsmath, amssymb, amsthm}
 \usepackage[font=small]{caption, subcaption}
 \usepackage{setspace}\onehalfspacing
 \usepackage[loose,nice]{units}
@@ -18,6 +18,7 @@ headheight=12pt
 \usepackage[super]{nth}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[unicode=true,colorlinks=true,urlcolor=Blue,citecolor=black,linkcolor=black]{hyperref}
 \usepackage{cleveref}
 \usepackage{subcaption}
 \usepackage{mathtools}
@@ -278,7 +279,7 @@ We found two approximations such processes, summarized here and explained in det
 The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore,
 \begin{enumerate}\item the expected number of copiers of role-model~$j$ equals its prestige in the eyes of the first copier, multiplied by the total number of copiers, that is,
 $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all copiers ($e=e_i$ for $i=1, \ldots, N$).
-\item the expected number of copiers of each role-model equals its relative biased indicator value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if $\alpha$ is uniform for all role-models ($\alpha=\alpha_k$ for $k=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated indicator value. 
+\item the expected number of copiers of each role-model equals its relative biased indicator value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the success weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated indicator value. 
 \end{enumerate}
 \item The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$). 
 Therefore, the number of copiers of all role-models, $\vec{K}_i = (K_{i,1}, \ldots, K_{i,N})$, follows a Dirichlet-Multinomial distribution,
@@ -289,6 +290,7 @@ Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and th
 
 \subsection*{Generalized Binomial Distribution}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is parameterized by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials ($\theta=0$ gives the standard binomial distribution).
+\\
 
 \begin{result}[GBD approximation]
 The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A_j+e))$ if $e_i=e$ for all role-models $i=1, \ldots, N$. 
@@ -347,64 +349,60 @@ We can then denote $L = 1/\overline{\beta(A+e)}$ and write
 \E[K_{Nj}] = L\cdot \beta(A_j+e) \;.
 \end{equation}
 
+% TODO what about a numerical validation for GBD?
 
 \subsection*{Dirichlet-Multinomial Distribution}
 
-\begin{remark}
-\textit{Pólya urn model}  is a stochastic process that is defined as such: 
-The process consists of $N$ draws from an urn with an initial amount of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same colour.\\
+\paragraph{P\'{o}lya urn model.}
+This stochastic process consists of $N$ draws from an urn with an initial amount of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same color.
 Let $\vec{U_i} = \{u_{i,1},u_{i,2},...,u_{i,M}\}$  where $u_{i,j}$ is the number of balls of the $j$-th color in the urn after $i$ draws.
-Let $S_{i,j}=1$ when drawing a $j$ colored ball on the $i$-th draw, and $0$ otherwise. The probability that $S_{i,j}=1$ given $\vec{U_{i-1}}$ is:
-\begin{equation}\label{polya}
+Let $S_{i,j}=1$ when drawing a $j$-colored ball on the $i$-th draw, and $0$ otherwise. The probability that $S_{i,j}=1$ given $\vec{U_{i-1}}$ is
+\begin{equation}\label{eq:polya}
 \begin{split}
-P(S_{i,j} = 1 | \vec{U_{i-1}}) & = \frac{u_{i-1,j}}{\sum\limits_{m=1}^{M} u_{i-1,m}} = \frac{o_j + w_{i-1,j}}{\sum\limits_{m=1}^{M} o_m + w_{i-1,m}}\\
- & = \frac{o_j + w_{i-1,j}}{i-1 + \sum\limits_{m=1}^{M} o_m}
+P(S_{i,j} = 1 \mid \vec{U_{i-1}}) = 
+\frac{u_{i-1,j}}{\sum\limits_{m=1}^{M} u_{i-1,m}} = 
+\frac{o_j + w_{i-1,j}}{\sum\limits_{m=1}^{M} o_m + w_{i-1,m}} = 
+\frac{o_j + w_{i-1,j}}{i-1 + \sum\limits_{m=1}^{M} o_m} \;,
 \end{split}
 \end{equation}
-where $o_j$ is the initial number of balls of the colour $j$ in the urn, and $w_{i,j}$ is the number of new balls that were added to the urn after $i$ draws of the color $j$.
-\end{remark}
+where $o_j$ is the initial number of balls of the color $j$ in the urn, and $w_{i,j}$ is the cumulative number of new balls that were added to the urn after $i$ draws of the color $j$.
+\\
 
-\begin{result}[Pólya urn model]
-$\big\{\vec{K}_i\big\}_{i=1}^N$ is equivalent to a \textit{Pólya urn model} when $e=e_i=e_j$ and $\alpha=\alpha_j=\alpha_i$ for all $i,j \in N$.
+\begin{result}[P{\'{o}}lya urn model]\label{result:polya}
+The role-model choice process, $\big\{\vec{K}_i\big\}_{i=1}^N$, is equivalent to a \textit{P\'{o}lya urn model} if both trait estimation error and success weight are uniform in the population, $e=e_j$ and $\alpha=\alpha_j$ for all $j=1,\ldots,N$.
 \end{result}
 
 \begin{proof} 
-We denote $\alpha'$ as the odds ratio between the weights of the indicator and the influence ($\alpha'=\frac{\alpha}{1-\alpha}$). 
-Using \cref{eq:prestige} we get:
+Denote $\alpha'=\frac{\alpha}{1-\alpha}$ as the odds ratio between the weights of success and influence bias and $A'_j=A_j+e$. From \cref{eq:prestige} and because $\sum_{j=1}^{N}{K_{i,j}}=i$, we have
 \begin{equation}\label{eq:copier_choose}
-\begin{split}
-G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cdot \frac{1-\alpha}{1-\alpha} \\
-&= \frac{\alpha'\beta(A'_j) + K_{i-1,j}}{\sum\limits_{m=1}^{N} \alpha'\beta(A'_m) + K_{i-1,m}}\\
-& =\frac{\alpha'\beta(A'_j) + K_{i-1,j}}{i-1 + \sum\limits_{m=1}^{N} \alpha'\beta(A'_m)}
-\end{split}
+G_{i,j} = 
+\frac{\alpha'\beta(A'_j) + K_{i-1,j}}{\sum\limits_{m=1}^{N} \alpha'\beta(A'_m) + K_{i-1,m}}
+ =\frac{\alpha'\beta(A'_j) + K_{i-1,j}}{i-1 + \sum\limits_{m=1}^{N}\alpha'\beta(A'_m)} \;.
 \end{equation}
-We see that \cref{polya} and \cref{eq:copier_choose} are equivalent when setting $M=N$, $o_j = \alpha'\beta(A'_j)$, $w_{i,j} = K_{i,j}$, completing the proof.
+Substituting $M=N$, $o_j = \alpha'\beta(A'_j)$, and $w_{i,j} = K_{i,j}$ in \cref{eq:polya} gives \cref{eq:copier_choose}, thus completing the proof.
 \end{proof} 
 
-\begin{remark}
-In their paper, \citet[section 2]{dirichlet} prove that the proportion of different colored balls in a \textit{Pólya urn model} will converge to the Dirichlet distribution as the number of draws approaches infinity, based on \textit{Martingale Convergence Theorem} \citep{martingaleBook}.
-We therefore have an approximation for the relative "weight" or the proportion each role-model has when evaluated as a role-model. Drawing from a Multinomial distribution where the parameters are the modified weights gained from the Dirichlet distribution is viable for selecting the role-model for the next generation.
-We can therefore sample from a Dirichlet-Multinomial distribution to approximate how many copiers each of the role-models will have:
-$\vec{K_i} \sim DM(N,\vec{G_1})$.
-\end{remark}
+\citet[section 2]{dirichlet} prove that the proportion of different colored balls in a \textit{P\'{o}lya urn model} converges to the Dirichlet distribution as the number of draws approaches infinity, based on the \textit{Martingale Convergence Theorem} \citep{martingaleBook}.
+We therefore have an approximation for the relative prestige each role-model has when evaluated by copiers. Thus, choosing the role-models for all copiers is equivalent to drawing from a Multinomial distribution where the parameters are the modified weights from a Dirichlet distribution and we have the following corollary.
+\\
 
-\paragraph{Numeric validation:} We showed our process is DM (Dirichlet-Multinomial) distributed when there are no errors when copying or evaluating the traits, and when $\alpha$ is homogeneous in the population. To support our proof, we tested our approximation empirically using computer simulations.
-To test our hypothesis, we used a \textit{goodness of fit} method known as \textit{Pearson's chi-squared test}. In this test, one can reject or accept the null hypothesis, which in our case is the hypothesis that the simulations results were drawn from a DM distribution.
+\begin{corollary}\label{cor:dirichlet}
+The number of copiers of each role-model follows a Dirichlet-Multinomial distribution, $\vec{K_i} \sim \textit{DM}(N,\vec{G_1})$, under the conditions of \Cref{result:polya}.
+\end{corollary}
 
-To use this test, we ran many simulations of our original model, and used the mean distribution of copiers. This mean distribution is our observed distribution, and we tested it with the DM expected distribution, using said chi-squared test.
-We tested multiple variations of the trait weight parameter ($\alpha$).
+\paragraph{Numerical validation.}
+To validate our analytical result (\cref{cor:dirichlet}) and test its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) we compare it to results of stochastic simulations.
+We executed many simulations of our original model to  % TODO exactly how many 
+compute an observed distribution of number of copiers from the average empirical distribution. To compare the observed distribution with the expected DM distribution, we use a Pearson's chi-squared test of goodness-of-fit to reject or accept the null hypothesis that the simulation results are drawn from a DM distribution.
 
-In all our tests, the p-value was \textbf{1}. This means that the probability to reject the null hypothesis is essentially nonexistent (the usual threshold for a p-value needed to reject $H_0$ is 0.05 or lower). 
-In addition, we found out that for high $\alpha$ values (above 0.5), very few simulations are needed to reach p-value 1. (less than five simulations for $\alpha=0.9$, and less than 20 for $\alpha=0.7$)
-For very low $\alpha$ values, which means very high influence weight, the number of simulations needed was 100, which is still a relatively small amount.
-To verify our codes results, we also ran the test for different distributions, for example the uniform distribution (all role-models have exactly one copier).
+When testing multiple values of the bias weight parameter $\alpha$, the test p-value was 1, meaning means that the null hypothesis cannot be rejected
+For high $\alpha$ values (above 0.5), very few simulations are needed to reach p-value of 1 (less than five simulations for $\alpha=0.9$, and less than 20 for $\alpha=0.7$)
+For very low $\alpha$ values, which means very high influence weight, the number of simulations needed was 100.
+When testing our observed distributions against different distributions, for example the uniform distribution (all role-models have exactly one copier), the p-value was 0, so that the null hypothesis was rejected, as required. % TODO did you test other distributions?
+% TODO figure of observed vs expected distribution, and maybe also for other distributions such as uniform
+% TODO maybe it would be better to compute a test score for multiple distributions and show it is lowest (highest?) for DM ? do model comparison this way?
 
-All these tests resulted in a p-value 0, which means we can likely reject $H_0$ for these distributions, as expected.
-
-Once we validated our proof for a single iteration of the model, we went on to more complex validations for the entire model.
-
-
-\subsection*{Numeric comparisons}
+\subsection*{Numeric comparisons} % TODO rename section
 We're interesting in studying the difference between the real binary model as we defined in \cref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
 
 \begin{figure}
