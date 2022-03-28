@@ -1,5 +1,14 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}          
+\documentclass[12pt]{extarticle}
+\usepackage{geometry}
+\geometry{
+a4paper,
+total={170mm,257mm},
+left=20mm,
+top=20mm,
+headheight=12pt
+}
+
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
 \usepackage{amsthm, amsmath, amssymb}
 \usepackage[font=small]{caption, subcaption}
@@ -12,82 +21,64 @@
 \usepackage{cleveref}
 \usepackage{subcaption}
 \usepackage{mathtools}
-\usepackage[displaymath, mathlines]{lineno}
-\usepackage{natbib}
+\usepackage[round,colon,authoryear]{natbib}
 \usepackage[all]{nowidow}
 \usepackage{wrapfig}
 \usepackage{pdfpages}
+\usepackage{authblk}
 
 % line numbers
- \usepackage[displaymath, mathlines]{lineno}
+\usepackage[displaymath, mathlines]{lineno}
  \renewcommand\linenumberfont{\normalfont\small\sffamily}
 \linenumbers
 \modulolinenumbers[2]
 
 % math stuff
 \DeclareMathOperator*{\E}{{\rm I\kern-.3em E}}
+\newcommand*{\tr}{^\intercal}
 \let\vec\mathbf
-\newenvironment{conditions}
-  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
-  {\end{tabular}\par\vspace{\belowdisplayskip}}
+\newcommand{\matrx}[1]{{\left[ \stackrel{}{#1}\right]}}
+\newcommand{\diag}[1]{\mbox{diag}\matrx{#1}}
+\newcommand{\goesto}{\rightarrow}
+\newcommand{\dspfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2} }
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{result}{Result}
+\renewcommand\qedsymbol{} % no square at end of proof
+\newcommand{\cl}{\mathbf{L}}
+\newcommand{\cj}{\mathbf{J}}
+\newcommand{\ci}{I}
 
 % title page stuff
-\author{
-	Saar Egozi
-	\and
-	Yoav Ram
-}
+\title{Prestige as a Driving Force in Cultural Transmission}
+
+\author[1]{Saar Egozi}
+\author[2,3,*]{Yoav Ram}
+\affil[1]{School of Computer Science, Reichman University, Herzliya, Israel}
+\affil[2]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv, Israel}
+\affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv, Israel}
+\affil[*]{Corresponding author: yoav@yoavram.com}
  
+\date{\today}
+
+
 \begin{document}
+\maketitle
 
-\begin{titlepage}
-\centering
-
-\vspace{4cm}
-
-{\LARGE\bfseries Prestige as a Driving Force in Cultural Transmission}
-
-\vspace{2cm}
-
-{\large\bfseries Saar Egozi}
-
-\vspace{1cm}
-
-{\large supervised by Dr. Yoav Ram}
-
-\vspace{2cm}
-
-\vfill
-
-{\large Efi Arazi School of Computer Science, Reichman University}
-
-\vspace{1cm}
-
-{\itshape \today}
-
-{\large saartk@gmail.com}
-\end{titlepage}
-
-
-\renewcommand\linenumberfont{\normalfont\small\sffamily}
-\linenumbers
-\modulolinenumbers[2]
-\setcounter{secnumdepth}{0}
-\tableofcontents
-
-\clearpage
-
-\section{Abstract}
-Copying role-models can be an efficient method of acquiring knowledge \citep{strategiesPaper}. \textbf{Here, we study the effects of prestige as a cultural transmission bias} in cultural-evolution model. A common bias when choosing a role-model to copy is \textit{success bias}, i.e copying whoever appears more successful \citep{evolution_of_cultural_evolution}. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: \textit{Influence bias}, which is evaluated by the number of individuals that have already copied a specific role-model \citep{prestige_evolution}. We combine these biases together to a \textit{prestige bias} and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
+\begin{abstract}
+Copying role-models can be an efficient method of acquiring knowledge. Here, we study the effects of prestige as a cultural transmission bias in cultural-evolution model. A common bias when choosing a role-model to copy is success bias, i.e copying whoever appears more successful. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, which is evaluated by the number of individuals that have already copied a specific role-model . We combine these biases together to a prestige bias and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
 For a dichotomous cultural trait, we find  an approximation to the fixation probability and the fixation time of an invading advantageous cultural trait, in both a constant and changing environment, which resembles Kimura's classical formulas.
 These approximations show that influence effectively reduces the population size. % TODO reduce or increase?
 We also find that influence accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
 Our model may provide a better description of how human cultural transmission, 
 especially in the last years where social networks are very popular. % TODO to discuss this last sentence
 Further work is needed to test if this model could predict various phenomena in human cultural evolution when extended with the effects of selection and innovation.
+\end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
+\section*{Introduction}
 
 \paragraph{Cultural transmission.}
 In cultural transmission, individuals transmit cultural traits (i.e., behavior, beliefs, norms) to one another, typically via learning and demonstrating \citep{transmissionVectorsBook}.
@@ -148,7 +139,7 @@ This is a context bias, % TODO right?
 We define a model for prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Models and Methods}
+\section*{Models and Methods}
 
 %A \textit{Wright–Fisher model} describes an evolutionary process with random genetic. This model assumes non-overlapping generations such that the entire population is replaced in every generation by the offspring population. The parent of each offspring is independently drawn at random from the parental generation.
 %A \textit{Moran model} also describes an evolutionary process with drift, but assumes overlapping generations. At each time step, one individual is chosen to reproduce and one individual is chosen to die. 
@@ -160,7 +151,7 @@ We implemented our stochastic models and approximations, performed statistical a
 %- Hunter, J. D. Matplotlib: A 2D Graphics Environment. Comput. Sci. Eng. 9, 90–95 (2007).
 Source code is available at % TODO GitHub link; currently it is private but will be public when paper is accepted.
 
-\subsection{Continuous trait}
+\subsection*{Continuous trait}
 We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the indicator trait and omitting the indirect trait in order to reduce model complexity. 
 We consider a population of $N$ individuals, described by a single indicator trait with a continuous value.
 Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright–Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
@@ -225,7 +216,7 @@ Here, the weight $\alpha_j$ is a characteristic of role-model~$j$ that determine
 %\end{equation}
 
 
-\subsection{Dichotomous trait}
+\subsection*{Dichotomous trait}
 To allow for mathematical analysis of the model, we introduce a simplified version where the indicator trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
 All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
@@ -238,8 +229,8 @@ where $X$ is the number of role-models with trait $\hat{A}$ and $K_{i,A}$ is the
 Initially, we assume the population has a single individual with phenotype $\hat{A}$ and $N-1$ individuals with phenotype $A$. The rest of the details follow the continuous trait model.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results}
-\subsection{Approximations}
+\section*{Results}
+\subsection*{Approximations}
 Our model is defined by two nested stochastic processes. Change over multiple generations is described by the phenotype distribution at each generation, $\{\vec{A}(t)\}_t$. The transition from one generation to the next is described by the number of copiers each role-model has after $i$ copiers have chosen a role-model, $\{\vec{K}_i\}_{i=1}^N$.
 We emphasize that the models are nested: $\vec{A}(t+1)$ can be computed from $\vec{A}(t)$ by evaluating $\vec{K}_{N}$. However, the former requires iterating over \cref{eq:recurrence,eq:recPrestige}. Thus, we sought to find an equivalent stochastic process that has the same joint distribution as $\vec{K}_{N}$. 
 We found two approximations such processes, summarized here and explained in detail below:
@@ -257,12 +248,15 @@ Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and th
 \end{enumerate}
 
 
-\subsection{Generalized Binomial Distribution Approximation}
+\subsection*{Generalized Binomial Distribution}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is parameterized by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials ($\theta=0$ gives the standard binomial distribution).
 
-\paragraph{Proposition.} The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A_j+e))$ if $e_i=e$ for all role-models $i=1, \ldots, N$. 
+\begin{result}[GBD approximation]
+The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A_j+e))$ if $e_i=e$ for all role-models $i=1, \ldots, N$. 
+\end{result}
 
-\paragraph{Proof.} We denote $Q_j(k,i)=P(K_{i,j} = k \mid K_{i-1,j})$ as the probability that exactly $k$ out of $i$ copiers choose role-model $j$ given $K_{i-1,j}$ our of $i-1$ copiers chose role-model $j$. 
+\begin{proof}
+We denote $Q_j(k,i)=P(K_{i,j} = k \mid K_{i-1,j})$ as the probability that exactly $k$ out of $i$ copiers choose role-model $j$ given $K_{i-1,j}$ our of $i-1$ copiers chose role-model $j$. 
 Using conditional probability and \cref{eq:recurrence},
 \begin{equation}\label{recursive}
 Q_j(k,i) = P_j(S_{i,j}=1 | k-1,i-1) \cdot Q_j(k-1,i-1) + P_j(S_{i,j} =0 | k,i-1) \cdot Q_j(k,i-1),
@@ -270,15 +264,25 @@ Q_j(k,i) = P_j(S_{i,j}=1 | k-1,i-1) \cdot Q_j(k-1,i-1) + P_j(S_{i,j} =0 | k,i-1)
 where $S_{i,j} =1 $ when the $i$-th copier chooses role-model $j$.
 \Cref{recursive} is equivalent to eq.~(2.1) by \citet{GBD}, which completes the proof.
 %$Q_j(k,N)$ is the probability that $k$ out of $N$ copiers choose role-model $j$ at the end of the process, which by our previous notation is $k=K_{N,j}$. % TODO do you need this sentence?
+\end{proof}
 
-\paragraph{Corollary 1.} $\E[K_{N,j}] = N \cdot G_{1,j}$.
-\paragraph{Proof.} \citet[eq.~(2.3)]{GBD} show that 
+\begin{corollary}
+$\E[K_{N,j}] = N \cdot G_{1,j}$.
+\end{corollary}
+
+\begin{proof}
+\citet[eq.~(2.3)]{GBD} show that 
 $\E[k] = N \cdot Q_j(1,1)$ (modified from their notation).
 $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-model choices are made.
 $Q_j(1,1) = G_{1,j}$ by definition, which completes the proof.
+\end{proof}
 
-\paragraph{Corollary 2: } $\E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) / \overline{\alpha \cdot \beta(A+e)}$, where the averaging in the denominator is over the role-models index, $j$.
-\paragraph{Proof.} The initial prestige of role-model $j$ based on \cref{eq:prestige} is
+\begin{corollary}
+$\E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) / \overline{\alpha \cdot \beta(A+e)}$, where the averaging in the denominator is over the role-models index, $j$.
+\end{corollary}
+
+\begin{proof}
+The initial prestige of role-model $j$ based on \cref{eq:prestige} is
 \begin{equation}\label{eq:initial_prob}
 G_{1,j} = \frac{\alpha_j\cdot\beta(A_j+e)}{\sum\limits_{m=1}^{N} \alpha_m\cdot\beta(A_m+e)} \;.
 \end{equation}
@@ -292,6 +296,7 @@ Using \cref{eq:denominator} we get, % TODO something is missing here? how did yo
 \E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) \bigg/ \overline{\alpha \cdot \beta(A+e)} \;,
 \end{equation}
 completing the proof.
+\end{proof}
 
 The special case where the weight is uniform for all role-models ($\alpha = \alpha_j$ for $j=1,\ldots, N$) is interesting, because we can evaluate the expected number of copiers using a linear equation
 \begin{equation}
@@ -304,8 +309,10 @@ We can then denote $L = 1/\overline{\beta(A+e)}$ and write
 \end{equation}
 
 
-\subsection{Dirichlet-Multinomial Distribution Approximation}
-\paragraph{Reminder: \textit{Pólya urn model}}  is a stochastic process that is defined as such: 
+\subsection*{Dirichlet-Multinomial Distribution}
+
+\begin{remark}
+\textit{Pólya urn model}  is a stochastic process that is defined as such: 
 The process consists of $N$ draws from an urn with an initial amount of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same colour.\\
 Let $\vec{U_i} = \{u_{i,1},u_{i,2},...,u_{i,M}\}$  where $u_{i,j}$ is the number of balls of the $j$-th color in the urn after $i$ draws.
 Let $S_{i,j}=1$ when drawing a $j$ colored ball on the $i$-th draw, and $0$ otherwise. The probability that $S_{i,j}=1$ given $\vec{U_{i-1}}$ is:
@@ -316,9 +323,13 @@ P(S_{i,j} = 1 | \vec{U_{i-1}}) & = \frac{u_{i-1,j}}{\sum\limits_{m=1}^{M} u_{i-1
 \end{split}
 \end{equation}
 where $o_j$ is the initial number of balls of the colour $j$ in the urn, and $w_{i,j}$ is the number of new balls that were added to the urn after $i$ draws of the color $j$.
+\end{remark}
 
-\paragraph{Proposition:} process $\big\{\vec{K}_i\big\}_{i=1}^N$ is equivalent to a \textit{Pólya urn model} when $e=e_i=e_j$ and $\alpha=\alpha_j=\alpha_i$ for all $i,j \in N$.
-\paragraph{Proof:} 
+\begin{result}[Pólya urn model]
+$\big\{\vec{K}_i\big\}_{i=1}^N$ is equivalent to a \textit{Pólya urn model} when $e=e_i=e_j$ and $\alpha=\alpha_j=\alpha_i$ for all $i,j \in N$.
+\end{result}
+
+\begin{proof} 
 We denote $\alpha'$ as the odds ratio between the weights of the indicator and the influence ($\alpha'=\frac{\alpha}{1-\alpha}$). 
 Using \cref{eq:prestige} we get:
 \begin{equation}\label{eq:copier_choose}
@@ -329,12 +340,14 @@ G_{i,j} & = \frac{\alpha\cdot \beta(A'_j) + (1-\alpha) \cdot K_{i-1,j}}{W_i} \cd
 \end{split}
 \end{equation}
 We see that \cref{polya} and \cref{eq:copier_choose} are equivalent when setting $M=N$, $o_j = \alpha'\beta(A'_j)$, $w_{i,j} = K_{i,j}$, completing the proof.
+\end{proof} 
 
-\paragraph{Corollary 1:}
+\begin{remark}
 In their paper, \citet[section 2]{dirichlet} prove that the proportion of different colored balls in a \textit{Pólya urn model} will converge to the Dirichlet distribution as the number of draws approaches infinity, based on \textit{Martingale Convergence Theorem} \citep{martingaleBook}.
 We therefore have an approximation for the relative "weight" or the proportion each role-model has when evaluated as a role-model. Drawing from a Multinomial distribution where the parameters are the modified weights gained from the Dirichlet distribution is viable for selecting the role-model for the next generation.
 We can therefore sample from a Dirichlet-Multinomial distribution to approximate how many copiers each of the role-models will have:
 $\vec{K_i} \sim DM(N,\vec{G_1})$.
+\end{remark}
 
 \paragraph{Numeric validation:} We showed our process is DM (Dirichlet-Multinomial) distributed when there are no errors when copying or evaluating the traits, and when $\alpha$ is homogeneous in the population. To support our proof, we tested our approximation empirically using computer simulations.
 To test our hypothesis, we used a \textit{goodness of fit} method known as \textit{Pearson's chi-squared test}. In this test, one can reject or accept the null hypothesis, which in our case is the hypothesis that the simulations results were drawn from a DM distribution.
@@ -352,7 +365,7 @@ All these tests resulted in a p-value 0, which means we can likely reject $H_0$ 
 Once we validated our proof for a single iteration of the model, we went on to more complex validations for the entire model.
 
 
-\subsection{Numeric comparisons}
+\subsection*{Numeric comparisons}
 We're interesting in studying the difference between the real binary model as we defined in \cref{eq:binary-model}, and the Dirichlet-Multinomial approximation. Specifically, we're interesting in the fixation probability of the favored trait ($\hat{A}$) and its time to fixation.
 
 \begin{figure}
@@ -389,15 +402,18 @@ We can see that even when the standard deviation is $0.1$, the metrics of both m
 
 In \cref{fig:hetro_alpha} we relaxed our assumption of a homogeneous $\alpha$, and used a heterogeneous $\alpha$ instead. Similar to the mutation comparison, we drew $\alpha_j$ for each role-model $j$ from a normal distribution with varying scale. We again see that the metrics of both models are similar in the entire spectrum of our x-axis, and the Kimura approximation is within both confidence intervals.
 
-\subsection{Fixation probability and time - binary model}
+\subsection*{Fixation probability and time - binary model}
 \paragraph{Kimura's approximation:}
 After establishing a case in the favor of our DM approximation, we wanted to use it to examine the behavior of the population. Specifically, we wanted to analyze the influence of the indicator weight ($\alpha$) on the fixation probability and time to fixation of the favored phenotype in a binary model.
 For simplicity, we don't include mutation rate in the binary model approximations.
 Following \citet{durret}, we used our DM approximation of the model to find the effective population size. From \cref{eq:binary-model} we can derive that the process of inheritance in our binary model is DM distributed with a parameters vector of size two: $\vec{V}=(\alpha'X,(N-X)\alpha'\beta(A))$.
 
-\paragraph{Proposition:} $1-\beta(A)$ is equivalent to the selection coefficient $s$ in a classic Wright-Fisher model in the diffusion equations meant to approximate the fixation probability and time of the advantageous trait.
+\begin{result}[Effective selection coefficient]
+$1-\beta(A)$ is equivalent to the selection coefficient $s$ in a classic Wright-Fisher model in the diffusion equations meant to approximate the fixation probability and time of the advantageous trait.
+\end{result}
 
-\paragraph{Proof:} Let $x$ be the frequency of type $\hat{A}$ in the population with $N$ individuals. Let $X$ be the number of individuals of type $\hat{A}$ so $x=X/N$. $X'$ is the number of individuals with $\hat{A}$ in the next generation and $x'$ their frequency.
+\begin{proof}
+Let $x$ be the frequency of type $\hat{A}$ in the population with $N$ individuals. Let $X$ be the number of individuals of type $\hat{A}$ so $x=X/N$. $X'$ is the number of individuals with $\hat{A}$ in the next generation and $x'$ their frequency.
 By definition $\beta(\hat{A})=1$, and for simplicity we'll denote $\beta(A)=\beta$ ($\beta<1$).
 
 The expected number of individuals of a DM distribution is:
@@ -431,10 +447,14 @@ By definition, $x$ is constant, so $E[x] = x$. We continue to calculate $E[x'-x]
 E[x'-x] = E[x'] - E[x] = x(1-x)(1-\beta) + o(1-\beta)
 \end{equation}
 where when substituting $1-\beta$ with $s$, we get the same result as \citet{durret} which is the desired result.
+\end{proof}
 
-\paragraph{Proposition:} $Ne=\alpha N + (1-\alpha)$, where $Ne$ is the effective population size of our binary model.
+\begin{result}[Effective population size]
+$N_e=\alpha N + (1-\alpha)$, where $Ne$ is the effective population size of our binary model.
+\end{result}
 
-\paragraph{Proof:} The variance of a DM distribution is:
+\begin{proof}
+The variance of a DM distribution is:
 \begin{equation}
 V(X') = N\frac{\alpha_1}{\alpha_1+\alpha_2}(1-\frac{\alpha_1}{\alpha_1+\alpha_2})
 (\frac{N + \alpha_1+\alpha_2}{1+\alpha_1+\alpha_2})
@@ -450,7 +470,7 @@ V(x') = \frac{1}{N^2}N\frac{x}{x+(1-x)\beta}(1-\frac{x}{x+(1-x)\beta})
 (\frac{N + \alpha' xN + \alpha' N(1-x)\beta}{1 + \alpha' xN + \alpha' N(1-x)\beta}) 
 \end{equation}
 
-Like Durret, we'll use the zero order of the approximation when $\beta\approx1$,so:
+Like Durrett, we'll use the zero order of the approximation when $\beta\approx1$,so:
 \begin{equation}
 \frac{x}{x + (1-x)\beta} \approx x
 \end{equation}
@@ -463,7 +483,7 @@ V(x') & \approx  \frac{1}{N} x(1-x)
 \end{split}
 \end{equation}
 
-Again following Durret we want to calculate:
+Again following Durrett we want to calculate:
 \begin{equation}\label{eq:var_diff_durret}
 V(x'-x) = V(x') - V(x) \approx  x(1-x)(\frac{1 + \alpha'}{1 + \alpha' N})
 \end{equation}
@@ -540,7 +560,7 @@ In both cases we can see that the two models behave similarly, and both are appr
   \label{fig:var_beta}
 \end{figure}
 
-\subsection{Changing environment}
+\subsection*{Changing environment}
 After finding good estimations for our model in a constant environment, when the favorable trait is always $\hat{A}$, we want to find an estimation for our model in a changing environment.
 
 For that we will find an expression for the expected and variance of the change in frequency between $t$ generations.
@@ -663,6 +683,7 @@ Using the induction assumption and \cref{eq:ch_var2}:
 V\left(\frac{X_{t+1}}{N}\right) \simeq \frac{1}{N_e}x(1-x) + \frac{1}{N_e}tx(1-x) \simeq \frac{1}{N_e}x(1-x)(t+1)
 \end{equation}
 proving the second part of our preposition.
+\end{proof}
 
 Following our proof, we can say that after many cycles, we can use a modified version of our fixation probability:
 \begin{equation}
@@ -718,8 +739,8 @@ We then also tried changing the composition of the cycle, by keeping a constant 
 In \cref{fig:ch_env_k_l} we see that the larger $k$ relative to $l$, the closer the modified equation is to the original estimation of the constant environment. 
 When using higher values of $n$, the simulation results doesn't fit the equation result as with lower values. This is due to the fact that our proof, and therefore our equation is more accurate when more cycles occur. When $n$ is high, there will be less cycles, and the simulations will get closer to the constant environment equation.
 
-\section{Discussion}
-\subsection{summary}
+\section*{Discussion}
+\subsection*{summary}
 Cultural transmission is the phenomenon of which cultural elements, in the form of attitudes, values, beliefs, and behavioral patterns, are transmitted between individuals, typically via copying.
 Some cultural traits can be more likely to be copied by others, regardless of their frequency in the population.  
 Such transmission biases are common in cultural transmission processes. 
@@ -737,7 +758,7 @@ It is therefore crucial to model the cultural biases more realistically than suc
 \textbf{With a more realistic model of a common cultural transmission bias, we may be able to better understand decision-making processes in humans, including life-changing choices such as occupation or a life partner.} 
 Our model can be expanded in multiple ways: observing the effects of different bias functions, including errors in estimating the influence, combining factors of cost when copying from an influential role model (not all could afford to copy from the most popular role-model), and analyzing the differences when including several optimal values for the indicator trait (multiple preference traits in the population).
 
-\subsection{Prestige in the literature}
+\subsection*{Prestige in the literature}
 So far we discussed prestige as a main bias in humans, and to some extent in non-human species. Here we further base our claims and present additional appearances of prestige in nature and in the literature. \\
 
 \citet{animal_leadership} describe a manifestation of prestige in the form of leadership in animals. According to them, there are two main approaches to decision makings of groups in nature: leadership and consensus. Prey leaders would lead the pact when traveling, while other animal group leaders will decide on a nesting site or foraging patches. They found out that leadership is observed mostly when there is a profound social network in the group, and when there are individuals that present leadership behavior. Leaders would usually be high ranking members in the group, such as elders, individuals with many kin relations, or posses other dominant traits. When no individual posses such traits, or when the social network is lacking, a consensus is more likely to occur.
@@ -797,8 +818,7 @@ They build on the hypothesis of \citet{social_brains} that shows that larger, mo
 \citet{collective_brains} built a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. They later present their \textit{cumulative cultural brain} hypothesis, an approach which proposes that human brains have evolved with an ability and proclivity for selective, high fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
 In short, they suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e transmission biases, such as prestige.
 
-
-\clearpage
+\pagebreak
 \bibliography{refs}
 \bibliographystyle{apalike}
 \end{document}
