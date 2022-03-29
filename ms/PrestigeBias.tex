@@ -288,7 +288,7 @@ Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and th
 \end{enumerate}
 
 
-\subsection*{Generalized Binomial Distribution}
+\subsection*{Generalized binomial distribution}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is parameterized by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials ($\theta=0$ gives the standard binomial distribution).
 \\
 
@@ -351,7 +351,7 @@ We can then denote $L = 1/\overline{\beta(A+e)}$ and write
 
 % TODO what about a numerical validation for GBD?
 
-\subsection*{Dirichlet-Multinomial Distribution}
+\subsection*{Dirichlet-Multinomial distribution}
 
 \paragraph{P\'{o}lya urn model.}
 This stochastic process consists of $N$ draws from an urn with an initial amount of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same color.
@@ -431,6 +431,7 @@ Here we examine the difference between the dichotomous trait model defined in \c
 First, we find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1000$ (\Cref{fig:num_sims}).
 Next, we examined the robustness of the DM approximation to relaxing the approximation assumptions
 First we relaxed our assumption of no mutation. % TODO what is the mutation parameters? e? I thought this was estimation error. does it only affect the bias or also the copying? we should discuss!
+% no mutation or no variation in mutation?
 To include mutation in the dichotomous trait model, it needs to be redefined, since in the original model it was based on the fact the traits are drawn from a continuous scale. In the dichotomous trait model mutation will be manifested as an error when evaluating the bias itself. This is easily done by using a heterogeneous $J$ parameter, which controls the strength of the success bias in \cref{eq:success_bias}. % NOT CLEAR AT ALL - do you redefine now the model? or is this leftover from before??? 
 % I dont like that we call this mutation, we should call it copying error or something else, see if Boyd or Fogarty has a name for it.
 
@@ -443,10 +444,11 @@ To include mutation in the dichotomous trait model, it needs to be redefined, si
   }	
   % TODO
   % see comments in previous figure
+  % maybe 50% CI looks better? the bars are too large to understand. maybe a wider y range? say from 0 to 0.02?
   \label{fig:hetro_mutation}
 \end{figure}
 
-% YOAV HERE
+% TODO I suggest you incorporate this text to the figure caption and then we can just replace this with a sentence about how well the approximation is robust to assumptions with reference to figure.
 In \cref{fig:hetro_mutation} we see the comparison when heterogeneous mutation is applied to both models. When mutation is applied, we sample $J_i$ for each copier $i$ from a normal distribution with varying scale (variance).
 We can see that even when the standard deviation is $0.1$, the metrics of both models are both similar, and close to the Kimura approximation (more details in the next section). 
 
@@ -455,18 +457,39 @@ We can see that even when the standard deviation is $0.1$, the metrics of both m
   \caption{Comparison of the DM approximation and the full model when success weight is heterogeneous. High success weight variance distances the approximation and the full model of generations to fixation from the Kimura's approximation, but not by much (confidence intervals still cover it). Error bars are 95\% confidence intervals, and are less condensed (+- 0.03 probability and +-40 generations)
   $5000$ simulations per data point, $N=1000$, $\alpha\sim N(0.5,x^2)$,$\hat{A}=1$,$A=0.7$, $J=1$, $\beta(A)=0.956$.}	
   \label{fig:hetro_alpha}
+	% TODO
+	% see comments in previous figure
 \end{figure}
 
+% TODO I suggest you incorporate this text to the figure caption and then we can just replace this with a sentence about how well the approximation is robust to assumptions with reference to figure.
 In \cref{fig:hetro_alpha} we relaxed our assumption of a homogeneous $\alpha$, and used a heterogeneous $\alpha$ instead. Similar to the mutation comparison, we drew $\alpha_j$ for each role-model $j$ from a normal distribution with varying scale. We again see that the metrics of both models are similar in the entire spectrum of our x-axis, and the Kimura approximation is within both confidence intervals.
 
-\subsection*{Fixation probability and time - binary model}
-\paragraph{Kimura's approximation:}
-After establishing a case in the favor of our DM approximation, we wanted to use it to examine the behavior of the population. Specifically, we wanted to analyze the influence of the indicator weight ($\alpha$) on the fixation probability and time to fixation of the favored phenotype in a binary model.
-For simplicity, we don't include mutation rate in the binary model approximations.
-Following \citet{durret}, we used our DM approximation of the model to find the effective population size. From \cref{eq:binary-model} we can derive that the process of inheritance in our binary model is DM distributed with a parameters vector of size two: $\vec{V}=(\alpha'X,(N-X)\alpha'\beta(A))$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Fixation probability and time}
+% I think this subsection should come before the numerical validation (prev subsection) because the numerical validation also presents Kimura's equation
+
+After finding that the DM distribution is a good approximation of the role-model choice process we turn our attention to the evolutionary dynamics.
+We focus on the effect of the bias weight ($\alpha$), which determines the relative effects of success and influence on prestige bias, on the fixation probability and fixation time of an advantageous phenotype, similar to analyses in population-genetic models. % References: 
+% Kimura, M. On the probability of fixation of mutant genes in a population. Genetics 47, 713–9 (1962).
+% Kimura, M. & Ohta, T. The Average Number of Generations until Fixation of a Mutant Gene in a Finite Population. Genetics 61, 763–71 (1969).
+% Otto, S. P. & Whitlock, M. C. Fixation Probabilities and Times. in eLS (John Wiley & Sons, Ltd, 2013). doi:10.1002/9780470015902.a0005464.pub3.
+For simplicity, we do not include mutation in this analysis.
+As shown above, transmission in our model is approximately DM distributed with a parameters % TODO fill here from corollary 3 and eq 19, right?
+% $\vec{V}=(\alpha'X,(N-X)\alpha'\beta(A))$. % what's \vec{V} here?
+\\
+
+% TODO in the following, I would organize differently:
+% 1.  remark for E[x'-x] the "drift" (1st order) coefficient in a diffusion equation approximation
+% 2. result on effective selection coefficient
+% 3. remark for V[x'-x] the "diffusion" (2nd order) coefficient in a diffusion equation approximation
+% 4. result of effective population size
+% 5. result for fixation prob
+% 6. result for fixation time
+% 7. result for changing environment
+
 
 \begin{result}[Effective selection coefficient]
-$1-\beta(A)$ is equivalent to the selection coefficient $s$ in a classic Wright-Fisher model in the diffusion equations meant to approximate the fixation probability and time of the advantageous trait.
+$1-\beta(A)$ is equivalent to the selection coefficient $s$ in the diffusion-equation approximation of the a classic Wright-Fisher model that approximate the fixation probability and fixation time of an advantageous allele.
 \end{result}
 
 \begin{proof}
@@ -561,6 +584,7 @@ V(x'-x) & \approx x(1-x)(\frac{1 + \frac{\alpha}{1-\alpha}}{1 + \frac{\alpha}{1-
   &= x(1-x)\frac{1}{N_e}
 \end{split}
 \end{equation}
+\end{proof}
 
 Using our substitute for a selection coefficient, $1-\beta$, and the effective population size $N_e$, we can estimate the fixation probability and time of our binary model.
 
@@ -740,7 +764,6 @@ Using the induction assumption and \cref{eq:ch_var2}:
 V\left(\frac{X_{t+1}}{N}\right) \simeq \frac{1}{N_e}x(1-x) + \frac{1}{N_e}tx(1-x) \simeq \frac{1}{N_e}x(1-x)(t+1)
 \end{equation}
 proving the second part of our preposition.
-\end{proof}
 
 Following our proof, we can say that after many cycles, we can use a modified version of our fixation probability:
 \begin{equation}
