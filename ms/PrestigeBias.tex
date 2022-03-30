@@ -78,7 +78,7 @@
 \clearpage
 
 \section{Abstract}
-Copying role-models can be an efficient method of acquiring knowledge \citep{strategiesPaper}. \textbf{Here, we study the effects of prestige as a cultural transmission bias} in cultural-evolution model. A common bias when choosing a role-model to copy is \textit{success bias}, i.e copying whoever appears more successful \citep{evolution_of_cultural_evolution}. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: \textit{Influence bias}, which is evaluated by the number of individuals that have already copied a specific role-model \citep{prestige_evolution}. We combine these biases together to a \textit{prestige bias} and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
+Copying role-models can be an efficient method of acquiring knowledge. Here, we study the effects of prestige as a cultural transmission bias in cultural-evolution model. A common bias when choosing a role-model to copy is \textit{success bias}, i.e copying whoever appears more successful. This bias depends on the performance of the role-model alone, without other factors. We propose an additional bias that may be prevalent in cultural transmission: \textit{Influence bias}, which is evaluated by the number of individuals that have already copied a specific role-model. We combine these biases together to a \textit{prestige bias} and analyze its effects on the evolutionary dynamics of the population using mathematical analysis and stochastic simulations. We find analytic approximations to our model, facilitating further mathematical analysis and reducing the computational complexity of the simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
 For a dichotomous cultural trait, we find  an approximation to the fixation probability and the fixation time of an invading advantageous cultural trait, in both a constant and changing environment, which resembles Kimura's classical formulas.
 These approximations show that influence effectively reduces the population size. % TODO reduce or increase?
 We also find that influence accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
@@ -91,7 +91,7 @@ Further work is needed to test if this model could predict various phenomena in 
 
 \paragraph{Cultural transmission.}
 In cultural transmission, individuals transmit cultural traits (i.e., behavior, beliefs, norms) to one another, typically via learning and demonstrating \citep{transmissionVectorsBook}.
-Examples for cultural traits in humans are behavioral patterns, such as personalities and habits, transmitted via both verbally and by observations. % TODO reference
+Examples for cultural traits in humans are behavioral patterns, such as personalities and habits, transmitted both verbally and by observations \citep{cultural_traits}.
 Although cultural transmission is most common in humans, it is also observed in other animals such as chimpanzees \citep{chimpsPrestige, chimpsCopy}. % TODO but also birds, Cetacea (Whitehead, PNAS 2017)
 In elephants, \citet{elepahntsRepo} showed that once a matriarch is removed from the group, the group's survival instincts are inferior and that ``the possession of enhanced discriminatory abilities by the oldest individual [matriarch] in a group can influence the social knowledge of the group as a whole.''
 By playing audio recordings of African elephants, they showed that groups with a matriarch recognize and react better to hostile or friendly calls than groups without a matriarch.
@@ -102,7 +102,7 @@ Similar to genetic transmission, culturally transmitted traits can be transmitte
 For example, parents can "teach" their children to be strong or tall, within some biological limits, by instructing them to maintain a specific diet and engage in physical activity.
 Contrary to genetic transmission, cultural transmission can be non-vertical, that is, traits may be transmitted via social learning from non-parental individuals, and even unrelated individuals such as teachers, leaders, media, or any stranger that interacts with the learning individual.
 Thus, cultural transmission may combine vertical transmission, where parents transmit to their offspring; oblique transmission, where adults transmit traits to unrelated offspring; and horizontal transmission, where peers from the same age cohort transmit to one another. 
-Vertical transmission is also possible in the opposite direction: parents may copy traits from their offspring (e.g playing video games)\citep{transmissionVectorsBook,transmissionVectors}.  % TODO did they suggest video games or did they have some other trait? not sure I want to mention video games...
+Vertical transmission is also possible in the opposite direction: parents may copy traits from their offspring. \citep{transmissionVectorsBook,transmissionVectors}
 
 \paragraph{Transmission biases.}
 In social learning, transmission biases cause a trait to have a disproportionate probability to be transmitted compared to its frequency in the population.
@@ -112,11 +112,10 @@ Importantly, even when a trait is disfavored by natural selection, it may still 
 % 1. Cohen, D., Lewin-Epstein, O., Feldman, M. W. & Ram, Y. Non-vertical cultural transmission, assortment and the evolution of cooperation. Proc. R. Soc. B Biol. Sci. 288, 20203162 (2021).
 
 \paragraph{Success bias.}
-\citet{strategiesPaper} have conducted a tournament between learning strategies. Each strategy defines when individuals observe and copy from others, and when they engage in individual learning, in which an individual learns a cultural trait on his own. The best strategies had a high frequency of social learning relative to individual learning, even when the transmission error was almost 50\%. It is important to note that all of the strategies included some frequency of individual learning. 
+Believed to be a main bias in nature for choosing a role-model for copying \citep{evolution_of_cultural_evolution}
+\citet{strategiesPaper} have conducted a tournament between learning strategies based on that assumption.In their tournament, each strategy defines when individuals observe and copy from others, and when they engage in individual learning, in which an individual learns a cultural trait on his own. The best strategies had a high frequency of social learning relative to individual learning, even when the transmission error was almost 50\%. It is important to note that all of the strategies included some frequency of individual learning. 
 %The authors suggested that success-biased social transmission contribute more to the general success of the population than individual learning. % TODO how is the last sentence related to the results of the tournament? did the best strategies use success-bias? it is not clear
 
-% TODO do we need the following paragraph? it doesn't say much, and the paragraph after it covers "different type of success evaluation", so what is this paragraph doing?
-%\citet{complexityPaper} define different types of transmission biases based on success. They define several types of role-model choice methods, all assuming that the copier correctly identifies the successful role-models.
 
 \paragraph{Evaluating success.}
 \citet[Ch. 5]{evolutionBook} suggest that the evaluation of success can be divided into three groups: \textit{direct bias}, \textit{indirect bias} and \textit{frequency-dependent bias}.
