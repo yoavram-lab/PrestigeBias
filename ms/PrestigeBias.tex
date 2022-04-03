@@ -381,8 +381,7 @@ The number of copiers of each role-model follows a Dirichlet-Multinomial distrib
 
 \paragraph{Numerical validation.}
 To validate our analytical result (\cref{cor:dirichlet}) and test its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) we compare it to results of stochastic simulations.
-We executed many simulations of our original model to  % TODO exactly how many 
-compute an observed distribution of number of copiers from the average empirical distribution. To compare the observed distribution with the expected DM distribution, we use a Pearson's chi-squared test of goodness-of-fit to reject or accept the null hypothesis that the simulation results are drawn from a DM distribution.
+We executed varying amount of simulations of our original model to compute an observed distribution of number of copiers from the average empirical distribution.The number of simulation required depended on the parameters used. To compare the observed distribution with the expected DM distribution, we use a Pearson's chi-squared test of goodness-of-fit to reject or accept the null hypothesis that the simulation results are drawn from a DM distribution.
 
 When testing multiple values of the bias weight parameter $\alpha$, the test p-value was always 1, meaning that the null hypothesis cannot be rejected.
 
@@ -414,16 +413,16 @@ When testing our observed distributions against different distributions, for exa
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection*{Numeric comparisons} % TODO rename section
+\subsection*{Model testing}
 
 Here we examine the difference between the dichotomous trait model defined in \cref{eq:binary-model} and the Dirichlet-Multinomial approximation we presented in \cref{cor:dirichlet}. We focus on the fixation probability and fixation time of the advantageous phenotype $\hat{A}$ when invading a population of phenotype $A$.
 
 First, we find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1000$ (\Cref{fig:num_sims}).
 Next, we examined the robustness of the DM approximation to relaxing the approximation assumptions
-First we relaxed our assumption of no mutation. % TODO what is the mutation parameters? e? I thought this was estimation error. does it only affect the bias or also the copying? we should discuss!
-% no mutation or no variation in mutation?
-To include mutation in the dichotomous trait model, it needs to be redefined, since in the original model it was based on the fact the traits are drawn from a continuous scale. In the dichotomous trait model mutation will be manifested as an error when evaluating the bias itself. This is easily done by using a heterogeneous $J$ parameter, which controls the strength of the success bias in \cref{eq:success_bias}. % NOT CLEAR AT ALL - do you redefine now the model? or is this leftover from before??? 
-% I dont like that we call this mutation, we should call it copying error or something else, see if Boyd or Fogarty has a name for it.
+First we relaxed our assumption of no estimation error $e$.
+Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{ij} = A_j + e_i$). 
+
+In the dichotomous model the estimation error will be added by using heterogeneous $J$ parameter, which controls the strength of the bias of \cref{eq:success_bias}.
 
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
