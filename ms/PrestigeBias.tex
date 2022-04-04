@@ -318,7 +318,7 @@ The denominator of \cref{eq:initial_prob} can also be formulated as:
  \sum\limits_{m=1}^{N}\alpha_m\beta(A_m+e) = N \cdot \overline{\alpha \cdot \beta(A+e)} \;,
 \end{equation}
 where $\overline{\alpha\beta(A+e)}$ is the mean value of $\alpha_m\cdot\beta(A_m+e)$ for all $m$.
-Using \cref{eq:denominator} and \textbf{Corollary 1} we get, % TODO something is missing here? how did you get E[KNj] to relate to the previous two equations?
+Using \cref{eq:denominator} and \textbf{Corollary 1} we get,
 \begin{equation}
 \E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) \bigg/ \overline{\alpha \cdot \beta(A+e)} \;,
 \end{equation}
@@ -335,10 +335,8 @@ We can then denote $L = 1/\overline{\beta(A+e)}$ and write
 \E[K_{Nj}] = L\cdot \beta(A_j+e) \;.
 \end{equation}
 
-
-\paragraph{Numerical validation.}
-To be added
 % TODO what about a numerical validation for GBD?
+% ANS - The results of this approximation are contained in the next DM approximation. In here we find the expected number of copiers for a single role-model, and in the DM we find that (and get the same results of course) and more. I can make the Numerical Validation a subsection and say it's for both.
 
 \subsection*{Dirichlet-Multinomial distribution}
 
@@ -387,8 +385,13 @@ When testing multiple values of the bias weight parameter $\alpha$, the test p-v
 
 For high $\alpha$ values (above 0.5), very few simulations are needed to reach p-value of 1 (less than five simulations for $\alpha=0.9$, and less than 20 for $\alpha=0.7$)
 For very low $\alpha$ values, which means very high influence weight, the number of simulations needed was 100.
-When testing our observed distributions against different distributions, for example the uniform distribution (all role-models have exactly one copier), the p-value was 0, so that the null hypothesis was rejected, as required. % TODO did you test other distributions?
+When testing our observed distributions against different distributions, for example the uniform distribution (all role-models have exactly one copier), the p-value was 0, so that the null hypothesis was rejected, as required.
+% TODO did you test other distributions?
+% ANS - No, mainly because I didn't know what paremeters to choose, we should discuss
+
 % TODO figure of observed vs expected distribution, and maybe also for other distributions such as uniform
+% ANS - observed vs expected of what? Make a histogram of number of copiers per role-model? just the top role-models?
+
 % TODO maybe it would be better to compute a test score for multiple distributions and show it is lowest (highest?) for DM ? do model comparison this way?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -396,14 +399,11 @@ When testing our observed distributions against different distributions, for exa
     \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
   \caption{
   \textbf{Number of simulations needed to get a good approximation.}
-  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations. % 1000 simulations of the model or of DM ??
+  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models. 
   Markers for average value across simulations, error bars for 95\% confidence interval.
   Here, population size, $N=1000$; bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:num_sims}
   % TODO
-  % remove legend
-  % change y labels: "Fixation probability" "Fixation time"
-  % change x label: "Number of simulations"
   % Kimura - black solid line
   % I removed J as you give beta(A) below, ok
   % it is not clear what "number of simulations needed" means.
