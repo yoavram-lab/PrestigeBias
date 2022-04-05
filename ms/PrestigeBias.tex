@@ -118,7 +118,7 @@ especially in the last years where social networks are very popular. % TODO to d
 Further work is needed to test if this model could predict various phenomena in human cultural evolution when extended with the effects of selection and innovation.
 \end{abstract}
 \pagebreak
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section*{Introduction}
 
 \paragraph{Cultural transmission.}
@@ -192,8 +192,7 @@ A_{i}(t+1) = F_i(\vec{A}(t)) \;.
 \paragraph{Success bias.}
 \citet[Ch.8, p.247-249]{evolutionBook} describe a blended transmission algorithm by defining $F$ as a weighted average of the traits of all role-models, 
 \begin{equation}\label{eq:boydF}
-% TODO I changed X to A, and Aij to Aj, verify its ok
-F_i(\vec{A}) = \sum_{j=1}^N G_{i,j}\cdot A_{j} \;, 
+F_i(\vec{A}) = \sum_{j=1}^N G_{i,j}\cdot A_{i,j} \;, 
 \end{equation}
 where $G_{i,j}$ is the success bias of role-model $j$ in the eyes of copier $i$,
 \begin{equation}\label{eq:boydG}
@@ -247,7 +246,7 @@ To allow for mathematical analysis of the model, we introduce a simplified versi
 All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
-P_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X} % TODO should it be G_{i,A} rather than P_i,A ?
+G_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
 \end{equation}
 where $X$ is the number of role-models with trait $\hat{A}$ and $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model and $\alpha'$ is the odd ratio of the bias weight $\alpha'= \frac{\alpha}{1-\alpha}$.
 
@@ -304,7 +303,7 @@ $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-
 $Q_j(1,1) = G_{1,j}$ by definition, which completes the proof.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{cor:GBD}
 $\E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) / \overline{\alpha \cdot \beta(A+e)}$, where the averaging in the denominator is over the role-models index, $j$.
 \end{corollary}
 
@@ -335,8 +334,22 @@ We can then denote $L = 1/\overline{\beta(A+e)}$ and write
 \E[K_{Nj}] = L\cdot \beta(A_j+e) \;.
 \end{equation}
 
-% TODO what about a numerical validation for GBD?
-% ANS - The results of this approximation are contained in the next DM approximation. In here we find the expected number of copiers for a single role-model, and in the DM we find that (and get the same results of course) and more. I can make the Numerical Validation a subsection and say it's for both.
+\paragraph{Numerical validation.}
+To validate our results we ran $1,000$ simulations of the full model, and compared the results with \cref{cor:GBD}.
+We compare the distribution of number of copiers by plotting the histograms of both our simulations results and the expected values based on \cref{cor:GBD}.
+We used the average of the $1,000$ simulations to eliminate drift errors, as can be seen in \cref{fig:GBD}.
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/chi_square_stats/GBD_validation.pdf}
+  \caption{
+  \textbf{Numerical validation for the GBD approximation.}
+  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
+  Here, population size, $N=2,000$; bias weight, $\alpha=0.1$; idea phenotype value, $\hat{A}=1$; role-model traits $\vec{A} \sim N(0,1)$; success bias value, $\beta(A)=0.956$.}	
+  \label{fig:GBD}
+\end{figure}
+
+Although basic, \cref{fig:GBD} shows good fit of the GBD approximation.
+This validation is initial, and the more extensive validations we do on the Dirichlet-Multinomial approximation, because it is what we will use in our analysts.
 
 \subsection*{Dirichlet-Multinomial distribution}
 
@@ -386,11 +399,6 @@ Examining variable values of the bias weight parameter $\alpha$, the test p-valu
 For high $\alpha$ values (above 0.5), very few simulations are needed to reach p-value of 1 (less than five simulations for $\alpha=0.9$, and less than 20 for $\alpha=0.7$)
 For very low $\alpha$ values, which means very high influence weight, the number of simulations needed was 100.
 When testing our observed distributions against different distributions, for example the uniform distribution (all role-models have exactly one copier), the p-value was 0, so that the null hypothesis was rejected, as required.
-% TODO did you test other distributions?
-% ANS - No, mainly because I didn't know what paremeters to choose, we should discuss
-
-% TODO figure of observed vs expected distribution, and maybe also for other distributions such as uniform
-% ANS - observed vs expected of what? Make a histogram of number of copiers per role-model? just the top role-models?
 
 % TODO maybe it would be better to compute a test score for multiple distributions and show it is lowest (highest?) for DM ? do model comparison this way?
 
@@ -401,7 +409,7 @@ First, we relaxed our assumption of no estimation error $e$.
 Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{ij} = A_j + e_i$).
 When estimation error is applied, we sample $J_i$ for each copier $i$ from a normal distribution with varying scale (variance).
 Even when the standard deviation is $0.1$, the fixation probability and time is similar~(\cref{fig:hetro_error}). 
-We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(X,X)$. % TODO replace X and X with relevant symbols
+We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,x)$ where $x \in [10^{-7},10^{-1}]$. 
 We found again that results of the DM approximation are similar to those from stochastic simulations of the full model~(\cref{fig:hetro_alpha}).
 
 
@@ -409,18 +417,11 @@ We found again that results of the DM approximation are similar to those from st
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
   \caption{
-  \textbf{Number of simulations needed to get a good approximation.}
-  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models. 
+  \textbf{Minimum number of simulations required to get a good approximation.}
+  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models. The approximated value (black) is given by equation \cref{eq:kimura_p}.
   Markers for average value across simulations, error bars for 95\% confidence interval.
   Here, population size, $N=1000$; bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:num_sims}
-  % TODO
-  % Kimura - black solid line
-  % I removed J as you give beta(A) below, ok
-  % it is not clear what "number of simulations needed" means.
-  % what does "good enough" mean?
-  % maybe y axis should be in relative error?
-  % you should point to the equation for kimura.
 \end{figure}
 
 
@@ -428,11 +429,8 @@ We found again that results of the DM approximation are similar to those from st
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
   \caption{
   \textbf{Robustness of DM approximations to inclusion of estimation error.} Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high estimation error rate. Markers for average across simulations, error bars for 95\% confidence intervals.
-  % and are condensed (+- 0.01 probability and +-40 generations) % what does that mean?
-  5,000 simulations per data point; population size, $N=1000$; bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; $J\sim N(1,x^2)$ where $x$ is the estimation error scale in the x-axis. % not clear enough.
+  5,000 simulations per data point; population size, $N=1000$; bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,x^2)$ where $x \in [10^{-7},10^{-1}]$.
   }	
-  % TODO
-  % see comments in previous figure
   % maybe 50% CI looks better? the bars are too large to understand. maybe a wider y range? say from 0 to 0.02?
   \label{fig:hetro_error}
 \end{figure}
@@ -591,7 +589,6 @@ In both cases we can see that the two models behave similarly, and both are appr
 
 
 \begin{figure}[h]
-%TODO remove the (a) and (b) from the latex and put them on the figure itself (top left corenr).
   \begin{center}
   \begin{subfigure}[a]{0.49\linewidth}
     \caption{}
@@ -811,7 +808,6 @@ For the very high $\beta$ values (0.35 and above), the fixation probability exce
   \end{center}
   %TODO add panel labels (a) and (b) on figures corner.
   % see previous figures todos
-  % move legend to upper left? it is currently hiding something
   \caption{Model simulations compared with both the constant environment and the changing environment equations for different values of $k,l$, where $k$ is the number of generations where the bias is advantageous, and $l$ are the generations it is disadvantageous.
    When $k<l$ the approximation is good. When $k>l$, the approximation and the simulations are both very close to the constant environment approximation. 
  We ran $10,000$ simulations per data point, $N=1,000$, $\hat{A}=1$, $A=0.8$, $J=1$, $1-\beta=s=0.02$, $\alpha=0.1$.}
@@ -903,8 +899,8 @@ They build on the hypothesis of \citet{social_brains} that shows that larger, mo
 \citet{collective_brains} built a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. They later present their \textit{cumulative cultural brain} hypothesis, an approach which proposes that human brains have evolved with an ability and proclivity for selective, high fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
 In short, they suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e transmission biases, such as prestige.
 
-\paragraph{Further work.} 
-Our model can be expanded in various ways: observing the effects of different bias functions, % TODO unclear
+\paragraph{Further work.} %TODO revisit
+Our model can be expanded in various ways: observing the effects of different bias functions, 
 including errors when estimating influence or costs when copying from an influential role-model, and inclusion of multiple, rather than a single, optimal phenotype.
 
 {\small
