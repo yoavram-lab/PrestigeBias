@@ -180,8 +180,8 @@ We implemented our stochastic models and approximations, performed statistical a
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
 
 \subsection*{Continuous trait}
-We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the indicator trait and omitting the indirect trait in order to reduce model complexity. 
-We consider a population of $N$ individuals, described by a single indicator trait with a continuous value.
+We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the trait and omitting the indirect trait in order to reduce model complexity. 
+We consider a population of $N$ individuals, described by a single trait with a continuous value.
 Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright–Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
 The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$. We assume the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
 Cultural transmission is modeled by a function $F$ such that 
@@ -198,15 +198,15 @@ where $G_{i,j}$ is the success bias of role-model $j$ in the eyes of copier $i$,
 \begin{equation}\label{eq:boydG}
 G_{i,j} = \frac{\beta(A_{i,j})}{\sum_{k=1}^{N} \beta(A_{i,k})} \;,
 \end{equation}
-$A_{i,j}$ is the absolute indicator trait value copier $i$ estimates for role-model $j$ with some error $e_i \sim N(0,\frac{1}{\eta^2})$,
-\begin{equation}\label{eq:relativeIndicator}
+$A_{i,j}$ is the absolute trait value copier $i$ estimates for role-model $j$ with some error $e_i \sim N(0,\eta^2)$,
+\begin{equation}\label{eq:relativeTrait}
 A_{i,j} = A_j + e_i,
 \end{equation}
 and $\beta(\cdot)$ is the bias function that quantifies the success bias of a role-model,
 \begin{equation}\label{eq:success_bias}
 \beta(A_{i,j}) = b \cdot \exp{\Big(-\frac{(A_{i,j} - \hat{A})^2}{2J}\Big)},
 \end{equation} 
-with $\hat{A}$ as the arbitrary optimal indicator value, and $J$ and $b$ as parameters that control the bias strength.
+with $\hat{A}$ as the arbitrary optimal trait value, and $J$ and $b$ as parameters that control the bias strength.
 Therefore, $G_{i,j}$ is a relative success score that copier $i$ assigns to role-model $j$, equivalent to relative fitness in evolutionary-genetic transmission models.
 
 \citet{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We thus develop a similar stochastic model with transmission from a single random role-model. Instead of \cref{eq:boydF}, we define the transmission function $F$ as a random variable with its distribution given by 
@@ -233,16 +233,16 @@ Following \cref{eq:ourF}, the probability that the $i$-th copier chose role-mode
 \begin{equation}\label{eq:recPrestige}
 Pr(S_{i,j}=1 \mid S_{1,j},S_{2,j},...,S_{i-1,j}) = G_{i,j} \;.
 \end{equation}
-The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by the estimated biased indicator value $\beta(A_{i,j})$ and the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} of \citet{evolutionBook} with
+The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by the estimated biased trait value $\beta(A_{i,j})$ and the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} of \citet{evolutionBook} with
 \begin{equation}\label{eq:prestige}
 G_{i,j} = \frac{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}{W_i} \;.
 \end{equation}
-Here, the bias weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of success and influence in his prestige, the indicator value of role-model $j$ estimates by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeIndicator}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
+Here, the bias weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of success and influence in his prestige, the trait value of role-model $j$ estimates by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
 
 
 
 \subsection*{Dichotomous trait}
-To allow for mathematical analysis of the model, we introduce a simplified version where the indicator trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
+To allow for mathematical analysis of the model, we introduce a simplified version where the trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
 All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
@@ -265,12 +265,12 @@ We found two such approximations, summarized here and explained in detail below:
 The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore,
 \begin{enumerate}\item the expected number of copiers of role-model~$j$ equals its prestige in the eyes of the first copier, multiplied by the total number of copiers, that is,
 $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all copiers ($e=e_i$ for $i=1, \ldots, N$).
-\item the expected number of copiers of each role-model equals its relative biased indicator value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the bias weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated indicator value. 
+\item the expected number of copiers of each role-model equals its relative biased trait value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the bias weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated trait value. 
 \end{enumerate}
 \item The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$), meaning there's no meaning for the order of copiers. 
 Therefore, the number of copiers of all role-models, $\vec{K}_i = (K_{i,1}, \ldots, K_{i,N})$, follows a Dirichlet-Multinomial distribution,
 $\vec{K}_i \sim \mathit{DM}\big(N, \vec{G}_1\big)$, where $\vec{G}_1 = (G_{1,1}, \ldots, G_{1,N})$ is the prestige vector of all role-models in the "eyes" of the first copier.
-Note that here $G_{i,j}$ is only a function of the indicator values $A_j$ and the bias weights $\alpha_j$, as the estimation error is uniform, meaning all copiers are identical.
+Note that here $G_{i,j}$ is only a function of the trait values $A_j$ and the bias weights $\alpha_j$, as the estimation error is uniform, meaning all copiers are identical.
 \end{enumerate}
 
 
@@ -328,7 +328,7 @@ The special case where the bias weight is uniform for all role-models ($\alpha =
 \begin{equation}
 \E[K_{Nj}]= N\cdot\frac{\alpha\cdot\beta(A_j+e)}{\sum\limits_{m=1}^{N}\alpha\cdot\beta(A_m+e)} =\beta(A_j+e) \bigg/ \overline{\beta(A+e)} \;,
 \end{equation}
-where the only variable is $A_j+e$, because $\overline{\beta(A+e)}$ is the mean of the distribution we draw the indicator values from, modified by some constant parameters of $\beta$.
+where the only variable is $A_j+e$, because $\overline{\beta(A+e)}$ is the mean of the distribution we draw the trait values from, modified by some constant parameters of $\beta$.
 We can then denote $L = 1/\overline{\beta(A+e)}$ and write
 \begin{equation}\label{eq:linearEq}
 \E[K_{Nj}] = L\cdot \beta(A_j+e) \;.
@@ -825,7 +825,7 @@ When $n$ is high, the cycles are longer. When the cycles are long, the settings 
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
 Some cultural traits or cultural role-models may be more likely to be copied due to transmission biases. 
 A common one is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be correctly identified.
-However, it has been suggested \citep{complexityPaper} that because estimating success is hard, a more common bias is \textit{prestige bias}---a bias towards role-models perceived to be successful by some other indicator.
+However, it has been suggested \citep{complexityPaper} that because estimating success is hard, a more common bias is \textit{prestige bias}---a bias towards role-models perceived to be successful by some other trait.
 
 Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias, which included both success and influence biases, where the latter is a bias towards role-models with many copiers. We found approximations for the role-model choice process: the generalized binomial distribution that approximates the number of copiers of a single role-model, and the Dirichlet-Multinomial distribution that approximates the distribution of copiers in the entire population in a \textit{rich-getting-richer} type of process. 
 We then studied the effects of prestige bias on the fixation probability and time of an invading advantageous cultural phenotype in both a constant and a changing environment.
@@ -856,9 +856,9 @@ Our model does not reflect these leadership styles, but several adjustments coul
 The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
 
 \citet{prestige_evolution} support said claim that there are two types of leadership, and also define the two as prestige based and dominance based leadership types.
-By their definition, the latter is defined by acquiring social status by using aggression, intimidation and violence. It is also more common than prestige in non humans. Their definition of prestige is somewhat synonymous with ours. According to their manuscript, prestige is composed both of estimation in the eyes of people (our indicator/success trait) and commanding position in people's minds, i.e number of copiers people think they have, which they define as \textit{influence} (similar to our definition for influence).
+By their definition, the latter is defined by acquiring social status by using aggression, intimidation and violence. It is also more common than prestige in non humans. Their definition of prestige is somewhat synonymous with ours. According to their manuscript, prestige is composed both of estimation in the eyes of people (our success trait) and commanding position in people's minds, i.e number of copiers people think they have, which they define as \textit{influence} (similar to our definition for influence).
 In their paper, they show that prestige evolved from natural selection, as an efficient process to extract reproductive benefit from the flow of socially transmitted information. Simply put, prestige is a natural step where social learning exists, due to saving costs of individual learning.
-It could be interesting in the future to expand our model using this idea: observing the copier trait of \textit{evaluation}, rather than only observing the evolution of the indicator trait copied.
+It could be interesting in the future to expand our model using this idea: observing the copier trait of \textit{evaluation}, rather than only observing the evolution of the trait copied.
 \citet{prestige_evolution} suggest that the most skilled role-models will, on average, end up with most copiers. Their research, definitions and results, is consistent with ours.
 
 So far we presented the theory behind prestige, and it's appearance in nature. The following will show the appearances of prestige biases in humans, and in recent times.
@@ -880,7 +880,7 @@ Their research shows promising evidence for our prestige model, suggesting that 
 \begin{quote}
 This degree of centralization is consistent with the prediction that people substantially share notions about who is a good cultural model (network centrality), but that individuals’ model selections are influenced by multiple factors.
 \end{quote}
-We see here support for both our indicator trait and our influence bias in their data.
+We see here support for both our trait and our influence bias in their data.
 
 Aside from children's learning biases and small villages in a relatively primitive population, we can see prestige in more advanced domains as well, like western medicine.\citet{medical_prestige} present a specific and important effect of prestige - its significance for medical specialties and diseases.
 They examined literature from 1950 to 2005 regarding the effects of prestige on medicinal practices. They discovered that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, while medicine with opposite characteristics had low levels of prestige. They have concluded that such differences in prestige bear consequences for actual priority setting in healthcare systems. They discovered that surgery counts as the most prestigious specialty, while psychiatry is the less prestigious. In addition, doctors tend to rank practices that require more time to master as more prestigious, while other procedures that are considered \textit{easier} are less prestigious. Simply put, they found that the advance in technology and research was in accordance with the prestige rankings.
