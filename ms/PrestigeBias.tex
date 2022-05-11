@@ -113,8 +113,8 @@ Copying role-models can be an efficient method for acquiring knowledge. A common
 We also find approximations to the fixation probability and the fixation time of an invading advantageous cultural trait, in both a constant and changing environment, which resemble Kimura's classical formulas.
 These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
 It also accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
-Our model may provide a better description of human cultural transmission, 
-especially in the last years where social networks are very popular. % TODO to discuss this last sentence
+Our model may provide a good description of cultural transmission, 
+especially in human societies where social media is popular. 
 Further work is needed to test if this model could predict various phenomena in human cultural evolution when extended with the effects of selection and innovation.
 \end{abstract}
 \pagebreak
@@ -166,11 +166,34 @@ On the other hand, \citet{fijian_social_bias} suggest that prestige biases, over
 Prestige is often mentioned in the cultural-evolution literature, but seldom modeled.
 
 \paragraph{Influence bias.}
-Today, social media provides an easy way to estimate the influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \textit{Facebook} or \textit{Instagram} are known to affect the social influence of individuals \citep{social_influence,influence_analysis,social_media}. For example, specific marketing practices were invented following this realization \citep{facebook_marketing},
-Here we propose an indirect bias that we call \textit{influence bias}, in which the choice of a role-model depends on the the choices made by other individuals that have already chosen a role-model. 
+Today, social media provides an easy way to estimate the influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \textit{Facebook} or \textit{Instagram} are known to affect the social influence of individuals \citep{social_influence,influence_analysis,social_media}. For example, specific marketing practices were invented following this realization \citep{facebook_marketing}.
+Here, we propose an indirect bias that we call \textit{influence bias}, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
+Other than it's relative ease of evaluation, compared to the evaluation of the actual trait, choosing a role-model based on previous choices made may be advantageous on its own.
 This bias depends on the state of a role-model rather than a trait, in contrast to frequency biases such as conformity, which depend on the frequency of a trait in the population or in a sample of role-models. 
 We define a model for prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
- 
+To test if choosing an $\alpha$ value is really advantageous, we ran simulations of a single generation, where every copier evaluates the best $\alpha$ for it, which is the $\alpha$ that minimizes the mean error in estimation. This is calculated by minimizing the mean difference between the estimated value of every role-model to the ideal trait value $\hat{A}$.
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/influence_advantage/choose_bias.pdf}
+  \caption{
+  \textbf{Advantage of choosing success bias weight.}
+  The success bias weight decreases during the choosing process (a), showing that influence is more advantageous the later the copier chooses the role-model. In (b) we see that the estimation error decreases along the success bias weight.
+  Here, population size $N=200$, estimation error is normally distributed $e \sim N(0,\eta^2)$, standard deviation $\eta=0.0005$, plots are average of $300$ simulations.}	
+  \label{fig:influence_advantage}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/influence_advantage/const_bias.pdf}
+  \caption{
+  \textbf{Estimation error when using constant success bias weight.}
+  The mean estimation error doesn't have any significant improvement relative to when every copier chooses a bias for himself.
+  The minimum error is no less than $0.74$, while the mean error of the model where $\alpha$ is chosen is $0.06$, converging to $0.046$, which is a factor of $10$ less than the constant $\alpha$ model, showing the clear advantage of choosing $\alpha$.
+  Here, population size $N=200$, estimation error is normally distributed $e \sim N(0,\eta^2)$, standard deviation $\eta=0.0005$, plots are average of $300$ simulations.}	
+  \label{fig:const_influence}
+\end{figure}
+
+We see in \cref{fig:influence_advantage,fig:const_influence} a comparison between a model where every copier chooses its ideal success bias weight $\alpha_{ij}$, and when $\alpha$ is a constant homogeneous value. When copiers choose their $\alpha$ the estimation error decreases together with the success bias weight.Estimation error is the difference between the value estimated $A_{ij}$ and the ideal value $\hat{A}$ in this case. In addition, the estimation error converges to a value ($0.046$) much lower than when $\alpha$ is homogeneous (min $0.74$).
+We can learn that influence, when individually chosen by each copier, will aid the ideal trait to dominate the population. In addition, we see that homogeneous influence will not increase or decrease the estimation error in the population.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models and Methods}
 
@@ -235,15 +258,16 @@ Pr(S_{i,j}=1 \mid S_{1,j},S_{2,j},...,S_{i-1,j}) = G_{i,j} \;.
 \end{equation}
 The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by the estimated biased trait value $\beta(A_{i,j})$ and the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} of \citet{evolutionBook} with
 \begin{equation}\label{eq:prestige}
-G_{i,j} = \frac{\alpha_j \cdot \beta(A_{i,j}) + (1-\alpha_j) \cdot K_{i-1,j}}{W_i} \;.
+G_{i,j} = \frac{\alpha_{ij} \cdot \beta(A_{i,j}) + (1-\alpha_{ij}) \cdot K_{i-1,j}}{W_i} \;.
 \end{equation}
-Here, the bias weight $\alpha_j$ is a characteristic of role-model~$j$ that determines the relative significance of success and influence in his prestige, the trait value of role-model $j$ estimates by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
+Here, the bias weight $\alpha_{ij}$ is a characteristic of the interaction of role-model~$j$ with copier $i$, that determines the relative significance of success and influence within the role-model's overall prestige, in the eyes if the copier. The trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
 
 
 
 \subsection*{Dichotomous trait}
 To allow for mathematical analysis of the model, we introduce a simplified version where the trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
 All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
+In addition, we assume homogeneous $\alpha$ for simplicity and for easier mathematical analysis.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
 G_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
@@ -259,7 +283,7 @@ Initially, we assume the population has a single individual with phenotype $\hat
 \subsection*{Approximations}
 Our model is defined by two nested stochastic processes. Change over multiple generations is described by the phenotype distribution at each generation, $\{\vec{A}(t)\}_t$. The transition from one generation to the next is described by the number of copiers each role-model has after $i$ copiers have chosen a role-model, $\{\vec{K}_i\}_{i=1}^N$.
 We emphasize that the models are nested: $\vec{A}(t+1)$ can be computed from $\vec{A}(t)$ by evaluating $\vec{K}_{N}$. However, the former requires iterating over \cref{eq:recurrence,eq:recPrestige}. Thus, we sought to find an equivalent stochastic process that has the same joint distribution as $\vec{K}_{N}$. 
-We found two such approximations, summarized here and explained in detail below:
+We found two such approximations, summarized here and explained in detail below. In both we assume either $\alpha_j$ is a trait of role-model $j$ only (contrary to $\alpha_{ij}$ that included the relation with copier $i$), or a completely homogeneous $\alpha$.
 \begin{enumerate}
 \item 
 The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore,
@@ -393,15 +417,20 @@ The number of copiers of each role-model follows a Dirichlet-Multinomial distrib
 \paragraph{Numerical validation.}
 To validate our analytical result (\cref{cor:dirichlet}) and test its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) we compare it to results of stochastic simulations of the full model.
 First, we computed an observed distribution of the number of copiers from the average empirical distribution of multiple simulations.
-We then compared this observed distribution with the expected theoretical DM distribution using Pearson's chi-squared test of goodness-of-fit. Thus, we can reject or accept the null hypothesis that simulation results are effectively drawn from a DM distribution.
+We then compared this observed distribution with the expected theoretical DM distribution as can be seen in \cref{fig:DM_validation} (a). The difference in distributions was not perceived when plotting both distributions on the same figure, so we used the difference instead. The maximum difference is 0.5 role-models, which indicate a very good fit.
+In addition, we tested the likelihood of the observed data to be drawn from the DM distribution, against a shuffle of the parameters vector of the DM distribution itself, as seen in \cref{fig:DM_validation} (b). We see that the negative log likelihood of the observed data is much higher than any other shuffled version of the parameters vector, supporting our approximation more.
 
-Examining variable values of the bias weight parameter $\alpha$, the test p-value was always 1, meaning that the null hypothesis cannot be rejected.
-For high $\alpha$ values (above 0.5), very few simulations are needed to reach p-value of 1 (less than five simulations for $\alpha=0.9$, and less than 20 for $\alpha=0.7$)
-For very low $\alpha$ values, which means very high influence weight, the number of simulations needed was 100.
-When testing our observed distributions against different distributions, for example the uniform distribution (all role-models have exactly one copier), the p-value was 0, so that the null hypothesis was rejected, as required.
 
-% TODO maybe it would be better to compute a test score for multiple distributions and show it is lowest (highest?) for DM ? do model comparison this way?
-% But what distributions? just some random distributions? (like normal and exponential? but what parameters?)
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/chi_square_stats/DM_validation.pdf}
+  \caption{
+  \textbf{Goodness of fit of Dirichlet-Multinomial approximation to the model.}
+  The difference between the DM approximation distribution to observed model distribution (a) is very small, with the highest difference at 0.5 role-models.
+  The optimal negative log likelihood (b) is given when using the DM approximation (black vertical line), and is much better when compared to a shuffled vector of the DM distribution (blue bars).
+  Here, population size, $N=100$; number of distributions averaged, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; homogeneous success bias weight, $\alpha=0.5$.}	
+  \label{fig:DM_validation}
+\end{figure}
+
 
 Next, we examined the fixation probability and fixation time of an advantageous phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DM approximation.
 We find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1,000$ (\Cref{fig:num_sims}).
@@ -439,8 +468,8 @@ We found again that results of the DM approximation are similar to those from st
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_changing_alpha.pdf}
    \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
-   High bias weight variance distances the approximation and the full model of generations to fixation from the Kimura's approximation, but not by much (confidence intervals still cover it). Error bars are 95\% confidence intervals, and are less condensed (+- 0.03 probability and +-40 generations)
-  $5000$ simulations per data point; population size, $N=1000$; trait bias normally distributed, $\alpha\sim N(0.5,x^2)$; phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
+   Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high variation in success bias weight.Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
+  Here, population size, $N=1000$; success bias weight normally distributed, $\alpha\sim N(0.5,x^2)$; phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:hetro_alpha}
 \end{figure}
 
