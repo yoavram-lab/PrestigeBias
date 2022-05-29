@@ -110,12 +110,12 @@ headheight=12pt
 
 \begin{abstract}
 Copying role-models can be an efficient method for acquiring knowledge. A common bias when choosing a role-model to copy is success bias: copying whoever appears more successful. This bias depends on the performance of the role-model alone, with no other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, in which role-model choice is affected by the number of individuals that have already copied each potential role-model. We combine success and influence bias together to a ``prestige bias'' and analyze its effects on cultural-evolutionary dynamics using mathematical analysis and stochastic simulations. We find analytic approximations to our stochastic model, facilitating further mathematical analysis and reducing the computational complexity of simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
-We also find approximations to the fixation probability and the fixation time of an invading advantageous cultural trait, in both a constant and changing environment, which resemble Kimura's classical formulas.
+We also find approximations to the fixation probability and the fixation time of an invading advantageous cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
 These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
 It also accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
 Our model may provide a good description of cultural transmission, 
 especially in human societies where social media is popular. 
-Further work is needed to test if this model could predict various phenomena in human cultural evolution when extended with the effects of selection and innovation.
+Further work is needed to test if this model could predict various phenomena in cultural evolution when extended with the effects of selection and innovation.
 \end{abstract}
 \pagebreak
 
@@ -166,34 +166,13 @@ On the other hand, \citet{fijian_social_bias} suggest that prestige biases, over
 Prestige is often mentioned in the cultural-evolution literature, but seldom modeled.
 
 \paragraph{Influence bias.}
-Today, social media provides an easy way to estimate the influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \textit{Facebook} or \textit{Instagram} are known to affect the social influence of individuals \citep{social_influence,influence_analysis,social_media}. For example, specific marketing practices were invented following this realization \citep{facebook_marketing}.
-Here, we propose an indirect bias that we call \textit{influence bias}, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
-Other than it's relative ease of evaluation, compared to the evaluation of the actual trait, choosing a role-model based on previous choices made may be advantageous on its own.
-This bias depends on the state of a role-model rather than a trait, in contrast to frequency biases such as conformity, which depend on the frequency of a trait in the population or in a sample of role-models. 
-We define a model for prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
-To test if choosing an $\alpha$ value is really advantageous, we ran simulations of a single generation, where every copier evaluates the best $\alpha$ for it, which is the $\alpha$ that minimizes the mean error in estimation. This is calculated by minimizing the mean difference between the estimated value of every role-model to the ideal trait value $\hat{A}$.
+Today, social media provides an easy way to estimate the social and cultural influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \textit{Facebook} or \textit{Instagram} are known to affect the influence of individuals \citep{social_influence,influence_analysis,social_media}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
+Here, we model such influence as an indirect bias in cultural transmission, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
+Other than its relative ease of evaluation, compared to the evaluation of the actual trait, choosing a role-model based on previous choices made may be advantageous on its own. % TODO rephrase
+This bias depends on the state of a role-model rather than on its trait, in contrast to frequency biases such as conformity,% TODO cite doi 10.1111/j.1420-9101.2011.02236.x
+ which depend on the frequency of a trait in the population or in a sample of role-models. 
+ We define a model of cultural transmission with prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
 
-\begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/influence_advantage/choose_bias.pdf}
-  \caption{
-  \textbf{Advantage of choosing success bias weight.}
-  The success bias weight decreases during the choosing process (a), showing that influence is more advantageous the later the copier chooses the role-model. In (b) we see that the estimation error decreases along the success bias weight.
-  Here, population size $N=200$, estimation error is normally distributed $e \sim N(0,\eta^2)$, standard deviation $\eta=0.0005$, plots are average of $300$ simulations.}	
-  \label{fig:influence_advantage}
-\end{figure}
-
-\begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/influence_advantage/const_bias.pdf}
-  \caption{
-  \textbf{Estimation error when using constant success bias weight.}
-  The mean estimation error doesn't have any significant improvement relative to when every copier chooses a bias for himself.
-  The minimum error is no less than $0.74$, while the mean error of the model where $\alpha$ is chosen is $0.06$, converging to $0.046$, which is a factor of $10$ less than the constant $\alpha$ model, showing the clear advantage of choosing $\alpha$.
-  Here, population size $N=200$, estimation error is normally distributed $e \sim N(0,\eta^2)$, standard deviation $\eta=0.0005$, plots are average of $300$ simulations.}	
-  \label{fig:const_influence}
-\end{figure}
-
-We see in \cref{fig:influence_advantage,fig:const_influence} a comparison between a model where every copier chooses its ideal success bias weight $\alpha_{ij}$, and when $\alpha$ is a constant homogeneous value. When copiers choose their $\alpha$ the estimation error decreases together with the success bias weight.Estimation error is the difference between the value estimated $A_{ij}$ and the ideal value $\hat{A}$ in this case. In addition, the estimation error converges to a value ($0.046$) much lower than when $\alpha$ is homogeneous (min $0.74$).
-We can learn that influence, when individually chosen by each copier, will aid the ideal trait to dominate the population. In addition, we see that homogeneous influence will not increase or decrease the estimation error in the population.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models and Methods}
 
@@ -810,6 +789,46 @@ When using higher values of $n$, the agreement between the approximation and sim
 This is because our approximation is more precise when more cycles occur.
 When $n$ is high, the cycles are longer. When the cycles are long, the settings are similar to a constant environment equation, and fixation/extinction is more likely to happen. This means there will be less cycles, which lowers our approximation accuracy.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Adaptive success-bias weight}
+
+We ran simulations of the role-model choice process during a single generation in which every copier evaluates its own optimal $\alpha$ value. This is the $\alpha$ value that minimizes the mean error in estimation. % TODO estimation of what?
+This is computed by minimizing the mean difference between the estimated value of every role-model and the ideal trait value $\hat{A}$. % TODO write the explicit equation
+
+We see in \cref{fig:influence_advantage,fig:const_influence} a comparison between a model where every copier chooses its ideal success bias weight $\alpha_{ij}$, and when $\alpha$ is a constant homogeneous value.
+We find that when copiers adapt their success-bias weight, their success-bias weight decreases with the number of copiers that have already chose a role-model~(\cref{fig:influence_advantage}a).
+Moreover, their estimation error is much lower compared to a constant success-bias weight, which gives roughly the same high estimation error to all copiers (compare \cref{fig:influence_advantage}b and c): the estimation error converges to $0.046$ whereas a constant weight gives values $>0.74$ in this example.
+
+
+\begin{figure}[b!]
+    \includegraphics[width=\linewidth]{../figures/influence_advantage/choose_bias.pdf}
+    % TODO
+    % fonts too small
+    % capital letters in labels
+    % add "alpha" to ylabel in panel a
+    % "mean estimation error" in y label of panel b
+	% can you maybe add two more lines with different colors on the same plots for other parameters choices? say larger pop size or larger error?
+  \caption{
+  \textbf{Advantage of an adaptive success-bias weight.}
+  Both success-bias weight $\alpha$ (\textbf{a}) and estimation error (\textbf{b}) 
+   decrease during the role-model choosing process, demonstrating that influence is becomes more advantageous as more copiers have made their choice.
+   Here, population size $N=200$, estimation error is normally distributed $e \sim N(0,\eta^2)$, standard deviation $\eta=0.0005$, plots are average of $300$ simulations.}	
+  \label{fig:influence_advantage}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/influence_advantage/const_bias.pdf}
+    % TODO 
+    % merge with previous plot
+  \caption{
+  \textbf{Estimation error when using constant success bias weight.}
+  The mean estimation error doesn't have any significant improvement relative to when every copier chooses a bias for himself.
+  The minimum error is no less than $0.74$, while the mean error of the model where $\alpha$ is chosen is $0.06$, converging to $0.046$, which is a factor of $10$ less than the constant $\alpha$ model, showing the clear advantage of choosing $\alpha$.
+  Here, population size $N=200$, estimation error is normally distributed $e \sim N(0,\eta^2)$, standard deviation $\eta=0.0005$, plots are average of $300$ simulations.}	
+  \label{fig:const_influence}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Discussion}
 \paragraph{Summary.}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
