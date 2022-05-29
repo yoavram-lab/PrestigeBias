@@ -819,6 +819,8 @@ However, it has been suggested \citep{complexityPaper} that because estimating s
 
 Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias, which included both success and influence biases, where the latter is a bias towards role-models with many copiers.
 As shown in \cref{fig:influence_advantage}, given the option to choose the ratio of success and influence, copiers will minimize their estimation error, hence will copy the traits that are closer to the ideal phenotype. We see that throughout the choosing process, the estimation error decreases, and the success bias rate also decreases. This suggests that the later a copier gets to choose, the less he should rely on his own estimation, and more on previous choices.
+This behavior fits the intuitive thought - the more information you have, using others as an information source, the more informative your choice can be, therefore minimizing the distance from your choice of trait to the ideal one.
+
 In addition, we see that the process of choosing itself is necessary, and when using a constant ratio ($\alpha$), the mean estimation error in the population is greater by a factor of $10$, even when using the $\alpha$ the population converged to when being able to choose it (\cref{fig:const_influence}).
 After we showing that choosing one's success bias weight is beneficial to the copier, we continued to create our models- continuous and dichotomous, that incorporated both success and influence. However, running simulations for a nested iterative model is costly, and analyzing such model mathematically is very hard. We therefor found approximations for the role-model choice process: the generalized binomial distribution (\cref{res:GBD}) and the Dirichlet-Multinomial distribution (\cref{cor:dirichlet}).
 To use approximate our model with the GBD distribution, we must assume homogeneous estimation error, $e$, and homogeneous success bias weight, $\alpha$. Both assumptions are necessary to this approximation, because it requires all copiers to be identical (order of copiers must not be a factor).
@@ -860,6 +862,10 @@ In their paper, they show that prestige evolved from natural selection, as an ef
 It could be interesting in the future to expand our model using this idea: observing the copier trait of \textit{evaluation}, rather than only observing the evolution of the trait copied.
 \citet{prestige_evolution} suggest that the most skilled role-models will, on average, end up with most copiers. Their research, definitions and results, is consistent with ours.
 
+Furthermore, according to \citet{no_replication}, the process of cultural evolution doesn't require replication of representations.
+They base their assumption on three claims - mental representations are non-discrete, cultural transmission is highly inaccurate, and mental representations are not replicated, but rather are 'reconstructed' through an inferential process that is strongly affected by cognitive 'attractors.' In their paper they describe three different models to support their points.
+We see a high similarity between their model and ours. Like them, we treat the cultural trait as non-discrete (in the main model, before simplifying it to dichotomous in order to analyze it). We also assume error in estimation, which the copiers aren't really replicating their role-models, but rather reconstructing them to create a different trait, which is their representation of the role-model's trait. In addition, the inferential process that they describe as strongly affected by cognitive attractors match our influence bias, resulting in a very similar base assumptions in our models.
+
 So far we presented the theory behind prestige, and it's appearance in nature. The following will show the appearances of prestige biases in humans, and in recent times.
 
 \citet{prestige_cultural_learning}, for example, tested the existence of prestige in young children. \citet{prestige_cultural_learning} report the first direct tests in children that suggest the existence of \textit{prestige bias}, a tendency to learn from individuals to whom others have preferentially attended, learned or deferred.
@@ -898,9 +904,11 @@ They build on the hypothesis of \citet{social_brains} that shows that larger, mo
 \citet{collective_brains} built a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. They later present their \textit{cumulative cultural brain} hypothesis, an approach which proposes that human brains have evolved with an ability and proclivity for selective, high fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
 In short, they suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e transmission biases, such as prestige.
 
-\paragraph{Further work.} %TODO revisit
-Our model can be expanded in various ways: observing the effects of different bias functions, 
-including errors when estimating influence or costs when copying from an influential role-model, and inclusion of multiple, rather than a single, optimal phenotype.
+\paragraph{Further work.}
+In this paper we described several models and processes, analyzed them, and discovered some interesting approximations and results. But even though, there's much more to research in the direction we took, which can help us better model, understand, and maybe even predict, human behavior, specifically in this era where social media is very accessible and informative.
+Specifically, a deeper analysis of the first model, where every copier chooses its $\alpha$, is preferred. It would be interesting to see the if the mean error value and the $\alpha$ are converging to specific values, and what they depend on.
+Following that, it is possible to relax some assumptions we took in our main model in order to find approximations for it - like homogeneous estimation error and success bias weight.
+Lastly, it would be interesting to analyze the continuous model, instead of its dichotomous version. As we've discussed it is probably a much more accurate model of cultural evolution.
 
 {\small
 \section*{Acknowledgements}
