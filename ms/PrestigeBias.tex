@@ -184,7 +184,7 @@ Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{h
 \subsection*{Continuous trait}
 We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the trait and omitting the indirect trait in order to reduce model complexity. 
 We consider a population of $N$ individuals, described by a single trait with a continuous value.
-Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright–Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
+Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright-Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
 The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$. We assume the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
 Cultural transmission is modeled by a function $F$ such that 
 \begin{equation}\label{eq:transmission}
@@ -192,7 +192,7 @@ A_{i}(t+1) = F_i(\vec{A}(t)) \;.
 \end{equation}
 
 \paragraph{Success bias.}
-\citet[Ch.8, p.247-249]{evolutionBook} describe a blended transmission algorithm by defining $F$ as a weighted average of the traits of all role-models, 
+\citet[Ch.~8, p.~247-249]{evolutionBook} describe a blended transmission algorithm by defining $F$ as a weighted average of the traits of all role-models, 
 \begin{equation}\label{eq:boydF}
 F_i(\vec{A}) = \sum_{j=1}^N G_{i,j}\cdot A_{i,j} \;, 
 \end{equation}
@@ -456,324 +456,353 @@ We found again that results of the DM approximation are similar to those from st
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Fixation probability and time}
 
-After finding that the DM distribution is a good approximation of the (within-generations) role-model choice process, we turn our attention to the (between-generations) evolutionary dynamics.
-We focus on the fixation probability and fixation time of an advantageous phenotype, similar to analyses in population-genetic models \citep{kimura,kimura_average,otto_fixation}.
+After finding that the DM distribution is a good approximation of the (within-generation) role-model choice process, we turn our attention to the (between-generation) evolutionary dynamics.
+We focus on the fixation probability and fixation time of an advantageous phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
+We are mainly interested in the effect of the bias weight, $\alpha$, which determines the relative effect of success and influence on prestige bias. % TODO ref eq 10?
+For simplicity, we do not include role-model estimation error in this analysis. % TODO meaning epsilon=0?
+As shown above, transmission in our model is approximately DM distributed (\cref{cor:dirichlet} and \cref{eq:copier_choose}).
 
-We are mainly interested in the effect of the bias weight ($\alpha$), which determines the relative effects of success and influence on prestige bias.
-For simplicity, we do not include estimation error in this analysis.
-As shown above, transmission in our model is approximately DM distributed with the parameters $\sim DM(\alpha'X,(N-X)\alpha'\beta(A))$ based on \cref{cor:dirichlet} and \cref{eq:copier_choose}.
+We start by finding the expectation and variance of the change in frequency from one generation to the next, which are the drift and diffusion terms of the diffusion equation.\\
 
-
-\begin{remark}[Effective selection coefficient]
-In population genetics a selection coefficient is a measure of differences in relative fitness. Selection coefficients are central to the quantitative description of evolution, since fitness differences determine the change in genotype frequencies attributable to selection.
-Effective selection coefficient is the equivalent in a model to the selection coefficient in a Wright-Fisher model.
-\end{remark}
-
-\begin{result}[Effective selection coefficient]\label{res:selection_coef}
-$1-\beta(A)$ is equivalent to the selection coefficient $s$ in the diffusion-equation approximation of the a classic Wright-Fisher model that approximate the fixation probability and fixation time of an advantageous allele.
+\begin{result}[Drift and diffusion terms in a constant environment]
+Let $x$ and $x'$ be the frequency of type $\hat{A}$ in a population with $N$ individuals in the current and next generation, and  $\beta$ is the success coefficient of phenotype $A$, $\beta = \beta(A) < \beta(\hat{A}) = 1$.
+Then,
+\begin{equation}
+E[x'-x] \approx x(1-x)(1-\beta) \;, 
+\quad
+V(x'-x) \approx x(1-x)\Big(\frac{1}{\alpha N + (1-\alpha)}\Big) \;.
+\end{equation} 
 \end{result}
 
 \begin{proof}
-Let $x$ be the frequency of type $\hat{A}$ in the population with $N$ individuals. Let $X$ be the number of individuals of type $\hat{A}$ so $x=X/N$. $X'$ is the number of individuals with $\hat{A}$ in the next generation and $x'$ their frequency.
-By definition $\beta(\hat{A})=1$, and for simplicity we'll denote $\beta(A)=\beta$ ($\beta<1$).
-
-The expected number of individuals of a DM distribution is:
+Let $X$ be the number of individuals of type $\hat{A}$ such that $x=X/N$. $X'$ is the number of individuals with $\hat{A}$ in the next generation.
+The expected number of individuals is (due to the DM approximation),
 \begin{equation}
-E[X'] = N  \frac{\alpha_1}{\alpha_1+\alpha_2},
+E[X'] = N  \frac{\alpha_1}{\alpha_1+\alpha_2} \;,
 \end{equation}
 where $\alpha_1 = \alpha' X$ and $\alpha_2 = \alpha'(N-X)\beta$, from  \cref{eq:binary-model}.
-We want to use frequencies instead of quantities to follow Durret's process so:
-\begin{equation}
-E[x'] = E[\frac{X'}{N}] = \frac{1}{N}E[X']
-\end{equation}
-Putting it together we get:
+To use frequencies instead of counts, $E[x'] = E[X'/N] = \frac{1}{N}E[X']$.
+Putting it together,
 \begin{equation}
 \begin{split}
-E[x'] &= \frac{1}{N}N\frac{\alpha' xN}{\alpha' xN + \alpha' N (1-x)\beta}\\
-	 &= \frac{x}{x + (1-x)\beta}
+E[x'] &= \frac{1}{N}N\frac{\alpha' xN}{\alpha' xN + \alpha' N (1-x)\beta}
+	  = \frac{x}{x + (1-x)\beta} \\
+	  &= \frac{x}{x + (1-x) -(1-x) + (1-x)\beta}
+	  = x \frac{1}{1 -(1-x)(1-\beta)}  \\
+	  &= x \big(1 + (1-x)(1-\beta) + o(\beta)\big)
+	  = x + x(1-x)(1-\beta) + o(\beta) \;,
 \end{split}
 \end{equation}
+following \citet[p.~253, ch~7.2]{durret} and because $1/(1-y)=1+y+y^2+\ldots$.
 
-which is identical to the equation in the top of page 253, chap 7.2 in \citet{durret}. We therefore use the same approximation and say that:
-\begin{equation}
-\begin{split}
-E[x'] =& \frac{x}{x + (1-x)\beta} = \frac{x}{x + (1-x)(1-s)} =\\
- &= x + x(1-x)s + o(s)\\
-  &= x + x(1-x)(1-\beta) + o(1-\beta)
-\end{split}
-\end{equation}
-
-By definition, $x$ is constant, so $E[x] = x$. We continue to calculate $E[x'-x]$:
+By definition, $x$ is constant, so $E[x] = x$.
+We therefore have
 \begin{equation}\label{eq:expec_freq}
-E[x'-x] = E[x'] - E[x] = x(1-x)(1-\beta) + o(1-\beta)
+E[x'-x] = E[x'] - E[x] = x(1-x)(1-\beta) + o(1-\beta) \;,
 \end{equation}
-where when substituting $1-\beta$ with $s$, we get the same result as \citet{durret} which is the desired result.
-\end{proof}
+which gives us the drift term of the diffusion equation.
 
-\begin{remark}
-The effective size of a population, $N_e$, determines the rate of change in the composition of a population caused by genetic drift, which is the random sampling of genetic variants in a finite population. Ne is crucial in determining the level of variability in a population, and the effectiveness of selection relative to drift.
-\end{remark}
-
-\begin{result}[Effective population size]\label{res:effective_population}
-$N_e=\alpha N + (1-\alpha)$, where $Ne$ is the effective population size of the binary model.
-\end{result}
-
-\begin{proof}
-The variance of a DM distribution is:
+Using the variance of the DM distribution,
 \begin{equation}
-V(X') = N\frac{\alpha_1}{\alpha_1+\alpha_2}(1-\frac{\alpha_1}{\alpha_1+\alpha_2})
-(\frac{N + \alpha_1+\alpha_2}{1+\alpha_1+\alpha_2})
+V(X') = N\frac{\alpha_1}{\alpha_1+\alpha_2}
+\Big(1-\frac{\alpha_1}{\alpha_1+\alpha_2}\Big)
+\Big(\frac{N + \alpha_1+\alpha_2}{1+\alpha_1+\alpha_2}\Big) \;.
 \end{equation}
-And again, we want to use frequencies so:
+Again, we want to use frequencies so we have $V(X'/N) = \frac{1}{N^2}V(x')$.
+Putting it together with our model notations,
 \begin{equation}
-V(\frac{X'}{N}) = \frac{1}{N^2}V(x')
+V(x') = \frac{1}{N^2}N\frac{x}{x+(1-x)\beta}\Big(1-\frac{x}{x+(1-x)\beta}\Big)
+\Big(\frac{N + \alpha' xN + \alpha' N(1-x)\beta}{1 + \alpha' xN + \alpha' N(1-x)\beta}\Big) \;.
 \end{equation}
 
-Putting it together with our model's notations:
+Following \citet[ch~7.2]{durret}, we assume $\beta \approx 1$, such that
 \begin{equation}
-V(x') = \frac{1}{N^2}N\frac{x}{x+(1-x)\beta}(1-\frac{x}{x+(1-x)\beta})
-(\frac{N + \alpha' xN + \alpha' N(1-x)\beta}{1 + \alpha' xN + \alpha' N(1-x)\beta}) 
+\frac{x}{x + (1-x)\beta} \approx x \,
 \end{equation}
-
-Like Durrett, we'll use the zero order of the approximation when $\beta\approx1$,so:
+and for the entire variance expression we get
 \begin{equation}
-\frac{x}{x + (1-x)\beta} \approx x
+%\begin{split}
+V(x') \approx  \frac{1}{N} x(1-x)
+\Big(\frac{N + \alpha' xN + \alpha' N - \alpha' xN}{1 + \alpha' xN + \alpha' N - \alpha' xN}\Big)
+= x(1-x)\Big(\frac{1 + \alpha'}{1 + \alpha' N}\Big) \;.
+%\end{split}
 \end{equation}
-and we also use $\beta\approx1$ for the entire variance expression and get:
-\begin{equation}
-\begin{split}
-V(x') & \approx  \frac{1}{N} x(1-x)
-(\frac{N + \alpha' xN + \alpha' N - \alpha' xN}{1 + \alpha' xN + \alpha' N - \alpha' xN})\\
-&=  x(1-x)(\frac{1 + \alpha'}{1 + \alpha' N}) 
-\end{split}
-\end{equation}
-
-Again following Durrett we want to calculate:
+Now because $x$ is a constant, $V(x) = 0$, and therefore
 \begin{equation}\label{eq:var_diff_durret}
-V(x'-x) = V(x') - V(x) \approx  x(1-x)(\frac{1 + \alpha'}{1 + \alpha' N})
+V(x'-x) = V(x') - V(x) \approx  x(1-x)(\frac{1 + \alpha'}{1 + \alpha' N}) \;.
 \end{equation}
-because $x$ is a constant so $V(x) = 0$
-
-In our model, $\alpha'$ is the odds ratio of a parameter we called "bias weight", denoted in our model as $\alpha$, so:
+$\alpha'$ is the odds ratio of the bias weight, 
 \begin{equation}\label{eq:success_ratio}
-\alpha' = \frac{\alpha}{1-\alpha}
+\alpha' = \frac{\alpha}{1-\alpha} \;.
 \end{equation}
-
 Combining \cref{eq:var_diff_durret} and \cref{eq:success_ratio} we get:
 \begin{equation}\label{eq:const_var}
 \begin{split}
-V(x'-x) & \approx x(1-x)(\frac{1 + \frac{\alpha}{1-\alpha}}{1 + \frac{\alpha}{1-\alpha} N})\\
- &= x(1-x)(\frac{\frac{1-\alpha+\alpha}{1-\alpha}}{\frac{1-\alpha+\alpha N}{1-\alpha}})\\
- &= x(1-x)(\frac{1}{1- \alpha(1-N)})\\
-  &= x(1-x)(\frac{1}{\alpha N + (1-\alpha)})\\
-  &= x(1-x)\frac{1}{N_e}
+V(x'-x) \approx x(1-x)\Big(\frac{1 + \frac{\alpha}{1-\alpha}}{1 + \frac{\alpha}{1-\alpha} N}\Big)
+% &= x(1-x)(\frac{\frac{1-\alpha+\alpha}{1-\alpha}}{\frac{1-\alpha+\alpha N}{1-\alpha}})\\
+% &= x(1-x)(\frac{1}{1- \alpha(1-N)})\\
+  = x(1-x)(\frac{1}{\alpha N + (1-\alpha)}) \;.
 \end{split}
 \end{equation}
+This gives the diffusion term of the diffusion equation, which completes the proof.
 \end{proof}
 
-\begin{result}[Fixation probability approximation]
-The fixation probability is estimated by:
+
+This analysis gives a surprising result relating the parameters $\alpha$ and $\beta$ to parameters of the classical Wright-Fisher model from population genetics:
+the selection coefficient $s$, a measure of the effect of natural selection on the change in frequency of genotypes, and the effective population size, $N_e$, a measure of the effect of random genetic drift on the change in frequency of genotypes. 
+In a diffusion-equation approximation of the classical Wright-Fisher model, the expectation and variance of the change in frequency are $E[x'-x]=x+x(1-x)s+o(s)$ and $V[x'-x]=x(1-x)/N_e$ \citep[eq.~7]{kimura}. 
+Therefore, we have the following result.\\
+
+\begin{result}[Effective selection coefficient and population size]\label{res:selection_coef}
+The effective selection coefficient $s$ and effective population size $N_e$ can be written in terms of the success coefficient $\beta$ (\cref{eq:success_bias}), the bias weight $\alpha$ (\cref{eq:prestige}), and the population size $N$ as 
+\begin{equation}
+s=1-\beta(A), \quad N_e=\alpha N + (1-\alpha) \;.
+\end{equation}
+\end{result}
+
+Using our effective selection coefficient, $1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by \citet[eq.~8]{kimura}, we get the following result.\\
+
+\begin{result}[Fixation probability]
+The fixation probability is approximately
 \begin{equation}\label{eq:kimura_p}
-P_{fix} = \frac{1-e^{-2(1-\beta)N_e x}}{1-e^{-2(1-\beta)N_e}}
+\pi = \frac{1-e^{-2(1-\beta)N_e x}}{1-e^{-2(1-\beta)N_e}}
 \end{equation}
 where $x$ is the initial frequency of the advantageous phenotype $\hat{A}$.
 \end{result}
-\begin{proof}
-Using our substitute for a selection coefficient, $1-\beta$, and the effective population size $N_e$, we can estimate the fixation probability using the diffusion equation, $E[X'-X]$ (\cref{res:selection_coef}), and $V(X'-X)$ (\cref{res:effective_population}).
-\end{proof}
+
+Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citet[eq.~8]{kimura_average}.\\
+
 
 \begin{result}[Fixation time approximation]
 \begin{equation}\label{eq:kimura_t}
-T_{fix}=\frac{1-P_{fix}}{1-\beta}\int_0^x\frac{e^{2(1-\beta) \xi}-1}{\xi(1-\xi)}d\xi+ \frac{P_{fix}}{1-\beta}\int_x^1\frac{1-e^{-2(1-\beta)(1-\xi)}}{\xi(1-\xi)}d\xi
+T = \frac{1-\pi}{1-\beta}\int_0^x\frac{e^{2(1-\beta) \xi}-1}{\xi(1-\xi)}d\xi+ \frac{\pi}{1-\beta}\int_x^1\frac{1-e^{-2(1-\beta)(1-\xi)}}{\xi(1-\xi)}d\xi
 \end{equation}
+% TODO double check this, because eq 17 in Kimura 1969 looks different.
+% in particular, I don't see Ne here...
 \end{result}
+Note that these integrals cannot be solved in closed form, so we can only estimate them numerically.
 
-\begin{proof}
-Again using the diffusion equation and \cref{res:selection_coef,res:effective_population}, we get our result.
-the integrals cannot be solved in closed form, so we can only estimate them numerically.
-\end{proof}
-
-\paragraph{Numeric validation.}
-To validate our math we ran multiple simulations comparing our binary model with the classic Wright-Fisher model, using different $\alpha$ and $\beta$ each time, and using the corresponding values of $s$ and $N_e$ for the WF simulations.
-In \cref{fig:var_alpha} we changed $\alpha$ (and $N_e$ accordingly) and used a constant $\beta$.
-In \cref{fig:var_beta} we changed $\beta$ and used a constant $\alpha$.
-In both cases we can see that the two models behave similarly, and both are approximated well by the Kimura's equations: \cref{eq:kimura_p} and \cref{eq:kimura_t}.
+\paragraph{Numerical validation.}
+To validate our analysis we performed multiple simulations comparing our binary model with the classic Wright-Fisher model, using different $\alpha$ and $\beta$ each time, and using the corresponding values of $s=1-\beta$ and $N_e=\alpha N + (1-\alpha)$ for the Wright-Fisher simulations.
+%In \cref{fig:var_alpha} we changed $\alpha$ (and $N_e$ accordingly) and used a constant $\beta$.
+%In \cref{fig:var_beta} we changed $\beta$ and used a constant $\alpha$.
+We find see that the two models have similar dynamics, and both are well approximated the the approximations in \cref{eq:kimura_p,eq:kimura_t}.
 
 
 \begin{figure}[h]
+% TODO 
+% capital letters in panel labels
+% bigger font
     \includegraphics[width=\linewidth]{../figures/binary/kimura_var_alpha.pdf}
-  \caption{\textbf{Goodness of fit of Kimura's approximation for varying bias weights.}
-  The approximation (black) fits DM simulations results (green) and Wright Fisher simulation results (orange) when using \cref{eq:kimura_p}.
-  Fixation probability (a) is limited at approximately $2s$ (blue), like the classic WF model.
-  Markers for average values across $5,000$ simulations, error bars for 95\% confidence intervals.
+  \caption{\textbf{Fixation probability and time approximation for varying bias weight.}
+  Fixation probability (\textbf{a}) and time (\textbf{b}) for varying bias weight on the bottom x-axis. The corresponds effective population size is on the top x-axis.
+  The approximation (black) fits DM simulations results (green) and Wright-Fisher simulation results (orange) when using \cref{eq:kimura_p}.
+  Fixation probability (a) is limited at approximately $2s$ (blue), as in the classic WF model.
+  Markers are averages of $5,000$ simulations, error bars show 95\% confidence intervals.
    Here, Population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.7$; success coefficient, $1-\beta=s=0.044$.}
   \label{fig:var_alpha}
 \end{figure}
 
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/binary/kimura_var_beta.pdf}
-  \caption{\textbf{Goodness of fit of Kimura's approximation for varying success coefficients.}
+  \caption{\textbf{Fixation probability and time approximation for varying success coefficient.}
+  % TODO
+  % merge with previous figure; see comments there.
    The approximation (black) fits DM simulations results (green) and Wright Fisher simulation results (orange) when using \cref{eq:kimura_p}.
   Markers for average values across $5,000$ simulations, error bars for 75\% confidence intervals.
  Here, Population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=a\cdot \hat{A}, a \in [0.01,0.99]$; bias weight, $\alpha=0.01$.}
   \label{fig:var_beta}
 \end{figure}
 
-After finding good estimations for our model in a constant environment, when the favorable trait is always $\hat{A}$, we want to find an estimation for our model in a changing environment.
+After finding a good approximation for our model in a constant environment, when the favorable trait is always $\hat{A}$, we continued to find an approximation for our model in a changing environment. 
+Following \citet{changeEnv}, we find the following expressions for the expectation and variance of the change in frequency between $t$ generations.\\
 
-For that we will find an expression for the expected and variance of the change in frequency between $t$ generations.
-Let $s_t=N(1-\beta_t)$, and $S_n=\sum\limits_{i=1}^n s_i$, where $\beta_t$ is $\beta(A)$ at time/generation $t$.
-
-\begin{result} [Expected difference in frequency in a changing environment]\label{res:ch_expected}
-$E[\frac{X_t}{N}-x]\simeq \frac{1}{N}S_tx(1-x)$, where $x$ is the initial frequency of the favorable/invading trait and $X_t$ is the number of individuals with the trait at time $t$.
-\end{result}
-\begin{result}[Variance of difference in frequency in a changing environment]\label{res:ch_var}
-$V(\frac{X_t}{N})\simeq\frac{1}{N_e}tx(1-x)$, where $x$ is the initial frequency of the favorable/invading trait and $X_t$ is the number of individuals with the trait at time $t$.
+\begin{result} [Drift and diffusion terms in a changing environment]\label{res:ch_expected}
+Let $x$ be the initial frequency of the invading phenotype and $X_t$ is the number of individuals with the phenotype at time $t$.
+Then,
+\begin{equation}\label{eq:ch_expected_and_var}
+E[X_t/N - x] \simeq x(1-x) S_t / N \;, 
+\quad
+V(X_t/N ) \simeq x(1-x) t/N_e \;, % TODO shouldn't it be V[X_t/N - x] ?? or something like that? with square brackets and with "- something" ?
+\end{equation}
+where $S_t=\sum\limits_{i=1}^{t} N (1-\beta_t)$.
 \end{result}
 
 \begin{proof}
-Following the proof of \citet{changeEnv}, we prove by induction. We will prove \cref{res:ch_expected,res:ch_var} together, because the induction assumptions are needed for both.
-
+Let $s_t=N(1-\beta_t)$, and $S_n=\sum\limits_{i=1}^n s_i$, where $\beta_t$ is $\beta(A)$ at generation $t$.
+We prove by induction both terms in \cref{eq:ch_expected_and_var}.
 From \cref{eq:expec_freq} we know that
 \begin{equation}\label{eq:ch_1}
-\begin{split}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\bigg|X_t\right] &= \frac{X_t}{N}\left(1-\frac{X_t}{N}\right)(1-\beta_{t+1}) \\
-&= \frac{1}{N}\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)s_{t+1}
-\end{split}
+%\begin{split}
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\bigg|X_t\right] 
+= \frac{X_t}{N}\left(1-\frac{X_t}{N}\right)(1-\beta_{t+1}) 
+= \frac{1}{N}\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)s_{t+1} \;.
+%\end{split}
 \end{equation}
 Also note that using the definition of $V(y)=E[y^2]-(E[y])^2$
 \begin{equation}
 \begin{split}
-E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] &= E\left[\frac{X_t}{N}-\left(\frac{X_t}{N}\right)^2\right] \\
-&= E\left[\frac{X_t}{N}\right]-E\left[\left(\frac{X_t}{N}\right)^2\right] \\
-&= E\left[\frac{X_t}{N}\right] - V\left(\frac{X_t}{N}\right) - \left(E\left[\frac{X_t}{N}\right]\right)^2
+E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] 
+&= E\left[\frac{X_t}{N}-\left(\frac{X_t}{N}\right)^2\right] 
+= E\left[\frac{X_t}{N}\right] - E\left[\left(\frac{X_t}{N}\right)^2\right] \\
+&= E\left[\frac{X_t}{N}\right] - V\left(\frac{X_t}{N}\right) - \left(E\left[\frac{X_t}{N}\right]\right)^2 \;.
 \end{split}
 \end{equation}
 
-we can now use the induction assumption of $V(\frac{X_t}{N})$ and get
+We can now use the induction assumption of $V(\frac{X_t}{N})$ to get
 \begin{equation}
 \begin{split}
-E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] &\simeq
-E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right)-\frac{1}{N_e}tx(1-x)
+E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] 
+&\simeq E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right)-\frac{1}{N_e}tx(1-x) \;.
 \end{split}
 \end{equation}
 From \cref{eq:ch_1} we know that
 \begin{equation}
 \begin{split}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &= \frac{1}{N}s_{t+1}E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] \\
-&\simeq \frac{1}{N}s_{t+1}\left(E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e}tx(1-x)\right) \\
-&\simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e N}s_{t+1}tx(1-x)
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] 
+&= \frac{1}{N}s_{t+1}E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] 
+\simeq \frac{1}{N}s_{t+1}\left(E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e}tx(1-x)\right) \\
+&\simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e N}s_{t+1}tx(1-x) \;.
 \end{split}
 \end{equation}
-Now we'll omit $O(\frac{1}{Ne\cdot N})$ and get
+Now we omit $O(\frac{1}{Ne\cdot N})$ and get
 \begin{equation}\label{eq:ch_2}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] \simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right)
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] \simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) \;.
 \end{equation}
 
-We'll now look at the induction assumption to see that
+We now look at the induction assumption to see that
 \begin{equation}
-E\left[\frac{X_t}{N}-x\right]=E\left[\frac{X_t}{N}\right]-E[x]=E\left[\frac{X_t}{N}\right]-x ,
+E\left[\frac{X_t}{N}-x\right]
+= E\left[\frac{X_t}{N}\right]-E[x]
+= E\left[\frac{X_t}{N}\right]-x \;,
 \end{equation}
 so using the assumption we get
 \begin{equation}
 \begin{split}
-E\left[\frac{X_t}{N}\right] &\simeq \frac{1}{N} S_t x(1-x)+x \\
-1 - E\left[\frac{X_t}{N}\right] &\simeq 1- \frac{1}{N} S_t x(1-x)+x
+E\left[\frac{X_t}{N}\right] 
+&\simeq \frac{1}{N} S_t x(1-x)+x \\
+1 - E\left[\frac{X_t}{N}\right] 
+&\simeq 1- \frac{1}{N} S_t x(1-x)+x \;.
 \end{split}
 \end{equation}
-we'll use both expressions in \cref{eq:ch_2} and get
+We use both expressions in \cref{eq:ch_2} and get
 \begin{equation}\label{eq:ch_3}
 \begin{split}
-E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] &\simeq \frac{1}{N}s_{t+1} \left(\frac{1}{N} S_t x(1-x)+x \right)\left(1- \frac{1}{N} S_t x(1-x)+x \right) \\
-&\simeq  \frac{1}{N}s_{t+1}\cdot x(1-x)
+E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] 
+&\simeq \frac{1}{N}s_{t+1} \left(\frac{1}{N} S_t x(1-x)+x \right)\left(1- \frac{1}{N} S_t x(1-x)+x \right) \\
+&\simeq  \frac{1}{N}s_{t+1}\cdot x(1-x) \;,
 \end{split}
 \end{equation}
-after again omitting $O(\frac{1}{N^2})$ parts of the equation.
-To conclude our proof, we see that
+after again omitting $O(\frac{1}{N^2})$ terms.
+To conclude the proof, we note that
 \begin{equation}
-E\left[\frac{X_{t+1}}{N}-x\right] = E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] + E\left[\frac{X_t}{N}-x\right]
+E\left[\frac{X_{t+1}}{N}-x\right] 
+= E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] + E\left[\frac{X_t}{N}-x\right] \;,
 \end{equation}
 so again using the induction assumption, together with \cref{eq:ch_3} we get
 \begin{equation}
 \begin{split}
-E\left[\frac{X_{t+1}}{N}-x\right] &\simeq \frac{1}{N}s_{t+1}\cdot x(1-x) + \frac{1}{N}S_t\cdot x(1-x) \\
-& \simeq \frac{1}{N}x(1-x)(S_t + s_{t+1}) \\
-& \simeq \frac{1}{N} S_{t+1} x(1-x)
+E\left[\frac{X_{t+1}}{N}-x\right] \simeq \frac{1}{N}s_{t+1}\cdot x(1-x) + \frac{1}{N}S_t\cdot x(1-x) \\
+\simeq \frac{1}{N}x(1-x)(S_t + s_{t+1}) 
+\simeq \frac{1}{N} S_{t+1} x(1-x) \;,
 \end{split}
 \end{equation}
-which proves \cref{res:ch_expected}.
+which proves the drift term.
 
-For \cref{res:ch_var}, we'll use a property of variance:
+For the diffusion term, we use a property of variance,
 \begin{equation}\label{eq:ch_var}
-V\left(\frac{X_{t+1}}{N}\right) = E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \right)\right] + V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right)
+V\left(\frac{X_{t+1}}{N}\right) 
+= E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \right)\right] + V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) \;.
 \end{equation}
 
-using \cref{eq:ch_1} we see that:
+Using \cref{eq:ch_1} we see that
 \begin{equation}\label{eq:ch_var1}
+% TODO check this - looks weird that you have such a similar expression on the left side
 \begin{split}
-E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] - E\left[\frac{X_{t}}{N} \bigg|X_t \right] &= \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \\
-E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] = \frac{X_t}{N} &+ \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right)
+&E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] - E\left[\frac{X_{t}}{N} \bigg|X_t \right] 
+= \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \\
+&E\left[\frac{X_{t+1}}{N} \bigg|X_t \right] 
+= \frac{X_t}{N} + \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \;.
 \end{split}
 \end{equation}
 
-Using \cref{eq:const_var} we get:
+Using \cref{eq:const_var} we get
 \begin{equation}
-V\left(\frac{X_{t+1}}{N} \bigg|X_t \right) = \frac{1}{N_e}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right)
+V\left(\frac{X_{t+1}}{N} \bigg|X_t \right) 
+= \frac{1}{N_e}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \;,
 \end{equation}
-
-and using the equation $y'(1-y') \simeq y(1-y)$ on the first part of \cref{eq:ch_var} we get:
+and using the equation $y'(1-y') \simeq y(1-y)$ on the first part of \cref{eq:ch_var} we get
 \begin{equation}\label{eq:ch_var2}
-E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \right)\right] = \frac{1}{N_e}E\left[\frac{X_t}{N}\left(1- \frac{X_t}{N}\right) \right] \simeq \frac{1}{N_e} x(1-x)
+E\left[V\left(\frac{X_{t+1}}{N} \bigg|X_t \right)\right] 
+= \frac{1}{N_e}E\left[\frac{X_t}{N}\left(1- \frac{X_t}{N}\right) \right] \simeq \frac{1}{N_e} x(1-x) \;.
 \end{equation}
-
-and moving on to simplify the second part of \cref{eq:ch_var} using \cref{eq:ch_var1}:
+Moving on to simplify the second part of \cref{eq:ch_var} using \cref{eq:ch_var1},
 \begin{equation}
-V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) = V\left(\frac{X_t}{N} + \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \right)
+V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) 
+= V\left(\frac{X_t}{N} + \frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \;.\right) \right)
 \end{equation}
-
-and now, because $\frac{X_t}{N}$ is a frequency, i.e $0\leq\frac{X_t}{N}\leq1$, we know that $V\left(\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \right)\leq\frac{1}{4}$. We therefore see that:
+Now, because $\frac{X_t}{N}$ is a frequency, i.e $0 \leq X_t/N \leq 1$, we know that $V\left(\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \right)\leq\frac{1}{4}$. We therefore find that
 \begin{equation}
-V\left(\frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \right)\leq \frac{1}{4N^2}s^2_{t+1}
+V\left(\frac{1}{N}s_{t+1}\frac{X_t}{N}\left(1-\frac{X_t}{N} \right) \right)
+\leq \frac{1}{4N^2}s^2_{t+1} ;,
 \end{equation}
 and so it can be ignored.
-Combining our equations we get:
+Combining our equations we get
 \begin{equation}
-V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) = V\left(\frac{X_t}{N}\right) + O\left(\frac{1}{N^2}\right)\simeq V\left(\frac{X_t}{N}\right)
+V\left(E\left[\frac{X_{t+1}}{N} \bigg|X_t \right]\right) 
+= V\left(\frac{X_t}{N}\right) + O\left(\frac{1}{N^2}\right)\simeq V\left(\frac{X_t}{N}\right) \;.
 \end{equation}
-
-Using the induction assumption and \cref{eq:ch_var2}:
+Using the induction assumption and \cref{eq:ch_var2},
 \begin{equation}
-V\left(\frac{X_{t+1}}{N}\right) \simeq \frac{1}{N_e}x(1-x) + \frac{1}{N_e}tx(1-x) \simeq \frac{1}{N_e}x(1-x)(t+1)
+V\left(\frac{X_{t+1}}{N}\right) 
+\simeq \frac{1}{N_e}x(1-x) + \frac{1}{N_e}tx(1-x) \simeq \frac{1}{N_e}x(1-x)(t+1) \,
 \end{equation}
-proving \cref{res:ch_var}.
+which proves the diffusion term.
 \end{proof}
 
-Following our proof, we can say that after many cycles, we can use a modified version of our fixation probability:
+
+Using the drift and diffusion terms and following \citet{changeEnv}, we can approximate the fixation probability in a changing environment using
 \begin{equation}\label{eq:ch_env}
-P_{fix} = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}}
+\tilde\pi = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}}
 \end{equation}
-where $\frac{S_n}{n} = \frac{k-l}{k+l}(1-beta)$, $n=k+l$. Put into words, we use the average selection coefficient of a cycle ($k+l$) as the selection coefficient in our original equation.
-In our proof we showed that the expected change in frequency and variance is only manifested in the selection coefficient $S_n$, and that we can use those modified equation as a base for Kimura's equation.
+where $\frac{S_n}{n} = \frac{k-l}{k+l}(1-\beta)$ and $n=k+l$.
+That is, we use the average selection coefficient during a cycle of $k+l$ generations as the selection coefficient \cref{eq:kimura_p}.
+% TODO what are you saying in the next paragraph?
+%In our proof we showed that the expected change in frequency and variance is only manifested in the selection coefficient $S_n$, and that we can use those modified equation as a base for Kimura's equation.
+
+\paragraph{Numerical validation.}
+Comparing our approximation (\cref{eq:ch_env}) to numerical simulations, we find that the approximation fits simulations results well for variable bias weights, $\alpha$, which corresponds to the effective population size (\Cref{fig:ch_env_alpha_beta}a).
+
+However, the approximation is more sensitive to the value of the success bias coefficient $\beta$ (\Cref{fig:ch_env_alpha_beta}b).
+We suspect that when $\beta$ is too small, there will not be many cycles in the simulations, because either the population reaches a high frequency of the fitter phenotype after just a few cycles, or the fitter phenotype becomes extinct very quickly. 
+For the very low $\beta$ values (0.65 and below),% TODO is that really "very low?"
+the fixation probability exceeds even the constant environment approximation (which is the upper limit). However, this is to be expected, because the diffusion-equation approximations assume weak selection (i.e., low selection coefficient $s$).
+
+% TODO what is k and l?
+We found that for large $k$-to-$l$ ratio (while keeping constant total cycle length, $n=k+l=40$) the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:p_kimura}), see \Cref{fig:ch_env_k_l}. 
+When using higher values of $n$, the agreement between the approximation and simulation results is weaker. % TODO reference to figure?
+This is because our approximation is more precise when more cycles occur in the simulations. % TODO "in the simulations"-right?
+When $n$ is high, the cycles are longer, the dynamics are therefore similar to a constant environment, and fixation or extinction is more likely to happen before the next cycle. Thus, there will be less cycles, which lowers our approximation precision.
+
 
 \begin{figure}[h]
+% TODO
+% See comments on previous figures
+% make x axes as before, with alpha on bottom and Ne on top
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var.pdf}
-  \caption{\textbf{Robustness of approximation in a changing environment to varying success coefficient and success bias weight.}
- Markers for average values across $10,000$ simulations, error bars for (a) are 75\% confidence intervals, and 95\% for (b).
-The approximation (blue) given by \cref{eq:ch_env} fits simulation results (orange) well when the effective population size varies (a).
-On (b) we see that for high values of success bias ($s>0.1$) will distance the simulations from the changing environment expected values. Very high values ($s>0.35$) will even deviate from the constant environment expected values (green) given by \cref{eq:kimura_p}. This is expected because Kimura's approximation are only viable for low selection coefficient values.
+  \caption{\textbf{Sensitivity of fixation probability approximation in a changing environment to varying success coefficient and bias weight.}
+\textbf{)a)} When the bias weight, or effective population size varies, the approximation (blue; \cref{eq:ch_env}) fits simulation results (orange). 
+\textbf{(b)} When success bias is large ($\beta > 0.1$),  % TODO it was s>0.1, and O changed to beta>0.1 because that's what the x axes says, but I am not sure, as below you say the approximation works for weak selection, and s=1-beta, so large beta should give weak selection... please check
+simulation results (orange) are underestimated by the approximation (blue; \cref{eq:ch_env}). With even larger success bias ($\beta > 0.35$), even the constant environment approximation (green; \cref{eq:kimura_p}) underestimate simulation results, likely because the diffusion equation approximation assumes weak selection.
+Markers show average of $10,000$ simulations, error bars show are 75\% (a) and 95\% (b) confidence intervals.
   Here, population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.9$; \textbf{(a)} success bias/selection coefficient is: $1-\beta=s=0.005$, \textbf{(b)} success bias weight is: $\alpha=0.1$. 
   }
   \label{fig:ch_env_alpha_beta}
 \end{figure}
 
-We validate our results using simulations.
-We find that $\alpha$ does not have a significant effect on the approximations (\cref{fig:ch_env_alpha_beta}).
-However, $\beta$ does. 
-
-We suspect that when $1-\beta$ is too large, there won't be many cycles in the simulations. This might happen if either the population reaches a high frequency of the fitter phenotype after only a few cycles, or the fitter phenotype get extinct very quickly. 
-For the very high $1-\beta$ values (0.35 and above), the fixation probability exceeds even the constant environment approximation (which is the upper limit), but it's to be expected, because Kimura's equations are only appropriate for weak fitness (i.e., low selection coefficients, $s$).
-
 \begin{figure}[h]
+% TODO
+% merge with previous figure and edit the caption accordingly.
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env_var_k_l.pdf}
   \caption{\textbf{Robustness of approximation in a changing environment to varying sizes of the cycles.} 
 Markers for average values across $10,000$ simulations, error bars are 95\% confidence intervals.
@@ -783,11 +812,6 @@ The approximation (blue) fits the simulations (orange) well for different sizes 
   \label{fig:ch_env_k_l}
 \end{figure}
 
-We also examined the effect of different choices of $k$ and $l$ while keeping a constant total cycle length, $n=k+l=40$.
-We found that larger $k$-to-$l$ ratio increases the agreement between the changing environment equation and the original estimation of the constant environment. 
-When using higher values of $n$, the agreement between the approximation and simulation results is weaker.
-This is because our approximation is more precise when more cycles occur.
-When $n$ is high, the cycles are longer. When the cycles are long, the settings are similar to a constant environment equation, and fixation/extinction is more likely to happen. This means there will be less cycles, which lowers our approximation accuracy.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Adaptive success-bias weight}
