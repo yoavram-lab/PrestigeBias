@@ -92,7 +92,7 @@ headheight=12pt
 \newcommand{\ci}{I}
 
 % title page stuff
-\title{Prestige as a Driving Force in Cultural Transmission}
+\title{Cultural Evolutionary Dynamics with Success and Influence biases}
 
 \renewcommand\Affilfont{\small}
 \author[1]{Saar Egozi}
@@ -112,7 +112,7 @@ headheight=12pt
 Copying role-models can be an efficient method for acquiring knowledge. A common bias when choosing a role-model to copy is success bias: copying whoever appears more successful. This bias depends on the performance of the role-model alone, with no other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, in which role-model choice is affected by the number of individuals that have already copied each potential role-model. We combine success and influence bias together to a ``prestige bias'' and analyze its effects on cultural-evolutionary dynamics using mathematical analysis and stochastic simulations. We find analytic approximations to our stochastic model, facilitating further mathematical analysis and reducing the computational complexity of simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
 We also find approximations to the fixation probability and the fixation time of an invading advantageous cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
 These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
-It also accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
+Influence bias also accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
 Our model may provide a good description of cultural transmission, 
 especially in human societies where social media is popular. 
 Further work is needed to test if this model could predict various phenomena in cultural evolution when extended with the effects of selection and innovation.
@@ -174,11 +174,10 @@ This bias depends on the state of a role-model rather than on its trait, in cont
  We define a model of cultural transmission with prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Models and Methods}
+\section*{Models and methods}
 
 We begin with a continuous trait model with indirect bias suggested by \citet{evolutionBook}, develop an extension with influence bias, and then develop a model with a dichotomous trait.
 We implemented our stochastic models and approximations, performed statistical analyses, and produced figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
- 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
 
 \subsection*{Continuous trait}
@@ -603,6 +602,7 @@ We find see that the two models have similar dynamics, and both are well approxi
 
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/binary/kimura_var.pdf}
+    % TODO - black line for 2s as well
   \caption{\textbf{Fixation probability and time approximation for varying bias weight and success coefficient.}
   Fixation probability (\textbf{A}) and time (\textbf{B}) for varying bias weight on the bottom x-axis. The corresponds effective population size is on the top x-axis.
   The approximation (black) fits DM simulations results (green) and Wright-Fisher simulation results (orange) when using \cref{eq:kimura_p}.
@@ -778,7 +778,7 @@ When $k$ is the number of generations where the invading phenotype is advantageo
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \includegraphics[width=\linewidth]{../figures/changed_env/ch_env.pdf}
   \caption{\textbf{Sensitivity of fixation probability approximation in a changing environment to varying success coefficient and bias weight and robustness to varying ratios of cycles.}
 \textbf{(A)} When the bias weight, or effective population size varies, the approximation (blue; \cref{eq:ch_env}) fits simulation results (orange). 
@@ -795,26 +795,27 @@ Markers show average of $10,000$ simulations, error bars show are 75\% \textbf{(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Adaptive success-bias weight}
 
-We ran simulations of the role-model choice process during a single generation in which every copier evaluates its own optimal $\alpha$ value. This is the $\alpha$ value that minimizes the mean square error of the difference between the estimated and the ideal trait values.
-This $\alpha$ is found by minimizing the following:
+We ran simulations of the role-model choice process during a single generation in which every copier evaluates its own optimal success-bias weight, $\alpha^*$, which minimizes the expected squared error between the estimated and the ideal trait values,
 \begin{equation}
-SMSE = \sum_{j=1}^N\frac{\alpha A_j + (1-\alpha) K_j}{\sum_{l=1}^N\alpha A_l + (1-\alpha) K_l}\cdot (\hat{A}-A_j)^2
+\alpha^* = \textit{argmin} \sum_{j=1}^N\frac{\alpha A_j + (1-\alpha) K_j}{\sum_{l=1}^N\alpha A_l + (1-\alpha) K_l}\cdot (\hat{A}-A_j)^2 \;,
 \end{equation}
-where $A_j$ is the trait of role-model $j$ and $K_j$ the number of copiers that already chose him.
+where $A_j$ is the trait of role-model $j$ and $K_j$ the number of copiers that already chose role-model $j$.
 
-We see in \cref{fig:influence_advantage} a comparison between a model where every copier chooses its ideal success bias weight $\alpha_{ij}$, and when $\alpha$ is a constant homogeneous value.
-We find that when copiers adapt their success-bias weight, their success-bias weight decreases with the number of copiers that have already chose a role-model~(\cref{fig:influence_advantage}).
-Moreover, their estimation error is much lower compared to a constant success-bias weight, which gives roughly the same high estimation error to all copiers (compare \cref{fig:influence_advantage}b and c): the estimation error converges to $0.046$ whereas a constant weight gives values $>0.74$ in this example.
+We find that when copiers adapt their success-bias weight, it decreases with the number of copiers that have already chosen a role-model~(\cref{fig:influence_advantage}).
+Moreover, their estimation error is much lower compared to a constant success-bias weight, which gives roughly the same high estimation error to all copiers (compare \cref{fig:influence_advantage}b and c): in this example, the adaptive weight estimation error converges to $0.046$, whereas a constant weight gives values $>0.74$.
 
 
-\begin{figure}[b!]
+\begin{figure}[H]
     \includegraphics[width=\linewidth]{../figures/influence_advantage/choose_bias.pdf}
+    % TODO - capital letters for all axis lables
+    % letter follows the description (success-bias weight, \alpha
+    % show plot of error bars and a scatter for the constant bias weight (no trend)
   \caption{
   \textbf{Advantage of an adaptive success-bias weight.}
   Both success-bias weight $\alpha$ (\textbf{a}) and estimation error (\textbf{b}) decrease during the role-model choosing process, demonstrating that influence is becomes more advantageous as more copiers have made their choice.
 However, when $\alpha$ is homogeneous, the mean estimation error doesn't decrease, regardless of $\alpha$ or $\eta$.
 The mean estimation error in the homogeneous $\alpha$ model is larger by a factor of $10$ than the adaptive $\alpha$ model.
-     Here, population size $N=200$; estimation error is normally distributed $e \sim N(0,\eta^2)$; standard deviation $\eta=0.0001 (blue), 0.001 (orange), 0.01 (green)$, plots are average of $300$ simulations.}	
+Here, population size $N=200$; estimation error is normally distributed $e \sim N(0,\eta^2)$ with standard deviation $\eta=$0.0001 (blue), 0.001 (orange), 0.01 (green), plots are average of $300$ simulations.}	
   \label{fig:influence_advantage}
 \end{figure}
 
