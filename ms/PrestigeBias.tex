@@ -342,7 +342,7 @@ We compare the distribution of number of copiers by plotting the histograms of b
 We used the average of the $1,000$ simulations to eliminate drift errors, as can be seen in \cref{fig:GBD}.
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/chi_square_stats/GBD_validation.pdf}
+    \includegraphics[width=\linewidth]{../figures/final/GBD_validation.pdf}
   \caption{
   \textbf{Numerical validation for the GBD approximation.}
   The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
@@ -400,10 +400,10 @@ In addition, we tested the likelihood of the observed data to be drawn from the 
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/chi_square_stats/DM_validation.pdf}
+    \includegraphics[width=\linewidth]{../figures/final/DM_validation.pdf}
   \caption{
   \textbf{Goodness of fit of Dirichlet-Multinomial approximation to the model.}
-  The difference between the DM approximation distribution to observed model distribution (a) is very small, with the highest difference at 0.5 role-models.
+  The difference between the DM approximation distribution to observed model distribution (a) is very small. The DM approximation (orange) and the simulation results (blue) are almost indistinguishable.
   The optimal negative log likelihood (b) is given when using the DM approximation (black vertical line), and is much better when compared to a shuffled vector of the DM distribution (blue bars).
   Here, population size, $N=100$; number of distributions averaged, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; homogeneous success bias weight, $\alpha=0.5$.}	
   \label{fig:DM_validation}
@@ -423,7 +423,7 @@ We found again that results of the DM approximation are similar to those from st
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/binary/num_sims.pdf}
+    \includegraphics[width=\linewidth]{../figures/final/num_sims.pdf}
   \caption{
   \textbf{Minimum number of simulations required to get a good approximation.}
   The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models. The approximated value (black) is given by equation \cref{eq:kimura_p}.
@@ -434,7 +434,7 @@ We found again that results of the DM approximation are similar to those from st
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_mutation.pdf}
+    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_mutation.pdf}
   \caption{
   \textbf{Robustness of DM approximations to inclusion of estimation error.} Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high estimation error rate. Markers for average across simulations, error bars for 95\% confidence intervals.
   5,000 simulations per data point; population size, $N=1000$; bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,x^2)$ where $x \in [10^{-7},10^{-1}]$.
@@ -444,7 +444,7 @@ We found again that results of the DM approximation are similar to those from st
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../figures/binary/full_vs_dm_changing_alpha.pdf}
+    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_changing_alpha.pdf}
    \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
    Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high variation in success bias weight.Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
   Here, population size, $N=1000$; success bias weight normally distributed, $\alpha\sim N(0.5,x^2)$; phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
@@ -601,8 +601,7 @@ We find see that the two models have similar dynamics, and both are well approxi
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/binary/kimura_var.pdf}
-    % TODO - black line for 2s as well
+    \includegraphics[width=\linewidth]{../figures/final/kimura_var.pdf}
   \caption{\textbf{Fixation probability and time approximation for varying bias weight and success coefficient.}
   Fixation probability (\textbf{A}) and time (\textbf{B}) for varying bias weight on the bottom x-axis. The corresponds effective population size is on the top x-axis.
   The approximation (black) fits DM simulations results (green) and Wright-Fisher simulation results (orange) when using \cref{eq:kimura_p}.
@@ -779,7 +778,7 @@ When $k$ is the number of generations where the invading phenotype is advantageo
 
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{../figures/changed_env/ch_env.pdf}
+    \includegraphics[width=\linewidth]{../figures/final/ch_env.pdf}
   \caption{\textbf{Sensitivity of fixation probability approximation in a changing environment to varying success coefficient and bias weight and robustness to varying ratios of cycles.}
 \textbf{(A)} When the bias weight, or effective population size varies, the approximation (blue; \cref{eq:ch_env}) fits simulation results (orange). 
 \textbf{(B)} When success bias is large ($1-\beta > 0.1$),  
@@ -806,10 +805,7 @@ Moreover, their estimation error is much lower compared to a constant success-bi
 
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{../figures/influence_advantage/choose_bias.pdf}
-    % TODO - capital letters for all axis lables
-    % letter follows the description (success-bias weight, \alpha
-    % show plot of error bars and a scatter for the constant bias weight (no trend)
+    \includegraphics[width=\linewidth]{../figures/final/choose_bias.pdf}
   \caption{
   \textbf{Advantage of an adaptive success-bias weight.}
   Both success-bias weight $\alpha$ (\textbf{a}) and estimation error (\textbf{b}) decrease during the role-model choosing process, demonstrating that influence is becomes more advantageous as more copiers have made their choice.
