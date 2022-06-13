@@ -1,4 +1,11 @@
 \documentclass[12pt]{extarticle}
+
+\makeatletter
+
+\def\blfootnote{\gdef\@thefnmark{}\@footnotetext}
+
+\makeatother
+
 \usepackage{geometry}
 \geometry{
 a4paper,
@@ -55,7 +62,7 @@ headheight=12pt
 % line numbers
 \usepackage[displaymath, mathlines]{lineno}
  \renewcommand\linenumberfont{\normalfont\small\sffamily}
-\linenumbers
+%\linenumbers
 \modulolinenumbers[2]
 
 % Supplementary
@@ -91,24 +98,59 @@ headheight=12pt
 \newcommand{\cj}{\mathbf{J}}
 \newcommand{\ci}{I}
 
-% title page stuff
-\title{Cultural Evolutionary Dynamics with Success and Influence biases}
-
-\renewcommand\Affilfont{\small}
-\author[1]{Saar Egozi}
-\author[2,3,*]{Yoav Ram}
-\affil[1]{School of Computer Science, Reichman University, Herzliya 4610101, Israel}
-\affil[2]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel}
-\affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel}
-\affil[*]{Corresponding author: yoav@yoavram.com, ORCID 0000-0002-9653-4458}
- 
-\date{\today}
-
-
 \begin{document}
-\maketitle
 
-\begin{abstract}
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.4\textwidth]{ReichmanLogo}\par\vspace{1cm}
+	{\huge Reichman University \par}
+	{\Large Efi Arazi School of Computer Science \par}
+	{\Large M.Sc. Program - Research Track \par}
+
+	\vspace{1.5cm}
+	{\Huge Cultural Evolutionary Dynamics with Success and Influence biases\par}
+	\vspace{1.5cm}
+	{\large by\par}
+	{\Large\bfseries Saar Egozi\par}
+	\vspace{1cm}
+	{\large Supervised by Dr. Yoav Ram\par}
+	{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel\par}
+	{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel \par}
+
+	\vspace{1cm}
+	{M.Sc. dissertation, submitted in partial fulfillment of the requirements\par}
+	{for the M.Sc. degree, research track, School of Computer Science\par}
+	{Reichman University}
+
+	\vspace{1cm}
+	% Bottom of the page
+	{\large \today \par}
+
+\end{titlepage}
+
+
+% title page stuff
+%\title{Cultural Evolutionary Dynamics with Success and Influence biases}
+
+%\renewcommand\Affilfont{\small}
+%\author[1]{Saar Egozi}
+%\author[2,3,*]{Yoav Ram}
+%\affil[1]{School of Computer Science, Reichman University, Herzliya 4610101, Israel}
+%\affil[2]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel}
+%\affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel}
+%\affil[*]{Corresponding author: yoav@yoavram.com, ORCID 0000-0002-9653-4458}
+ 
+%\date{\today}
+
+%\maketitle
+
+
+This work was carried out under the supervision of Dr. Yoav Ram as part of the M.Sc.
+program of Efi Arazi School of Computer Science, Reichman University.
+
+\pagebreak
+
+\section*{Abstract}
 Copying role-models can be an efficient method for acquiring knowledge. A common bias when choosing a role-model to copy is success bias: copying whoever appears more successful. This bias depends on the performance of the role-model alone, with no other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, in which role-model choice is affected by the number of individuals that have already copied each potential role-model. We combine success and influence bias together to a ``prestige bias'' and analyze its effects on cultural-evolutionary dynamics using mathematical analysis and stochastic simulations. We find analytic approximations to our stochastic model, facilitating further mathematical analysis and reducing the computational complexity of simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
 We also find approximations to the fixation probability and the fixation time of an invading advantageous cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
 These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
@@ -116,7 +158,8 @@ Influence bias also accelerates the evolutionary dynamics, as can be expected in
 Our model may provide a good description of cultural transmission, 
 especially in human societies where social media is popular. 
 Further work is needed to test if this model could predict various phenomena in cultural evolution when extended with the effects of selection and innovation.
-\end{abstract}
+
+\blfootnote{This work is in preparation for submission to a high-impact journal.}
 \pagebreak
 
 \section*{Introduction}
