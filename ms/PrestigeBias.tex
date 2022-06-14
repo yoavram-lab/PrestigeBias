@@ -872,7 +872,7 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section*{Discussion}
-\paragraph{Summary.}
+%\paragraph{Summary.}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
 Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
 A common bias is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
@@ -886,16 +886,19 @@ The latter is especially useful, as it approximated the entire process and only 
 Analyzing the model with the DM approximation, we found approximations for the fixation probability and fixation time of a beneficial cultural trait in a constant environment.
 Our approximations are similar to Kimura's evolutionary-genetic approximations, such that (i) the difference between the resident and invading cultural trait values, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) increasing the relative weight of influence bias compared to success bias, $\alpha$, decreases the effective population size, $N_e$. % TODO ref to figure/result
 
-We also analyzed a cyclic changing environment in which the identity of the advantageous trait value switches after a fixed amount of generations.
+We also analyzed a cyclic changing environment in which the identity of the success-biased trait switches after a fixed amount of generations.
+%% TODO move this to results
 We found that as in the constant environment, the effective population size doesn't affect the goodness of fit of the approximation. The success coefficient however, must be even lower than before for the approximation to fit. When the success coefficient is higher than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation. We believe the reason is the structure of the cycle.
 Our proof and approximation in the changing environment are for a large amount of cycles, and when the success coefficient is too high, there might be very few cycles. Either the ideal trait is copied by enough copiers so that the influence is sufficient to negate the success bias when the cycle changes (and the beneficial trait becomes the maladaptive), or the opposite happens, and the ideal trait gets extinct before there were enough copiers that copied it.
 We then tried to change the ratio between the number of cycles where $\hat{A}$ is beneficial and maladaptive. We showed that the approximation fits well regardless of the ratio, but when the ratio of adaptive generations to maladaptive ones is very high, it is very similar to a constant environment model.
+%%% 
+% instead, write here how the model parameters affect fixation probability
 
-We find that copiers can minimize their estimation error (i.e., copy trait values closer to the ideal value) by correctly balancing between success and influence biases (\Cref{fig:influence_advantage}).
-We find that throughout the role-model choice process, the estimation error decreases, and the success bias rate also decreases. This suggests that the later a copier makes its choice, the more it should rely on choices of previous copiers and the less it should rely on its own estimation.
-The rationale, then, is that the more information a copier has, e.g. by using others as an information source, the more informative and effective his choice can be.
-
-In addition, we find that the process of choosing itself is necessary, and when using a constant ratio ($\alpha$), the mean estimation error in the population is greater by a factor of $10$, even when using the $\alpha$ the population converged to when being able to choose it (\cref{fig:influence_advantage}).
+We also examined a scenario in which copiers can adapt their success-weight bias, $\alpha$ to minimize their copying error, i.e., copy trait values closer to the ideal value.
+We found that as the role-model choice process proceeds (that is, more copiers make their choices), both the success-bias weight (adapted by copiers) and the estimation error decrease. 
+The latter is significantly lower compared to a population using a constant, fixed success-bias weight, regardless of the value of the constant weight (\Cref{fig:influence_advantage}).
+This suggests that the later a copier makes its choice, the more it should rely on choices of previous copiers, and the less it should rely on its own estimation.
+The rationale, then, is that the more information a copier has, e.g. by using others as an information sources, the more informative and effective his choice can be.
 
 \paragraph{Prestige in the literature.}
 
@@ -906,73 +909,83 @@ When no individual posseses such traits, or when there are not enough connection
 Leaders may carry selection costs, e.g. due to higher predation risk, poisoning when exploring new foraging patches.
 In some cases, the leader may be the hungriest or the weakest individual, while the others would prefer to follow the leader and minimizing their risks and costs.
 However, leadership may also carry selection benefits. For example, given the route to the foraging site was successful, the leader and his closest followers would gain most or the best of the food, whereas in consensus decision making, the food would be shared more equally. Or, sexual selection may also provide a selection benefit advantage to leaders, who might gain more sexual partners due to their leadership of the group. \citet{animal_leadership} describe benefits for the closest associates of a dominant baboon, such as protection from predators. 
-In some species, like the females of \textit{Eulemur fulvus rufus} (Red lemur), leaders may arise due to nutritional needs, and not due to possessing superior traits \citep{lemurs}.
+In some species, like the females of \textit{Eulemur fulvus rufus} (Red lemur), leaders may arise due to nutritional needs, and not due to possessing superior traits \citep{lemurs}. 
+% TODO this is a nice paragraph, but it is unclear how it relates to your work. does your model results have something to say about leadership? or what? if this is just an introduction so that you can then present Van Vugt and Smith, then it is too long.
 
-In humans, leadership also has its costs and benefits. Leaders can make decisions that would most benefit them and their closest followers, while still maintaining group cohesion. However, wrong decision making that harms the group could result in harm.
+In humans, leadership also has its costs and benefits. Leaders can make decisions that would most benefit them and their closest followers, while still maintaining group cohesion. 
+However, wrong decision making that harms the group could result in harm. % TODO you have double harm here, rephrase it.
+In modern society, many humans strive for prestigious positions, as they may reap rewards greater than the risk and costs to achieve them, or due to individual personality and pressure or education from the family. % again, how is this relevant? also I would add reference to at least some of your claims -
 
-In modern society humans strive for the prestigious positions, as they may reap rewards greater than the risk and costs to achieve them, or due to individual personality and pressure/education from the family.
-
-\citet{dual_leadership} suggest a different view of leadership. They note that most discussions assume there is one type of leadership, as seen above, and so they differ in their definitions. \citet{dual_leadership} suggest a way to solve said contradiction by defining two types of leaderships: prestige-based and dominance-based.
-They present classical views of leaderships by Confucius and Machiavelli. Confucius views leaders as role-models who exercise influence through possessing superior knowledge, skills,
-and (outstanding) personal qualities. This description is very similar to success bias in our model. 
-By contrast, Machiavelli views leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence.
-They say that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view into the complex and dynamic processes of leadership. 
+\citet{dual_leadership} suggest a different view of leadership. They note that most discussions assume there is one type of leadership, 
+as seen above, and so they differ in their definitions. % TODO this sentence (on this line) in unclear
+\citet{dual_leadership} suggest a way to solve said contradiction % TODO what contradiction? I dont understand
+ by defining two types of leaderships: prestige-based and dominance-based.
+They present classical views of leaderships by Confucius and Machiavelli. Confucius views leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
+In contrast, Machiavelli views leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence. % TODO but this is different from our influence model right?
+\citet{dual_leadership} suggest that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic processes of leadership. 
 Our model does not reflect these leadership styles, but several adjustments could be made in order to match it, such as assuming there is a correlation between phenotype to leadership style. 
-The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
+The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing. % TODO is this paragraph is a suggestion for followup work? if so, you could make it shorter - remove the first sentences about contradictions, and directly present Confucius and Machiavelli, and so on. Also this should be in a latter part of the Discussion under the name "Future work" or something like that.
 
-\citet{prestige_evolution} support said claim that there are two types of leadership, and also define the two as prestige based and dominance based leadership types.
-By their definition, the latter is defined by acquiring social status by using aggression, intimidation and violence. It is also more common than prestige in non humans. Their definition of prestige is somewhat synonymous with ours. According to their manuscript, prestige is composed both of estimation in the eyes of people (our success trait) and commanding position in people's minds, i.e number of copiers people think they have, which they define as \textit{influence} (similar to our definition for influence).
-In their paper, they show that prestige evolved from natural selection, as an efficient process to extract reproductive benefit from the flow of socially transmitted information. Simply put, prestige is a natural step where social learning exists, due to saving costs of individual learning.
-It could be interesting in the future to expand our model using this idea: observing the copier trait of \textit{evaluation}, rather than only observing the evolution of the trait copied.
-\citet{prestige_evolution} suggest that the most skilled role-models will, on average, end up with most copiers. Their research, definitions and results, is consistent with ours.
+% TODO it seems that the next paragraph is the one that really corresponds to ours, so it should be emphasized earlier, I think
+\citet{prestige_evolution} support said claim that there are two types of leadership, and also define the two as prestige-based and dominance-based leadership types.
+In the latter, social status is acquired through using aggression, intimidation and violence. It is also more common than prestige in non-human animals.
+Their definition of prestige seems to overlap with ours. They suggest prestige is composed of estimation in the eyes of other people (similar to our success bias) and commanding position in people's minds, i.e, the number of followers others people think one has, which they define as \textit{influence}, similar to our influence bias.
+\citet{prestige_evolution} show that prestige evolved via natural selection as an efficient process to extract reproductive benefit from the flow of socially transmitted information. % TODO how do they show this? math? simulations? experiments?
+Simply put, prestige naturally evolves when social learning already exists to save costs of individual learning. % TODO Are you sure ?
+It could be interesting in the future to expand our model using this idea: observing the copier trait of \textit{evaluation}, rather than only observing the evolution of the trait copied. % TODO unclear
+\citet{prestige_evolution} suggest that the most skilled role-models will, on average, end up with most copiers. Their research, definitions, and results, is consistent with ours. % TODO how so?
 
-Furthermore, according to \citet{no_replication}, the process of cultural evolution doesn't require replication of representations.
-They base their assumption on three claims - mental representations are non-discrete, cultural transmission is highly inaccurate, and mental representations are not replicated, but rather are 'reconstructed' through an inferential process that is strongly affected by cognitive 'attractors.' In their paper they describe three different models to support their points.
-We see a high similarity between their model and ours. Like them, we treat the cultural trait as non-discrete (in the main model, before simplifying it to dichotomous in order to analyze it). We also assume error in estimation, which the copiers aren't really replicating their role-models, but rather reconstructing them to create a different trait, which is their representation of the role-model's trait. In addition, the inferential process that they describe as strongly affected by cognitive attractors match our influence bias, resulting in a very similar base assumptions in our models.
+Furthermore, according to \citet{no_replication}, the process of cultural evolution doesn't require replication of representations.% TODO what is "representation"?
+They base their assumption on three claims: mental representations are non-discrete, cultural transmission is highly inaccurate, and mental representations are not replicated, but rather are `reconstructed' through an inferential process that is strongly affected by cognitive `attractors.' They describe three different models to support their points.
+We see a high similarity between their model and ours. Like them, we treat the cultural trait as non-discrete (in the main model, before simplifying it to facilitate analysis). We also assume error in estimation, such that copiers do not precisely replicate their role-models, but rather reconstruct them to create a different trait, which is their representation of the role-model's trait. In addition, the inferential process that they describe as strongly affected by cognitive attractors matches our influence bias.
 
-So far we presented the theory behind prestige, and it's appearance in nature. The following will show the appearances of prestige biases in humans, and in recent times.
+% TODO maybe this and the following should be grouped under a heading like "empirical evidence of prestige bias"
+\citet{prestige_cultural_learning} tested the existence of prestige in young children. 
+They report the first direct tests in children that suggest the existence of "prestige bias", defined as the tendency to learn from individuals to whom others have preferentially attended, learned or deferred.
+Their definition of prestige is similar to our influence bias. They showed that the odds of 3-4 years-old children learning from an adult model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of their learning from a model whom bystanders ignored.
+They also note that prestige effects are domain-sensitive: they found that prestigious models were attended more when demonstrating artifact-use, but not as much as when presenting food preferences. % TODO confusing phrasing, try again?
+This lead \citet{prestige_cultural_learning} to suggest that when the trait is costly to learn individually, prestige will have a higher effect. % TODO higher effect? or will be used more often?
+It would be interesting to include costs in our model to try and observe these effects and dynamics in a large population.
 
-\citet{prestige_cultural_learning}, for example, tested the existence of prestige in young children. \citet{prestige_cultural_learning} report the first direct tests in children that suggest the existence of \textit{prestige bias}, a tendency to learn from individuals to whom others have preferentially attended, learned or deferred.
-Their definition of prestige is similar to our \textit{influence bias}, and brings concrete proof of its existence and effects. Their study showed that the odds of 3-4 years-old children learning from an adult model to whom bystanders had previously preferentially attended for 10 seconds were over twice those of their learning from a model whom bystanders ignored.
-In addition to this first study, they also discovered prestige effects are domain-sensitive. They saw that prestigious models were listened to by most when demonstrating artifact-use, but not as much as when presenting food preferences. It lead \citet{prestige_cultural_learning} to believe that when the trait is costly to learn individually, prestige will have a higher effect. It would be interesting to include costs in our model to try and observe these effects and their dynamics in the simulations of a larger population than this study.
+\citet{fijian_social_bias} wrote that ``evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information.'' 
+Thus, they studied Fijian villages to examine if and how such biases emerge in a small-scale society.
+They found that ``Fijian villagers (ages 10 and up) are biased to learn from others perceived as more successful/knowledgeable, both within and across domains (prestige effects).'' % TODO it's better to rephrase in your words. (you can have one quote, but too is a bit much)
+Their research thus suggests that copying from those perceived as successful, rather than actually are successful. % TODO this sentence is not finished?
+They show that the social networks representing copier--role-model relationships are centralized, suggesting that ``this degree of centralization is consistent with the prediction that people substantially share notions about who is a good cultural model (network centrality), but that individuals' model selections are influenced by multiple factors.'' 
 
-\citet{fijian_social_bias} researched Fijian villages, looking for evidence of social learning biases and their origins. They mention that:
-\begin{quote}
-evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information.
-\end{quote}
-Their goal is to bridge from the laboratory to the field by examining if and how these biases emerge in a small-scale society.
-During their research they found that:
-\begin{quote}
-Fijian villagers (ages 10 and up) are biased to learn from others perceived as more successful/knowledgeable, both within and across domains (prestige effects).
-\end{quote}
-Their research shows promising evidence for our prestige model, suggesting that copying from others who are \textit{perceived} as successful, rather than actually are successful. In their paper, they show that the social networks representing copier-role-model relationships are centralized, suggesting:
-\begin{quote}
-This degree of centralization is consistent with the prediction that people substantially share notions about who is a good cultural model (network centrality), but that individuals’ model selections are influenced by multiple factors.
-\end{quote}
-We see here support for both our trait and our influence bias in their data.
+We can also find prestige bias in more modern domains such as western medicine.
+\citet{medical_prestige} present a specific and important effect of prestige: its significance for medical specialties and diseases.
+They examined literature from 1950 to 2005 regarding the effects of prestige on medicinal practices. They found that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, while medicine with opposite characteristics had low levels of prestige. % TODO I dont understand - what is accorded prestige here? people or ... what?
+They have concluded that such differences in prestige may bear consequences for actual priority setting in healthcare systems. They found that surgery counts as the most prestigious specialty, while psychiatry is the less prestigious. In addition, doctors tend to rank practices that require more time to master as more prestigious, while other procedures that are considered easier to master are less prestigious. 
+This means that there may be very important practices that are neglected due to prestige bias.
 
-Aside from children's learning biases and small villages in a relatively primitive population, we can see prestige in more advanced domains as well, like western medicine.\citet{medical_prestige} present a specific and important effect of prestige - its significance for medical specialties and diseases.
-They examined literature from 1950 to 2005 regarding the effects of prestige on medicinal practices. They discovered that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, while medicine with opposite characteristics had low levels of prestige. They have concluded that such differences in prestige bear consequences for actual priority setting in healthcare systems. They discovered that surgery counts as the most prestigious specialty, while psychiatry is the less prestigious. In addition, doctors tend to rank practices that require more time to master as more prestigious, while other procedures that are considered \textit{easier} are less prestigious. Simply put, they found that the advance in technology and research was in accordance with the prestige rankings.
-This means that there may be very important practices that are neglected due to the prestige bias.
+Prestige bias can help to cheaply estimate and acquire knowledge, which may help an individual to survive and reproduce. However, it is not always the case, and there could be negative repercussions to this bias, such as invasion of maladaptive traits.
+\citet{best_of_k} mention that social learning not only takes the form of random copying of other individuals, but also involves learners' choice of what to learn and from whom to learn. They suggest a best-of-k model where an individual samples $k$ role-models and chooses the one he deems most "successful". They mentioned that a previous mathematical analysis has shown that it may sometimes result in maladaptive cultural evolution when the payoffs associated with cultural variants vary stochastically. In such a case, learners may be selectively disfavored and in the long run replaced by unbiased learners, who simply copy someone chosen at random. They developed new mathematical models that are simpler and mathematically tractable. They found that best-of-k learning, unlike unbiased learning, can facilitate the invasion of an on average inferior variant that sometimes gives a very high payoff. Our model, which includes influence bias, is consistent with this claim. When a maladaptive trait is "piggybacking" a role-model with high influence, said trait could spread in the population, as mentioned.
+In addition, they show that best-of-k learning can be stable against invasion by unbiased learning if social learning is sometimes combined with individual learning. 
+Our model only includes social learning, and not individual learning, but it could be interesting to combine it with individual learning and see how it affects the dynamics of the population.
 
-As we seen so far, prestige can explain many behaviors and evolution of cultural traits. It is a tool to cheaply estimate and acquire knowledge, which helps an individual to survive and breed. However, it is not always the case, and there could be negative repercussions to this bias, such as invasion of maladaptive traits.
+Prestige bias can also accelerate reversal of harmful traditions such as child marriage, open defecation, % TODO why "open defecation" ??
+and domestic violence. 
+\citet{harmful_traditions} suggest a \textit{spillover}  mechanism, in which an intervention affects a large enough group in a target population, so that others not included in the intervention also change their behavior.
+They found that there are individuals who act as \textit{agents}, who are often looked upon, and therefore they are ideal targets for interventions. This is similar to influential role-models in our model, where a prestigious individual will be copied more often, and will therefore spread his trait faster and wider in the population.
+They also suggest a way to use this phenomena to change existing traditions in a population. It is very clear however, that just as it can be used to end harmful traditions, the same agents could be used for starting harmful traditions.
 
-\citet{best_of_k} mention that social learning not only takes the form of random copying of other individuals, but also involves learners’ choice of what to learn and from whom to learn. They suggest a best-of-K model where an individual samples k role-models and choose the one he deems most "successful". They mentioned that a previous mathematical analysis has shown that it may sometimes result in maladaptive cultural evolution when the payoffs associated with cultural variants vary stochastically. In such a case, learners may be selectively disfavored and in the long run replaced by unbiased learners, who simply copy someone chosen at random. They develop new mathematical models that are simpler and mathematically tractable. They found that best-of-k learning, unlike unbiased learning, can facilitate the invasion of an on average inferior variant that sometimes gives a very high payoff. Our model, which includes influence bias, is consistent with that claim. When a maladaptive trait is "piggybacking" a role-model with high influence, said trait could spread in the population, as mentioned. In addition, they show that best-of-k learning can be stable against invasion by unbiased learning if social learning is sometimes combined with individual learning. Our model is based on copying based learning only, but it could be interesting to combine it with individual learning and see how it affects the dynamics of the population.
+% TODO I think this whole commented thing should be removed...
+%We also displayed similarities between this process and genetic transmission, while presenting differences between them, specifically selective biases such as influence and prestige. We also presented examples of good and bad usages of such biases. All of these are mainly presented as a parallel process to the natural selection process in regards to physical anatomy, or at least have an indirect effect on it. 
 
-We discussed prestige in depth, and provided several proofs for its existence in nature, humans, and even medicine. We saw it could aid invasion of maladaptive traits, or neglect of important medicinal specialities. But, it can also accelerate reversal of harmful traditions.
-Harmful traditions can be child marriage, open defecation, and domestic violence, to name a few. 
-\citet{harmful_traditions} suggest a mechanism called \textit{spillover}. By their definition, a spillover is when an intervention affect a large enough group in a target population, so that others not included in the intervention starts changing their behavior as well. In their research, they found that there are individuals who act as \textit{agents}, who are often looked upon, and therefore they are ideal targets for interventions. This is the same concept as our role-models, where a more prestigious individual will be copied more, therefore spreading his trait wider in the population. Their research support therefore in our assumption that there are social biases, conformist influence specifically. They also suggest a way to use this phenomena to change existing traditions in a population. It is very clear however, that just as it can be used to end harmful traditions, the same agents could be used for any negative way that comes to mind.
-
-Up until now, we showed that cultural transmission is a process that manifests in many species, with emphasis on humans. We also displayed similarities between this process and genetic transmission, while presenting differences between them, specifically selective biases such as influence and prestige. We also presented examples of good and bad usages of such biases. All of these are mainly presented as a parallel process to the natural selection process in regards to physical anatomy, or at least have an indirect effect on it. \citet{collective_brains} offer a take on prestige as a factor of human physical evolution directly. They present a concept called \textit{cultural brains} | brains that evolved primarily for the acquisition of adaptive knowledge.
-They build on the hypothesis of \citet{social_brains} that shows that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
-\citet{collective_brains} built a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. They later present their \textit{cumulative cultural brain} hypothesis, an approach which proposes that human brains have evolved with an ability and proclivity for selective, high fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
-In short, they suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e transmission biases, such as prestige.
+\citet{social_brains} hypothesized that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
+Following up in this, \citet{collective_brains} offered that prestige can directly affect human physical evolution. They present a concept called \textit{cultural brains}--brains that evolved primarily for the acquisition of adaptive knowledge.
+They then develop a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. They later present their \textit{cumulative cultural brain} hypothesis, an approach which proposes that human brains have evolved with an ability and tendency for selective, high-fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
+They suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e. via transmission biases, such as prestige.
 
 \paragraph{Further work.}
-In this paper we described several models and processes, analyzed them, and discovered some interesting approximations and results. But even though, there's much more to research in the direction we took, which can help us better model, understand, and maybe even predict, human behavior, specifically in this era where social media is very accessible and informative.
-Specifically, a deeper analysis of the first model, where every copier chooses its $\alpha$, is preferred. It would be interesting to see the if the mean error value and the $\alpha$ are converging to specific values, and what they depend on.
-Following that, it is possible to relax some assumptions we took in our main model in order to find approximations for it - like homogeneous estimation error and success bias weight.
-Lastly, it would be interesting to analyze the continuous model, instead of its dichotomous version. As we've discussed it is probably a much more accurate model of cultural evolution.
+% TODO I think this commented out part can be remove: In this paper we described several models and processes, analyzed them, and discovered some interesting approximations and results. But even though, there's much more to research in the direction we took, which can help us better model, understand, and maybe even predict, human behavior, specifically in this era where social media is very accessible and informative.
+
+One path forward is mathematical analysis of the adaptive success-bias weight model, where every copier chooses its $\alpha$. It would be interesting to see the if the mean estimation error and the adaptive weight, $\alpha^*$, are converging to specific values, and how they are affected by the model parameters
+It might also possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
+Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
+
+% TODO add a 4-5 sentence "Conclusions" paragaph
 
 {\small
 \section*{Acknowledgements}
@@ -981,7 +994,7 @@ This work was supported in part by
 the Israel Science Foundation (YR 552/19),
 Minerva Stiftung Center for Lab Evolution (YR),
 and 
-John Templeton Foundation (YR 61809).
+the John Templeton Foundation (YR 61809).
 }
 
 \section*{References}
