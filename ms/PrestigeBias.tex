@@ -108,14 +108,14 @@ headheight=12pt
 	{\Large M.Sc. Program - Research Track \par}
 
 	\vspace{1.5cm}
-	{\Huge Cultural Evolutionary Dynamics with Success and Influence biases\par}
+	{\Huge Cultural Evolutionary Dynamics with Success and Influence Bias\par}
 	\vspace{1.5cm}
 	{\large by\par}
 	{\Large\bfseries Saar Egozi\par}
 	\vspace{1cm}
 	{\large Supervised by Dr. Yoav Ram\par}
 	{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel\par}
-	{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel \par}
+%	{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel \par}
 
 	\vspace{1cm}
 	{M.Sc. dissertation, submitted in partial fulfillment of the requirements\par}
@@ -385,9 +385,10 @@ We compare the distribution of number of copiers by plotting the histograms of b
 We used the average of the $1,000$ simulations to eliminate drift errors, as can be seen in \cref{fig:GBD}.
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/GBD_validation.pdf}
+    \includegraphics[width=0.7\linewidth]{../figures/final/GBD_validation.pdf}
   \caption{
-  \textbf{Numerical validation for the GBD approximation.}
+  % TODO same x and y label as fig 2A ?
+  \textbf{Numerical validation of the GBD approximation.}
   The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
   Here, population size, $N=2,000$; bias weight, $\alpha=0.1$; idea phenotype value, $\hat{A}=1$; role-model traits $\vec{A} \sim N(0,1)$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:GBD}
@@ -445,10 +446,11 @@ In addition, we tested the likelihood of the observed data to be drawn from the 
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/final/DM_validation.pdf}
   \caption{
-  \textbf{Goodness of fit of Dirichlet-Multinomial approximation to the model.}
-  The difference between the DM approximation distribution to observed model distribution (a) is very small. The DM approximation (orange) and the simulation results (blue) are almost indistinguishable.
-  The optimal negative log likelihood (b) is given when using the DM approximation (black vertical line), and is much better when compared to a shuffled vector of the DM distribution (blue bars).
-  Here, population size, $N=100$; number of distributions averaged, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; homogeneous success bias weight, $\alpha=0.5$.}	
+  \textbf{Numerical validation of the DM approximation.}
+  We performed computational "experiments" of the role-model choice process and compared them to the DM distribution. 
+  \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the experiments (blue) is very small. % TODO check this phrasing is correct
+  \textbf{(B)} The log-likelihood of the DM distribution for results of the experiments (black vertical line) is much higher compared to the log-likelihood of permutations of experiments (blue histogram).
+  Here, population size, $N=100$; number of experiments, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.}	
   \label{fig:DM_validation}
 \end{figure}
 
@@ -468,10 +470,11 @@ We found again that results of the DM approximation are similar to those from st
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/final/num_sims.pdf}
   \caption{
-  \textbf{Minimum number of simulations required to get a good approximation.}
-  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models. The approximated value (black) is given by equation \cref{eq:kimura_p}.
-  Markers for average value across simulations, error bars for 95\% confidence interval.
-  Here, population size, $N=1000$; bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success bias value, $\beta(A)=0.956$.}	
+  \textbf{DM Approximation precision as function of number of simulations.}
+  Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 DM simulations. % TODO right?
+  Both fluctuate around the analytic fixation probability approximation (black; \cref{eq:kimura_p}).
+  Markers are averages across simulations, error bars are 95\% confidence intervals.
+  Here, population size, $N=1000$; success-bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success-bias value, $\beta(A)=0.956$.}	
   \label{fig:num_sims}
 \end{figure}
 
@@ -479,8 +482,10 @@ We found again that results of the DM approximation are similar to those from st
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_mutation.pdf}
   \caption{
-  \textbf{Robustness of DM approximations to inclusion of estimation error.} Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high estimation error rate. Markers for average across simulations, error bars for 95\% confidence intervals.
-  5,000 simulations per data point; population size, $N=1000$; bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,x^2)$ where $x \in [10^{-7},10^{-1}]$.
+  \textbf{Robustness of DM approximations to success estimation error.}
+  Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
+  Markers are averages across simulations, error bars are 95\% confidence intervals.
+  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,x^2)$ where $x \in [10^{-7},10^{-1}]$. % TODO what is "x"? should it be \eta?
   }	
   \label{fig:hetro_error}
 \end{figure}
@@ -615,11 +620,11 @@ where $x$ is the initial frequency of the advantageous phenotype $\hat{A}$.
 Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citet[eq.~17]{kimura_average}.\\
 
 
-\begin{result}[Fixation time approximation]
+\begin{result}[Fixation time]
 \begin{equation}
 T = J_1 + \frac{1-u(x)}{u(x)}\cdot J_2,
 \end{equation}
-where, given $S=Ne(1-\beta)$ and $x=\frac{1}{N_e}$,
+where, given $S=N_e(1-\beta)$ and $x=\frac{1}{N_e}$,
 \begin{equation}
 u(x)=\frac{1-e^{-2Sx}}{1-e^{2S}}
 \end{equation}
@@ -638,33 +643,34 @@ T = \frac{1-\pi}{1-\beta}\int_0^x\frac{e^{2(1-\beta) \xi}-1}{\xi(1-\xi)}d\xi+ \f
 Note that these integrals cannot be solved in closed form, so we can only estimate them numerically.
 
 \paragraph{Numerical validation.}
-To validate our analysis we performed multiple simulations comparing our binary model with the classic Wright-Fisher model, using different $\alpha$ and $\beta$ each time, and using the corresponding values of $s=1-\beta$ and $N_e=\alpha N + (1-\alpha)$ for the Wright-Fisher simulations.
-
-We find see that the two models have similar dynamics, and both are well approximated the the approximations in \cref{eq:kimura_p,eq:kimura_t}.
+We compare our approximations (\cref{eq:kimura_p,eq:kimura_t}) with results of simulations of our dichotomous model using various $\alpha$ and $\beta$ values, as well as simulations of the Wright-Fisher model, using the effective selection coefficient, $s_e=1-\beta$, and effective population size, $N_e=\alpha N + (1-\alpha)$. 
+We find see that the two models have similar dynamics, and both are well approximated our approximations (\Cref{fig:var_alpha}).
 
 
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/final/kimura_var.pdf}
-  \caption{\textbf{Fixation probability and time approximation for varying bias weight and success coefficient.}
-  Fixation probability (\textbf{A}) and time (\textbf{B}) for varying bias weight on the bottom x-axis. The corresponds effective population size is on the top x-axis.
-  The approximation (black) fits DM simulations results (green) and Wright-Fisher simulation results (orange) when using \cref{eq:kimura_p}.
-  Fixation probability (\textbf{A}) is limited at approximately $2s$ (blue), as in the classic WF model.
-  Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for (\textbf{A,B}) and 75\% for (\textbf{C,D}).
-   Here, Population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.7$ (\textbf{A,B}), $A=a\cdot \hat{A}, a \in [0.01,0.99]$ (\textbf{C,D}); success coefficient, $1-\beta=s=0.044$ (\textbf{A,B}); bias weight, $\alpha=0.01$ (\textbf{C,D}).}
+  \caption{\textbf{Fixation probability and time in a constant environment.}
+  Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row. % TODO missing \beta in x labels of C and D ?
+  The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
+  Fixation probability (A) is bounded by $2s_e=2(1-\beta)$ (blue).
+  Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
+   Here, Population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.7$ (A and B), $A=a\cdot \hat{A}, a \in [0.01,0.99]$ (C and D); success coefficient, $1-\beta=s=0.044$ (A and B); success-bias weight, $\alpha=0.01$ (C and D).}
   \label{fig:var_alpha}
 \end{figure}
 
 
-After finding a good approximation for our model in a constant environment, when the favorable trait is always $\hat{A}$, we continued to find an approximation for our model in a changing environment. 
+\paragraph*{Changing environment}. After finding a good approximation in constant environment, where the favorable trait is always $\hat{A}$, we proceeded to find an approximation for a changing environment. 
 Following \citet{changeEnv}, we find the following expressions for the expectation and variance of the change in frequency between $t$ generations.\\
 
 \begin{result} [Drift and diffusion terms in a changing environment]\label{res:ch_expected}
 Let $x$ be the initial frequency of the invading phenotype and $X_t$ is the number of individuals with the phenotype at time $t$.
 Then,
 \begin{equation}\label{eq:ch_expected_and_var}
-E[X_t/N - x] \simeq x(1-x) S_t / N \;, 
+E[X_t/N - x] \simeq x(1-x) S_t / N_e \;, 
 \quad
-V(X_t/N-x) = V(X_t/N) \simeq x(1-x) t/N_e \;,
+\text{and}
+\quad
+V(X_t/N-x) \simeq  t x(1-x) / N_e \;,
 \end{equation}
 where $S_t=\sum\limits_{i=1}^{t} N (1-\beta_t)$.
 \end{result}
@@ -690,7 +696,7 @@ E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right]
 \end{split}
 \end{equation}
 
-We can now use the induction assumption of $V(\frac{X_t}{N})$ to get
+We can now use the induction assumption of $V\big(\frac{X_t}{N}\big)$ to get
 \begin{equation}
 \begin{split}
 E\left[\frac{X_t}{N}\left(1-\frac{X_t}{N}\right)\right] 
@@ -706,7 +712,7 @@ E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right]
 &\simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) - \frac{1}{N_e N}s_{t+1}tx(1-x) \;.
 \end{split}
 \end{equation}
-Now we omit $O(\frac{1}{Ne\cdot N})$ and get
+Now we omit $O\big(\frac{1}{Ne\cdot N}\big)$ and get
 \begin{equation}\label{eq:ch_2}
 E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right] \simeq \frac{1}{N}s_{t+1}\cdot E\left[\frac{X_t}{N}\right]\left(1-E\left[\frac{X_t}{N}\right]\right) \;.
 \end{equation}
@@ -721,7 +727,7 @@ so using the assumption we get
 \begin{equation}
 \begin{split}
 E\left[\frac{X_t}{N}\right] 
-&\simeq \frac{1}{N} S_t x(1-x)+x \\
+&\simeq \frac{1}{N} S_t x(1-x)+x \;, \\
 1 - E\left[\frac{X_t}{N}\right] 
 &\simeq 1- \frac{1}{N} S_t x(1-x)+x \;.
 \end{split}
@@ -734,7 +740,7 @@ E\left[\frac{X_{t+1}}{N}-\frac{X_t}{N}\right]
 &\simeq  \frac{1}{N}s_{t+1}\cdot x(1-x) \;,
 \end{split}
 \end{equation}
-after again omitting $O(\frac{1}{N^2})$ terms.
+after again omitting $O\big(\frac{1}{N^2}\big)$ terms.
 To conclude the proof, we note that
 \begin{equation}
 E\left[\frac{X_{t+1}}{N}-x\right] 
@@ -816,20 +822,23 @@ We suspect that when $\beta$ is too small, there will not be many cycles in the 
 For the $\beta$ values (0.65 and below), the fixation probability exceeds even the constant environment approximation (which is the upper limit). However, this is to be expected, because the diffusion-equation approximations assume weak selection (i.e., low selection coefficient $s$).
 
 
-When $k$ is the number of generations where the invading phenotype is advantageous, and $l$ when the original trait is, we found that for large $k$-to-$l$ ratio (while keeping constant total cycle length, $n=k+l=100$), the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:kimura_p}), see \Cref{fig:ch_env_alpha_beta} (C,D).
+When $k$ is the number of generations where the invading phenotype is advantageous, and $l$ when the original trait is, we found that for large $k$-to-$l$ ratio (while keeping constant total cycle length, $n=k+l=100$), the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:kimura_p}), see \Cref{fig:ch_env_alpha_beta}C and \Cref{fig:ch_env_alpha_beta}D.
 
 
 
 \begin{figure}[H]
+% TODO remove y label of B ? is it all fixation probability? do we have something for fixation time?
+% adds 1-beta to x label 
     \includegraphics[width=\linewidth]{../figures/final/ch_env.pdf}
-  \caption{\textbf{Sensitivity of fixation probability approximation in a changing environment to varying success coefficient and bias weight and robustness to varying ratios of cycles.}
-\textbf{(A)} When the bias weight, or effective population size varies, the approximation (blue; \cref{eq:ch_env}) fits simulation results (orange). 
-\textbf{(B)} When success bias is large ($1-\beta > 0.1$),  
-simulation results (orange) are underestimated by the approximation (blue; \cref{eq:ch_env}). With even larger success bias ($1-\beta > 0.35$), even the constant environment approximation (green; \cref{eq:kimura_p}) underestimate simulation results, likely because the diffusion equation approximation assumes weak selection.
-We can also see the robustness of the approximation to changes in cycle ratios (\textbf{C,D}): The approximation (blue) fits the simulations (orange) well for different sizes of the changing environment cycle, where $k$ is the number of generations where the bias is advantageous, and $l$ are the generations it is disadvantageous.
-When $k<l$ the approximation is good. When $k>l$, the approximation and the simulations are both very close to the constant environment approximation (green). 
-Markers show average of $10,000$ simulations, error bars show are 75\% \textbf{(A,C,D)} and 95\% \textbf{(B)} confidence intervals.
-  Here, population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.9$ (\textbf{A,B}), $A=0.8$ \textbf{(C,D)}; In \textbf{(A)} success bias/selection coefficient is: $1-\beta=s=0.005$; In \textbf{(B,C,D)} success bias weight is: $\alpha=0.1$.}
+  \caption{\textbf{Fixation probability in a changing environment.}
+\textbf{(A)} Fixation probability decreases with the the success-bias weight (bottom x-axis) and effective population size (top x-axis). The approximation (blue; \cref{eq:ch_env}) agrees with simulation results (orange). 
+\textbf{(B)} Fixation probability increases with the success coefficient, $\beta$.
+When success bias is large ($1-\beta > 0.1$),  
+simulation results (orange) are underestimated by the changing environment approximation (blue; \cref{eq:ch_env}). With even larger success bias ($1-\beta > 0.35$), even the constant environment approximation (green; \cref{eq:kimura_p}) slightly underestimates simulation results, likely because the diffusion equation approximation assumes weak "selection" .
+(\textbf{C,D}) The approximation (blue) is robust to changes in environmental cycle length, as it agrees with simulations (orange) for different sizes of the changing environment cycle, where $k$ and $l$ are the number of generations each trait value is under success bias. % TODO everywhere we say "beneficial" or "advantageous" we need to correct it, because there is no selection, it is under bias or favored by bias or something like that.
+When $k>l$, the approximation and the simulations are both very close to the constant environment approximation (green). % TODO because .... one sentence.
+Markers show average of $10,000$ simulations, error bars show 75\% (A, C, and D) and 95\% (B) confidence intervals.
+  Here, population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.9$ (A and B), $A=0.8$ (C and D); In (A), the success coefficient is: $1-\beta=s=0.005$; In (B, C, and D) the success-bias weight is $\alpha=0.1$.}
   \label{fig:ch_env_alpha_beta}
 \end{figure}
 
@@ -843,8 +852,8 @@ We ran simulations of the role-model choice process during a single generation i
 \end{equation}
 where $A_j$ is the trait of role-model $j$ and $K_j$ the number of copiers that already chose role-model $j$.
 
-We find that when copiers adapt their success-bias weight, it decreases with the number of copiers that have already chosen a role-model~(\cref{fig:influence_advantage}).
-Moreover, their estimation error is much lower compared to a constant success-bias weight, which gives roughly the same high estimation error to all copiers (compare \cref{fig:influence_advantage}b and c): in this example, the adaptive weight estimation error converges to $0.046$, whereas a constant weight gives values $>0.74$.
+We find that when copiers adapt their success-bias weight, it decreases with the number of copiers that have already chosen a role-model~(\Cref{fig:influence_advantage}).
+Moreover, their estimation error is much lower compared to a constant success-bias weight, which gives roughly the same high estimation error to all copiers (compare \Cref{fig:influence_advantage}B and C): in this example, the adaptive weight estimation error converges to $0.046$, whereas a constant weight gives values $>0.74$.
 
 
 \begin{figure}[H]
@@ -865,25 +874,28 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 \section*{Discussion}
 \paragraph{Summary.}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
-Some cultural traits or cultural role-models may be more likely to be copied due to transmission biases. 
-A common one is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
-However, it has been suggested \citep{complexityPaper} that because estimating success is hard, a more common bias is \textit{prestige bias}---a bias towards role-models perceived to be successful, portrayed by other traits or means.
+Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
+A common bias is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
+However, it has been suggested that because it is hard to estimate success, a more common bias is \textit{prestige bias}---a bias towards role-models perceived to be successful in other traits \citep{complexityPaper}. % TODO change ref to https://royalsocietypublishing.org/doi/10.1098/rstb.2010.0323
 
-Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias, which included both success and influence biases, where the latter is a bias towards role-models with many copiers.
-As shown in \cref{fig:influence_advantage}, given the option to choose the ratio of success and influence, copiers will minimize their estimation error, hence will copy the traits that are closer to the ideal phenotype. We see that throughout the choosing process, the estimation error decreases, and the success bias rate also decreases. This suggests that the later a copier gets to choose, the less he should rely on his own estimation, and more on previous choices.
-This behavior fits the intuitive thought - the more information you have, using others as an information source, the more informative your choice can be, therefore minimizing the distance from your choice of trait to the ideal one.
+Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias that includes both success and influence biases, where the latter is a bias towards role-models with many copiers. This is accomplished by a role-model choice process: each copier, in its turn, chooses a role-model, and that choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model. % TODO ref to the correct equation
 
-In addition, we see that the process of choosing itself is necessary, and when using a constant ratio ($\alpha$), the mean estimation error in the population is greater by a factor of $10$, even when using the $\alpha$ the population converged to when being able to choose it (\cref{fig:influence_advantage}).
-After we showing that choosing one's success bias weight is beneficial to the copier, we continued to create our models- continuous and dichotomous, that incorporated both success and influence. However, running simulations for a nested iterative model is costly, and analyzing such model mathematically is very hard. We therefor found approximations for the role-model choice process: the generalized binomial distribution (\cref{res:GBD}) and the Dirichlet-Multinomial distribution (\cref{cor:dirichlet}).
-To use approximate our model with the GBD distribution, we must assume homogeneous estimation error, $e$, and homogeneous success bias weight, $\alpha$. Both assumptions are necessary to this approximation, because it requires all copiers to be identical (order of copiers must not be a factor).
-For the DM approximation we can relax the assumption for $\alpha$, and allow a varying $\alpha_j$ for each role-model $j$. This means that a copier is still not able to choose a success bias weight for itself, and instead it is a characteristic of the role-model only.
-Using the DM approximation, because it is easier to analyze, we found equivalents for Kimura's equations, for our dichotomous model.
-Following \cref{res:selection_coef} we found an approximation for the fixation probability of the ideal trait, and an approximation for the time of fixation. These approximations hold only when the equivalent for the selection coefficient, in our model $1-\beta(A)$, is low (0.4 or lower). We also discovered that changing the success bias weight doesn't hurt the goodness of the approximations, and only affects the effective population size $N_e$.
-Once we found the equations for a constant environment, we moved on to a cyclic changing environment.
-Based on \cref{res:ch_expected}, we found the approximations for the fixation probability and time to fixation.
-We discovered that as in the constant environment, the effective population size doesn't affect the goodness of fit of the approximation. The success coefficient however, must be even lower than before for the approximation to fit. When the success coefficient is higher than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation. We believe the reason is the structure of the cycle.
+This resulted in a model with two "nested" stochastic process: the role-model choice process within generations, and the cultural-evolutionary process between generations. To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the generalized binomial distribution (GBD, \Cref{res:GBD}) and the Dirichlet-Multinomial distribution (DM, \Cref{cor:dirichlet}).
+The latter is especially useful, as it approximated the entire process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model, rather than the copier. % TODO check this is correct
+
+Analyzing the model with the DM approximation, we found approximations for the fixation probability and fixation time of a beneficial cultural trait in a constant environment.
+Our approximations are similar to Kimura's evolutionary-genetic approximations, such that (i) the difference between the resident and invading cultural trait values, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) increasing the relative weight of influence bias compared to success bias, $\alpha$, decreases the effective population size, $N_e$. % TODO ref to figure/result
+
+We also analyzed a cyclic changing environment in which the identity of the advantageous trait value switches after a fixed amount of generations.
+We found that as in the constant environment, the effective population size doesn't affect the goodness of fit of the approximation. The success coefficient however, must be even lower than before for the approximation to fit. When the success coefficient is higher than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation. We believe the reason is the structure of the cycle.
 Our proof and approximation in the changing environment are for a large amount of cycles, and when the success coefficient is too high, there might be very few cycles. Either the ideal trait is copied by enough copiers so that the influence is sufficient to negate the success bias when the cycle changes (and the beneficial trait becomes the maladaptive), or the opposite happens, and the ideal trait gets extinct before there were enough copiers that copied it.
 We then tried to change the ratio between the number of cycles where $\hat{A}$ is beneficial and maladaptive. We showed that the approximation fits well regardless of the ratio, but when the ratio of adaptive generations to maladaptive ones is very high, it is very similar to a constant environment model.
+
+We find that copiers can minimize their estimation error (i.e., copy trait values closer to the ideal value) by correctly balancing between success and influence biases (\Cref{fig:influence_advantage}).
+We find that throughout the role-model choice process, the estimation error decreases, and the success bias rate also decreases. This suggests that the later a copier makes its choice, the more it should rely on choices of previous copiers and the less it should rely on its own estimation.
+The rationale, then, is that the more information a copier has, e.g. by using others as an information source, the more informative and effective his choice can be.
+
+In addition, we find that the process of choosing itself is necessary, and when using a constant ratio ($\alpha$), the mean estimation error in the population is greater by a factor of $10$, even when using the $\alpha$ the population converged to when being able to choose it (\cref{fig:influence_advantage}).
 
 \paragraph{Prestige in the literature.}
 
