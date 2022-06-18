@@ -152,7 +152,7 @@ program of Efi Arazi School of Computer Science, Reichman University.
 
 \section*{Abstract}
 Copying role-models can be an efficient method for acquiring knowledge. A common bias when choosing a role-model to copy is success bias: copying whoever appears more successful. This bias depends on the performance of the role-model alone, with no other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, in which role-model choice is affected by the number of individuals that have already copied each potential role-model. We combine success and influence bias together to a ``prestige bias'' and analyze its effects on cultural-evolutionary dynamics using mathematical analysis and stochastic simulations. We find analytic approximations to our stochastic model, facilitating further mathematical analysis and reducing the computational complexity of simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
-We also find approximations to the fixation probability and the fixation time of an invading advantageous cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
+We also find approximations to the fixation probability and the fixation time of an invading favored (by bias) cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
 These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
 Influence bias also accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
 Our model may provide a good description of cultural transmission, 
@@ -387,7 +387,6 @@ We used the average of the $1,000$ simulations to eliminate drift errors, as can
 \begin{figure}[h]
     \includegraphics[width=0.7\linewidth]{../figures/final/GBD_validation.pdf}
   \caption{
-  % TODO same x and y label as fig 2A ?
   \textbf{Numerical validation of the GBD approximation.}
   The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
   Here, population size, $N=2,000$; bias weight, $\alpha=0.1$; idea phenotype value, $\hat{A}=1$; role-model traits $\vec{A} \sim N(0,1)$; success bias value, $\beta(A)=0.956$.}	
@@ -448,14 +447,14 @@ In addition, we tested the likelihood of the observed data to be drawn from the 
   \caption{
   \textbf{Numerical validation of the DM approximation.}
   We performed computational "experiments" of the role-model choice process and compared them to the DM distribution. 
-  \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the experiments (blue) is very small. % TODO check this phrasing is correct
-  \textbf{(B)} The log-likelihood of the DM distribution for results of the experiments (black vertical line) is much higher compared to the log-likelihood of permutations of experiments (blue histogram).
+  \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the experiments (blue) is very small. 
+  \textbf{(B)} The log-likelihood of the DM distribution for results of the experiments (red vertical line) is much higher compared to the log-likelihood of permutations of experiments (blue histogram).
   Here, population size, $N=100$; number of experiments, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.}	
   \label{fig:DM_validation}
 \end{figure}
 
 
-Next, we examined the fixation probability and fixation time of an advantageous phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DM approximation.
+Next, we examined the fixation probability and fixation time of a favored phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DM approximation.
 We find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1,000$ (\Cref{fig:num_sims}).
 Next, we examined the robustness of the DM approximation to relaxing the approximation assumptions.
 First, we relaxed our assumption of no estimation error $e$.
@@ -471,7 +470,7 @@ We found again that results of the DM approximation are similar to those from st
     \includegraphics[width=\linewidth]{../figures/final/num_sims.pdf}
   \caption{
   \textbf{DM Approximation precision as function of number of simulations.}
-  Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 DM simulations. % TODO right?
+  Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 or more simulations.
   Both fluctuate around the analytic fixation probability approximation (black; \cref{eq:kimura_p}).
   Markers are averages across simulations, error bars are 95\% confidence intervals.
   Here, population size, $N=1000$; success-bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success-bias value, $\beta(A)=0.956$.}	
@@ -485,7 +484,7 @@ We found again that results of the DM approximation are similar to those from st
   \textbf{Robustness of DM approximations to success estimation error.}
   Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
   Markers are averages across simulations, error bars are 95\% confidence intervals.
-  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,x^2)$ where $x \in [10^{-7},10^{-1}]$. % TODO what is "x"? should it be \eta?
+  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,\eta^2)$ where $\eta \in [10^{-7},10^{-1}]$.
   }	
   \label{fig:hetro_error}
 \end{figure}
@@ -504,7 +503,7 @@ We found again that results of the DM approximation are similar to those from st
 \subsection*{Fixation probability and time}
 
 After finding that the DM distribution is a good approximation of the (within-generation) role-model choice process, we turn our attention to the (between-generation) evolutionary dynamics.
-We focus on the fixation probability and fixation time of an advantageous phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
+We focus on the fixation probability and fixation time of a favored phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
 We are mainly interested in the effect of the bias weight, $\alpha$, which determines the relative effect of success and influence on prestige bias, given by \cref{eq:prestige}.
 For simplicity, we do not include role-model estimation error in this analysis, i.e $e_i=0$ for every copier $i$.
 As shown above, transmission in our model is approximately DM distributed (\cref{cor:dirichlet} and \cref{eq:copier_choose}).
@@ -614,7 +613,7 @@ The fixation probability is approximately
 \begin{equation}\label{eq:kimura_p}
 \pi = \frac{1-e^{-2(1-\beta)N_e x}}{1-e^{-2(1-\beta)N_e}}
 \end{equation}
-where $x$ is the initial frequency of the advantageous phenotype $\hat{A}$.
+where $x$ is the initial frequency of the favored phenotype $\hat{A}$.
 \end{result}
 
 Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citet[eq.~17]{kimura_average}.\\
@@ -650,7 +649,7 @@ We find see that the two models have similar dynamics, and both are well approxi
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{../figures/final/kimura_var.pdf}
   \caption{\textbf{Fixation probability and time in a constant environment.}
-  Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row. % TODO missing \beta in x labels of C and D ?
+  Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row.
   The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
   Fixation probability (A) is bounded by $2s_e=2(1-\beta)$ (blue).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
@@ -815,28 +814,35 @@ where $\frac{S_n}{n} = \frac{k-l}{k+l}(1-\beta)$ and $n=k+l$.
 That is, we use the average selection coefficient during a cycle of $k+l$ generations as the selection coefficient \cref{eq:kimura_p}.
 
 \paragraph{Numerical validation.}
-Comparing our approximation (\cref{eq:ch_env}) to numerical simulations, we find that the approximation fits simulations results well for variable bias weights, $\alpha$, which corresponds to the effective population size (\Cref{fig:ch_env_alpha_beta}A).
+Comparing our approximation, \cref{eq:ch_env} to numerical simulations, we find that the approximation fits simulations results well for variable bias weights, $\alpha$, which corresponds to the effective population size (\Cref{fig:ch_env_alpha_beta}A).
 
 However, the approximation is more sensitive to the value of the success bias coefficient $\beta$ (\Cref{fig:ch_env_alpha_beta}B).
 We suspect that when $\beta$ is too small, there will not be many cycles in the simulations, because either the population reaches a high frequency of the fitter phenotype after just a few cycles, or the fitter phenotype becomes extinct very quickly. 
 For the $\beta$ values (0.65 and below), the fixation probability exceeds even the constant environment approximation (which is the upper limit). However, this is to be expected, because the diffusion-equation approximations assume weak selection (i.e., low selection coefficient $s$).
 
 
-When $k$ is the number of generations where the invading phenotype is advantageous, and $l$ when the original trait is, we found that for large $k$-to-$l$ ratio (while keeping constant total cycle length, $n=k+l=100$), the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:kimura_p}), see \Cref{fig:ch_env_alpha_beta}C and \Cref{fig:ch_env_alpha_beta}D.
+When $k$ is the number of generations where the invading phenotype is favored, and $l$ when the original trait is, we found that for large $k$-to-$l$ ratio (while keeping constant total cycle length, $n=k+l=100$), the changing environment approximation, \cref{eq:ch_env} converges to the constant environment approximation, \cref{eq:kimura_p}, see \Cref{fig:ch_env_alpha_beta}C and \Cref{fig:ch_env_alpha_beta}D.
+
+\begin{result}
+The effective population size doesn't affect the goodness of fit of the approximation. The success coefficient however, must be even lower than before for the approximation to fit.
+\end{result}
+The proof is seen in \Cref{fig:ch_env_alpha_beta}A,B. The approximation follows the trend of the simulation results for all $\alpha$ values.
+When increasing the success coefficient to more than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation. We believe the reason is the structure of the cycle.
+Our proof and approximation in the changing environment are for a large amount of cycles, and when the success coefficient is too high, there might be very few cycles. Either the ideal trait is copied by enough copiers so that the influence is sufficient to negate the success bias when the cycle changes (and the trait favored by the bias becomes the disfavored), or the opposite happens, and the ideal trait gets extinct before there were enough copiers that copied it.
+We then tried to change the ratio between the number of cycles where $\hat{A}$ is favored and disfavored. We showed that the approximation fits well regardless of the ratio, but when the ratio of favored generations to disfavored ones is very high, it is very similar to a constant environment model.
+
 
 
 
 \begin{figure}[H]
-% TODO remove y label of B ? is it all fixation probability? do we have something for fixation time?
-% adds 1-beta to x label 
     \includegraphics[width=\linewidth]{../figures/final/ch_env.pdf}
   \caption{\textbf{Fixation probability in a changing environment.}
 \textbf{(A)} Fixation probability decreases with the the success-bias weight (bottom x-axis) and effective population size (top x-axis). The approximation (blue; \cref{eq:ch_env}) agrees with simulation results (orange). 
 \textbf{(B)} Fixation probability increases with the success coefficient, $\beta$.
 When success bias is large ($1-\beta > 0.1$),  
 simulation results (orange) are underestimated by the changing environment approximation (blue; \cref{eq:ch_env}). With even larger success bias ($1-\beta > 0.35$), even the constant environment approximation (green; \cref{eq:kimura_p}) slightly underestimates simulation results, likely because the diffusion equation approximation assumes weak "selection" .
-(\textbf{C,D}) The approximation (blue) is robust to changes in environmental cycle length, as it agrees with simulations (orange) for different sizes of the changing environment cycle, where $k$ and $l$ are the number of generations each trait value is under success bias. % TODO everywhere we say "beneficial" or "advantageous" we need to correct it, because there is no selection, it is under bias or favored by bias or something like that.
-When $k>l$, the approximation and the simulations are both very close to the constant environment approximation (green). % TODO because .... one sentence.
+(\textbf{C,D}) The approximation (blue) is robust to changes in environmental cycle length, as it agrees with simulations (orange) for different sizes of the changing environment cycle, where $k$ and $l$ are the number of generations each trait value is under success bias. 
+When $k>l$, the approximation and the simulations are both very close to the constant environment approximation (green), because the more generations the rare phenotype is favored, the more similar it is to the constant environment model, where it is always favored by the success bias.
 Markers show average of $10,000$ simulations, error bars show 75\% (A, C, and D) and 95\% (B) confidence intervals.
   Here, population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.9$ (A and B), $A=0.8$ (C and D); In (A), the success coefficient is: $1-\beta=s=0.005$; In (B, C, and D) the success-bias weight is $\alpha=0.1$.}
   \label{fig:ch_env_alpha_beta}
@@ -860,8 +866,8 @@ Moreover, their estimation error is much lower compared to a constant success-bi
     \includegraphics[width=\linewidth]{../figures/final/choose_bias.pdf}
   \caption{
   \textbf{Advantage of an adaptive success-bias weight.}
-  Both success-bias weight $\alpha$ (\textbf{a}) and estimation error (\textbf{b}) decrease during the role-model choosing process, demonstrating that influence is becomes more advantageous as more copiers have made their choice.
-However, when $\alpha$ is homogeneous, the mean estimation error doesn't decrease, regardless of $\alpha$ or $\eta$.
+  Both success-bias weight $\alpha$ (\textbf{A}) and estimation error (\textbf{B}) decrease during the role-model choosing process, demonstrating that influence becomes more favored as more copiers have made their choice.
+However, when $\alpha$ is homogeneous (\textbf{C}), the mean estimation error doesn't decrease, regardless of $\alpha$ or $\eta$.
 The mean estimation error in the homogeneous $\alpha$ model is larger by a factor of $10$ than the adaptive $\alpha$ model.
 Here, population size $N=200$; estimation error is normally distributed $e \sim N(0,\eta^2)$ with standard deviation $\eta=$0.0001 (blue), 0.001 (orange), 0.01 (green), plots are average of $300$ simulations.}	
   \label{fig:influence_advantage}
@@ -872,27 +878,22 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section*{Discussion}
-%\paragraph{Summary.}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
 Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
 A common bias is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
-However, it has been suggested that because it is hard to estimate success, a more common bias is \textit{prestige bias}---a bias towards role-models perceived to be successful in other traits \citep{complexityPaper}. % TODO change ref to https://royalsocietypublishing.org/doi/10.1098/rstb.2010.0323
+However, it has been suggested that because it is hard to estimate success, a more common bias is \textit{prestige bias}---a bias towards role-models perceived to be successful in other traits \citep{fijian_social_bias}.
 
-Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias that includes both success and influence biases, where the latter is a bias towards role-models with many copiers. This is accomplished by a role-model choice process: each copier, in its turn, chooses a role-model, and that choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model. % TODO ref to the correct equation
+Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias that includes both success and influence biases, where the latter is a bias towards role-models with many copiers. This is accomplished by a role-model choice process: each copier, in its turn, chooses a role-model, and that choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model, \cref{eq:prestige}. 
 
 This resulted in a model with two "nested" stochastic process: the role-model choice process within generations, and the cultural-evolutionary process between generations. To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the generalized binomial distribution (GBD, \Cref{res:GBD}) and the Dirichlet-Multinomial distribution (DM, \Cref{cor:dirichlet}).
-The latter is especially useful, as it approximated the entire process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model, rather than the copier. % TODO check this is correct
+The latter is especially useful, as it approximated the entire process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model, rather than the copier.
 
-Analyzing the model with the DM approximation, we found approximations for the fixation probability and fixation time of a beneficial cultural trait in a constant environment.
-Our approximations are similar to Kimura's evolutionary-genetic approximations, such that (i) the difference between the resident and invading cultural trait values, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) increasing the relative weight of influence bias compared to success bias, $\alpha$, decreases the effective population size, $N_e$. % TODO ref to figure/result
+Analyzing the model with the DM approximation, we found approximations for the fixation probability and fixation time of a favored by bias cultural trait in a constant environment.
+Our approximations are similar to Kimura's evolutionary-genetic approximations, such that (i) the difference between the resident and invading cultural trait values, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) increasing the relative weight of influence bias compared to success bias, $\alpha$, decreases the effective population size, $N_e$, \Cref{fig:var_alpha}.
 
-We also analyzed a cyclic changing environment in which the identity of the success-biased trait switches after a fixed amount of generations.
-%% TODO move this to results
-We found that as in the constant environment, the effective population size doesn't affect the goodness of fit of the approximation. The success coefficient however, must be even lower than before for the approximation to fit. When the success coefficient is higher than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation. We believe the reason is the structure of the cycle.
-Our proof and approximation in the changing environment are for a large amount of cycles, and when the success coefficient is too high, there might be very few cycles. Either the ideal trait is copied by enough copiers so that the influence is sufficient to negate the success bias when the cycle changes (and the beneficial trait becomes the maladaptive), or the opposite happens, and the ideal trait gets extinct before there were enough copiers that copied it.
-We then tried to change the ratio between the number of cycles where $\hat{A}$ is beneficial and maladaptive. We showed that the approximation fits well regardless of the ratio, but when the ratio of adaptive generations to maladaptive ones is very high, it is very similar to a constant environment model.
-%%% 
-% instead, write here how the model parameters affect fixation probability
+We also analyzed a cyclic changing environment in which the identity of the success-biased trait switches after a fixed amount of generations, \Cref{fig:ch_env_alpha_beta}.
+We see that similarly to the constant environment approximation, a change in the success-bias weight has no negative effects on the goodness of fit to the simulation results.
+We also showed that this approximation is more sensitive to the success coefficient value than the approximation of the constant environment, and a lower value is required to have a good fit. Changing the ratio between the cycles that have a bias that favors the rare phenotype and the ones that disfavors it, doesn't affect the goodness of fit. 
 
 We also examined a scenario in which copiers can adapt their success-weight bias, $\alpha$ to minimize their copying error, i.e., copy trait values closer to the ideal value.
 We found that as the role-model choice process proceeds (that is, more copiers make their choices), both the success-bias weight (adapted by copiers) and the estimation error decrease. 
@@ -903,59 +904,40 @@ The rationale, then, is that the more information a copier has, e.g. by using ot
 \paragraph{Prestige in the literature.}
 
 According to \citet{animal_leadership}, there are two main approaches to group decision-making in nature: leadership and consensus.
-Leaders may lead the group when traveling, decide on a nesting site, or choose foraging patches. They found that leadership is mostly observed when there are a lot of connections in the social network of the group, and when there are individuals that present leadership behavior.
 Leaders would usually be high-ranking members of the group: elders, individuals with many kin relations, or individuals possessing other dominant traits.
-When no individual posseses such traits, or when there are not enough connections and relations in the social network, decisions are more likely to be made by consensus.
-Leaders may carry selection costs, e.g. due to higher predation risk, poisoning when exploring new foraging patches.
-In some cases, the leader may be the hungriest or the weakest individual, while the others would prefer to follow the leader and minimizing their risks and costs.
-However, leadership may also carry selection benefits. For example, given the route to the foraging site was successful, the leader and his closest followers would gain most or the best of the food, whereas in consensus decision making, the food would be shared more equally. Or, sexual selection may also provide a selection benefit advantage to leaders, who might gain more sexual partners due to their leadership of the group. \citet{animal_leadership} describe benefits for the closest associates of a dominant baboon, such as protection from predators. 
+\citet{animal_leadership} describe benefits for the closest associates of a dominant baboon, such as protection from predators. 
 In some species, like the females of \textit{Eulemur fulvus rufus} (Red lemur), leaders may arise due to nutritional needs, and not due to possessing superior traits \citep{lemurs}. 
-% TODO this is a nice paragraph, but it is unclear how it relates to your work. does your model results have something to say about leadership? or what? if this is just an introduction so that you can then present Van Vugt and Smith, then it is too long.
-
 In humans, leadership also has its costs and benefits. Leaders can make decisions that would most benefit them and their closest followers, while still maintaining group cohesion. 
-However, wrong decision making that harms the group could result in harm. % TODO you have double harm here, rephrase it.
-In modern society, many humans strive for prestigious positions, as they may reap rewards greater than the risk and costs to achieve them, or due to individual personality and pressure or education from the family. % again, how is this relevant? also I would add reference to at least some of your claims -
+However, wrong decision making that harms the group could result in negative effects for the leader. 
+In modern society, many humans strive for prestigious positions, as they may reap rewards greater than the risk and costs to achieve them, or due to individual personality and pressure or education from the family. 
 
-\citet{dual_leadership} suggest a different view of leadership. They note that most discussions assume there is one type of leadership, 
-as seen above, and so they differ in their definitions. % TODO this sentence (on this line) in unclear
-\citet{dual_leadership} suggest a way to solve said contradiction % TODO what contradiction? I dont understand
- by defining two types of leaderships: prestige-based and dominance-based.
-They present classical views of leaderships by Confucius and Machiavelli. Confucius views leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
-In contrast, Machiavelli views leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence. % TODO but this is different from our influence model right?
-\citet{dual_leadership} suggest that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic processes of leadership. 
-Our model does not reflect these leadership styles, but several adjustments could be made in order to match it, such as assuming there is a correlation between phenotype to leadership style. 
-The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing. % TODO is this paragraph is a suggestion for followup work? if so, you could make it shorter - remove the first sentences about contradictions, and directly present Confucius and Machiavelli, and so on. Also this should be in a latter part of the Discussion under the name "Future work" or something like that.
-
-% TODO it seems that the next paragraph is the one that really corresponds to ours, so it should be emphasized earlier, I think
-\citet{prestige_evolution} support said claim that there are two types of leadership, and also define the two as prestige-based and dominance-based leadership types.
+\citet{prestige_evolution} suggest that there are two types of leadership, and also define the two as prestige-based and dominance-based leadership types.
 In the latter, social status is acquired through using aggression, intimidation and violence. It is also more common than prestige in non-human animals.
 Their definition of prestige seems to overlap with ours. They suggest prestige is composed of estimation in the eyes of other people (similar to our success bias) and commanding position in people's minds, i.e, the number of followers others people think one has, which they define as \textit{influence}, similar to our influence bias.
-\citet{prestige_evolution} show that prestige evolved via natural selection as an efficient process to extract reproductive benefit from the flow of socially transmitted information. % TODO how do they show this? math? simulations? experiments?
-Simply put, prestige naturally evolves when social learning already exists to save costs of individual learning. % TODO Are you sure ?
-It could be interesting in the future to expand our model using this idea: observing the copier trait of \textit{evaluation}, rather than only observing the evolution of the trait copied. % TODO unclear
-\citet{prestige_evolution} suggest that the most skilled role-models will, on average, end up with most copiers. Their research, definitions, and results, is consistent with ours. % TODO how so?
+\citet{prestige_evolution} show that prestige evolved via natural selection as an efficient process to extract reproductive benefit from the flow of socially transmitted information. They back up their claims by creating testable predictions and using evidence from the literature and experiments of social sciences.
+Simply put, prestige can naturally evolve when social learning already exists to save costs of individual learning. 
 
-Furthermore, according to \citet{no_replication}, the process of cultural evolution doesn't require replication of representations.% TODO what is "representation"?
+Furthermore, according to \citet{no_replication}, the process of cultural evolution doesn't require accurate replication of viewed cultural traits, addressed as "representations" in their paper.
 They base their assumption on three claims: mental representations are non-discrete, cultural transmission is highly inaccurate, and mental representations are not replicated, but rather are `reconstructed' through an inferential process that is strongly affected by cognitive `attractors.' They describe three different models to support their points.
 We see a high similarity between their model and ours. Like them, we treat the cultural trait as non-discrete (in the main model, before simplifying it to facilitate analysis). We also assume error in estimation, such that copiers do not precisely replicate their role-models, but rather reconstruct them to create a different trait, which is their representation of the role-model's trait. In addition, the inferential process that they describe as strongly affected by cognitive attractors matches our influence bias.
 
-% TODO maybe this and the following should be grouped under a heading like "empirical evidence of prestige bias"
+\paragraph{Empirical evidence of prestige bias}
 \citet{prestige_cultural_learning} tested the existence of prestige in young children. 
 They report the first direct tests in children that suggest the existence of "prestige bias", defined as the tendency to learn from individuals to whom others have preferentially attended, learned or deferred.
-Their definition of prestige is similar to our influence bias. They showed that the odds of 3-4 years-old children learning from an adult model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of their learning from a model whom bystanders ignored.
-They also note that prestige effects are domain-sensitive: they found that prestigious models were attended more when demonstrating artifact-use, but not as much as when presenting food preferences. % TODO confusing phrasing, try again?
-This lead \citet{prestige_cultural_learning} to suggest that when the trait is costly to learn individually, prestige will have a higher effect. % TODO higher effect? or will be used more often?
+Their definition of prestige is similar to our influence bias. They showed that the odds of 3-4 years-old children learning from an adult role-model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of their learning from a role-models whom bystanders ignored.
+They also note that prestige effects are domain-sensitive: they found that prestigious role-models were attended more when demonstrating artifact-use. Meanwhile, role-models presenting food preferences had less attendants, suggesting that the domain itself (artifact-use vs. food preference) can affect the attendance, hence the prestige of the role-model.
+This lead \citet{prestige_cultural_learning} to suggest that when the trait is costly to learn individually, prestige will have a stronger bias.
 It would be interesting to include costs in our model to try and observe these effects and dynamics in a large population.
 
-\citet{fijian_social_bias} wrote that ``evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information.'' 
+\citet{fijian_social_bias} wrote that evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information. 
 Thus, they studied Fijian villages to examine if and how such biases emerge in a small-scale society.
-They found that ``Fijian villagers (ages 10 and up) are biased to learn from others perceived as more successful/knowledgeable, both within and across domains (prestige effects).'' % TODO it's better to rephrase in your words. (you can have one quote, but too is a bit much)
-Their research thus suggests that copying from those perceived as successful, rather than actually are successful. % TODO this sentence is not finished?
-They show that the social networks representing copier--role-model relationships are centralized, suggesting that ``this degree of centralization is consistent with the prediction that people substantially share notions about who is a good cultural model (network centrality), but that individuals' model selections are influenced by multiple factors.'' 
+They found that Fijian villagers are more likely to learn from role-models perceived as more successful/knowledgeable, both within and across domains.
+Their research thus suggests that copying from those perceived as successful, rather than actually are successful, is a common phenomena. 
+They show that the social networks representing copier--role-model relationships are centralized, suggesting that it is consistent with the prediction that people substantially share notions about who is a good cultural model, but that individuals' role-model selections are influenced by multiple factors.
 
 We can also find prestige bias in more modern domains such as western medicine.
 \citet{medical_prestige} present a specific and important effect of prestige: its significance for medical specialties and diseases.
-They examined literature from 1950 to 2005 regarding the effects of prestige on medicinal practices. They found that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, while medicine with opposite characteristics had low levels of prestige. % TODO I dont understand - what is accorded prestige here? people or ... what?
+They examined literature from 1950 to 2005 regarding the effects of prestige on medicinal practices. They found that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were medicine and practices accorded high levels of prestige, while medicine with opposite characteristics had low levels of prestige. 
 They have concluded that such differences in prestige may bear consequences for actual priority setting in healthcare systems. They found that surgery counts as the most prestigious specialty, while psychiatry is the less prestigious. In addition, doctors tend to rank practices that require more time to master as more prestigious, while other procedures that are considered easier to master are less prestigious. 
 This means that there may be very important practices that are neglected due to prestige bias.
 
@@ -964,14 +946,11 @@ Prestige bias can help to cheaply estimate and acquire knowledge, which may help
 In addition, they show that best-of-k learning can be stable against invasion by unbiased learning if social learning is sometimes combined with individual learning. 
 Our model only includes social learning, and not individual learning, but it could be interesting to combine it with individual learning and see how it affects the dynamics of the population.
 
-Prestige bias can also accelerate reversal of harmful traditions such as child marriage, open defecation, % TODO why "open defecation" ??
-and domestic violence. 
+Prestige bias can also accelerate reversal of harmful traditions such as child marriage and domestic violence. 
 \citet{harmful_traditions} suggest a \textit{spillover}  mechanism, in which an intervention affects a large enough group in a target population, so that others not included in the intervention also change their behavior.
 They found that there are individuals who act as \textit{agents}, who are often looked upon, and therefore they are ideal targets for interventions. This is similar to influential role-models in our model, where a prestigious individual will be copied more often, and will therefore spread his trait faster and wider in the population.
 They also suggest a way to use this phenomena to change existing traditions in a population. It is very clear however, that just as it can be used to end harmful traditions, the same agents could be used for starting harmful traditions.
 
-% TODO I think this whole commented thing should be removed...
-%We also displayed similarities between this process and genetic transmission, while presenting differences between them, specifically selective biases such as influence and prestige. We also presented examples of good and bad usages of such biases. All of these are mainly presented as a parallel process to the natural selection process in regards to physical anatomy, or at least have an indirect effect on it. 
 
 \citet{social_brains} hypothesized that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
 Following up in this, \citet{collective_brains} offered that prestige can directly affect human physical evolution. They present a concept called \textit{cultural brains}--brains that evolved primarily for the acquisition of adaptive knowledge.
@@ -979,13 +958,20 @@ They then develop a model that predicts a strong relationship between brain size
 They suggest that some of the reasons for the extreme increase in brain size in humans, are the ability to "cheaply" acquire adaptive knowledge, i.e. via transmission biases, such as prestige.
 
 \paragraph{Further work.}
-% TODO I think this commented out part can be remove: In this paper we described several models and processes, analyzed them, and discovered some interesting approximations and results. But even though, there's much more to research in the direction we took, which can help us better model, understand, and maybe even predict, human behavior, specifically in this era where social media is very accessible and informative.
-
 One path forward is mathematical analysis of the adaptive success-bias weight model, where every copier chooses its $\alpha$. It would be interesting to see the if the mean estimation error and the adaptive weight, $\alpha^*$, are converging to specific values, and how they are affected by the model parameters
 It might also possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
 Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
 
-% TODO add a 4-5 sentence "Conclusions" paragaph
+Another is to expand our model to account for two types of prestige/leadership, suggested by \citet{dual_leadership}.
+They present classical views of leaderships by Confucius and Machiavelli. Confucius views leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
+In contrast, Machiavelli views leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence. 
+\citet{dual_leadership} suggest that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic processes of leadership. 
+Our model does not reflect these leadership styles, but several adjustments could be made in order to match it, such as assuming there is a correlation between phenotype to leadership style. 
+The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
+
+\paragraph{Conclusions.}
+In this paper we presented numerous reasons and sources to support the existence of biases in cultural transmission of traits. We presented the most known and addressed bias, the success bias, and added another bias, which is addressed a lot less, the influence bias. We believe the combination of these biases is a strong driving force in cultural evolution. We see a clear advantage when an individual can choose his ideal ratio between the two biases.
+We also showed that even when this ratio is constant and homogeneous in the population, it is affecting the effective population size. The higher the influence bias will be, the smaller the effective population size will become.
 
 {\small
 \section*{Acknowledgements}
