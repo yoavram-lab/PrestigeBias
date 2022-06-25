@@ -34,6 +34,9 @@ headheight=12pt
 \usepackage{wrapfig}
 \usepackage{pdfpages}
 \usepackage{authblk}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{cjhebrew}
 
 % unbreakable dashes
 \usepackage[shortcuts]{extdash}
@@ -150,7 +153,7 @@ program of Efi Arazi School of Computer Science, Reichman University.
 
 \pagebreak
 
-\section*{Abstract}
+\section{Abstract}
 Copying role-models can be an efficient method for acquiring knowledge. A common bias when choosing a role-model to copy is success bias: copying whoever appears more successful. This bias depends on the performance of the role-model alone, with no other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, in which role-model choice is affected by the number of individuals that have already copied each potential role-model. We combine success and influence bias together to a ``prestige bias'' and analyze its effects on cultural-evolutionary dynamics using mathematical analysis and stochastic simulations. We find analytic approximations to our stochastic model, facilitating further mathematical analysis and reducing the computational complexity of simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
 We also find approximations to the fixation probability and the fixation time of an invading favored (by bias) cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
 These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
@@ -162,7 +165,11 @@ Further work is needed to test if this model could predict various phenomena in 
 \blfootnote{This work is in preparation for submission to a high-impact journal.}
 \pagebreak
 
-\section*{Introduction}
+\tableofcontents
+
+\pagebreak
+
+\section{Introduction}
 
 \paragraph{Cultural transmission.}
 In cultural transmission, individuals transmit cultural traits (i.e., behavior, beliefs, norms) to one another, typically via learning and demonstrating \citep{transmissionVectorsBook}.
@@ -217,13 +224,13 @@ This bias depends on the state of a role-model rather than on its trait, in cont
  We define a model of cultural transmission with prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Models and methods}
+\section{Models and methods}
 
 We begin with a continuous trait model with indirect bias suggested by \citet{evolutionBook}, develop an extension with influence bias, and then develop a model with a dichotomous trait.
 We implemented our stochastic models and approximations, performed statistical analyses, and produced figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
 
-\subsection*{Continuous trait}
+\subsection{Continuous trait}
 We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the trait and omitting the indirect trait in order to reduce model complexity. 
 We consider a population of $N$ individuals, described by a single trait with a continuous value.
 Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright-Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
@@ -285,7 +292,7 @@ Here, the bias weight $\alpha_{ij}$ is a characteristic of the interaction of ro
 
 
 
-\subsection*{Dichotomous trait}
+\subsection{Dichotomous trait}
 To allow for mathematical analysis of the model, we introduce a simplified version where the trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
 All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
 In addition, we assume homogeneous $\alpha$ for simplicity and for easier mathematical analysis.
@@ -300,8 +307,8 @@ We prove this equation later, based on the proof of the Dirichlet-Multinomial ap
 Initially, we assume the population has a single individual with phenotype $\hat{A}$ and $N-1$ individuals with phenotype $A$. The rest of the details follow the continuous trait model.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Results}
-\subsection*{Approximations}
+\section{Results}
+\subsection{Approximations}
 Our model is defined by two nested stochastic processes. Change over multiple generations is described by the phenotype distribution at each generation, $\{\vec{A}(t)\}_t$. The transition from one generation to the next is described by the number of copiers each role-model has after $i$ copiers have chosen a role-model, $\{\vec{K}_i\}_{i=1}^N$.
 We emphasize that the models are nested: $\vec{A}(t+1)$ can be computed from $\vec{A}(t)$ by evaluating $\vec{K}_{N}$. However, the former requires iterating over \cref{eq:recurrence,eq:recPrestige}. Thus, we sought to find an equivalent stochastic process that has the same joint distribution as $\vec{K}_{N}$. 
 We found two such approximations, summarized here and explained in detail below. In both we assume either $\alpha_j$ is a trait of role-model $j$ only (contrary to $\alpha_{ij}$ that included the relation with copier $i$), or a completely homogeneous $\alpha$.
@@ -319,7 +326,7 @@ Note that here $G_{i,j}$ is only a function of the trait values $A_j$ and the bi
 \end{enumerate}
 
 
-\subsection*{Generalized binomial distribution}
+\subsection{Generalized binomial distribution}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is parameterized by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials ($\theta=0$ gives the standard binomial distribution).
 \\
 
@@ -396,7 +403,7 @@ We used the average of the $1,000$ simulations to eliminate drift errors, as can
 Although basic, \cref{fig:GBD} shows good fit of the GBD approximation.
 This validation is initial, and the more extensive validations we do on the Dirichlet-Multinomial approximation, because it is what we will use in our analysts.
 
-\subsection*{Dirichlet-Multinomial distribution}
+\subsection{Dirichlet-Multinomial distribution}
 
 \paragraph{P\'{o}lya urn model.}
 This stochastic process consists of $N$ draws from an urn with an initial amount of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same color.
@@ -500,7 +507,7 @@ We found again that results of the DM approximation are similar to those from st
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Fixation probability and time}
+\subsection{Fixation probability and time}
 
 After finding that the DM distribution is a good approximation of the (within-generation) role-model choice process, we turn our attention to the (between-generation) evolutionary dynamics.
 We focus on the fixation probability and fixation time of a favored phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
@@ -850,7 +857,7 @@ Markers show average of $10,000$ simulations, error bars show 75\% (A, C, and D)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Adaptive success-bias weight}
+\subsection{Adaptive success-bias weight}
 
 We ran simulations of the role-model choice process during a single generation in which every copier evaluates its own optimal success-bias weight, $\alpha^*$, which minimizes the expected squared error between the estimated and the ideal trait values,
 \begin{equation}
@@ -877,7 +884,7 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\section*{Discussion}
+\section{Discussion}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
 Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
 A common bias is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
@@ -974,7 +981,7 @@ In this paper we presented numerous reasons and sources to support the existence
 We also showed that even when this ratio is constant and homogeneous in the population, it is affecting the effective population size. The higher the influence bias will be, the smaller the effective population size will become.
 
 {\small
-\section*{Acknowledgements}
+\section{Acknowledgements}
 We thank Marcus Feldman, Martin Pontz, and Tal Simon for discussions and comments.
 This work was supported in part by 
 the Israel Science Foundation (YR 552/19),
@@ -983,9 +990,22 @@ and
 the John Templeton Foundation (YR 61809).
 }
 
-\section*{References}
+\section{References}
 \nolinenumbers
 \bibliography{refs}
 %\bibliographystyle{agsm}
 \bibliographystyle{apalike}
+
+\pagebreak
+
+\begin{cjhebrew}
+\section*{תקציר}
+Copying role-models can be an efficient method for acquiring knowledge. A common bias when choosing a role-model to copy is success bias: copying whoever appears more successful. This bias depends on the performance of the role-model alone, with no other factors. We propose an additional bias that may be prevalent in cultural transmission: influence bias, in which role-model choice is affected by the number of individuals that have already copied each potential role-model. We combine success and influence bias together to a ``prestige bias'' and analyze its effects on cultural-evolutionary dynamics using mathematical analysis and stochastic simulations. We find analytic approximations to our stochastic model, facilitating further mathematical analysis and reducing the computational complexity of simulations. We validate these approximations using simulations, and demonstrate their robustness to model assumptions.
+We also find approximations to the fixation probability and the fixation time of an invading favored (by bias) cultural trait, in both constant and changing environments, which resemble Kimura's approximations for population-genetic models.
+These approximations show that success bias effectively plays the part of natural selection, whereas influence bias effectively reduces the population size.	
+Influence bias also accelerates the evolutionary dynamics, as can be expected in a \textit{rich-getting-richer} process.
+Our model may provide a good description of cultural transmission, 
+especially in human societies where social media is popular. 
+Further work is needed to test if this model could predict various phenomena in cultural evolution when extended with the effects of selection and innovation.
+\end{cjhebrew}
 \end{document}
