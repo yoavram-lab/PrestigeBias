@@ -24,4 +24,4 @@ def output_path(thesis_path: str):
 
 
 if __name__ == '__main__':
-    merge('PrestigeBias.pdf', 'HebrewThesisSaar.pdf')
+    merge('PrestigeBias.pdf', 'hebrew_abstract.pdf')
