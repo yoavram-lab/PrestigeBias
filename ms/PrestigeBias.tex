@@ -791,6 +791,10 @@ the John Templeton Foundation (YR 61809).
 
 \appendix
 \section{General Binomial Distribution approximation proof}\label{append:GBD}
+
+\paragraph{Proving $\E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) / \overline{\alpha \cdot \beta(A+e)}$, where the averaging in the denominator is over the role-models index, $j$.}
+
+
 \begin{proof}
 The initial prestige of role-model $j$ based on \cref{eq:prestige} is
 \begin{equation}\label{eq:initial_prob}
@@ -808,6 +812,17 @@ Using \cref{eq:denominator} and \textbf{Corollary 1} we get,
 \end{proof}
 
 \section{Drift and diffusion in a constant environment proof}\label{append:drift_diff_const}
+
+\paragraph{Proving drift and diffusion terms in a constant environment.}
+Let $x$ and $x'$ be the frequency of type $\hat{A}$ in a population with $N$ individuals in the current and next generation, and  $\beta$ is the success coefficient of phenotype $A$, $\beta = \beta(A) < \beta(\hat{A}) = 1$.
+Then,
+\begin{equation*}
+E[x'-x] \approx x(1-x)(1-\beta) \;, 
+\quad
+V(x'-x) \approx x(1-x)\Big(\frac{1}{\alpha N + (1-\alpha)}\Big) \;.
+\end{equation*} 
+
+
 \begin{proof}
 Let $X$ be the number of individuals of type $\hat{A}$ such that $x=X/N$. $X'$ is the number of individuals with $\hat{A}$ in the next generation.
 The expected number of individuals is (due to the DM approximation),
@@ -882,6 +897,19 @@ This gives the diffusion term of the diffusion equation.
 \end{proof}
 
 \section{Drift and diffusion in a changing environment proof}\label{append:drift_diff_chang}
+\paragraph{Proving drift and diffusion terms in a changing environment.}
+Let $x$ be the initial frequency of the invading phenotype and $X_t$ is the number of individuals with the phenotype at time $t$.
+Then,
+\begin{equation*}
+E[X_t/N - x] \simeq x(1-x) S_t / N_e \;, 
+\quad
+\text{and}
+\quad
+V(X_t/N-x) \simeq  t x(1-x) / N_e \;,
+\end{equation*}
+where $S_t=\sum\limits_{i=1}^{t} N (1-\beta_t)$.
+
+
 \begin{proof}
 Let $s_t=N(1-\beta_t)$, and $S_n=\sum\limits_{i=1}^n s_i$, where $\beta_t$ is $\beta(A)$ at generation $t$.
 We prove by induction both terms in \cref{eq:ch_expected_and_var}.
