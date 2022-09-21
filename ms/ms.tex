@@ -172,26 +172,28 @@ A frequency-dependent bias occurs when the probability to copy a phenotype is hi
 For example, when the common paddle grip is used by 60\% of the demonstrators, then if the probability to copy this grip is 80\%, then transmission is under positive frequency bias, also called conformity; if the probability is 40\%, then transmission is under negative frequency bias, or non-conformity \citep{conformism}. 
 The effects of conformity and non-conformity on cultural evolution have been studied with both models \citep{conformity,anticonformity} and experiments \citep{negativeFrequency}.
  
-% YOAV HERE
 \paragraph{Prestige.}
-Prestige means having a good reputation or high esteem, therefore does not directly signify success (although it may imply it), making it an indirect bias.
-Both \citet[Ch. 8]{evolutionBook} and \citet{complexityPaper} suggest that prestige biases are probably more common in humans than success biases.
+Prestige means having a good reputation or high esteem, therefore does not directly signify success, although it may imply it--making it an indirect bias.
+\citet[Ch.~8]{evolutionBook} and \citet{complexityPaper} suggest that prestige biases are probably more common in humans than success biases.
 \citet[Ch. 8]{evolutionBook} add that maladaptive traits may spread widely in a population if indirect biases are strong enough.
 They suggest that such biases could lead to a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 On the other hand, \citet{fijian_social_bias} suggest that prestige biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
 Prestige is often mentioned in the cultural-evolution literature, but seldom modeled.
 
 \paragraph{Influence bias.}
-Today, social media provides an easy way to estimate the social and cultural influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \textit{Facebook} or \textit{Instagram} are known to affect the influence of individuals \citep{social_influence,influence_analysis,social_media}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
-Here, we model such influence as an indirect bias in cultural transmission, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
-In addition to using influence bias as an easy way to approximate role-models worth, it can also be a used to approximate it better than the copier's own estimation. This bias can save the copier costs: time, effort etc, and it can also improve its choice of role-model.
+Today, social media provides an easy way to estimate the social and cultural influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
 
-This bias depends on the state of a role-model rather than on its trait, in contrast to frequency biases such as conformity \citep{conformity}, which depend on the frequency of a trait in the population or in a sample of role-models. 
- We define a model of cultural transmission with prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
+Here, we model such influence as an indirect bias in cultural transmission, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
+% TODO rephrase the next two sentences, they are heard to understand - from here
+In addition to using influence bias as an easy way to approximate role-models worth, it can also be a used to approximate it better than the copier's own estimation. This bias can save the copier costs: time, effort etc, and it can also improve its choice of role-model.
+%% to here
+Influence bias is a context-based, rather than a content-based bias--it does not depend on the phenotype but rather on the number of copiers that already copied each role-model. IT also differs from frequency biases such as conformity \citep{conformity}, which depend on the frequency of a trait in the population or in a sample of role-models rather than the social dynamics of copying.
+ 
+Here, we define a model of cultural transmission with prestige bias that combines both success and influence biases, find analytic approximations for this model, and analyze its dynamics. We find approximations for the probability and time for fixation of a "successful" phenotype (i.e., that is favored by success bias). Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and influence bias play the role of natural selection and genetic drift, respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
-
+% YOAV HERE
 We begin with a continuous trait model with indirect bias suggested by \citet{evolutionBook}, develop an extension with influence bias, and then develop a model with a dichotomous trait.
 We implemented our stochastic models and approximations, performed statistical analyses, and produced figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
