@@ -288,7 +288,13 @@ The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined
 \begin{equation}\label{eq:prestige}
 G_{i,j} = \frac{\alpha_{ij} \cdot \beta(A_{i,j}) + (1-\alpha_{ij}) \cdot K_{i-1,j}}{W_i} \;.
 \end{equation}
-Here, the bias weight $\alpha_{ij}$ is a characteristic of the interaction of role-model~$j$ with copier $i$, that determines the relative significance of success and influence within the role-model's overall prestige, in the eyes if the copier. The trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
+
+Here, the bias weight $\alpha_{ij}$ is a characteristic of the interaction of role-model~$j$ with copier $i$, that determines the relative significance of success and influence within the role-model's overall prestige, in the eyes if the copier.
+
+We assume every individual evaluates the importance of success and influence differently. Additionally, we assume every role-model displays his influence and success individually, for example - a person with more followers but lack of actual skill may emphasize the number of his followers rather than his actual skill. We therefore modeled $\alpha_{ij}$ to be the relation between every copiers intrinsic significance of estimation, and every role-models personal emphasis.
+ 
+
+The trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
 
 
 
@@ -298,9 +304,9 @@ All role-models with the same phenotype will contribute to the probability of th
 In addition, we assume homogeneous $\alpha$ for simplicity and for easier mathematical analysis.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
-G_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + X\alpha'\beta(\hat{A})} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X}
+G_{i,A} = \frac{(N-C)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-C)\alpha'\beta(A) + C\alpha'\beta(\hat{A})} = \frac{(N-C)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-C)\alpha'\beta(A) + \alpha'C}
 \end{equation}
-where $X$ is the number of role-models with trait $\hat{A}$ and $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model and $\alpha'$ is the odd ratio of the bias weight $\alpha'= \frac{\alpha}{1-\alpha}$.
+where $C$ is the number of role-models with trait $\hat{A}$ and $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model and $\alpha'$ is the odd ratio of the bias weight $\alpha'= \frac{\alpha}{1-\alpha}$.
 
 We prove this equation later, based on the proof of the Dirichlet-Multinomial approximation.
 
@@ -316,7 +322,7 @@ We found two such approximations, summarized here and explained in detail below.
 \item 
 The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore,
 \begin{enumerate}\item the expected number of copiers of role-model~$j$ equals its prestige in the eyes of the first copier, multiplied by the total number of copiers, that is,
-$\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all copiers ($e=e_i$ for $i=1, \ldots, N$).
+$\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all copiers ($e=e_i$ for $i=1, \ldots, N$). This means that there's no actual estimation error in the population, just a fixed bias in every copiers estimation.
 \item the expected number of copiers of each role-model equals its relative biased trait value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the bias weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated trait value. 
 \end{enumerate}
 \item The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$), meaning there's no meaning for the order of copiers. 
@@ -442,7 +448,8 @@ In addition, we tested the likelihood of the observed data to be drawn from the 
   We performed computational "experiments" of the role-model choice process and compared them to the DM distribution. 
   \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the experiments (blue) is very small. 
   \textbf{(B)} The log-likelihood of the DM distribution for results of the experiments (red vertical line) is much higher compared to the log-likelihood of permutations of experiments (blue histogram).
-  Here, population size, $N=100$; number of experiments, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.}	
+  Here, population size, $N=100$; number of experiments, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.
+  No estimation error or bias is applied, and traits are estimated and copied perfectly.}	
   \label{fig:DM_validation}
 \end{figure}
 
@@ -454,7 +461,7 @@ First, we relaxed our assumption of no estimation error $e$.
 Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{ij} = A_j + e_i$).
 When estimation error is applied, we sample $J_i$ for each copier $i$ from a normal distribution with varying scale (variance).
 Even when the standard deviation is $0.1$, the fixation probability and time is similar~(\cref{fig:hetro_error}). 
-We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,x)$ where $x \in [10^{-7},10^{-1}]$. 
+We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,q)$ where $q \in [10^{-7},10^{-1}]$. 
 We found again that results of the DM approximation are similar to those from stochastic simulations of the full model~(\cref{fig:hetro_alpha}).
 
 
@@ -496,7 +503,7 @@ We found again that results of the DM approximation are similar to those from st
 \subsection{Fixation probability and time}
 
 After finding that the DM distribution is a good approximation of the (within-generation) role-model choice process, we turn our attention to the (between-generation) evolutionary dynamics.
-We focus on the fixation probability and fixation time of a favored phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
+We focus on the conditional fixation probability and conditioned fixation time (conditioned on the population reaching fixation) of a favored phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
 We are mainly interested in the effect of the bias weight, $\alpha$, which determines the relative effect of success and influence on prestige bias, given by \cref{eq:prestige}.
 For simplicity, we do not include role-model estimation error in this analysis, i.e $e_i=0$ for every copier $i$.
 As shown above, transmission in our model is approximately DM distributed (\cref{cor:dirichlet} and \cref{eq:copier_choose}).
@@ -531,6 +538,7 @@ s=1-\beta(A), \quad N_e=\alpha N + (1-\alpha) \;.
 \end{result}
 
 Using our effective selection coefficient, $1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by \citet[eq.~8]{kimura}, we get the following result.\\
+It's interesting to notice that when $N>>1$, $N_e \approx \alpha N$, resulting in a very convenient expression.\\
 
 \begin{result}[Fixation probability]
 The fixation probability is approximately
