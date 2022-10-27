@@ -105,7 +105,7 @@ headheight=12pt
 
 \begin{titlepage}
 	\centering
-	\includegraphics[width=0.4\textwidth]{ReichmanLogo}\par\vspace{1cm}
+	\includegraphics[width=0.4\textwidth]{ReichmanLogo.png}\par\vspace{1cm}
 	{\huge Reichman University \par}
 	{\Large Efi Arazi School of Computer Science \par}
 	{\Large M.Sc. Program - Research Track \par}
@@ -116,8 +116,8 @@ headheight=12pt
 	{\large by\par}
 	{\Large\bfseries Saar Egozi\par}
 	\vspace{1cm}
-	{\large Supervised by Dr. Yoav Ram\par}
-	{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel\par}
+	%{\large Supervised by Dr. Yoav Ram\par}
+	%{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv 6997801, Israel\par}
 %	{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv 6997801, Israel \par}
 
 	\vspace{1cm}
@@ -130,7 +130,6 @@ headheight=12pt
 	{\large \today \par}
 
 \end{titlepage}
-
 
 % title page stuff
 %\title{Cultural Evolutionary Dynamics with Success and Influence biases}
@@ -208,20 +207,21 @@ Frequency bias could be negative, i.e., non-conformist bias.
 Conformity and non-conformity are well-known biases in cultural transmission \citep{conformism}, and its effect on cultural evolution have been studied with both models \citep{conformity,anticonformity} and experiments \citep{negativeFrequency}.
  
 \paragraph{Prestige.}
-Prestige means having a good reputation or high esteem, therefore does not directly signify success (although it may imply it), making it an indirect bias.
-Both \citet[Ch. 8]{evolutionBook} and \citet{complexityPaper} suggest that prestige biases are probably more common in humans than success biases.
+Prestige means having a good reputation or high esteem, therefore does not directly signify success, although it may imply it--making it an indirect bias.
+\citet[Ch.~8]{evolutionBook} and \citet{complexityPaper} suggest that prestige biases are probably more common in humans than success biases.
 \citet[Ch. 8]{evolutionBook} add that maladaptive traits may spread widely in a population if indirect biases are strong enough.
 They suggest that such biases could lead to a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 On the other hand, \citet{fijian_social_bias} suggest that prestige biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
 Prestige is often mentioned in the cultural-evolution literature, but seldom modeled.
 
 \paragraph{Influence bias.}
-Today, social media provides an easy way to estimate the social and cultural influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \textit{Facebook} or \textit{Instagram} are known to affect the influence of individuals \citep{social_influence,influence_analysis,social_media}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
+Today, social media provides an easy way to estimate the social and cultural influence individuals have over others, and therefore may have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
 Here, we model such influence as an indirect bias in cultural transmission, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
-In addition to using influence bias as an easy way to approximate role-models worth, it can also be a used to approximate it better than the copier's own estimation. This bias can save the copier costs: time, effort etc, and it can also improve its choice of role-model.
+Influence can be easily estimated, so costs may be lower than estimating success. In some cases it could be a more accurate estimation as well.
 
-This bias depends on the state of a role-model rather than on its trait, in contrast to frequency biases such as conformity \citep{conformity}, which depend on the frequency of a trait in the population or in a sample of role-models. 
- We define a model of cultural transmission with prestige bias that combines both success and influence biases, provide analytic approximations for this model, and analyze its dynamics.
+Influence bias is a context-based, rather than a content-based bias--it does not depend on the phenotype but rather on the number of copiers that already copied each role-model. IT also differs from frequency biases such as conformity \citep{conformity}, which depend on the frequency of a trait in the population or in a sample of role-models rather than the social dynamics of copying.
+
+Here, we define a model of cultural transmission with prestige bias that combines both success and influence biases, find analytic approximations for this model, and analyze its dynamics. We find approximations for the probability and time for fixation of a "successful" phenotype (i.e., that is favored by success bias). Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and influence bias play the role of natural selection and genetic drift, respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Models and methods}
