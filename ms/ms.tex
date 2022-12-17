@@ -268,7 +268,7 @@ The trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \c
 \subsection*{Dichotomous trait}
 To allow for mathematical analysis of the model, we introduce a simplified version where the trait only has two phenotypes: the optimal phenotype $\hat{A}$ and the sub-optimal phenotype $A$. 
 All role-models with the same phenotype will contribute to the probability of that phenotype to be transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
-In addition, we assume homogeneous $\alpha$ for simplicity and for easier mathematical analysis.
+In addition, we assume homogeneous $\alpha$, also called \textit{exchangability}, for simplicity and for easier mathematical analysis.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
 G_{i,A} = \frac{(N-C)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-C)\alpha'\beta(A) + C\alpha'\beta(\hat{A})} = \frac{(N-C)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-C)\alpha'\beta(A) + \alpha'C}
@@ -737,6 +737,8 @@ In contrast, Machiavelli viewed leaders as rulers who exercise influence by impo
 \citet{dual_leadership} suggest that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic concept of leadership. 
 Several adjustments could be made so that our model reflects these leadership styles, such as assuming there is a correlation between phenotype to leadership style. 
 The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
+
+So far we examined different variations of our model using a Wright-Fisher model as our basis, mainly because we wanted to base our model on a known one from the literature, namely \citet{evolutionBook} indirect bias model. When approximating our model by comparing it to a Polya Urn process, we noticed that our model would be identical to a model where every copier that chose a role-model would copy its trait and join the role-models during the selection process. Based on this, we theorize that when using a Moran model as basis instead of a Wright-Fisher mode, we would get very similar, and perhaps identical results. It would be interesting to run simulations and analyze that model, to prove or disprove our hypothesis.
 
 \paragraph{Conclusions.}
 Here, we presented support for the existence of prestige biases in cultural transmission, including the commonly studied success bias. We introduced an influence bias, which has so far received less attention. We believe the combination of these biases may be a strong driving force in cultural evolution. 
