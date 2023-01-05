@@ -124,13 +124,14 @@ headheight=12pt
 \maketitle
 
 \begin{abstract}
-A common bias in cultural transmission is to copy whoever appears more successful. This ``success bias'' only depends on the performance of the role-model.
-Here, we propose an additional transmission bias that may be common in cultural transmission: ``influence bias'', in which the choice of a role-model depends on the number of individuals that have already copied from that role-model.
-We combine success and influence bias together to a ``prestige bias'', and analyze its effects on cultural evolutionary dynamics using mathematical analysis and stochastic simulations.
+A common bias in cultural transmission is to copy whoever appears more successful. This success bias only depends on the performance of the role-model.
+Because success may be difficult to estimate, it has been suggested that individuals may indirectly estimate success by using prestige as a proxy for success. However, prestige can be defined in different ways: it can reflect performance in another, possibly related, task; but it can also reflect overall influence of the role-model, irrespective of performance.
+Here, we model prestige bias as a combination of indirect success bias and influence bias, the latter meaning that the choice of a role-model depends on the number of individuals that have already copied from that role-model.
+We analyze the effect of prestige on cultural evolutionary dynamics using mathematical analysis and stochastic simulations.
 We find analytic approximations to the stochastic role-model choice process, which facilitate further mathematical analysis and reduce the computational complexity of simulations. We validate these approximations and demonstrate their robustness to model assumptions.
 We also find approximations to the fixation probability and the fixation time of an invading cultural trait, in both constant and changing environments. 
 These approximations are similar to Kimura's approximations for population-genetic models.
-These similarities show that success bias effectively plays the role of natural selection, whereas influence bias effectively plays the role of genetic drift.	
+These similarities show that indirect success bias effectively plays the role of natural selection, whereas influence bias effectively plays the role of genetic drift.	
 Influence bias also accelerates the evolutionary dynamics, as can be expected in a \emph{rich-getting-richer} process.
 Our model extends the literature that describes and analyses cultural transmission, 
 especially in human societies where social media is popular and thus influence bias may be expected. 
@@ -151,12 +152,11 @@ Although cultural transmission is common in humans, it is also observed in other
 Cultural transmission may combine vertical transmission, in which parents transmit to their offspring; oblique transmission, in which adults (teachers, leaders, and even strangers) transmit to unrelated offspring; and horizontal transmission, in which peers from the same age cohort transmit to one another \citep{transmissionVectorsBook,transmissionVectors}.
 It has been demonstrated that non-vertical cultural transmission can maintain maladaptive traits, which can be beneficial in changing environments \citep{changeEnv}. 
 
-Transmission biases may cause a cultural trait to have a disproportionate probability to be transmitted compared to its frequency in the population.
-A common bias in the literature is \textit{success bias}, in which individuals prefer to copy from role models that demonstrate success in some activity, such as fishing, growing yams, and using medicinal plants \citep{fijian_social_bias}, and hunting \citep{Mesoudi2008}, and it can increase the probability of learning a successful trait \citep{Borofsky2022}. 
+Transmission biases may cause a cultural trait to have a disproportionate probability to be transmitted compared to its frequency in the population. \textit{Success bias} occurs when individuals prefer to copy from role models that demonstrate success in some activity, such as fishing, growing yams, using medicinal plants \citep{fijian_social_bias}, or hunting \citep{Mesoudi2008}, and it can increase the probability of learning a successful trait \citep{Borofsky2022}. 
 Indeed, in a tournament between learning strategies conducted by \citet{strategiesPaper}, most winner strategies included a mixture of success-biased social learning and individual learning, implying that success-biased learning is a good strategy, but that by itself it is not enough to best other strategies, even when success is measured accurately.
 
 % TODO edit so that we focus on indirect success - aka prestige - and decompose it to content based - which we call success - and context based - which we call influence
-\citet[Ch.~5]{evolutionBook} have suggested that the evaluation of success can be divided into three groups: \emph{direct bias}, \emph{indirect bias} and \emph{frequency-dependent bias}.
+\citet[Ch.~5]{evolutionBook} have suggested that the evaluation of success can be divided to three categories: \emph{direct bias}, \emph{indirect bias} and \emph{frequency-dependent bias}.
 A direct bias occurs when one phenotype is more attractive than other phenotypes, and is evaluated by \emph{directly} testing the trait.
 For example, an individual observing a ping-pong match can attempt the observed paddle grips to determine which grip is better.
 A frequency-dependent bias occurs when the probability to copy a phenotype is higher or lower than the frequency of the phenotype among demonstrators. 
@@ -168,17 +168,17 @@ This, however, may cause mismatches between the copied trait and the rest of the
 Furthermore, \citet[Ch. 8]{evolutionBook} have suggested that maladaptive traits may spread widely in a population if indirect biases are strong enough by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 For example, \citet{cooperation} have shown that helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost.
 
-\citet{fijian_social_bias} have studied such indirect biases, which they call cross-domain success bias, or in short, \emph{prestige} (e.g. great fishermen may be chosen as role-models for growing yams). They have suggested that prestige biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
+\citet{fijian_social_bias} have studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They have suggested that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
 \citet[Ch.~8]{evolutionBook} and \citet{complexityPaper} have suggested that prestige biases are probably more common in humans than success biases, and prestige is often mentioned in the cultural evolution literature, however there are few models of prestige bias.
 
 A broader definition of prestige is the ``widespread respect and admiration felt for someone or something on the basis of a perception of their achievements or quality'' (New Oxford American Dictionary).
 Indeed, \citet{prestige_cultural_learning} have defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'', and demonstrated its occurrence in in 3-4 year old children.
 To distinguish this form of indirect bias from other definitions of prestige, we call it \emph{influence bias}. This is an important distinction, as influence is a context-based bias, rather than a content-based bias: it does not depend on the phenotype itself but rather on the number of copiers that already copied each role-model, which may be easier and more accurate to estimate compared to success. Influence bias differs from frequency biases such as conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
-We model influence as an indirect bias in cultural transmission, in which the choice of a role-model depends on the choices made by other individuals that have already chosen a role-model. 
 
 In contemporary human society, social media makes it especially easy to estimate the social and cultural influence individuals have over others, and therefore can have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
 
-In the following, we develop a stochastic model of cultural transmission with that combines both success and influence biases, find analytic approximations for this model, and analyze its dynamics. We find approximations for the probability and time for fixation of a `successful' phenotype (i.e., that is favored by success bias). Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and influence bias play the role of natural selection and genetic drift, respectively. 
+In the following, we develop a stochastic model of cultural transmission with prestige bias. In our model, prestige combines both cross-domain indirect success bias and influence bias.
+We develop analytic approximations for this model and analyze its dynamics. We find approximations for the probability and time for fixation of a `successful' phenotype (i.e., that is favored by success bias). Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and influence bias play the role of natural selection and genetic drift, respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
