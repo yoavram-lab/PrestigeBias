@@ -106,7 +106,7 @@ headheight=12pt
 
 
 % Title page
-\title{Cultural evolutionary dynamics with success and influence bias}
+\title{Prestige bias in cultural evolutionary dynamics}
 % Authors
 \renewcommand\Affilfont{\small}
 
@@ -155,6 +155,7 @@ Transmission biases may cause a cultural trait to have a disproportionate probab
 A common bias in the literature is \textit{success bias}, in which individuals prefer to copy from role models that demonstrate success in some activity, such as fishing, growing yams, and using medicinal plants \citep{fijian_social_bias}, and hunting \citep{Mesoudi2008}, and it can increase the probability of learning a successful trait \citep{Borofsky2022}. 
 Indeed, in a tournament between learning strategies conducted by \citet{strategiesPaper}, most winner strategies included a mixture of success-biased social learning and individual learning, implying that success-biased learning is a good strategy, but that by itself it is not enough to best other strategies, even when success is measured accurately.
 
+% TODO edit so that we focus on indirect success - aka prestige - and decompose it to content based - which we call success - and context based - which we call influence
 \citet[Ch.~5]{evolutionBook} have suggested that the evaluation of success can be divided into three groups: \emph{direct bias}, \emph{indirect bias} and \emph{frequency-dependent bias}.
 A direct bias occurs when one phenotype is more attractive than other phenotypes, and is evaluated by \emph{directly} testing the trait.
 For example, an individual observing a ping-pong match can attempt the observed paddle grips to determine which grip is better.
@@ -260,10 +261,9 @@ All role-models with the same phenotype will contribute to the probability of th
 In addition, for simplicity and for easier mathematical analysis, we assume $\alpha$ is homogeneous, such that we have exchangeability between role-models.
 Therefore, the probability of the $i$-th copier to copy phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
-G_{i,A} = \frac{(N-C)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-C)\alpha'\beta(A) + C\alpha'\beta(\hat{A})} = \frac{(N-C)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-C)\alpha'\beta(A) + \alpha'C} \;,
+G_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X} \;,
 \end{equation}
-where $C$ is the number of role-models with trait $\hat{A}$ and $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model. $\alpha'$ is the odd ratio of the bias weight $\alpha'= \frac{\alpha}{1-\alpha}$.
-We prove this equation later, based on the proof of the Dirichlet-Multinomial approximation. % TODO what do you mean "we prove this later"..?
+where $X$ is the number of role-models with trait $\hat{A}$, $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model, $\beta(\hat{A})=1$, and $\alpha'= \frac{\alpha}{1-\alpha}$ is the odd ratio of the bias weight. Complementing this, the probability of the $i$-th copier to copy phenotype $\hat{A}$ is $G_{i, \hat{A}} = 1-G_{i,A}$.
 The rest of the details follow the continuous trait model.
 
 
@@ -500,38 +500,30 @@ Using our effective selection coefficient, $1-\beta$, and effective population s
 \begin{result}[Fixation probability]
 The fixation probability is approximately
 \begin{equation}\label{eq:kimura_p}
-\pi = \frac{1-e^{-2(1-\beta)N_e x}}{1-e^{-2(1-\beta)N_e}}
+\pi(x) = \frac{1-e^{-2(1-\beta)N_e x}}{1-e^{-2(1-\beta)N_e}}
 \end{equation}
 where $x$ is the initial frequency of the favored phenotype $\hat{A}$.
 \end{result}
 
 Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citet[eq.~17]{kimura_average}.\\
 
-
-\begin{result}[Fixation time] The fixation time (conditioned on fixation) is approximately
-\begin{equation}
-T = J_1 + \frac{1-u(x)}{u(x)}\cdot J_2,
+% TODO SAAR check these equations vs what you have in the source code
+\begin{result}[Fixation time] The fixation time (conditioned on fixation) from an initial frequency $x$ is approximately
+\begin{equation} \label{eq:kimura_t}
+T(x) = J_1(x) + \frac{1-\pi(x)}{\pi(x)}\cdot J_2(x),
 \end{equation}
-where, given $S=N_e(1-\beta)$ and $x=\frac{1}{N_e}$,
+where $N_e=\alpha N + (1-\alpha)$, $S=N_e(1-\beta)$, and
 \begin{equation}
-u(x)=\frac{1-e^{-2Sx}}{1-e^{2S}}
-\end{equation}
-and,
-\begin{equation}
-J_1 = \frac{2}{(1-\beta)(1-e^{-2S})}\int_x^1 \frac{(e^{2S\xi}-1)(e^{-2S\xi}-e^{-2S})}{\xi(1-\xi)}d\xi,
-\end{equation}
-\begin{equation}
-J_2= \frac{2}{(1-\beta)(1-e^{-2S})}\int_0^p \frac{(e^{2S\xi}-1)(1-e^{-2S\xi})}{\xi(1-\xi)}d\xi
-\end{equation}
-
-\begin{equation}\label{eq:kimura_t}
-T = \frac{1-\pi}{1-\beta}\int_0^x\frac{e^{2(1-\beta) \xi}-1}{\xi(1-\xi)}d\xi+ \frac{\pi}{1-\beta}\int_x^1\frac{1-e^{-2(1-\beta)(1-\xi)}}{\xi(1-\xi)}d\xi
+\begin{aligned}
+J_1(x) &= \frac{2}{(1-\beta)(1-e^{-2S})}\int_x^1 \frac{(e^{2S\xi}-1)(e^{-2S\xi}-e^{-2S})}{\xi(1-\xi)}d\xi \;, \\
+J_2 (x) &= \frac{2}{(1-\beta)(1-e^{-2S})}\int_0^x \frac{(e^{2S\xi}-1)(1-e^{-2S\xi})}{\xi(1-\xi)}d\xi \;.
+\end{aligned}
 \end{equation}
 \end{result}
 Note that these integrals cannot be solved in closed form, so we can only estimate them numerically.
 
 \paragraph{Numerical validation.}
-We compare our approximations (\cref{eq:kimura_p,eq:kimura_t}) with results of simulations of our dichotomous model using various $\alpha$ and $\beta$ values, as well as simulations of the Wright-Fisher model, using the effective selection coefficient, $s_e=1-\beta$, and effective population size, $N_e=\alpha N + (1-\alpha)$. 
+We compare our approximations (\cref{eq:kimura_p,eq:kimura_t}) with results of simulations of our dichotomous model using various $\alpha$ and $\beta$ values, as well as simulations of the Wright-Fisher model, using the effective selection coefficient, $1-\beta$, and effective population size, $N_e=\alpha N + (1-\alpha)$. 
 We find see that the two models have similar dynamics, and both are well approximated our approximations (\Cref{fig:var_alpha}).
 
 
@@ -540,7 +532,7 @@ We find see that the two models have similar dynamics, and both are well approxi
   \caption{\textbf{Fixation probability and time in a constant environment.}
   Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row.
   The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
-  Fixation probability (A) is bounded by $2s_e=2(1-\beta)$ (blue).
+  Fixation probability (A) is bounded by $2(1-\beta)$ (blue).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
    Here, Population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.7$ (A and B), $A = a \cdot \hat{A}$ with $0.01 \le a \le 0.99$ (panels C and D); success coefficient, $1-\beta=s=0.044$ (A and B); success-bias weight, $\alpha=0.01$ (panels C and D).}
   \label{fig:var_alpha}
@@ -569,23 +561,20 @@ where $S_n=\sum\limits_{t=1}^{n} N (1-\beta_t)$.
 Note that here, we have the average selection coefficient during a cycle of $n$ generations as the selection coefficient \cref{eq:kimura_p}.
 Using the drift and diffusion terms and following \citet{changeEnv}, we can approximate the fixation probability in a changing environment using
 \begin{equation}\label{eq:ch_env}
-\tilde\pi = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}} \;.
+\tilde\pi(x) = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}} \;.
 \end{equation}
 
 \paragraph{Numerical validation.}
+% TODO SAAR edit this section
 Comparing our approximation (\cref{eq:ch_env}) to simulations, we find that the approximation fits simulation results well for variable bias weights, $\alpha$, which corresponds to the effective population size (\Cref{fig:ch_env_alpha_beta}A).
 
 However, the approximation is more sensitive to the value of the success bias coefficient $\beta$ (\Cref{fig:ch_env_alpha_beta}B).
 We suspect that when $\beta$ is too small, there will not be many cycles in the simulations, because either the population reaches a high frequency of the fitter phenotype after just a few cycles, or the fitter phenotype becomes extinct very quickly. 
 For such $\beta$ values (below 0.65), the fixation probability exceeds even the constant environment approximation (which is the upper limit). We note that the diffusion-equation approximation assumes weak selection, or in our case, weak success bias.
 
-We found that for a large $k/l$ ratio (with a constant cycle length, $n=k+l=100$), the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:kimura_p}), see \Cref{fig:ch_env_alpha_beta}C and \Cref{fig:ch_env_alpha_beta}D. \\
+We found that for a large $k/l$ ratio (with a constant cycle length, $n=k+l=100$), the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:kimura_p}), see \Cref{fig:ch_env_alpha_beta}C and \Cref{fig:ch_env_alpha_beta}D.
 
-% TODO the next paragraph is strange...
-\begin{result}
-The effective population size doesn't affect the goodness of fit of the approximation. The success coefficient however, must be even lower than before for the approximation to fit.
-\end{result}
-The proof is seen in \Cref{fig:ch_env_alpha_beta}A,B. The approximation follows the trend of the simulation results for all $\alpha$ values.
+The approximation follows the trend of the simulation results for all $\alpha$ values.
 When increasing the success coefficient to more than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation. We believe the reason is the structure of the cycle.
 Our proof and approximation in the changing environment are for a large amount of cycles, and when the success coefficient is too high, there might be very few cycles. Either the ideal trait is copied by enough copiers so that the influence is sufficient to negate the success bias when the cycle changes (and the trait favored by the bias becomes the disfavored), or the opposite happens, and the ideal trait gets extinct before there were enough copiers that copied it.
 We then tried to change the ratio between the number of cycles where $\hat{A}$ is favored and disfavored. We showed that the approximation fits well regardless of the ratio, but when the ratio of favored generations to disfavored ones is very high, it is very similar to a constant environment model.
@@ -634,7 +623,7 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% TODO Edit to follow our latest definition of prestige etc in the introduction
 \section*{Discussion}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
 Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
