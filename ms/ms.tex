@@ -173,7 +173,11 @@ For example, \citet{cooperation} have shown that helping behaviors can evolve du
 
 A broader definition of prestige is the ``widespread respect and admiration felt for someone or something on the basis of a perception of their achievements or quality'' (New Oxford American Dictionary).
 Indeed, \citet{prestige_cultural_learning} have defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'', and demonstrated its occurrence in in 3-4 year old children.
-To distinguish this form of indirect bias from other definitions of prestige, we call it \emph{influence bias}. This is an important distinction, as influence is a context-based bias, rather than a content-based bias: it does not depend on the phenotype itself but rather on the number of copiers that already copied each role-model, which may be easier and more accurate to estimate compared to success. Influence bias differs from frequency biases such as conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying. \citet{prestige_evolution} define prestige in a similar manner, and their definition for influence bias is similar to ours.
+\citet{prestige_evolution} give a similar definition of prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provide examples from the anthropological literature.
+
+To distinguish this form of indirect bias from other definitions of prestige, we call it \emph{influence bias}.
+This is an important distinction, as influence is a context-based bias, rather than a content-based bias: it does not depend on the phenotype itself but rather on the number of copiers that already copied each role-model, which may be easier and more accurate to estimate compared to success. 
+Influence bias also differs from frequency biases such as conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
 
 In contemporary human society, social media makes it especially easy to estimate the social and cultural influence individuals have over others, and therefore can have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices were invented to capitalize on this effect \citep{facebook_marketing}.
 
@@ -623,16 +627,18 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO Edit to follow our latest definition of prestige etc in the introduction
 \section*{Discussion}
 During cultural transmission, cultural traits such as attitudes, values, beliefs, and behavioral patterns are transmitted between individuals, for example via copying and social learning.
 Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
 A common bias is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
-However, it has been suggested that because it is hard to estimate success, a more common bias is \emph{prestige bias}---a bias towards role-models perceived to be successful in other traits \citep{fijian_social_bias}. This perceived success can be by a manifestation of another trait, i.e indirect success, which we refer to as success in this research. Prestige can also be identified as the influence an individual has on others.
+However, it has been suggested that because it is hard to estimate success, a more common bias is \emph{prestige bias}---a bias towards role-models perceived to be successful.
+This perceived success can be determined by performance in another trait, i.e., by indirect success \citet{evolutionBook,fijian_social_bias}, or by the influence an individual has on others \citet{prestige_cultural_learning,prestige_evolution}.
 
-Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias that includes both indirect success and influence biases, where the latter is a bias towards role-models with many copiers. This is accomplished by a role-model choice process: each copier, in its turn, chooses a role-model, and that choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-mode (eq.~\ref{eq:prestige}). 
+Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias that includes both indirect success and influence biases, where the latter is a bias towards role-models with many copiers.
+We model the these biases using a stochastic role-model choice process: each copier, in its turn, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
 
-This resulted in a model with two "nested" stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations. To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DM, \Cref{cor:dirichlet}).
+Hence, we have a model with two "nested" stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
+To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DM, \Cref{cor:dirichlet}).
 The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model, rather than the copier.
 
 Analyzing the model with the DM distribution, we found approximations for the fixation probability and fixation time of a cultural trait under biased transmission in a constant environment.
@@ -723,9 +729,8 @@ Here, we studied a model of cultural evolution under two transmission biases: th
 
 {\small
 \section*{Acknowledgements}
-We thank Marcus Feldman, Martin Pontz, and Tal Simon for discussions and comments.
+We thank Marcus Feldman, Martin Pontz, Gili Greenbaum, Alon Rozen, and Tal Simon for discussions and comments.
 This work was supported in part by 
-the Israel Science Foundation (YR 552/19),
 Minerva Stiftung Center for Lab Evolution (YR),
 and 
 the John Templeton Foundation (YR 61809).
