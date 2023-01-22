@@ -64,19 +64,17 @@ headheight=12pt
 \modulolinenumbers[2]
 
 % Supplementary
+% https://support.authorea.com/en-us/article/how-to-create-an-appendix-section-or-supplementary-information-1g25i5a/
 \newcommand{\beginsupplement}{%
       	\setcounter{table}{0}
         \renewcommand{\thetable}{S\arabic{table}}%
         \setcounter{figure}{0}
         \renewcommand{\thefigure}{S\arabic{figure}}%
-        \setcounter{equation}{0}
+		\setcounter{equation}{0}
         \renewcommand{\theequation}{A\arabic{equation}}%
 }
-
 % NatBib
-%\usepackage[super,comma]{natbib}
-\usepackage[round,colon,authoryear]{natbib}
-%\use-package[numbers,super,sort&compress]{natbib}
+\usepackage[numbers,square,comma,sort]{natbib}
 \renewcommand{\bibsection}{}
 %\renewcommand{\bibfont}{\small}
 
@@ -165,15 +163,15 @@ The effects of conformity and non-conformity on cultural evolution have been stu
 An indirect bias occurs when an individual uses one phenotype to determine the attractiveness of another phenotype.
 For example, an observer may copy the paddle grip of the ping-pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
 This, however, may cause mismatches between the copied trait and the rest of the cultural or genetic repertoire of the individual \citep{Kolodny2022}.
-Furthermore, \citet[Ch. 8]{evolutionBook} have suggested that maladaptive traits may spread widely in a population if indirect biases are strong enough by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
-For example, \citet{cooperation} have shown that helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost.
+Furthermore, \citet[Ch. 8]{evolutionBook} have suggested that maladaptive traits may spread widely in a population if indirect biases are strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
+Indeed, \citet{cooperation} have shown that helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost.
 
 \citet{fijian_social_bias} have studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They have suggested that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
 \citet[Ch.~8]{evolutionBook} and \citet{complexityPaper} have suggested that prestige biases are probably more common in humans than success biases, and prestige is often mentioned in the cultural evolution literature, however there are few models of prestige bias.
 
 A broader definition of prestige is the ``widespread respect and admiration felt for someone or something on the basis of a perception of their achievements or quality'' (New Oxford American Dictionary).
 Indeed, \citet{prestige_cultural_learning} have defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'', and demonstrated its occurrence in in 3-4 year old children.
-\citet{prestige_evolution} give a similar definition of prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provide examples from the anthropological literature.
+\citet{prestige_evolution} gave a similar definition of prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature.
 
 To distinguish this form of indirect bias from other definitions of prestige, we call it \emph{influence bias}.
 This is an important distinction, as influence is a context-based bias, rather than a content-based bias: it does not depend on the phenotype itself but rather on the number of copiers that already copied each role-model, which may be easier and more accurate to estimate compared to success. 
@@ -344,15 +342,6 @@ To validate our results we ran $1,000$ simulations of the full model, and compar
 We compare the distribution of number of copiers by plotting the histograms of both our simulations results and the expected values based on \Cref{cor:GBD}.
 We used the average of the $1,000$ simulations to eliminate drift errors, as can be seen in \Cref{fig:GBD}.
 
-\begin{figure}[h]
-    \includegraphics[width=0.7\linewidth]{../figures/final/GBD_validation.pdf}
-  \caption{
-  \textbf{Numerical validation of the GB approximation.}
-  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
-  Here, population size, $N=2,000$; bias weight, $\alpha=0.1$; idea phenotype value, $\hat{A}=1$; role-model traits $\vec{A} \sim N(0,1)$; success bias value, $\beta(A)=0.956$.}	
-  \label{fig:GBD}
-\end{figure}
-
 Although basic, \Cref{fig:GBD} shows good fit of the GB approximation.
 This validation is initial, and the more extensive validations we do on the Dirichlet-Multinomial approximation, because it is what we will use in our analysts.
 
@@ -399,22 +388,8 @@ The number of copiers of each role-model follows a Dirichlet-Multinomial distrib
 \paragraph{Numerical validation.}
 To validate our analytical result (\Cref{cor:dirichlet}) and test its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) we compare it to results of stochastic simulations of the full model.
 First, we computed an observed distribution of the number of copiers from the average empirical distribution of multiple simulations.
-We then compared this observed distribution with the expected theoretical DM distribution as can be seen in \Cref{fig:DM_validation} (a). The difference in distributions was not perceived when plotting both distributions on the same figure, so we used the difference instead. The maximum difference is 0.5 role-models, which indicate a very good fit.
-In addition, we tested the likelihood of the observed data to be drawn from the DM distribution, against a shuffle of the parameters vector of the DM distribution itself, as seen in \Cref{fig:DM_validation} (b). We see that the negative log likelihood of the observed data is much higher than any other shuffled version of the parameters vector, supporting our approximation more.
-
-
-\begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/DM_validation.pdf}
-  \caption{
-  \textbf{Numerical validation of the DM approximation.}
-  We performed computational "experiments" of the role-model choice process and compared them to the DM distribution. 
-  \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the experiments (blue) is very small. 
-  \textbf{(B)} The log-likelihood of the DM distribution for results of the experiments (red vertical line) is much higher compared to the log-likelihood of permutations of experiments (blue histogram).
-  Here, population size, $N=100$; number of experiments, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.
-  No estimation error or bias is applied, and traits are estimated and copied perfectly.}	
-  \label{fig:DM_validation}
-\end{figure}
-
+We then compared this observed distribution with the expected theoretical DM distribution (\Cref{fig:DM_validation}A). The difference in distributions was not perceived when plotting both distributions on the same figure, so we used the difference instead. The maximum difference is 0.5 role-models, which indicate a very good fit.
+In addition, we tested the likelihood of the observed data to be drawn from the DM distribution, against a shuffle of the parameters vector of the DM distribution itself (\Cref{fig:DM_validation}B). We see that the negative log likelihood of the observed data is much higher than any other shuffled version of the parameters vector, supporting our approximation more.
 
 Next, we examined the fixation probability and fixation time of a favored phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DM approximation.
 Thus, we assume the population has a single individual with phenotype $\hat{A}$ and $N-1$ individuals with phenotype $A$. 
@@ -427,27 +402,13 @@ Even when the standard deviation is $0.1$, the fixation probability and time is 
 We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,q)$ where $q \in [10^{-7},10^{-1}]$. 
 We found again that results of the DM approximation are similar to those from stochastic simulations of the full model~(\Cref{fig:hetro_alpha}).
 
-
-
-\begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/num_sims.pdf}
-  \caption{
-  \textbf{DM Approximation precision as function of number of simulations.}
-  Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 or more simulations.
-  Both fluctuate around the analytic fixation probability approximation (black; \cref{eq:kimura_p}).
-  Markers are averages across simulations, error bars are 95\% confidence intervals.
-  Here, population size, $N=1000$; success-bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success-bias value, $\beta(A)=0.956$.}	
-  \label{fig:num_sims}
-\end{figure}
-
-
 \begin{figure}
     \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_mutation.pdf}
   \caption{
   \textbf{Robustness of DM approximations to success estimation error.}
   Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
   Markers are averages across simulations, error bars are 95\% confidence intervals.
-  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,\eta^2)$ where $\eta \in [10^{-7},10^{-1}]$.
+  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,\eta^2)$ where $\eta^2$ in on the x-axis.
   }	
   \label{fig:hetro_error}
 \end{figure}
@@ -632,14 +593,14 @@ During cultural transmission, cultural traits such as attitudes, values, beliefs
 Some cultural traits or cultural role-models may be copied more often due to transmission biases. 
 A common bias is success bias, in which copiers are more likely to copy a successful role-model. Many models assume that success can be accurately estimated.
 However, it has been suggested that because it is hard to estimate success, a more common bias is \emph{prestige bias}---a bias towards role-models perceived to be successful.
-This perceived success can be determined by performance in another trait, i.e., by indirect success \citet{evolutionBook,fijian_social_bias}, or by the influence an individual has on others \citet{prestige_cultural_learning,prestige_evolution}.
+This perceived success can be determined by performance in another trait, i.e., by indirect success \citep{evolutionBook,fijian_social_bias}, or by the influence an individual has on others \citep{prestige_cultural_learning,prestige_evolution}.
 
-Inspired by a model by \citet{evolutionBook}, we developed a cultural-evolution model with prestige bias that includes both indirect success and influence biases, where the latter is a bias towards role-models with many copiers.
+We developed a cultural-evolution model with prestige bias that includes both indirect success and influence biases, where the latter is a bias towards role-models with many copiers.
 We model the these biases using a stochastic role-model choice process: each copier, in its turn, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
 
 Hence, we have a model with two "nested" stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
 To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DM, \Cref{cor:dirichlet}).
-The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model, rather than the copier.
+The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model and not the copier.
 
 Analyzing the model with the DM distribution, we found approximations for the fixation probability and fixation time of a cultural trait under biased transmission in a constant environment.
 Our approximations are similar to Kimura's evolutionary-genetic approximations, such that (i) the difference between the resident and invading cultural trait values, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) increasing the relative weight of influence versus success bias, $\alpha$, decreases the effective population size, $N_e$~(\Cref{fig:var_alpha}).
@@ -652,7 +613,7 @@ We also examined a scenario in which copiers can adapt their success-weight bias
 We found that as the role-model choice process proceeds (that is, more copiers make their choices), both the success-bias weight (adapted by copiers) and the estimation error decrease. 
 The latter is significantly lower compared to a population using a constant, fixed success-bias weight, regardless of the value of the constant weight (\Cref{fig:influence_advantage}).
 This suggests that the later a copier makes its choice, the more it should rely on choices of previous copiers, and the less it should rely on its own estimation.
-The rationale, then, is that the more information a copier has, e.g. by using others as information sources, the more informative and effective his choice can be.
+The rationale, then, is that the more information a copier has, e.g., by using others as information sources, the more informative and effective his choice can be.
 
 \paragraph{Prestige in the literature.}
 
@@ -722,25 +683,22 @@ In contrast, Machiavelli viewed leaders as rulers who exercise influence by impo
 Several adjustments could be made so that our model reflects these leadership styles, such as assuming there is a correlation between phenotype to leadership style. 
 The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
 
-So far we examined different variations of our model using a Wright-Fisher model as our basis, mainly because we wanted to base our model on a known one from the literature, namely \citet{evolutionBook} indirect bias model. When approximating our model by comparing it to a Polya Urn process, we noticed that our model would be identical to a model where every copier that chose a role-model would copy its trait and join the role-models during the selection process. Based on this, we theorize that when using a Moran model as basis instead of a Wright-Fisher mode, we would get very similar, and perhaps identical results. It would be interesting to run simulations and analyze that model, to prove or disprove our hypothesis.
-
 \paragraph{Conclusions.}
 Here, we studied a model of cultural evolution under two transmission biases: the commonly studied success bias, together with influence bias, which has so far received less attention. We found approximations for this complex dynamics. We then showed that success bias affects the evolutionary dynamics much like natural selection does, whereas influence bias has a similar effect to random genetic drift. We also find a clear advantage to individuals that can choose the relative weight of the two biases.
 
 {\small
 \section*{Acknowledgements}
-We thank Marcus Feldman, Martin Pontz, Gili Greenbaum, Alon Rozen, and Tal Simon for discussions and comments.
+We thank Marc Feldman, Martin Pontz, Gili Greenbaum, Alon Rozen, and Tal Simon for discussions and comments.
 This work was supported in part by 
-Minerva Stiftung Center for Lab Evolution (YR),
-and 
-the John Templeton Foundation (YR 61809).
+Minerva Stiftung Center for Lab Evolution (YR) and  the John Templeton Foundation (YR 61809).
 }
 
 \section*{References}
 \nolinenumbers
 \bibliography{refs}
 %\bibliographystyle{agsm}
-\bibliographystyle{apalike}
+%\bibliographystyle{apalike}
+\bibliographystyle{unsrtnat}
 
 \pagebreak
 
@@ -1002,5 +960,44 @@ which proves the diffusion term.
 \end{appendices}
 
 %%%
+
+\newpage
+\section*{Supplementary Figures}
+\beginsupplement % https://support.authorea.com/en-us/article/how-to-create-an-appendix-section-or-supplementary-information-1g25i5a/
+
+\begin{figure}[h]
+    \includegraphics[width=0.7\linewidth]{../figures/final/GBD_validation.pdf}
+  \caption{
+  \textbf{Numerical validation of the GB approximation.}
+  The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
+  Here, population size, $N=2,000$; bias weight, $\alpha=0.1$; idea phenotype value, $\hat{A}=1$; role-model traits $\vec{A} \sim N(0,1)$; success bias value, $\beta(A)=0.956$.}	
+  \label{fig:GBD}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/final/DM_validation.pdf}
+  \caption{
+  \textbf{Numerical validation of the DM approximation.}
+  We performed computational "experiments" of the role-model choice process and compared them to the DM distribution. 
+  \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the experiments (blue) is very small. 
+  \textbf{(B)} The log-likelihood of the DM distribution for results of the experiments (red vertical line) is much higher compared to the log-likelihood of permutations of experiments (blue histogram).
+  Here, population size, $N=100$; number of experiments, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.
+  No estimation error or bias is applied, and traits are estimated and copied perfectly.}	
+  \label{fig:DM_validation}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{../figures/final/num_sims.pdf}
+  \caption{
+  \textbf{DM Approximation precision as function of number of simulations.}
+  Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 or more simulations.
+  Both fluctuate around the analytic fixation probability approximation (black; \cref{eq:kimura_p}).
+  Markers are averages across simulations, error bars are 95\% confidence intervals.
+  Here, population size, $N=1000$; success-bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success-bias value, $\beta(A)=0.956$.}	
+  \label{fig:num_sims}
+\end{figure}
+
 
 \end{document}
