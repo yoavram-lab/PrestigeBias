@@ -108,13 +108,12 @@ headheight=12pt
 % Authors
 \renewcommand\Affilfont{\small}
 
-\author[1]{Saar Egozi}
+\author[1,3]{Saar Egozi}
 \author[2,3,$\dagger$]{Yoav Ram}
 
 \affil[1]{School of Computer Science, Reichman University, Herzliya, Israel}
 \affil[3]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv, Israel}
 \affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv, Israel}
-%\affil[*]{These authors contributed equally to this work}
 \affil[$\dagger$]{Corresponding author: yoav@yoavram.com}
 
 
@@ -397,26 +396,6 @@ When estimation error is applied, we sample $J_i$ for each copier $i$ from a nor
 Even when the standard deviation is $0.1$, the fixation probability and time is similar~(\Cref{fig:hetro_error}). 
 We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,q)$ where $q \in [10^{-7},10^{-1}]$. 
 We found again that results of the DM approximation are similar to those from stochastic simulations of the full model~(\Cref{fig:hetro_alpha}).
-
-\begin{figure}
-    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_mutation.pdf}
-  \caption{
-  \textbf{Robustness of DM approximations to success estimation error.}
-  Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
-  Markers are averages across simulations, error bars are 95\% confidence intervals.
-  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,\eta^2)$ where $\eta^2$ in on the x-axis.
-  }	
-  \label{fig:hetro_error}
-\end{figure}
-
-
-\begin{figure}
-    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_changing_alpha.pdf}
-   \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
-   Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high variation in success bias weight.Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
-  Here, population size, $N=1000$; success bias weight normally distributed, $\alpha\sim N(0.5,x^2)$; phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
-  \label{fig:hetro_alpha}
-\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -973,6 +952,27 @@ which proves the diffusion term.
   Markers are averages across simulations, error bars are 95\% confidence intervals.
   Here, population size, $N=1000$; success-bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success-bias value, $\beta(A)=0.956$.}	
   \label{fig:num_sims}
+\end{figure}
+
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_mutation.pdf}
+  \caption{
+  \textbf{Robustness of DM approximations to success estimation error.}
+  Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
+  Markers are averages across simulations, error bars are 95\% confidence intervals.
+  5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,\eta^2)$ where $\eta^2$ in on the x-axis.
+  }	
+  \label{fig:hetro_error}
+\end{figure}
+
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_changing_alpha.pdf}
+   \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
+   Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high variation in success bias weight.Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
+  Here, population size, $N=1000$; success bias weight normally distributed, $\alpha\sim N(0.5,x^2)$; phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
+  \label{fig:hetro_alpha}
 \end{figure}
 
 
