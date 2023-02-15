@@ -140,10 +140,10 @@ Cultural transmission may combine vertical transmission, in which parents transm
 It has been demonstrated that non-vertical cultural transmission can maintain maladaptive traits, which can be beneficial in changing environments \citep{changeEnv}. 
 
 Transmission biases may cause a cultural trait to have a disproportionate probability to be transmitted compared to its frequency in the population. \textit{Success bias} occurs when individuals prefer to copy from role models that demonstrate success in some activity, such as fishing, growing yams, using medicinal plants \citep{fijian_social_bias}, or hunting \citep{Mesoudi2008}, and it can increase the probability of learning a successful trait \citep{Borofsky2022}. 
-Indeed, in a tournament between learning strategies conducted by \citet{strategiesPaper}, most winner strategies included a mixture of success-biased social learning and individual learning, implying that success-biased learning is a good strategy, but that by itself it is not enough to best other strategies, even when success is measured accurately.
+Indeed, in a tournament between learning strategies conducted by \citep{strategiesPaper}, most winner strategies included a mixture of success-biased social learning and individual learning, implying that success-biased learning is a good strategy, but that by itself it is not enough to best other strategies, even when success is measured accurately.
 
 % TODO edit so that we focus on indirect success - aka prestige - and decompose it to content based - which we call success - and context based - which we call influence
-\citet[Ch.~5]{evolutionBook} have suggested that the evaluation of success can be divided to three categories: \emph{direct bias}, \emph{indirect bias} and \emph{frequency-dependent bias}.
+\citep[Ch.~5]{evolutionBook} have suggested that the evaluation of success can be divided to three categories: \emph{direct bias}, \emph{indirect bias} and \emph{frequency-dependent bias}.
 A direct bias occurs when one phenotype is more attractive than other phenotypes, and is evaluated by \emph{directly} testing the trait.
 For example, an individual observing a ping-pong match can attempt the observed paddle grips to determine which grip is better.
 A frequency-dependent bias occurs when the probability to copy a phenotype is higher or lower than the frequency of the phenotype among demonstrators. 
@@ -152,15 +152,15 @@ The effects of conformity and non-conformity on cultural evolution have been stu
 An indirect bias occurs when an individual uses one phenotype to determine the attractiveness of another phenotype.
 For example, an observer may copy the paddle grip of the ping-pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
 This, however, may cause mismatches between the copied trait and the rest of the cultural or genetic repertoire of the individual \citep{Kolodny2022}.
-Furthermore, \citet[Ch. 8]{evolutionBook} have suggested that maladaptive traits may spread widely in a population if indirect biases are strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
-Indeed, \citet{cooperation} have shown that helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost.
+Furthermore, \citep[Ch. 8]{evolutionBook} have suggested that maladaptive traits may spread widely in a population if indirect biases are strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
+Indeed, \citep{cooperation} have shown that helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost.
 
-\citet{fijian_social_bias} have studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They have suggested that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
-\citet[Ch.~8]{evolutionBook} and \citet{complexityPaper} have suggested that prestige biases are probably more common in humans than success biases, and prestige is often mentioned in the cultural evolution literature, however there are few models of prestige bias.
+\citep{fijian_social_bias} have studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They have suggested that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits.
+\citep[Ch.~8]{evolutionBook} and \citep{complexityPaper} have suggested that prestige biases are probably more common in humans than success biases, and prestige is often mentioned in the cultural evolution literature, however there are few models of prestige bias.
 
 A broader definition of prestige is the ``widespread respect and admiration felt for someone or something on the basis of a perception of their achievements or quality'' (New Oxford American Dictionary).
-Indeed, \citet{prestige_cultural_learning} have defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'', and demonstrated its occurrence in in 3-4 year old children.
-\citet{prestige_evolution} gave a similar definition of prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature.
+Indeed, \citep{prestige_cultural_learning} have defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'', and demonstrated its occurrence in in 3-4 year old children.
+\citep{prestige_evolution} gave a similar definition of prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature.
 
 To distinguish this form of indirect bias from other definitions of prestige, we call it \emph{influence bias}.
 This is an important distinction, as influence is a context-based bias, rather than a content-based bias: it does not depend on the phenotype itself but rather on the number of copiers that already copied each role-model, which may be easier and more accurate to estimate compared to success. 
@@ -174,12 +174,12 @@ We develop analytic approximations for this model and analyze its dynamics. We f
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
 
-We begin with a continuous trait model with indirect bias suggested by \citet{evolutionBook}, develop an extension with influence bias, and then develop a model with a dichotomous trait.
+We begin with a continuous trait model with indirect bias suggested by \citep{evolutionBook}, develop an extension with influence bias, and then develop a model with a dichotomous trait.
 We implemented our stochastic models and approximations, performed statistical analyses, and produced figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
 
 \subsection*{Continuous trait}
-We follow the model of \citet{evolutionBook}, assuming only oblique transmission of the trait and omitting the indirect trait in order to reduce model complexity. 
+We follow the model of \citep{evolutionBook}, assuming only oblique transmission of the trait and omitting the indirect trait in order to reduce model complexity. 
 We consider a population of $N$ individuals, described by a single trait with a continuous value.
 Each generation, $N$ naive individuals, or copiers, choose an individual from the previous generation, or role-models, from which they will copy their trait. Similar to a Wright-Fisher model, we assume non-overlapping generations such that the entire population is replaced in each generation.
 The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$. We assume the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
@@ -189,7 +189,7 @@ A_{i}(t+1) = F_i(\vec{A}(t)) \;.
 \end{equation}
 
 \paragraph{Success bias.}
-\citet[Ch.~8, p.~247-249]{evolutionBook} describe a blended transmission algorithm by defining $F$ as a weighted average of the traits of all role-models, 
+\citep[Ch.~8, p.~247-249]{evolutionBook} describe a blended transmission algorithm by defining $F$ as a weighted average of the traits of all role-models, 
 \begin{equation}\label{eq:boydF}
 F_i(\vec{A}) = \sum_{j=1}^N G_{i,j}\cdot A_{i,j} \;, 
 \end{equation}
@@ -208,7 +208,7 @@ and $\beta(\cdot)$ is the bias function that quantifies the success bias of a ro
 with $\hat{A}$ as the arbitrary optimal trait value, and $J$ and $b$ as parameters that control the bias strength.
 Therefore, $G_{i,j}$ is a relative success score that copier $i$ assigns to role-model $j$, equivalent to relative fitness in evolutionary-genetic transmission models.
 
-\citet{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We thus develop a similar stochastic model with transmission from a single random role-model. Instead of \cref{eq:boydF}, we define the transmission function $F$ as a random variable with its distribution given by 
+\citep{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We thus develop a similar stochastic model with transmission from a single random role-model. Instead of \cref{eq:boydF}, we define the transmission function $F$ as a random variable with its distribution given by 
 \begin{equation}\label{eq:ourF}
 \Pr\big(F_i(\vec{A}) = A_{j}\big) = G_{i,j} \;,
 \end{equation}
@@ -232,7 +232,7 @@ Following \cref{eq:ourF}, the probability that the $i$-th copier chose role-mode
 \begin{equation}\label{eq:recPrestige}
 Pr(S_{i,j}=1 \mid S_{1,j},S_{2,j},...,S_{i-1,j}) = G_{i,j} \;.
 \end{equation}
-The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by success--the estimated biased trait value $\beta(A_{i,j})$--and influence--the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} of \citet{evolutionBook} with
+The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by success--the estimated biased trait value $\beta(A_{i,j})$--and influence--the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} of \citep{evolutionBook} with
 \begin{equation}\label{eq:prestige}
 G_{i,j} = \frac{\alpha_{ij} \cdot \beta(A_{i,j}) + (1-\alpha_{ij}) \cdot K_{i-1,j}}{W_i} \;.
 \end{equation}
@@ -294,7 +294,7 @@ Using conditional probability and \cref{eq:recurrence},
 Q_j(k,i) = P_j(S_{i,j}=1 | k-1,i-1) \cdot Q_j(k-1,i-1) + P_j(S_{i,j} =0 | k,i-1) \cdot Q_j(k,i-1) \;,
 \end{equation}
 where $S_{i,j} =1 $ when the $i$-th copier chooses role-model $j$.
-\Cref{recursive} is equivalent to eq.~(2.1) by \citet{GBD}, which completes the proof.
+\Cref{recursive} is equivalent to eq.~(2.1) by \citep{GBD}, which completes the proof.
 \end{proof}
 This result gives the following two corollaries on the expected number of followers of a given role-model by the end of the role-model choice process. The proof of \Cref{cor:GBD} is in Appendix~\ref{sec:GBD}.
 \\
@@ -305,7 +305,7 @@ $\E[K_{N,j}] = N \cdot G_{1,j}$, where $G_{1,j}$ is the probability of the first
 \end{corollary}
 
 \begin{proof}
-\citet[eq.~(2.3)]{GBD} show that 
+\citep[eq.~(2.3)]{GBD} show that 
 $\E[k] = N \cdot Q_j(1,1)$ (modified from their notation).
 $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-model choices are made.
 $Q_j(1,1) = G_{1,j}$ by definition, which completes the proof.
@@ -366,7 +366,7 @@ G_{i,j} =
 Substituting $M=N$, $o_j = \alpha'\beta(A'_j)$, and $w_{i,j} = K_{i,j}$ in \cref{eq:polya} gives \cref{eq:copier_choose}, thus completing the proof.
 \end{proof} 
 
-\citet[section 2]{dirichlet} prove that the proportion of different colored balls in a \emph{P\'{o}lya urn model} converges to the Dirichlet distribution as the number of draws approaches infinity, based on the \emph{Martingale Convergence Theorem} \citep{martingaleBook}.
+\citep[section 2]{dirichlet} prove that the proportion of different colored balls in a \emph{P\'{o}lya urn model} converges to the Dirichlet distribution as the number of draws approaches infinity, based on the \emph{Martingale Convergence Theorem} \citep{martingaleBook}.
 We therefore have an approximation for the relative prestige each role-model has when evaluated by copiers. Thus, choosing the role-models for all copiers is equivalent to drawing from a Multinomial distribution where the parameters are the modified weights from a Dirichlet distribution and we have the following corollary.
 \\
 
@@ -430,7 +430,7 @@ s=1-\beta(A), \quad N_e=\alpha N + (1-\alpha) \;.
 
 Note that when $N>>1$, $N_e \approx \alpha N$, resulting in a very convenient expression.\\
 
-Using our effective selection coefficient, $1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by \citet[eq.~8]{kimura}, we get the following result:
+Using our effective selection coefficient, $1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by \citep[eq.~8]{kimura}, we get the following result:
 \begin{result}[Fixation probability]
 The fixation probability is approximately
 \begin{equation}\label{eq:kimura_p}
@@ -439,7 +439,7 @@ The fixation probability is approximately
 where $x$ is the initial frequency of the favored phenotype $\hat{A}$.
 \end{result}
 
-Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citet[eq.~17]{kimura_average}.\\
+Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citep[eq.~17]{kimura_average}.\\
 
 % TODO SAAR check these equations vs what you have in the source code
 \begin{result}[Fixation time] The fixation time (conditioned on fixation) from an initial frequency $x$ is approximately
@@ -462,7 +462,7 @@ We find see that the two models have similar dynamics, and both are well approxi
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/kimura_var.pdf}
+    \includegraphics[width=\linewidth]{kimura_var.pdf}
   \caption{\textbf{Fixation probability and time in a constant environment.}
   Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row.
   The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
@@ -474,7 +474,7 @@ We find see that the two models have similar dynamics, and both are well approxi
 
 
 \paragraph*{Changing environment}. After finding a good approximation in constant environment, where the favorable trait is always $\hat{A}$, we proceeded to find an approximation for a changing environment. 
-Following \citet{changeEnv}, we denote $k$ as the number of generations in which the invading phenotype is favored by success bias, and $l$ as the number of generations in which the resident phenotype is favored by success bias.
+Following \citep{changeEnv}, we denote $k$ as the number of generations in which the invading phenotype is favored by success bias, and $l$ as the number of generations in which the resident phenotype is favored by success bias.
 We then proceed to find expressions for the expectation and variance of the change in frequency between $n=k+l$ generations. 
 The proof is in Appendix~\ref{sec:drift_diff_chang}.
 \\
@@ -493,7 +493,7 @@ where $S_n=\sum\limits_{t=1}^{n} N (1-\beta_t)$.
 \end{result}
 
 Note that here, we have the average selection coefficient during a cycle of $n$ generations as the selection coefficient \cref{eq:kimura_p}.
-Using the drift and diffusion terms and following \citet{changeEnv}, we can approximate the fixation probability in a changing environment using
+Using the drift and diffusion terms and following \citep{changeEnv}, we can approximate the fixation probability in a changing environment using
 \begin{equation}\label{eq:ch_env}
 \tilde\pi(x) = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}} \;.
 \end{equation}
@@ -516,7 +516,7 @@ We then tried to change the ratio between the number of cycles where $\hat{A}$ i
 
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{../figures/final/ch_env.pdf}
+    \includegraphics[width=\linewidth]{ch_env.pdf}
   \caption{\textbf{Fixation probability in a changing environment.}
 \textbf{(A)} Fixation probability decreases with the the success-bias weight (bottom x-axis) and effective population size (top x-axis). The approximation (blue; \cref{eq:ch_env}) agrees with simulation results (orange). 
 \textbf{(B)} Fixation probability increases with the success coefficient, $\beta$.
@@ -544,7 +544,7 @@ Moreover, their estimation error is much lower compared to a constant success-bi
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/choose_bias.pdf}
+    \includegraphics[width=\linewidth]{choose_bias.pdf}
   \caption{
   \textbf{Advantage of an adaptive success-bias weight.}
   Both success-bias weight $\alpha$ (\textbf{A}) and estimation error (\textbf{B}) decrease during the role-model choosing process, demonstrating that influence becomes more favored as more copiers have made their choice.
@@ -585,38 +585,38 @@ This suggests that the later a copier makes its choice, the more it should rely 
 The rationale, then, is that the more information a copier has, e.g., by using others as information sources, the more informative and effective his choice can be.
 
 %\paragraph{Empirical evidence of prestige bias}
-\citet{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
+\citep{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
 Their definition of prestige is similar to our influence bias. They showed that the odds of 3-4 years-old children learning from an adult role-model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of their learning from a role-models whom bystanders ignored.
 They also note that prestige effects are domain sensitive: they found that prestigious role-models were attended more when demonstrating artifact use, whereas role-models presenting food preferences had less attendants, suggesting that the domain itself (artifact use vs. food preference) can affect the attendance, and hence the prestige of the role-model.
-This lead \citet{prestige_cultural_learning} to suggest that when the trait is costly to learn individually, prestige will have a stronger bias.
+This lead \citep{prestige_cultural_learning} to suggest that when the trait is costly to learn individually, prestige will have a stronger bias.
 It would be interesting to include costs in our model to try and observe these effects and dynamics in a large population.
 
-According to \citet{fijian_social_bias}, evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information. 
+According to \citep{fijian_social_bias}, evolutionary theorists propose that natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information. 
 Thus, they studied Fijian villages to examine if and how such biases emerge in a small-scale society.
 They found that Fijian villagers are more likely to learn from role-models perceived as more successful/knowledgeable, both within and across domains.
 Their research thus suggests that copying from those perceived as successful, rather than actually are successful, is a common phenomena. 
 They show that the social networks representing copier--role-model relationships are centralized, suggesting that it is consistent with the prediction that people substantially share notions about who is a good cultural model, but that individuals' role-model selections are influenced by multiple factors.
 
 We can also find prestige bias in more modern domains such as western medicine.
-\citet{medical_prestige} examined literature from 1950 to 2005 on the effects of prestige on medicinal practices. They found that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, whereas medicine and practices with opposite characteristics had low levels of prestige. 
+\citep{medical_prestige} examined literature from 1950 to 2005 on the effects of prestige on medicinal practices. They found that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, whereas medicine and practices with opposite characteristics had low levels of prestige. 
 For example, they found that surgery counts as the most prestigious specialty, while psychiatry is the less prestigious.
 In addition, doctors tend to rank practices that require more time to master as more prestigious, while other procedures that are considered easier to master are less prestigious. 
 This means that there may be very important practices that are neglected due to prestige bias.
 They concluded that such differences in prestige may bear consequences for actual priority setting in healthcare systems.
 
 Prestige bias can help to cheaply estimate and acquire knowledge, which may facilitate survival and reproduction. However, it is not always the case, and there could be negative repercussions to this bias, such as invasion of maladaptive traits.
-\citet{best_of_k} mention that social learning not only takes the form of random copying of other individuals, but also involves learners' choice of what to learn and from whom to learn. They suggest a best-of-k model where an individual samples~$k$ role-models and chooses the one he deems most "successful". They mentioned that a previous mathematical analysis has shown that it may sometimes result in maladaptive cultural evolution when the payoffs associated with cultural variants vary stochastically. In such a case, learners may be selectively disfavored and in the long run replaced by unbiased learners, who simply copy someone chosen at random. They developed new mathematical models that are simpler and mathematically tractable. They found that best-of-k learning, unlike unbiased learning, can facilitate the invasion of an on average inferior variant that sometimes gives a very high payoff. Our model, which includes influence bias, is consistent with this claim. When a maladaptive trait is "piggybacking" a role-model with high influence, this trait could spread in the population.
+\citep{best_of_k} mention that social learning not only takes the form of random copying of other individuals, but also involves learners' choice of what to learn and from whom to learn. They suggest a best-of-k model where an individual samples~$k$ role-models and chooses the one he deems most "successful". They mentioned that a previous mathematical analysis has shown that it may sometimes result in maladaptive cultural evolution when the payoffs associated with cultural variants vary stochastically. In such a case, learners may be selectively disfavored and in the long run replaced by unbiased learners, who simply copy someone chosen at random. They developed new mathematical models that are simpler and mathematically tractable. They found that best-of-k learning, unlike unbiased learning, can facilitate the invasion of an on average inferior variant that sometimes gives a very high payoff. Our model, which includes influence bias, is consistent with this claim. When a maladaptive trait is "piggybacking" a role-model with high influence, this trait could spread in the population.
 In addition, they show that best-of-k learning can be stable against invasion by unbiased learning if social learning is sometimes combined with individual learning. 
 Our model only includes social learning, and not individual learning, but it could be interesting to combine it with individual learning and see how it affects the dynamics.
 
 Prestige bias can also accelerate reversal of harmful traditions such as child marriage and domestic violence. 
-\citet{harmful_traditions} suggest a \emph{spillover}  mechanism, in which an intervention affects a large enough group in a target population, so that others not included in the intervention also change their behavior.
+\citep{harmful_traditions} suggest a \emph{spillover}  mechanism, in which an intervention affects a large enough group in a target population, so that others not included in the intervention also change their behavior.
 They found that there are individuals who act as \emph{agents}, who are often looked upon, and therefore they are ideal targets for interventions. This is similar to influential role-models in our model, where a prestigious individual will be copied more often, and will therefore spread his trait faster and wider in the population.
 They also suggest a way to use this phenomena to change existing traditions in a population. It is very clear however, that just as it can be used to end harmful traditions, the same agents could start harmful traditions.
 
 
-\citet{social_brains} hypothesized that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
-Following up on this, \citet{collective_brains} offered that prestige can directly affect human physical evolution. They present a concept called \emph{cultural brains}---brains that evolved primarily for the acquisition of adaptive knowledge.
+\citep{social_brains} hypothesized that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
+Following up on this, \citep{collective_brains} offered that prestige can directly affect human physical evolution. They present a concept called \emph{cultural brains}---brains that evolved primarily for the acquisition of adaptive knowledge.
 They then develop a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. 
 They also presented the \emph{cumulative cultural brain} hypothesis, which proposes that human brains have evolved with an ability and tendency for selective, high-fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
 They suggest that one of the reasons for the extreme increase in brain size in humans is the ability to "cheaply" acquire adaptive knowledge via transmission biases such as prestige.
@@ -626,9 +626,9 @@ One path forward is an analysis of the dynamics of the adaptive success-bias wei
 It may also be possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
 Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
 
-Another way to expand our model is to account for the two types of prestige or leadership suggested by \citet{dual_leadership} that are attributed to Confucius and Machiavelli. Confucius viewed leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
+Another way to expand our model is to account for the two types of prestige or leadership suggested by \citep{dual_leadership} that are attributed to Confucius and Machiavelli. Confucius viewed leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
 In contrast, Machiavelli viewed leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence. 
-\citet{dual_leadership} suggest that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic concept of leadership. 
+\citep{dual_leadership} suggest that these two opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic concept of leadership. 
 Several adjustments could be made so that our model reflects these leadership styles, such as assuming there is a correlation between phenotype to leadership style. 
 The emerging cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
 
@@ -644,10 +644,172 @@ Minerva Stiftung Center for Lab Evolution (YR) and  the John Templeton Foundatio
 
 \section*{References}
 \nolinenumbers
-\bibliography{refs}
-%\bibliographystyle{agsm}
-%\bibliographystyle{apalike}
-\bibliographystyle{unsrtnat}
+\begin{thebibliography}{}
+
+
+\bibitem{fliesPaper}
+  Battesti, Marine, et al. "Spread of social information and dynamics of social transmission within Drosophila groups." Current biology 22.4 (2012): 309-313.
+
+\bibitem{transmissionVectors}
+Creanza, Nicole, Oren Kolodny, and Marcus W. Feldman. "Cultural evolutionary theory: How culture evolves and why it matters." Proceedings of the National Academy of Sciences 114.30 (2017): 7782-7789.
+
+\bibitem{negativeFrequency}
+Aljadeff, Naama, Luc-Alain Giraldeau, and Arnon Lotem. "Competitive advantage of rare behaviours induces adaptive diversity rather than social conformity in skill learning." Proceedings of the Royal Society B 287.1933 (2020): 20201259.
+
+\bibitem{transmissionVectorsBook}
+Cavalli-Sforza, Luigi Luca, and Marcus W. Feldman. Cultural transmission and evolution: A quantitative approach. No. 16. Princeton University Press, 1981.
+
+\bibitem{evolutionBook}
+Boyd, Robert, and Peter J. Richerson. Culture and the evolutionary process. University of Chicago press, 1988.
+
+\bibitem{complexityPaper}
+Fogarty, Laurel, et al. "The driving forces of cultural complexity: neanderthals, modern humans, and the question of population size." Human Nature 28 (2017): 39-52.
+
+\bibitem{strategiesPaper}
+Rendell, Luke, et al. "Why copy others? Insights from the social learning strategies tournament." Science 328.5975 (2010): 208-213.
+
+\bibitem{sexualSelectionBook}
+Andersson, Malte, and Yoh Iwasa. "Sexual selection." Trends in ecology \& evolution 11.2 (1996): 53-58.
+
+\bibitem{chimpsCopy}
+Kendal, Rachel, et al. "Chimpanzees copy dominant and knowledgeable individuals: implications for cultural diversity." Evolution and Human Behavior 36.1 (2015): 65-72.
+
+\bibitem{chimpsPrestige}
+Horner, Victoria, et al. "Prestige affects cultural learning in chimpanzees." PloS one 5.5 (2010): e10625.
+
+\bibitem{dualEvolution}
+Henrich, Joseph, and Richard McElreath. "Dual-inheritance theory: the evolution of human cultural capacities and cultural evolution." (2007).
+
+\bibitem{elepahntsRepo}
+McComb, Karen, et al. "Matriarchs as repositories of social knowledge in African elephants." Science 292.5516 (2001): 491-494.
+
+\bibitem{wtfGene}
+Eickbush, Michael T., Janet M. Young, and Sarah E. Zanders. "Killer meiotic drive and dynamic evolution of the wtf gene family." Molecular Biology and Evolution 36.6 (2019): 1201-1214.
+
+\bibitem{pageRank}
+Xing, Wenpu, and Ali Ghorbani. "Weighted pagerank algorithm." Proceedings. Second Annual Conference on Communication Networks and Services Research, 2004.. IEEE, 2004.
+
+\bibitem{conformism}
+Molleman, Lucas, Ido Pen, and Franz J. Weissing. "Effects of conformism on the cultural evolution of social behaviour." PloS one 8.7 (2013): e68153.
+
+\bibitem{GBD}
+Drezner, Zvi, and Nicholas Farnum. "A generalized binomial distribution." Communications in Statistics-Theory and Methods 22.11 (1993): 3051-3063.
+
+\bibitem{dirichlet}
+Frigyik, Bela A., Amol Kapila, and Maya R. Gupta. "Introduction to the Dirichlet distribution and related processes." Department of Electrical Engineering, University of Washignton, UWEETR-2010-0006 6 (2010): 1-27.
+
+\bibitem{martingaleBook}
+Durrett, Richard, and R. Durrett. Essentials of stochastic processes. Vol. 1. New York: Springer, 1999.
+
+\bibitem{kimura}
+Kimura, Motoo. "On the probability of fixation of mutant genes in a population." Genetics 47.6 (1962): 713.
+
+\bibitem{durret}
+Durrett, Richard, and Richard Durrett. Probability models for DNA sequence evolution. Vol. 2. New York: Springer, 2008.
+
+\bibitem{changeEnv}
+Ram, Yoav, Uri Liberman, and Marcus W. Feldman. "Evolution of vertical and oblique transmission under fluctuating selection." Proceedings of the National Academy of Sciences 115.6 (2018): E1174-E1183.
+
+\bibitem{animal_leadership}
+King, Andrew J., and Guy Cowlishaw. "Leaders, followers, and group decision-making." Communicative \& integrative biology 2.2 (2009): 147-150.
+
+\bibitem{dual_leadership}
+Van Vugt, Mark, and Jennifer E. Smith. "A dual model of leadership and hierarchy: Evolutionary synthesis." Trends in Cognitive Sciences 23.11 (2019): 952-967.
+
+\bibitem{fijian_social_bias}
+Henrich, Joseph, and James Broesch. "On the nature of cultural transmission networks: evidence from Fijian villages for adaptive learning biases." Philosophical Transactions of the Royal Society B: Biological Sciences 366.1567 (2011): 1139-1148.
+
+\bibitem{harmful_traditions}
+Efferson, Charles, Sonja Vogt, and Ernst Fehr. "The promise and the peril of using social influence to reverse harmful traditions." Nature human behaviour 4.1 (2020): 55-68.
+
+\bibitem{prestige_evolution}
+Henrich, Joseph, and Francisco J. Gil-White. "The evolution of prestige: Freely conferred deference as a mechanism for enhancing the benefits of cultural transmission." Evolution and human behavior 22.3 (2001): 165-196.
+
+\bibitem{best_of_k}
+Takahashi, Takuya, and Yasuo Ihara. "Cultural and evolutionary dynamics with best-of-k learning when payoffs are uncertain." Theoretical Population Biology 128 (2019): 27-38.
+
+\bibitem{medical_prestige}
+Norredam, Marie, and Dag Album. "Prestige and its significance for medical specialties and diseases." Scandinavian journal of public health 35.6 (2007): 655-661.
+
+\bibitem{collective_brains}
+Muthukrishna, Michael, and Joseph Henrich. "Innovation in the collective brain." Philosophical Transactions of the Royal Society B: Biological Sciences 371.1690 (2016): 20150192.
+
+\bibitem{social_brains}
+Dunbar, Robin IM. "The social brain hypothesis and its implications for social evolution." Annals of human biology 36.5 (2009): 562-572.
+
+\bibitem{prestige_cultural_learning}
+Chudek, Maciej, et al. "Prestige-biased cultural learning: Bystander's differential attention to potential models influences children's learning." Evolution and human behavior 33.1 (2012): 46-56.
+
+\bibitem{evolution_of_cultural_evolution}
+Henrich, Joseph, and Richard McElreath. "The evolution of cultural evolution." Evolutionary Anthropology: Issues, News, and Reviews: Issues, News, and Reviews 12.3 (2003): 123-135.
+
+\bibitem{cultural_traits}
+O'Brien, Michael J., et al. "Cultural traits as units of analysis." Philosophical Transactions of the Royal Society B: Biological Sciences 365.1559 (2010): 3797-3806.
+
+\bibitem{dolphins_whales}
+Whitehead, Hal. "Gene–culture coevolution in whales and dolphins." Proceedings of the National Academy of Sciences 114.30 (2017): 7814-7821.
+
+\bibitem{cooperation}
+Cohen, Dor, et al. "Non-vertical cultural transmission, assortment and the evolution of cooperation." Proceedings of the Royal Society B 288.1951 (2021): 20203162.
+
+\bibitem{conformity}
+Denton, Kaleda K., Yoav Ram, and Marcus W. Feldman. "Conformity and content-biased cultural transmission in the evolution of altruism." Theoretical Population Biology 143 (2022): 52-61.
+
+\bibitem{anticonformity}
+Denton, Kaleda Krebs, et al. "Cultural evolution of conformity and anticonformity." Proceedings of the National Academy of Sciences 117.24 (2020): 13603-13614.
+
+\bibitem{facebook_marketing}
+Lee, Woojin, Lina Xiong, and Clark Hu. "The effect of Facebook users’ arousal and valence on intention to go to the festival: Applying an extension of the technology acceptance model." International Journal of Hospitality Management 31.3 (2012): 819-827.
+
+\bibitem{social_influence}
+Anagnostopoulos, Aris, Ravi Kumar, and Mohammad Mahdian. "Influence and correlation in social networks." Proceedings of the 14th ACM SIGKDD international conference on Knowledge discovery and data mining. 2008.
+
+\bibitem{influence_analysis}
+Peng, Sancheng, et al. "Influence analysis in social networks: A survey." Journal of Network and Computer Applications 106 (2018): 17-32.
+
+\bibitem{social_media}
+Diga, Marichris, and Tom Kelleher. "Social media use, perceptions of decision-making power, and public relations roles." Public Relations Review 35.4 (2009): 440-442.
+
+\bibitem{python}
+Van Rossum, Guido. "Python Programming Language." USENIX annual technical conference. Vol. 41. No. 1. 2007.
+
+\bibitem{numpy}
+Van Der Walt, Stefan, S. Chris Colbert, and Gael Varoquaux. "The NumPy array: a structure for efficient numerical computation." Computing in science \& engineering 13.2 (2011): 22-30.
+
+\bibitem{mathplotlib}
+Hunter, John D. "Matplotlib: A 2D graphics environment." Computing in science \& engineering 9.03 (2007): 90-95.
+
+\bibitem{kimura_average}
+Kimura, Motoo, and Tomoko Ohta. "The average number of generations until fixation of a mutant gene in a finite population." Genetics 61.3 (1969): 763.
+
+\bibitem{otto_fixation}
+Slatkin, Montgomery. "Fixation probabilities and fixation times in a subdivided population." Evolution (1981): 477-488.
+
+\bibitem{lemurs}
+Erhart, Elizabeth M., and Deborah J. Overdorff. "Female coordination of group travel in wild Propithecus and Eulemur." International Journal of Primatology 20 (1999): 927-940.
+
+\bibitem{no_replication}
+Boyd, Robert, and Joseph Henrich. "On modeling cognition and culture: Why cultural evolution does not require replication of representations." Journal of cognition and culture 2.2 (2002): 87-112.
+
+\bibitem{kin_selection}
+Gardner, Andy, Stuart A. West, and Geoff Wild. "The genetical theory of kin selection." Journal of evolutionary biology 24.5 (2011): 1020-1043.
+
+\bibitem{Truskanov2020}
+Truskanov, Noa, Yasmin Emery, and Redouan Bshary. "Juvenile cleaner fish can socially learn the consequences of cheating." Nature communications 11.1 (2020): 1159.
+
+\bibitem{Kolodny2022}
+Kolodny, Oren, et al. "Differential application of cultural practices at the family and individual levels may alter heritability estimates." Behavioral and Brain Sciences 45 (2022): e167.
+
+\bibitem{Denton2021}
+Denton, Kaleda K., Uri Liberman, and Marcus W. Feldman. "On randomly changing conformity bias in cultural transmission." Proceedings of the National Academy of Sciences 118.34 (2021): e2107204118.
+
+\bibitem{Borofsky2022}
+Borofsky, Talia, and Marcus W. Feldman. "Success-biased social learning in a one-consumer, two-resource model." Theoretical Population Biology 146 (2022): 29-35.
+
+\bibitem{Mesoudi2008}
+The cultural transmission of great basin projectile-point technology II: An agent-based computer simulation
+
+\end{thebibliography}
 
 \pagebreak
 
@@ -708,7 +870,7 @@ E[x'] &= \frac{1}{N}N\frac{\alpha' xN}{\alpha' xN + \alpha' N (1-x)\beta}
 	  = x + x(1-x)(1-\beta) + o(\beta) \;,
 \end{split}
 \end{equation}
-following \citet[p.~253, ch~7.2]{durret} and because $1/(1-y)=1+y+y^2+\ldots$.
+following \citep[p.~253, ch~7.2]{durret} and because $1/(1-y)=1+y+y^2+\ldots$.
 
 By definition, $x$ is constant, so $E[x] = x$.
 We therefore have
@@ -730,7 +892,7 @@ V(x') = \frac{1}{N^2}N\frac{x}{x+(1-x)\beta}\Big(1-\frac{x}{x+(1-x)\beta}\Big)
 \Big(\frac{N + \alpha' xN + \alpha' N(1-x)\beta}{1 + \alpha' xN + \alpha' N(1-x)\beta}\Big) \;.
 \end{equation}
 
-Following \citet[ch~7.2]{durret}, we assume $\beta \approx 1$, such that
+Following \citep[ch~7.2]{durret}, we assume $\beta \approx 1$, such that
 \begin{equation}
 \frac{x}{x + (1-x)\beta} \approx x \,
 \end{equation}
@@ -915,7 +1077,7 @@ which proves the diffusion term.
 \beginsupplement % https://support.authorea.com/en-us/article/how-to-create-an-appendix-section-or-supplementary-information-1g25i5a/
 
 \begin{figure}[h]
-    \includegraphics[width=0.7\linewidth]{../figures/final/GBD_validation.pdf}
+    \includegraphics[width=0.7\linewidth]{GBD_validation.pdf}
   \caption{
   \textbf{Numerical validation of the GB approximation.}
   The approximation (orange) fits simulation results (blue) well when using 1,000 simulations for both models.
@@ -925,7 +1087,7 @@ which proves the diffusion term.
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/DM_validation.pdf}
+    \includegraphics[width=\linewidth]{DM_validation.pdf}
   \caption{
   \textbf{Numerical validation of the DM approximation.}
   We performed computational "experiments" of the role-model choice process and compared them to the DM distribution. 
@@ -938,7 +1100,7 @@ which proves the diffusion term.
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{../figures/final/num_sims.pdf}
+    \includegraphics[width=\linewidth]{num_sims.pdf}
   \caption{
   \textbf{DM Approximation precision as function of number of simulations.}
   Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 or more simulations.
@@ -950,7 +1112,7 @@ which proves the diffusion term.
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_mutation.pdf}
+    \includegraphics[width=\linewidth]{full_vs_dm_mutation.pdf}
   \caption{
   \textbf{Robustness of DM approximations to success estimation error.}
   Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
@@ -962,7 +1124,7 @@ which proves the diffusion term.
 
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{../figures/final/full_vs_dm_changing_alpha.pdf}
+    \includegraphics[width=\linewidth]{full_vs_dm_changing_alpha.pdf}
    \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
    Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high variation in success bias weight.Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
   Here, population size, $N=1000$; success bias weight normally distributed, $\alpha\sim N(0.5,x^2)$; phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
