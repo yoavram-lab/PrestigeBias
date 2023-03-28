@@ -144,12 +144,12 @@ Indeed, in a tournament between learning strategies  \citep{strategiesPaper}, mo
 {Boyd and Richerson} \citep[Ch.~5]{evolutionBook} suggested that the {assessment} of success can be divided to three categories: \emph{direct bias}, \emph{indirect bias} and \emph{frequency-dependent bias}.
 {Direct} bias occurs when one phenotype is more attractive than other phenotypes, and is evaluated by \emph{directly} testing the trait.
 For example, an individual observing a ping-pong match can {try} the observed paddle grips to determine which grip is better.
-{Frequency}-dependent bias occurs when the probability {of copying} a phenotype is higher or lower than the frequency of the phenotype among demonstrators. 
+Frequency-dependent bias occurs when the probability {of copying} a phenotype is higher or lower than the frequency of the phenotype among demonstrators. 
 For example, suppose the common paddle grip is used by 60\% of the demonstrators; if the this grip is adopted by 80\% of copiers, then transmission is under positive frequency bias, also called \emph{conformity}; if it is adopted by 40\% of copiers, then transmission is under negative frequency bias, or \emph{{anti}-conformity} \citep{conformism}. 
 The effects of conformity and {anti}-conformity on cultural evolution have been studied with both models \citep{anticonformity,Denton2021,conformity} and experiments \citep{negativeFrequency}.
-{Indirect} bias occurs when an individual uses one phenotype to determine the attractiveness of another phenotype.
+Indirect bias occurs when an individual uses one phenotype to determine the attractiveness of another phenotype. % TODO change this to indirect evaluation instead of two phenotypes because we dont have two phenotypes
 For example, an observer may copy the paddle grip of the {ping}-pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
-{However, this} may cause mismatches between the copied trait and the rest of the cultural or genetic repertoire of the individual \citep{Kolodny2022}.
+However, this may cause mismatches between the copied trait and the rest of the cultural or genetic repertoire of the individual \citep{Kolodny2022}.
 Furthermore, {Boyd and Richerson} \citep[Ch. 8]{evolutionBook} {suggest} that maladaptive traits may spread widely in a population if indirect {bias is} strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 Indeed, helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost \citep{cooperation}.
 
@@ -162,8 +162,7 @@ Indeed, Chudek et al.~\citep{prestige_cultural_learning} have defined prestige b
 
 To distinguish this form of indirect bias from other definitions of prestige, we call it \emph{influence bias}.
 This is an important distinction, as influence is a context-dependent bias, rather than a content-{dependent} bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
-%TODO check this - is influence frequency dependent?
-Influence bias also differs from conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
+Influence bias is also frequency independent (see \cref{cor:GBD} below), and thus it differs from conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
 
 In contemporary human society, social media make it especially easy to estimate the social and cultural influence individuals have over others, which can have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices have been invented to capitalize on this effect \citep{facebook_marketing}.
 
@@ -172,14 +171,13 @@ We develop analytic approximations for this model and analyze its dynamics. We a
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
-
+% TODO explain indirect bias as indirect evaluation
 We begin with a continuous trait model with indirect bias suggested by Boyd and Richerson~\citep{evolutionBook}, propose an extension with influence bias, and then develop a model with a dichotomous trait.
 We implement our stochastic models and approximations, perform statistical analyses, and produce figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
 
 \subsection*{Continuous trait}
-%TODO If you omit the indirect trait, it is no longer indirect transmission.
-We follow the Boyd and Richerson model~\citep{evolutionBook}, assuming only oblique transmission of the trait and omitting the indirect trait in order to reduce model complexity. 
+We follow the Boyd and Richerson model~\citep{evolutionBook}, assuming only oblique transmission of a single trait. 
 Consider a population of $N$ individuals, described by a single trait that takes continuous values.
 Each generation, $N$ naive individuals, or copiers, each chooses a single role-model from the entire previous generation. The copier than copies its trait value from the chosen role-model.
 Note that our transmission models is slightly different than previous those modeled before, e.g. \citep{cumul_culture,anticonformity,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
@@ -236,15 +234,13 @@ Pr(S_{i,j}=1 \mid S_{1,j},S_{2,j},...,S_{i-1,j}) = G_{i,j} \;.
 \end{equation}
 The prestige $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determined by success--the estimated biased trait value $\beta(A_{i,j})$--and influence--the number of copiers that chose role-model $j$ before copier $i$, $K_{i-1,j}$, replacing \cref{eq:boydG} with
 \begin{equation}\label{eq:prestige}
-G_{i,j} = \frac{\alpha_{ij} \cdot \beta(A_{i,j}) + (1-\alpha_{ij}) \cdot K_{i-1,j}}{W_i} \;.
+G_{i,j} = \frac{\alpha_{ij} \cdot \beta(A_{i,j}) + (1-\alpha_{ij}) \cdot K_{i-1,j}}{W_i} \;,
 \end{equation}
+where $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
 
-Here, the bias weight $\alpha_{ij}$ determines the relative weighting of success and influence bias. It is a characteristic of the interaction of role-model~$j$ with copier $i$ that determines the relative significance of direct success vs. influence in the role-model's overall prestige in the eyes of the copier.
-
-{Different individuals} may evaluate the importance of success and influence differently. Additionally, we assume {each} role-model displays {its} influence and success individually. For example, {individuals} with more followers but {lacking} skill may emphasize the number of {their} followers rather than {their} skill. %We therefore defined $\alpha_{i,j}$ to be the relation between every copier's intrinsic significance of estimation, and every role-model's personal emphasis.
- 
-
-The trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}, and $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
+Here, the bias weight $\alpha_{i,j}$ determines the relative weighting of success and influence bias. It is a characteristic of the interaction of role-model~$j$ with copier $i$ that determines the relative significance of direct success vs. influence in the role-model's overall prestige in the eyes of the copier.
+Different individuals may evaluate the importance of success and influence differently. Additionally, we assume each role-model displays its influence and success individually. For example, individuals with more followers but lacking skill may emphasize the number of their followers rather than their skill.
+Finally, the trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}.
 
 
 
@@ -268,7 +264,7 @@ We emphasize that the models are nested: $\vec{A}(t+1)$ can be computed from $\v
 However, the former requires iterating over \cref{eq:recurrence,eq:recPrestige}.
 Thus, we sought to find an equivalent stochastic process that has the same joint distribution as $\vec{K}_{N}$. 
 We found two approximations for the distribution of $\vec{K}_{N}$, summarized here and explained in detail below.
-In both we assume that the bias weight is either completely homogeneous, $\alpha_{i,j}=\alpha$, or that $\alpha_j$ is a bias of role-model $j$ only, meaning it does not vary between copiers.% TODO but result 1 has alpha_i
+In both we assume that the bias weight is either completely homogeneous, $\alpha_{i,j}=\alpha$, or that $\alpha_{i,j}=\alpha_j$ is a bias of role-model $j$ only, meaning it does not vary between copiers. %TODO but result 1 has alpha_i
 Note that these approximations apply for both the and the continuous trait (\cref{eq:prestige}) and the dichotomous trait (\cref{eq:binary-model}) models.
 
 \paragraph{Generalized binomial approximation.}  
@@ -287,7 +283,7 @@ The generalized binomial distribution (GBD) emerges from a series of dependent B
 \\
 
 \begin{result}[Generalized binomial approximation]\label{res:GBD}
-The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A_j+e))$ if $e_i=e$ for all role-models $i=1, \ldots, N$. 
+The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the GBD, $K_{i,j} \sim GBD(i,\alpha_i\cdot\beta(A_j+e))$ if $e_i=e$ for all role-models $i=1, \ldots, N$. % TODO what about theta?
 \end{result}
 
 \begin{proof}
@@ -301,7 +297,6 @@ where $S_{i,j} =1 $ when the $i$-th copier chooses role-model $j$.
 \end{proof}
 
 This result gives the following corollary on the expected number of followers of a given role-model $j$ by the end of the role-model choice process, $K_{N,j}$.
-The proof of \Cref{cor:GBD} is in Appendix~\ref{sec:GBD}.
 \\
 
 
@@ -312,25 +307,26 @@ In addition, $\E[K_{N, j}] = \alpha_j \cdot \beta(A_j+e) / \overline{\alpha \cdo
 
 \begin{proof}
 Drezner and Farnum~\citep[eq.~(2.3)]{GBD} show that the expected number of successful trials, 
-$\E[k] = N \cdot Q_j(1,1)$ (modified from their notation). % TODO what is k? not defined.
-$Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-model choices are made.
-$Q_j(1,1) = G_{1,j}$ by definition, which completes the proof.
-% TODO where is the proof for the second part of the corollary??
+$\E[k] = N \cdot Q_j(1,1)$ (modified from their notation). %TODO what is k? not defined.
+Here, $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-model choices are made.
+$Q_j(1,1) = G_{1,j}$ by definition.
+The rest of the proof is in Appendix~\ref{sec:GBD}.
 \end{proof}
 
+%% TODO two sentences - influence bias is not frequency dependent
 
 The special case where the bias weight is uniform for all role-models ($\alpha = \alpha_j$ for $j=1,\ldots, N$) is interesting, because we can evaluate the expected number of copiers using a linear equation
-\begin{equation}
-\E[K_{Nj}]= N\cdot\frac{\alpha\cdot\beta(A_j+e)}{\sum\limits_{m=1}^{N}\alpha\cdot\beta(A_m+e)} =\beta(A_j+e) \bigg/ \overline{\beta(A+e)} \;,
+\begin{equation}\label{eq:GBDsamelalpha}
+\E[K_{N,j}]= N\cdot\frac{\alpha\cdot\beta(A_j+e)}{\sum\limits_{m=1}^{N}\alpha\cdot\beta(A_m+e)} =\beta(A_j+e) \bigg/ \overline{\beta(A+e)} \;,
 \end{equation}
 where the only variable is $A_j+e$, because $\overline{\beta(A+e)}$ is the mean of the distribution of the trait values, modified by some constant parameters of $\beta$.
-We can then {write} $L = 1/\overline{\beta(A+e)}$ and
+We can then write $L = 1/\overline{\beta(A+e)}$ and
 \begin{equation}\label{eq:linearEq}
 \E[K_{N,j}] = L\cdot \beta(A_j+e) \;.
 \end{equation}
 
 \paragraph{Numerical validation.}
-To validate that our approximation is correct, % TODO which approximation?? be explicit. refer to an equation. tell us what you are approximating.
+To validate that GBD approximation for the number of copiers of a role-model is correct (\cref{eq:GBDsamelalpha}), %TODO check that this is the correct equation reference
 we ran $1,000$ simulations of the full model, and compared the results with \Cref{cor:GBD}.
 We compare the distribution of number of copiers by plotting the histograms of both our simulations results and the expected values based on \Cref{cor:GBD}.
 
@@ -369,8 +365,7 @@ G_{i,j} =
 Substituting $M=N$, $o_j = \alpha'\beta(A'_j)$, and $w_{i,j} = K_{i,j}$ in \cref{eq:polya} gives \cref{eq:copier_choose}, thus completing the proof.
 \end{proof} 
 
-Frigyik et al.~\citep[section 2]{dirichlet} prove that the proportion of different colored balls in a \emph{P\'{o}lya urn model} converges to the Dirichlet distribution as the number of draws approaches infinity (the population size, $N$, in our model), % TODO did we check sensitivity of the approximation to small values of N? if so, refer to it here.
-based on the \emph{Martingale Convergence Theorem} \citep{martingaleBook}.
+Frigyik et al.~\citep[section 2]{dirichlet} prove that the proportion of different colored balls in a \emph{P\'{o}lya urn model} converges to the Dirichlet distribution as the number of draws  (the population size, $N$, in our model) approaches infinity, based on the \emph{Martingale Convergence Theorem} \citep{martingaleBook}.
 We therefore have an approximation for the relative prestige each role-model has when evaluated by copiers. Thus, choosing the role-models for all copiers is equivalent to drawing from a {multinomial} distribution where the parameters are the modified weights from a Dirichlet distribution and we have the following corollary.
 \\
 
@@ -379,6 +374,7 @@ The number of copiers of each role-model {approximates} a Dirichlet-Multinomial 
 \end{corollary}
 
 \paragraph{Numerical validation.}
+% TODO add something about small N
 We next validated the DM approximation of our model
 and tested its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) by comparing results of stochastic simulations of our model (\cref{eq:binary-model}) with the DM approximation (\Cref{cor:dirichlet}).
 First, we computed an observed distribution of the number of copiers from the average empirical distribution of multiple simulations.
@@ -392,10 +388,10 @@ Thus, we assume the population has a single individual with phenotype $\hat{A}$ 
 That the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1,000$ (\Cref{fig:num_sims}).
 We examined the robustness of the DM approximation to relaxing the following assumptions.
 First, we relaxed our assumption of no estimation error $e$.
-Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{ij} = A_j + e_i$).
-When estimation error is applied, we sample $J_i$ for each copier $i$ from a normal distribution with expected value zero and variance $\eta^2$. % TODO J_i? e_i?
+Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{i,j} = A_j + e_i$).
+When estimation error is applied, we sample $J_i$ for each copier $i$ from a normal distribution with expected value zero and variance $\eta^2$. % TODO should e_i?
 Even when the estimation error variance is $0.1$, both the fixation probability and fixation time approximations are accurate~(\Cref{fig:hetro_error}). 
-We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,q)$ where $q \in [10^{-7},10^{-1}]$. 
+We also relaxed our assumption of a uniform bias weight $\alpha$ (i.e., $\alpha_i=\alpha$). We allowed $\alpha$ to vary in the population, drawing $\alpha_j$ for each role-model $j$ from a normal distribution such that $\alpha_j \sim N(0.5,q)$ where $\epsilon$ is between $10^{-7}$ and $10^{-1}$. 
 We found again that results of the DM approximation are similar to those from stochastic simulations of the full model~(\Cref{fig:hetro_alpha}).
 
 
@@ -407,23 +403,16 @@ We are mainly interested in the effect of the bias weight, $\alpha$, which deter
 For simplicity, we use the dichotomous model, and we do not include role-model estimation error in this analysis, i.e $e_i=0$ for every copier $i$.
 As shown above, transmission in our model is approximately DM distributed (\Cref{cor:dirichlet} and \cref{eq:copier_choose}).
 
+\paragraph{Drift and diffusion terms in a constant environment.}
 We start by finding the expectation and variance of the change in frequency from one generation to the next, which are the drift and diffusion terms of the diffusion equation.
-The proof is in Appendix~\ref{sec:drift_diff_const}.
-\\
-
-% TODO I'm not sure this needs to be a "Results" - I think we can write it here as apart of the analysis, which gives Result 4. Also, where is the actual proof of the equation in this result?
-\begin{result}[Drift and diffusion terms in a constant environment]
 Let $x$ and $x'$ be the frequency of type $\hat{A}$ in a population with $N$ individuals in the current and next generation, and  $\beta$ be the success coefficient of phenotype $A$, $\beta = \beta(A) < \beta(\hat{A}) = 1$.
-% TODO can we say beta=beta(A)/beta(hat A) ? then we dont force beta(hat A)=1
-Then,
-\begin{equation} 
-% TODO the use of big O is incorrect... 
-E[x'-x] = \mathcal{O} (x(1-x)(1-\beta)) \;, 
-\quad
-V(x'-x) = \mathcal{O} (x(1-x)\Big(\frac{1}{\alpha N + (1-\alpha)}\Big)) \;.
-\end{equation} 
-\end{result}
-
+% TODO can we say beta=beta(A)/beta(hat A) ? because beta(A hat)=b and not 1.
+Then (see Appendix~\ref{sec:drift_diff_const} for derivation),
+\begin{equation}\begin{aligned}
+E[x'-x] &= (x(1-x)(1-\beta) + o(1-\beta)  \;, 
+\\
+V(x'-x) &= x(1-x)\left(\frac{1}{\alpha N + (1-\alpha)}\right) + o\left(\frac{1}{\alpha N + (1-\alpha)}\right) \;.
+\end{aligned}\end{equation} 
 
 This analysis gives a surprising result relating the parameters $\alpha$ and $\beta$ to parameters of the classical Wright-Fisher model from population genetics:
 the selection coefficient $s$, a measure of the effect of natural selection on the change in frequency of genotypes, and the effective population size, $N_e$, a measure of the effect of random genetic drift on the change in frequency of genotypes. 
@@ -433,7 +422,7 @@ Therefore, we have the following result.\\
 \begin{result}[Effective selection coefficient and population size]\label{res:selection_coef}
 The effective selection coefficient $s$ and effective population size $N_e$ can be written in terms of the success coefficient $\beta$ (\cref{eq:success_bias}), the bias weight $\alpha$ (\cref{eq:prestige}), and the population size $N$ as 
 \begin{equation}
-s=1-\beta(A), \quad N_e=\alpha N + (1-\alpha) \;.
+s=1-\beta, \quad N_e=\alpha N + (1-\alpha) \;.
 \end{equation}
 \end{result}
 
@@ -476,8 +465,8 @@ We find see that the two models have similar dynamics, and both are well approxi
   The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
   Fixation probability (A) is bounded by $2(1-\beta)$ (blue).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
-   Here, Population size, $N=1,000$; phenotype values, $\hat{A}=1$, $A=0.7$ (panels A and B), 
-   $A/\hat{A}$, is between 0.01 and 0.99 (panels C and D); % TODO not clear, because x label suggest you modify beta, but caption says you modify A/hatA
+   Here, Population size, $N=1,000$; phenotype values, $A=0.7$ (panels A and B), 
+   $A/\hat{A}$ is between 0.01 and 0.99 (panels C and D), and $\hat{A}=1$; % TODO not clear, because x label suggest you modify beta, but caption says you modify A/hatA. remind us that beta is given from A - refer to equation
    success coefficient, $1-\beta=s=0.044$ (panels A and B); 
    success-bias weight, $\alpha=0.01$ (panels C and D).
    }
@@ -491,6 +480,7 @@ We then proceed to find expressions for the expectation and variance of the chan
 The proof is in Appendix~\ref{sec:drift_diff_chang}.
 \\
 
+% TODO same as above, the derivation of drift and diffusion doesnt have to be a result of its own, but rather the fixation prob can be a result
 \begin{result} [Drift and diffusion terms in a changing environment]\label{res:ch_expected}
 Let $x$ be the initial frequency of the invading phenotype and $X_t$ the number of individuals with that phenotype after $n$ generation.
 Then,
@@ -501,7 +491,7 @@ E[X_n/N - x] \simeq x(1-x) S_n / N_e \;,
 \quad
 V(X_n/N-x) \simeq  n x(1-x) / N_e \;,
 \end{equation}
-where $S_n=\sum\limits_{t=1}^{n} N (1-\beta_t)$ and $\beta_t$ is $\beta(A)$ at generation $t$. % TODO define more explicitly - connect it to the paragraph above that explains that the environment changes
+where $S_n=\sum\limits_{t=1}^{n} N (1-\beta_t)$ and $\beta_t$ is $\beta(A)$ at generation $t$. % TODO define more explicitly how environmental change affects A and beta. define it before the result!
 \end{result}
 
 Note that here, we have the average selection coefficient during a cycle of $n$ generations as the selection coefficient {in} \cref{eq:kimura_p}.
@@ -856,7 +846,7 @@ The denominator of \cref{eq:initial_prob} can also be formulated as:
 where $\overline{\alpha\beta(A+e)}$ is the mean value of $\alpha_m\cdot\beta(A_m+e)$.
 Using \cref{eq:denominator} and \textbf{Corollary 1} we get,
 \begin{equation}
-\E[K_{Nj}] = \alpha_j \cdot \beta(A_j+e) \bigg/ \overline{\alpha \cdot \beta(A+e)} \;,
+\E[K_{N,j}] = \alpha_j \cdot \beta(A_j+e) \bigg/ \overline{\alpha \cdot \beta(A+e)} \;,
 \end{equation}
 \end{proof}
 
