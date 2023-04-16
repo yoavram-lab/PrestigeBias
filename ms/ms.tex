@@ -147,8 +147,8 @@ For example, an individual observing a ping-pong match can {try} the observed pa
 Frequency-dependent bias occurs when the probability {of copying} a phenotype is higher or lower than the frequency of the phenotype among demonstrators. 
 For example, suppose the common paddle grip is used by 60\% of the demonstrators; if the this grip is adopted by 80\% of copiers, then transmission is under positive frequency bias, also called \emph{conformity}; if it is adopted by 40\% of copiers, then transmission is under negative frequency bias, or \emph{{anti}-conformity} \citep{conformism}. 
 The effects of conformity and {anti}-conformity on cultural evolution have been studied with both models \citep{anticonformity,Denton2021,conformity} and experiments \citep{negativeFrequency}.
-Indirect bias occurs when an individual uses a phenotype to evaluate the attractiveness of another individual. 
-For example, an observer may copy the paddle grip of the {ping}-pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
+Indirect bias occurs when a copier uses some observed phenotype to evaluate the attractiveness of a potential role-model. 
+For example, an observer may copy the paddle grip of the ping-pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
 However, this may cause mismatches between the copied trait and the rest of the cultural or genetic repertoire of the individual \citep{Kolodny2022}.
 Furthermore, {Boyd and Richerson} \citep[Ch. 8]{evolutionBook} {suggest} that maladaptive traits may spread widely in a population if indirect {bias is} strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 Indeed, helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost \citep{cooperation}.
@@ -171,7 +171,7 @@ We develop analytic approximations for this model and analyze its dynamics. We a
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
-We begin with a continuous trait model with indirect bias suggested by Boyd and Richerson~\citep{evolutionBook}, propose an extension with influence bias, and then develop a model with a dichotomous trait. The indirect bias is due to an indirect evaluation, using a certain trait to determine success of others.
+We begin with a continuous trait model with indirect bias, previously suggested by Boyd and Richerson~\citep{evolutionBook}. We extend this model to include influence bias. We then develop a dichotomous trait model. Note that the indirect bias is due to an indirect evaluation, in which a certain phenotype is used to evaluate the success of potential role-models.
 
 We implement our stochastic models and approximations, perform statistical analyses, and produce figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
@@ -279,11 +279,11 @@ $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all cop
 The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$), meaning that the order of copiers does not matter. 
 
 \subsection*{Generalized binomial distribution}
-The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is {denoted}  by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials. $\theta$ can be calculated from data using maximum likelihood estimation, but its value is irrelevant for our proof. Note that $\theta=0$ gives the standard binomial distribution.
+The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is {denoted}  by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials (the latter can be estimated from data, but its value is insignificant for our approximation). Note that $\theta=0$ gives the standard binomial distribution.
 \\
 
 \begin{result}[Generalized binomial approximation]\label{res:GBD}
-The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the GBD, $K_{i,j} \sim GBD(i,\alpha_j\cdot\beta(A_j+e),\theta)$ if $e_i=e$ for all role-models $i=1, \ldots, N$, and $\theta$ is a model parameter.
+The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the generalized binomial distribution, $K_{i,j} \sim GBD(i,\alpha_j\cdot\beta(A_j+e),\theta)$ if $e_i=e$ for all role-models $i=1, \ldots, N$, and $\theta$ is the correlation between successive role-model choices.
 \end{result}
 
 \begin{proof}
@@ -306,10 +306,9 @@ In addition, $\E[K_{N, j}] = \alpha_j \cdot \beta(A_j+e) / \overline{\alpha \cdo
 \end{corollary}
 
 \begin{proof}
-Drezner and Farnum~\citep[eq.~(2.3)]{GBD} show that the expected number of successful trials, 
-$\E[k] = N \cdot Q_j(1,1)$, where $k$ is the number of copiers that chose role model $j$ (i.e successful trials).
-Here, $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-model choices are made.
-$Q_j(1,1) = G_{1,j}$ by definition.
+The expected value of the GBD is
+$\E[K_{N,j}] = N \cdot Q_j(1,1)$, see Drezner and Farnum~\citep[eq.~(2.3)]{GBD}.
+Here, $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any role-model choices are made, such that $Q_j(1,1) = G_{1,j}$ by definition.
 The rest of the proof is in Appendix~\ref{sec:GBD}.
 \end{proof}
 
@@ -376,7 +375,7 @@ The number of copiers of each role-model {approximates} a Dirichlet-Multinomial 
 \paragraph{Numerical validation.}
 We next validated the DM approximation of our model
 and tested its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) by comparing results of stochastic simulations of our model (\cref{eq:binary-model}) with the DM approximation (\Cref{cor:dirichlet}).
-We did our validation on a relatively small population size $N=100$, showing that the approximation is very good for small $N$ as well, even though the Martingales proof requires $N$ to be very large.
+We used a relatively small population size, $N=100$, thus validating that the approximation is in good agreement even for small $N$, despite the assumption of large $N$ in the proof by Frigyik et al.~\citep[section 2]{dirichlet}.
 First, we computed an observed distribution of the number of copiers from the average empirical distribution of multiple simulations.
 We then compared this observed distribution with the expected theoretical DM distribution (\Cref{fig:DM_validation}A).
 The difference in distributions was not perceived when plotting both distributions on the same figure, so we used the difference instead.
@@ -405,11 +404,12 @@ As shown above, transmission in our model is approximately DM distributed (\Cref
 
 \paragraph{Drift and diffusion terms in a constant environment.}
 We start by finding the expectation and variance of the change in frequency from one generation to the next, which are the drift and diffusion terms of the diffusion equation.
-Let $x$ and $x'$ be the frequency of type $\hat{A}$ in a population with $N$ individuals in the current and next generation, and  $\beta$ be the success coefficient of phenotype $A$, $\beta = \frac{\beta(A)}{\beta(\hat{A})} < 1$.
+Let $x$ and $x'$ be the frequency of phenotype $\hat{A}$ in a population with $N$ individuals in the current and next generation, respectively.
+We set $\beta$ to be the success bias of phenotype $A$ relative to phenotype $\hat{A}$, such that $\beta = \beta(A)/\beta(\hat{A}) < 1$.
 Then (see Appendix~\ref{sec:drift_diff_const} for derivation),
 \begin{equation}\label{eq:drift_diff}
 \begin{aligned}
-E[x'-x] &= (x(1-x)(1-\beta) + o(1-\beta)  \;, 
+E[x'-x] &= x(1-x)(1-\beta) + o(1-\beta)  \;, 
 \\
 V(x'-x) &= x(1-x)\left(\frac{1}{\alpha N + (1-\alpha)}\right) + o\left(\frac{1}{\alpha N + (1-\alpha)}\right) \;.
 \end{aligned}\end{equation} 
@@ -422,19 +422,19 @@ Therefore, we have the following result.\\
 \begin{result}[Effective selection coefficient and population size]\label{res:selection_coef}
 The effective selection coefficient $s$ and effective population size $N_e$ can be written in terms of the success coefficient $\beta$ (\cref{eq:success_bias}), the bias weight $\alpha$ (\cref{eq:prestige}), and the population size $N$ as 
 \begin{equation}
-s=1-\beta, \quad N_e=\alpha N + (1-\alpha) \;.
+s=1-\beta=\frac{\beta(\hat{A})-\beta(A)}{\beta(\hat{A})}, \quad N_e=\alpha N + (1-\alpha) \;.
 \end{equation}
 \end{result}
 
 Note that when $N>>1$, $N_e \approx \alpha N$, resulting in a very convenient expression.\\
 
-Using our effective selection coefficient, $1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by \citep[eq.~8]{kimura}, we {obtain}:
+Using our effective selection coefficient, $s=1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by Kimura and Ohta~\citep[eq.~8]{kimura}, we obtain:
 \begin{result}[Fixation probability]
-The fixation probability is approximately
+The fixation probability of an invading phenotype favored by success bias is approximately 
 \begin{equation}\label{eq:kimura_p}
 \pi(x) = \frac{1-e^{-2(1-\beta)N_e x}}{1-e^{-2(1-\beta)N_e}},
 \end{equation}
-where $x$ is the initial frequency of the favored phenotype $\hat{A}$.
+where $x$ is the initial frequency of the invading phenotype.
 \end{result}
 
 Similarly, we can use $1-\beta$ and $N_e$ in the population-genetics fixation time approximation given by \citep[eq.~17]{kimura_average}.\\
@@ -466,7 +466,7 @@ We find see that the two models have similar dynamics, and both are well approxi
   Fixation probability (A) is bounded by $2(1-\beta)$ (blue).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
    Here, Population size, $N=1,000$; phenotype values, $A=0.7$ (panels A and B), 
-   $A/\hat{A}$ varies between 0.01 and 0.99 (panels C and D), and $\hat{A}=1$, which affects $\beta$ given in \Cref{eq:drift_diff};
+   $A/\hat{A}$ varies between 0.01 and 0.99 (panels C and D), and $\hat{A}=1$, which affects $\beta$ via \cref{eq:drift_diff};
    success coefficient, $1-\beta=s=0.044$ (panels A and B); 
    success-bias weight, $\alpha=0.01$ (panels C and D).
    }
@@ -474,15 +474,16 @@ We find see that the two models have similar dynamics, and both are well approxi
 \end{figure}
 
 
-\paragraph*{Changing environment}. After finding a good approximation in a constant environment, where the favorable trait is always $\hat{A}$, we proceeded to find an approximation for when the environment changes. 
-Following \citep{changeEnv}, we denote $k$ as the number of generations in which the invading phenotype is favored by success bias, and $l$ as the number of generations in which the resident phenotype is favored by success bias. This means that during the $k$ generations of the cycle, $\beta=\frac{\beta(A)}{\beta(\hat{A})}$, where $\hat{A}$ is the invading phenotype. During the following $l$ generations of the cycle, the favored phenotype is switched, so that $\frac{\beta(A)}{\beta(\hat{A})}>1$.
-We then proceed to find expressions for the expectation and variance of the change in frequency between $n=k+l$ generations. 
+\paragraph*{Changing environment}. After finding a good approximation in a constant environment, where the favorable trait is always $\hat{A}$, we proceeded to find an approximation for a periodically changing environment. 
+Following \citep{changeEnv}, we denote $k$ as the number of generations in which the invading phenotype is favored by success bias, and $l$ as the number of generations in which the resident phenotype is favored by success bias.
+Thus, during the first $k$ generations of the environmental cycle, $\beta=\frac{\beta(A)}{\beta(\hat{A})}$<1, where $\hat{A}$ is the invading phenotype. During the following $l$ generations of the environmental cycle, the phenotype favored by success bias is switched, such that $\frac{\beta(A)}{\beta(\hat{A})}>1$.
+We then proceed to find expressions for the expectation and variance of the change in the frequency of phenotype $\hat{A}$ after $n=k+l$ generations. 
 The proof is in Appendix~\ref{sec:drift_diff_chang}.
 \\
 
 
 \paragraph{Drift and diffusion terms in a changing environment.}
-Let $x$ be the initial frequency of the invading phenotype and $X_t$ the number of individuals with that phenotype after $n$ generation.
+Let $x$ be the initial frequency of the invading phenotype and $X_t$ the number of individuals with that phenotype after $n$ generations.
 Then,
 \begin{equation}\label{eq:ch_expected_and_var}
 E[X_n/N - x] \simeq x(1-x) S_n / N_e \;, 
@@ -491,15 +492,19 @@ E[X_n/N - x] \simeq x(1-x) S_n / N_e \;,
 \quad
 V(X_n/N-x) \simeq  n x(1-x) / N_e \;,
 \end{equation}
-where $S_n=\sum\limits_{t=1}^{n} N (1-\beta_t)$ and $\beta_t$ is $\beta(A)$ at generation $t$. % define more explicitly how environmental change affects A and beta. define it before the result! (above)
+where $S_n=\sum\limits_{t=1}^{n} N (1-\beta_t)$ and $\beta_t$ is $\beta(A)$ at generation $t$. 
 
 Note that here, we have the average selection coefficient during a cycle of $n$ generations as the selection coefficient {in} \cref{eq:kimura_p}.
 Using the drift and diffusion terms and following \citep{changeEnv}, we can approximate the fixation probability in a changing environment.
+\\
 
-\begin{result}[Fixation probability in changing environment]\label{res:ch_expected}
+\begin{result}[Fixation probability in a changing environment]\label{res:ch_expected}
+
+The fixation probability of an invading phenotype under periodical environmental changes is approximately
 \begin{equation}\label{eq:ch_env}
 \tilde\pi(x) = \frac{1-e^{-2 \frac{S_n}{n} N_e x}}{1-e^{-2 \frac{S_n}{n} N_e}} \;.
 \end{equation}
+where $x$ is the initial frequency of the invading phenotype.
 \end{result}
 
 \paragraph{Numerical validation.}
@@ -1104,7 +1109,7 @@ which proves the diffusion term.
     \includegraphics[width=\linewidth]{DM_validation.pdf}
   \caption{
   \textbf{Numerical validation of the DM approximation.}
-  We performed computational simulations of the role-model choice process (\Cref{eq:prestige}) and compared them to simulations when using the DM distribution approximation (\Cref{cor:dirichlet}).
+  We performed computational simulations of the role-model choice process (\Cref{eq:prestige}) and compared them to simulations when using the DM distribution approximation (\Cref{cor:dirichlet}). % TODO what is "them"?? where is being compared??
   \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the simulations (blue) is very small. 
   \textbf{(B)} The log-likelihood of the DM distribution for results of the simulations (red vertical line) is much higher {than} the log-likelihood of permutations of simulations (blue histogram).
   Here, population size, $N=100$; number of simulations, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.
@@ -1140,9 +1145,12 @@ which proves the diffusion term.
 \begin{figure}
     \includegraphics[width=\linewidth]{full_vs_dm_changing_alpha.pdf}
    \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
-   Both the DM approximation (orange) and Kimura's equation (black line) fit the stochastic simulations (blue) well even with a high variance in success bias weight.
+   Fixation probability does not seem to be effected by variation in success bias weight between individuals. % TODO copiers? or role-models?
+    Thus, both the DM approximation (orange) and Kimura's equation (black line) have a good fit to results of stochastic simulations (blue).
    Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
-  Here, population size, $N=1000$; success bias weight is not homogeneous, but instead normally distributed, $\alpha \sim N(0.5,\epsilon^2)$ where $e^{-7}\le \epsilon \le e^{-1}$; 
+  Here, population size, $N=1000$; 
+  success bias weight is normally distributed, $\alpha \sim N(0.5,\epsilon^2)$ where $10^{-7}\le \epsilon \le 10^{-1}$;  % TODO alpha_j ? alpha_i?
+  % TODO not clear if epsilon or epsilon^2 should be written in the inequality: x label says variance but epsilon is standard variation.
   phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:hetro_alpha}
 \end{figure}
