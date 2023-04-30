@@ -1108,7 +1108,7 @@ which proves the diffusion term.
     \includegraphics[width=\linewidth]{DM_validation.pdf}
   \caption{
   \textbf{Numerical validation of the DM approximation.}
-  We performed computational simulations of the role-model choice process (\Cref{eq:prestige}) and compared them to simulations when using the DM distribution approximation (\Cref{cor:dirichlet}). % TODO what is "them"?? where is being compared??
+  We performed computational simulations of the role-model choice process (\Cref{eq:prestige}) and compared the distribution of the number of copiers to simulations when using the DM distribution approximation (\Cref{cor:dirichlet}).
   \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the simulations (blue) is very small. 
   \textbf{(B)} The log-likelihood of the DM distribution for results of the simulations (red vertical line) is much higher {than} the log-likelihood of permutations of simulations (blue histogram).
   Here, population size, $N=100$; number of simulations, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.
@@ -1144,12 +1144,11 @@ which proves the diffusion term.
 \begin{figure}
     \includegraphics[width=\linewidth]{full_vs_dm_changing_alpha.pdf}
    \caption{\textbf{Robustness of DM approximations to variation in the bias weight $\alpha$.} 
-   Fixation probability does not seem to be effected by variation in success bias weight between individuals. % TODO copiers? or role-models?
+   Fixation probability does not seem to be affected by variation in success bias weight between role-models.
     Thus, both the DM approximation (orange) and Kimura's equation (black line) have a good fit to results of stochastic simulations (blue).
    Markers for average across $5,000$ simulations, error bars are 95\% confidence intervals.
   Here, population size, $N=1000$; 
-  success bias weight is normally distributed, $\alpha \sim N(0.5,\epsilon^2)$ where $10^{-7}\le \epsilon \le 10^{-1}$;  % TODO alpha_j ? alpha_i?
-  % TODO not clear if epsilon or epsilon^2 should be written in the inequality: x label says variance but epsilon is standard variation.
+  success bias weight is normally distributed, $\alpha_j \sim N(0.5,\epsilon^2)$ where $10^{-7}\le \epsilon^2 \le 10^{-1}$; 
   phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:hetro_alpha}
 \end{figure}
