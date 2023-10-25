@@ -70,6 +70,8 @@ headheight=12pt
 }
 % NatBib
 \usepackage[numbers,square,comma,sort]{natbib}
+\bibliographystyle{vancouver}
+\setcitestyle{numbers}
 \renewcommand{\bibsection}{}
 %\renewcommand{\bibfont}{\small}
 
@@ -153,7 +155,7 @@ However, this may cause mismatches between the copied trait and the rest of the 
 Furthermore, {Boyd and Richerson} \citep[Ch. 8]{evolutionBook} {suggest} that maladaptive traits may spread widely in a population if indirect {bias is} strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 Indeed, helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost \citep{cooperation}.
 
-{Heinrich and Broesch \citep{fijian_social_bias}  studied} such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They {suggested} that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits
+Henrich and Broesch \citep{fijian_social_bias}  studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They {suggested} that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits
 \citep[Ch.~8]{evolutionBook}. {Prestige bias may be} more common in humans than success {bias} \citep{complexityPaper}, and prestige is often mentioned in the cultural evolution literature, {although} there are few models of {it}.
 
 A broader definition of prestige is the ``widespread respect and admiration felt for someone or something on the basis of a perception of their achievements or quality'' (New Oxford American Dictionary).
@@ -179,8 +181,8 @@ Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{h
 \subsection*{Continuous trait}
 We follow the Boyd and Richerson model~\citep{evolutionBook}, assuming only oblique transmission of a single trait. 
 Consider a population of $N$ individuals, described by a single trait that takes continuous values.
-Each generation, $N$ naive individuals, or copiers, each chooses a single role-model from the entire previous generation. The copier than copies its trait value from the chosen role-model.
-Note that our transmission models is slightly different than previous those modeled before, e.g. \citep{cumul_culture,anticonformity,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
+Each generation, $N$ naive individuals, or copiers, each chooses a single role-model from the entire previous generation. The copier then copies its trait value from the chosen role-model.
+Note that our transmission models are slightly different from those modeled before, e.g. \citep{cumul_culture,anticonformity,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
 
 Similar to a Wright-Fisher model, generations are non-overlapping, and the entire population is replaced in each generation.
 The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$, and  the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
@@ -217,6 +219,7 @@ Boyd and Richerson~\citep{evolutionBook} note that the deterministic blended tra
 
 \paragraph{Influence bias.}
 Here we introduce a new element to the model by assuming that in each generation, copiers choose their role-models one by one.
+We formulate this assumption in the following.
 {Denote by} $K_{i,j}$  the number of copiers that {choose} role-model $j$ after copier $i$ chose a role-model. Thus, $i$ out of $N$ copiers {had} already {chosen} a role-model, $\sum_{j=1}^N{K_{i,j}} = i$, and there are $N-i$ copiers that have yet to choose a role-model.
 The stochastic process of role-model choice, 
 \begin{equation} \label{eq:process}
@@ -245,16 +248,15 @@ Finally, the trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains
 
 
 \subsection*{Dichotomous trait}
-{We} introduce a simplified version where the trait {has only} two phenotypes: {an} optimal phenotype $\hat{A}$ and {a} sub-optimal phenotype $A$. 
-All role-models with the same phenotype will contribute to the probability {that} that phenotype {is} transmitted, and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
+We introduce a simplified version of the above model where the trait has only two phenotypes: an optimal phenotype $\hat{A}$ and a sub-optimal phenotype $A$. 
+All role-models with the same phenotype will contribute to the probability that that phenotype is transmitted and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
 In addition, for simplicity and for easier mathematical analysis, we assume $\alpha$ is homogeneous, {which entails} exchangeability between role-models.
 Therefore, the probability {that} the $i$-th copier {copies} phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
-G_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X} \;,
+G_{i,A} = \frac{(N-X)\alpha'\beta(A) + K_{i-1,A}}{i-1 + (N-X)\alpha'\beta(A) + \alpha'X} \;,
 \end{equation}
-where $X$ is the number of role-models with trait $\hat{A}$; $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model; assuming (without loss of generality) that $\beta(\hat{A})=1$; and defining $\alpha'= \frac{\alpha}{1-\alpha}$ as the odds ratio of the bias weight.
+where $X$ is the number of role-models with trait $\hat{A}$; $K_{i,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model; assuming that $\beta(\hat{A})=1$; and defining $\alpha'= \frac{\alpha}{1-\alpha}$ as the odds ratio of the bias weight.
 Complementing this, the probability of the $i$-th copier to copy phenotype $\hat{A}$ is $G_{i, \hat{A}} = 1-G_{i,A}$.
-The rest of the details follow the continuous trait model.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,7 +278,7 @@ $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all cop
 (ii) the expected number of copiers of each role-model equals its relative biased trait value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the bias weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated trait value. 
 
 \paragraph{Dirichlet-Multinomial approximation.}
-The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$), meaning that the order of copiers does not matter. 
+The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$). 
 
 \subsection*{Generalized binomial distribution}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is {denoted}  by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials (the latter can be estimated from data, but its value is insignificant for our approximation). Note that $\theta=0$ gives the standard binomial distribution.
@@ -384,7 +386,7 @@ In addition, we tested the likelihood of the observed data to be drawn from the 
 
 Next, we examined the fixation probability and fixation time of a favored phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DM approximation.
 Thus, we assume the population has a single individual with phenotype $\hat{A}$ and $N-1$ individuals with phenotype $A$. 
-That the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1,000$ (\Cref{fig:num_sims}).
+We find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1,000$ (\Cref{fig:num_sims}).
 We examined the robustness of the DM approximation to relaxing the following assumptions.
 First, we relaxed our assumption of no estimation error $e$.
 Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{i,j} = A_j + e_i$).
@@ -414,9 +416,9 @@ E[x'-x] &= x(1-x)(1-\beta) + o(1-\beta)  \;,
 V(x'-x) &= x(1-x)\left(\frac{1}{\alpha N + (1-\alpha)}\right) + o\left(\frac{1}{\alpha N + (1-\alpha)}\right) \;.
 \end{aligned}\end{equation} 
 
-This analysis gives a surprising result relating the parameters $\alpha$ and $\beta$ to parameters of the classical Wright-Fisher model from population genetics:
+This analysis gives an interesting result relating the parameters $\alpha$ and $\beta$ to parameters of the classical Wright-Fisher model from population genetics:
 the selection coefficient $s$, a measure of the effect of natural selection on the change in frequency of genotypes, and the effective population size, $N_e$, a measure of the effect of random genetic drift on the change in frequency of genotypes. 
-In a diffusion-equation approximation of the classical Wright-Fisher model, the expectation and variance of the change in frequency are $E[x'-x]=x+x(1-x)s+o(s)$ and $V[x'-x]=x(1-x)/N_e$ \citep[eq.~7]{kimura}{, respectively}. 
+In a diffusion-equation approximation of the classical Wright-Fisher model, the expectation and variance of the change in frequency are $E[x'-x]=sx(1-x)+o(s)$ and $V[x'-x]=x(1-x)/N_e$ \citep[eq.~7]{kimura}{, respectively}. 
 Therefore, we have the following result.\\
 
 \begin{result}[Effective selection coefficient and population size]\label{res:selection_coef}
@@ -428,7 +430,8 @@ s=1-\beta=\frac{\beta(\hat{A})-\beta(A)}{\beta(\hat{A})}, \quad N_e=\alpha N + (
 
 Note that when $N>>1$, $N_e \approx \alpha N$, resulting in a very convenient expression.\\
 
-Using our effective selection coefficient, $s=1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by Kimura and Ohta~\citep[eq.~8]{kimura}, we obtain:
+Using our effective selection coefficient, $s=1-\beta$, and effective population size, $N_e$, with the population-genetics fixation probability approximation given by Kimura~\citep[eq.~8]{kimura}, we obtain the following result.\\
+
 \begin{result}[Fixation probability]
 The fixation probability of an invading phenotype favored by success bias is approximately 
 \begin{equation}\label{eq:kimura_p}
@@ -463,7 +466,7 @@ We find see that the two models have similar dynamics, and both are well approxi
   \caption{\textbf{Fixation probability and time in a constant environment.}
   Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row.
   The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
-  Fixation probability (A) is bounded by $2(1-\beta)$ (blue).
+  Fixation probability (A) is bounded by $2(1-\beta)$ (dashed line).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
    Here, Population size, $N=1,000$; phenotype values, $A=0.7$ (panels A and B), 
    $A/\hat{A}$ varies between 0.01 and 0.99 (panels C and D), and $\hat{A}=1$, which affects $\beta$ via \cref{eq:drift_diff};
@@ -574,9 +577,9 @@ Here, population size $N=200$; estimation error is normally distributed $e \sim 
 This perceived success can be determined by performance with respect to another trait (indirect) \citep{evolutionBook,fijian_social_bias}, or by the influence an individual has on others \citep{prestige_cultural_learning,prestige_evolution}.
 
 We developed a cultural-evolution model with prestige bias that includes both indirect success and influence biases, where the latter is a bias towards role-models with many copiers {and hence is the same as conformity bias}.
-We model the these biases using a stochastic role-model choice process: each copier, in {turn}, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
+We model these biases using a stochastic role-model choice process: each copier, in {turn}, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
 
-Hence, {our model has} two ``nested'' stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
+Hence, our model has two ``nested'' stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
 To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DM, \Cref{cor:dirichlet}).
 The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model and not the copier.
 
@@ -594,17 +597,17 @@ This suggests that the later a copier makes its choice, the more it should rely 
 The rationale, then, is that the more information a copier has, e.g., by using others as information sources, the more informative and effective his choice can be.
 
 %\paragraph{Empirical evidence of prestige bias}
-{Chudek et al.}\ \citep{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
-Their definition of prestige is similar to our influence bias. They showed that the odds of 3-4 years-old children learning from an adult role-model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of {learning from a role model} whom bystanders ignored.
+Chudek et al.~\citep{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
+Their definition of prestige is similar to our influence bias. They showed that the odds of 3-4 years-old children learning from an adult role-model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of learning from a role model whom bystanders ignored.
 They also note that prestige effects are domain sensitive: they found that prestigious role-models were attended more when demonstrating artifact use, whereas role-models presenting food preferences had less attendants, suggesting that the domain itself (artifact use vs. food preference) can affect the attendance, and hence the prestige of the role-model.
-This {led to the suggestion} that when the trait is costly to learn individually, prestige will have a stronger bias \citep{prestige_cultural_learning}.
+This led to the suggestion that when the trait is costly to learn individually, prestige will have a stronger bias \citep{prestige_cultural_learning}.
 It would be interesting to include costs in our model to try and observe these effects and dynamics in a large population.
 
-According to \citep{fijian_social_bias}, {natural} selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information. 
-{They} studied Fijian villages to examine if and how such biases emerge in a small-scale society.
+According to Henrich and Broesch~\citep{fijian_social_bias}, natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information. 
+They authors studied Fijian villages to examine if and how such biases emerge in a small-scale society.
 They found that Fijian villagers are more likely to learn from role-models perceived as more successful/knowledgeable, both within and across domains.
-Their research thus suggests that copying from those perceived as successful, rather than {who are actually} successful, is a common {phenomenon}. 
-They show that the social networks representing copier--role-model relationships are centralized, suggesting that it is consistent with the prediction that people substantially share notions about who is a good cultural model, but that individuals' role-model selections are influenced by multiple factors.
+Their research thus suggests that copying from those perceived as successful, rather than who are actually successful, is a common phenomenon. 
+They show that the social networks representing copier--role-model relationships are centralized, which is consistent with the prediction that people substantially share notions about who is a good cultural model, but that individuals' role-model selections are influenced by multiple factors.
 
 {Prestige bias also occurs} in more modern domains such as western medicine.
 Norredam and Album~\citep{medical_prestige} examined literature from 1950 to 2005 on the effects of prestige on medicinal practices. They found that active, specialized, biomedical, and high-technological types of medicine on organs in the upper part of the bodies of young and middle-aged people were accorded high levels of prestige, whereas medicine and practices that were not of these types had low levels of prestige.
@@ -823,7 +826,7 @@ Lehmann, L., and M.W. Feldman. Coevolution of adaptive technology, maladaptive c
 
 \bibitem{Fogarty2017}Fogarty, L., J. Y. Wakano, M. W. Feldman, and K. Aoki. The driving forces of cultural complexity: Neanderthals, modern humans, and the question of population size. Hum.\ Nat.\ (2017): 28: 39-52.
 
-\bibitem{cumul_culture}Denton, Kaleda K, Yoav Ram, and Marcus W. Feldman. 2023. “Conditions That Favour Cumulative Cultural Evolution.” Philosophical Transactions of the Royal Society B: Biological Sciences 378 (1872). https://doi.org/10.1098/rstb.2021.0400.
+\bibitem{cumul_culture}Denton, Kaleda K, Yoav Ram, and Marcus W. Feldman. 2023. “Conditions That Favour Cumulative Cultural Evolution.” Philosophical Transactions of the Royal Society B: Biological Sciences 378 (1872).
 
 
 \end{thebibliography}
