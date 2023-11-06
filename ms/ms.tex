@@ -159,6 +159,8 @@ Indeed, Chudek et al.~\citep{prestige_cultural_learning} have defined prestige b
 
 {Jimenez \& Mesoudi} (2019) \citep{prestigeSocialLearn} suggest that cultural evolution theory is a major factor in human ecological success. They mention that a way to acquire adaptive social information is by preferentially copying competent individuals within a valuable domain, and they call it success bias as we do in this paper. They also mention that competence within a domain is often difficult or impossible to directly asses, therefore people tend to use indirect cues of success, as suggested by {Henrich and Gil-White}.
 
+Similarly to {Henrich and Gil-White} \citep{prestige_evolution}, we believe that the most skilled/knowledgeable models will, on-average, end up with the biggest and most lavish clienteles, so the clientele size provides a convenient and reliable proxy for that person's "worth. Therefore, we predict that skilled individuals have higher status, people preferentially copy them more than others, therefore prestigious individuals are influential, even beyond their domain of expertise.
+
 In our paper, we examine the effect of both success and prestige biases, and their relationship in contribution to the cultural evolution of populations. We call the joint contribution of both biases \emph{Influence bias}.
 This is an important distinction, as prestige is a context-dependent bias, rather than a content-{dependent} bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
 Prestige bias is also frequency independent (see \Cref{cor:GBD} below), and thus it differs from conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
@@ -548,6 +550,8 @@ We ran simulations of the role-model choice process during a single generation i
 \alpha^* = \emph{argmin} \sum_{j=1}^N\frac{\alpha A_j + (1-\alpha) K_j}{\sum_{l=1}^N\alpha A_l + (1-\alpha) K_l} (\hat{A}-A_j)^2 \;,
 \end{equation}
 where $A_j$ is the trait of role-model $j$ and $K_j$ the number of copiers that already chose role-model~$j$.
+
+Simply put, each copier estimates what success-bias weight $\alpha^*$ will result in copying the closet trait to the ideal one $\hat{A}$.
 Indeed, if the trait value would have been correlated with fitness, the optimal success-bias weight would increase fitness. However in here we don't include natural selection.
 
 We find that when copiers choose their success-bias weight according to \cref{eq:optimal_alpha}, it decreases with the number of copiers that have already chosen a role-model~(\Cref{fig:influence_advantage}).
@@ -593,6 +597,9 @@ We found that as the role-model choice process proceeds (that is, more copiers m
 The latter is significantly lower {than in} a population using a constant, fixed success-bias weight, regardless of the value of the constant weight (\Cref{fig:influence_advantage}).
 This suggests that the later a copier makes its choice, the more it should rely on choices of previous copiers, and the less it should rely on its own estimation.
 The rationale, then, is that the more information a copier has, e.g., by using others as information sources, the more informative and effective his choice can be.
+
+Our decision to research and analyze a multi-bias model is preceded by several others.
+{Ze Hong} (2020) \citep{payoff}, for example, present a model that combines both frequency dependent bias (including conformist bias) and payoff bias in a single decision-making calculus. He shows that an integrated learning strategy may be superior to relying on either bias alone. He also show that both are likely to contribute to the spread of variants with high payoff, and the magnitude of conformist bias affects the evolutionary dynamics.
 
 %\paragraph{Empirical evidence of prestige bias}
 Chudek et al.~\citep{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
@@ -822,6 +829,7 @@ Lehmann, L., and M.W. Feldman. Coevolution of adaptive technology, maladaptive c
 
 \bibitem{cumul_culture}Denton, Kaleda K, Yoav Ram, and Marcus W. Feldman. 2023. “Conditions That Favour Cumulative Cultural Evolution.” Philosophical Transactions of the Royal Society B: Biological Sciences 378 (1872).
 
+\bibitem{payoff} Hong, Ze. "Combining Conformist and Payoff Bias in Cultural Evolution: An Integrated Model for Human Decision-Making." Human Nature 33.4 (2022): 463-484.
 
 \end{thebibliography}
 
