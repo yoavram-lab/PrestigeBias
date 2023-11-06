@@ -150,19 +150,20 @@ However, this may cause mismatches between the copied trait and the rest of the 
 Furthermore, {Boyd and Richerson} \citep[Ch. 8]{evolutionBook} {suggest} that maladaptive traits may spread widely in a population if indirect {bias is} strong enough, e.g., by a runaway process caused by a cultural equivalent of sexual selection \citep{sexualSelectionBook}.
 Indeed, helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient, or when the benefit is much larger than the cost \citep{cooperation}.
 
-Henrich and Broesch \citep{fijian_social_bias}  studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They {suggested} that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits
-\citep[Ch.~8]{evolutionBook}. {Prestige bias may be} more common in humans than success {bias} \citep{complexityPaper}, and prestige is often mentioned in the cultural evolution literature, {although} there are few models of {it}.
+Henrich and Broesch \citep{fijian_social_bias} studied such indirect success biases, which they call cross-domain success bias or \emph{prestige bias} (e.g., great fishermen may be chosen as role-models for growing yams). They suggested that such biases, over generations, can lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits
+\citep[Ch.~8]{evolutionBook}.
+Prestige bias may be more common in humans than success bias \citep{complexityPaper}, and prestige is often mentioned in the cultural evolution literature, although there are few models of it; see Chellappoo (2021) for a philosophical critique of the concept of prestige itself. % TODO convert to reference; add this sentence to response letter.
 
 A broader definition of prestige is the ``widespread respect and admiration felt for someone or something on the basis of a perception of their achievements or quality'' (New Oxford American Dictionary).
 Indeed, Chudek et al.~\citep{prestige_cultural_learning} have defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'', and demonstrated its occurrence in in 3-4 year old children.
 {Henrich and Gil-White} \citep{prestige_evolution} gave a similar definition of prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature.
 
-{Jimenez \& Mesoudi} (2019) \citep{prestigeSocialLearn} suggest that cultural evolution theory is a major factor in human ecological success. They mention that a way to acquire adaptive social information is by preferentially copying competent individuals within a valuable domain, and they call it success bias as we do in this paper. They also mention that competence within a domain is often difficult or impossible to directly asses, therefore people tend to use indirect cues of success, as suggested by {Henrich and Gil-White}.
+Jimenez \& Mesoudi~\citep{prestigeSocialLearn} suggest that cultural evolution theory is a major factor in human ecological success. They mention that a way to acquire adaptive social information is by preferentially copying competent individuals within a valuable domain, and they call it success bias as we do in this paper. They also mention that competence within a domain is often difficult or impossible to directly asses, therefore people tend to use indirect cues of success, as suggested by Henrich and Gil-White~\citep{prestige_evolution}.
 
-Similarly to {Henrich and Gil-White} \citep{prestige_evolution}, we believe that the most skilled/knowledgeable models will, on-average, end up with the biggest and most lavish clienteles, so the clientele size provides a convenient and reliable proxy for that person's "worth. Therefore, we predict that skilled individuals have higher status, people preferentially copy them more than others, therefore prestigious individuals are influential, even beyond their domain of expertise.
+Henrich and Gil-White~\citep{prestige_evolution} noted that ``the most skilled/knowledgeable role-models will, on average, end up with the biggest and most lavish clienteles, so the size and lavishness of a given model's clientele size (the \emph{prestige}) provides a convenient and reliable proxy for that person's information quality''. Therefore, they predicted that skilled individuals have higher status, people preferentially copy them more than others, and therefore prestigious individuals may be influential even beyond their domain of expertise. 
 
-In our paper, we examine the effect of both success and prestige biases, and their relationship in contribution to the cultural evolution of populations. We call the joint contribution of both biases \emph{Influence bias}.
-This is an important distinction, as prestige is a context-dependent bias, rather than a content-{dependent} bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
+Here, we examine the effect of both success and prestige biases, and their relationship in contribution to the cultural evolution of populations. We call the joint contribution of both biases \emph{influence bias}.
+This is an important distinction, as prestige is a context-dependent bias, rather than a content-dependent bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
 Prestige bias is also frequency independent (see \Cref{cor:GBD} below), and thus it differs from conformity, which depend on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
 
 In contemporary human society, social media make it especially easy to estimate the social and cultural influence individuals have over others, which can have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices have been invented to capitalize on this effect \citep{facebook_marketing}.
@@ -544,15 +545,14 @@ Markers show average of $10,000$ simulations, error bars show 75\% (panels A, C,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Optimal success-bias weight}
-
+% TODO edit the next sentence.
 We ran simulations of the role-model choice process during a single generation in which every copier evaluates its own optimal success-bias weight, $\alpha^*$, which minimizes the expected squared error between the chosen trait value and the optimal trait value $\hat{A}$,
 \begin{equation}\label{eq:optimal_alpha}
 \alpha^* = \emph{argmin} \sum_{j=1}^N\frac{\alpha A_j + (1-\alpha) K_j}{\sum_{l=1}^N\alpha A_l + (1-\alpha) K_l} (\hat{A}-A_j)^2 \;,
 \end{equation}
 where $A_j$ is the trait of role-model $j$ and $K_j$ the number of copiers that already chose role-model~$j$.
-
-Simply put, each copier estimates what success-bias weight $\alpha^*$ will result in copying the closet trait to the ideal one $\hat{A}$.
-Indeed, if the trait value would have been correlated with fitness, the optimal success-bias weight would increase fitness. However in here we don't include natural selection.
+Simply put, each copier estimates what success-bias weight $\alpha^*$ will result in copying a trait that is most similar to the ideal trait value $\hat{A}$.
+Indeed, if the trait value is correlated with fitness, the optimal success-bias weight would increase the fitness of individuals. However, here we ignore the effects of natural selection, focusing instead on selectively neutral traits.
 
 We find that when copiers choose their success-bias weight according to \cref{eq:optimal_alpha}, it decreases with the number of copiers that have already chosen a role-model~(\Cref{fig:influence_advantage}).
 Moreover, their estimation error is much lower compared to a constant success-bias weight, which gives roughly the same high estimation error to all copiers (compare \Cref{fig:influence_advantage}B and C): in this example, the optimal success-bias weight gives an estimation error (difference between the chosen and optimal trait) converges to $0.046$, whereas a constant success-bias weight gives values $>0.74$.
@@ -599,7 +599,8 @@ This suggests that the later a copier makes its choice, the more it should rely 
 The rationale, then, is that the more information a copier has, e.g., by using others as information sources, the more informative and effective his choice can be.
 
 Our decision to research and analyze a multi-bias model is preceded by several others.
-{Ze Hong} (2020) \citep{payoff}, for example, present a model that combines both frequency dependent bias (including conformist bias) and payoff bias in a single decision-making calculus. He shows that an integrated learning strategy may be superior to relying on either bias alone. He also show that both are likely to contribute to the spread of variants with high payoff, and the magnitude of conformist bias affects the evolutionary dynamics.
+Ze Hong~\citep{payoff}, for example, presented a model that combines both frequency-dependent bias (including conformist bias) and payoff bias. He has shown that an integrated learning strategy may be superior to relying on either bias alone. Moreover, both are likely to contribute to the spread of variants with high payoff, and the magnitude of conformist bias affects the evolutionary dynamics.
+% TODO add Denton; others
 
 %\paragraph{Empirical evidence of prestige bias}
 Chudek et al.~\citep{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
