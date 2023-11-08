@@ -145,7 +145,7 @@ Direct bias occurs when one phenotype is more attractive than other phenotypes, 
 For example, an individual observing a ping-pong match can try the observed paddle grips to determine which grip is better.
 Frequency-dependent bias occurs when the probability of copying a phenotype is higher or lower than the frequency of the phenotype among demonstrators. 
 For example, suppose the common paddle grip is used by 60\% of the demonstrators; if the this grip is adopted by 80\% of copiers, then transmission is under positive frequency bias, also called \emph{conformity}; if it is adopted by 40\% of copiers, then transmission is under negative frequency bias, or \emph{anti-conformity} \citep{conformism}. 
-The effects of conformity and anti-conformity on cultural evolution have been studied with both models \citep{anticonformity,Denton2021,conformity} and experiments \citep{negativeFrequency}.
+The effects of conformity and anti-conformity on cultural evolution have been studied with both models \citep{Denton2020,Denton2021,Denton2022} and experiments \citep{negativeFrequency}.
 Indirect bias occurs when a copier uses some observed phenotype to evaluate the attractiveness of a potential role-model. 
 For example, an observer may copy the paddle grip of the ping-pong player who scored more points in the match, thus indirectly evaluating the grip by the points scored.
 However, this may cause mismatches between the copied trait and the rest of the cultural or genetic repertoire of the individual \citep{Kolodny2022}.
@@ -160,7 +160,7 @@ Chudek et al.~\citep{prestige_cultural_learning} have also defined prestige bias
 Henrich and Broesch \citep{fijian_social_bias} have further suggested that prestige bias can, over generations, lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits. 
 
 The distinction between success and prestige bias is important, as prestige is a context-dependent bias, rather than a content-dependent bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
-Prestige bias is also frequency independent (see \Cref{cor:GBD} below), and thus it differs from conformity \citep{anticonformity,Denton2021,conformity}, which depends on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
+Prestige bias is also frequency independent (see \Cref{cor:GBD} below), and thus it differs from conformity \citep{Denton2020,Denton2021,Denton2022}, which depends on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
 
 Prestige bias may be more common in humans than success bias \citep{complexityPaper}.
 In contemporary human society, social media make it especially easy to estimate the social and cultural influence individuals have over others, which can have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices have been invented to capitalize on this effect \citep{facebook_marketing}.
@@ -180,7 +180,7 @@ Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{h
 We follow the Boyd and Richerson model~\citep{evolutionBook}, assuming only oblique transmission of a single trait. 
 Consider a population of $N$ individuals, described by a single trait that takes continuous values.
 Each generation, $N$ naive individuals, or copiers, each chooses a single role-model from the entire previous generation. The copier then copies its trait value from the chosen role-model.
-Note that our transmission models are slightly different from those modeled before, e.g. \citep{cumul_culture,anticonformity,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
+Note that our transmission models are slightly different from those modeled before, e.g. \citep{cumul_culture,Denton2021,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
 
 Similar to a Wright-Fisher model, generations are non-overlapping, and the entire population is replaced in each generation.
 The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$, and  the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
@@ -581,27 +581,20 @@ We model these biases using a stochastic role-model choice process: each copier,
 
 Hence, our model has two ``nested'' stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
 To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DM, \Cref{cor:dirichlet}).
-The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and influence is a characteristic of the role-model and not the copier.
+The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and prestige is a characteristic of the role-model and not the copier.
 
 Analyzing the model with the DM distribution, we found approximations for the fixation probability and fixation time of a cultural trait under biased transmission in a constant environment.
-Our approximations are similar to Kimura's evolutionary-genetic approximations, in that (i) the difference between the resident and invading cultural trait values, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) increasing the relative weight of influence versus success bias, $\alpha$, decreases the effective population size, $N_e$~(\Cref{fig:var_alpha}).
+Our approximations are similar to Kimura's evolutionary-genetic approximations, in that (i) the strength of success bias towards the invading cultural trait, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) decreasing the relative weight of success versus prestige bias, $\alpha$, decreases the effective population size, $N_e$~(\Cref{fig:var_alpha}).
 
 We also analyzed a cyclic changing environment in which the identity of the success-biased trait switches after a fixed amount of generations~(\Cref{fig:ch_env_alpha_beta}).
 We find that, similarly to the constant environment approximation, a change in the success-bias weight $\alpha$ has no negative effects on the goodness-of-fit of the approximation to simulation results.
 We also showed that this approximation is more sensitive to changes in the success coefficient $\beta$ than the constant environment approximation, and a lower value is required to have a good fit. The ratio between the number of {generations} in which the rare phenotype is under positive transmission bias and the number of generations in which it is under negative bias does not affect the goodness-of-fit of the approximation. 
 
-Lastly, we examined a scenario in which copiers can adjust their success-weight bias, $\alpha$, to minimize their copying error, i.e., copy trait values closer to the optimal value.
+Lastly, we examined a scenario in which copiers can adjust their success-bias weight, $\alpha$, to minimize their copying error, i.e., copy trait values closer to the optimal value.
 We found that as the role-model choice process proceeds (that is, more copiers make their choices), both the success-bias weight (adjusted by copiers) and the estimation error decrease. 
 The latter is significantly lower than in a population using a constant, fixed success-bias weight, regardless of the value of the constant weight (\Cref{fig:influence_advantage}).
 This suggests that the later a copier makes its choice, the more it should rely on choices of previous copiers (prestige), and the less it should rely on its own estimation of the success of role-models.
 The rationale, then, is that the more information a copier has, e.g., by using others as information sources, the more informative and effective his choice can be.
-
-Others have analyzed models with interactions between different transmission biases.
-Ze Hong~\citep{payoff} studied a model with both frequency-dependent bias (including conformist bias) and payoff bias. The analysis demonstrates that an integrated learning strategy may be superior to relying on either bias alone. Moreover, both biases are likely to contribute to the spread of variants with high payoff, and the magnitude of conformist bias affects the evolutionary dynamics.
-% TODO add: 
-% Ammar, Madeleine, Laurel Fogarty, and Anne Kandler. 2023. “Social Learning and Memory.” Proceedings of the National Academy of Sciences 120 (33): e2310033120. https://doi.org/10.1073/pnas.2310033120.
-% Enquist, Magnus, and Stefano Ghirlanda. 2007. “Evolution of Social Learning Does Not Explain the Origin of Human Cumulative Culture.” Journal of Theoretical Biology 246 (1): 129–35. https://doi.org/10.1016/j.jtbi.2006.12.022.
-% Denton, Kaleda K., Yoav Ram, and Marcus W. Feldman. 2022. “Conformity and Content-Biased Cultural Transmission in the Evolution of Altruism.” Theoretical Population Biology 143 (February): 52–61. https://doi.org/10.1016/j.tpb.2021.10.004.
 
 Chudek et al.~\citep{prestige_cultural_learning} report the first direct tests in children that suggest the existence of prestige bias, defined as the tendency to learn from individuals to whom others have preferentially attended, learned, or deferred.
 Their definition of prestige is similar to ours. They showed that the odds of 3-4 years-old children learning from an adult role-model to whom bystanders had previously preferentially attended for 10 seconds were more than twice those of learning from a role model whom bystanders ignored.
@@ -610,7 +603,7 @@ This led to the suggestion that when the trait is costly to learn individually, 
 It would be interesting to include costs in our model to try and observe these effects and dynamics in a large population.
 
 According to Henrich and Broesch~\citep{fijian_social_bias}, natural selection has favored the emergence of psychological biases for learning from those individuals most likely to possess adaptive information. 
-They authors studied Fijian villages to examine if and how such biases emerge in a small-scale society.
+The authors studied Fijian villages to examine if and how such biases emerge in a small-scale society.
 They found that Fijian villagers are more likely to learn from role-models perceived as more successful/knowledgeable, both within and across domains. Their research thus suggests that copying from those perceived as successful, rather than who are actually successful, is a common phenomenon. They show that the social networks representing copier--role-model relationships are centralized, which is consistent with the prediction that people substantially share notions about who is a good cultural model, but that individuals' role-model selections are influenced by multiple factors.
 
 Prestige bias can help to cheaply estimate and acquire knowledge, which may facilitate survival and reproduction. However, it is not always the case, and there could be negative repercussions to this bias, such as invasion of maladaptive traits.
@@ -634,6 +627,13 @@ One path forward is an analysis of the dynamics of the optimal success-bias weig
 It may also be possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
 Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
 
+Others have analyzed models with interactions between different transmission biases.
+Hong~\citep{payoff} studied a model with both conformity and success bias (which he calls `payoff bias'). 
+He showed that an intermediate level of conformity bias--not too little but not too much--can be adaptive and evolve to prevent invasion of low-success traits while allowing the invasion of high-success traits (for another example of adaptive filtering, see~\citep{adaptive_filtering}).
+Similar to our model (\cref{eq:prestige}), Hong~\citep{payoff} also additively combined the two transmission biases (his eq.~1). However, transmission biases can be combined in many ways. 
+For example, Denton et al.~\citep{Denton2022} combined frequency-dependent bias and genetically determined content bias multiplicatively (their eq.~1). 
+Ammar et al.~\citep{Ammar2023} studied a model in which individuals have a repertoire of cultural variants to choose from, and both variant choice and transmission via social learning are success-biased. Moreover, they also included the possibility to `forget' infrequently used variants; therefore, because usage is success-biased, memory is also success-biased. It remains to be seen how different assumptions on the mechanisms of learning and forgetting affect the evolutionary dynamics under different and interacting transmission biases.
+
 Another way to expand our model is to account for the two types of prestige or leadership suggested by Van Vugt and Smith~\citep{dual_leadership} that are attributed to Confucius and Machiavelli. Confucius viewed leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
 In contrast, Machiavelli viewed leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence.
 Van Vugt and Smith suggest that these opposing views are both partially supported by the available evidence but each one on its own offers an incomplete view of the complex and dynamic concept of leadership. 
@@ -641,14 +641,16 @@ Henrich and Gil-White~\citep{prestige_evolution} have suggested a similar distin
 Several adjustments could be made so that our model reflects these leadership styles, such as assuming there is a correlation between phenotype and leadership style. The resulting cultural-evolutionary dynamics and their dependence on the costs and benefits are intriguing.
 
 \paragraph{Conclusions.}
-We studied a model of cultural evolution under two transmission biases: the commonly studied success bias, together with prestige bias, which has so far received less attention. We found approximations for this complex dynamics. We then showed that success bias affects the evolutionary dynamics much like natural selection does, whereas prestige bias has a similar effect to random genetic drift. We also find a clear advantage to individuals that can choose the relative weight of the two biases.
+We studied a model of cultural evolution under two transmission biases: the commonly studied success bias, together with prestige bias, which has so far received less attention by modelers. We found approximations for this complex dynamics. We then showed that success bias affects the evolutionary dynamics much like natural selection does, whereas prestige bias has a similar effect to random genetic drift. We also find a clear advantage to individuals that can choose the relative weight of the two biases.
 
 {\small
 \section*{Acknowledgements}
 We thank Marc Feldman, Martin Pontz, Gili Greenbaum, Alon Rozen, Tal Simon and two anonymous reviewers for discussions and comments.
 This work was supported in part by 
-Minerva Stiftung Center for Lab Evolution (YR) and  the John Templeton Foundation (YR 61809).
+Minerva Stiftung Center for Lab Evolution~(YR) and  the John Templeton Foundation~(YR 61809).
 }
+
+\newpage 
 
 \section*{References}
 \nolinenumbers
@@ -763,11 +765,14 @@ Whitehead, Hal. (2017) "Gene–culture coevolution in whales and dolphins." Proc
 \bibitem{cooperation}
 Cohen, Dor, Ohad Lewin-Epstein, Marcus W. Feldman, and Yoav Ram. (2021) "Non-Vertical Cultural Transmission, Assortment and the Evolution of Cooperation." Proceedings of the Royal Society B: Biological Sciences 288 (1951): 20203162. https://doi.org/10.1098/rspb.2020.3162.
 
-\bibitem{conformity}
+\bibitem{Denton2022}
 Denton, Kaleda K., Yoav Ram, and Marcus W. Feldman. (2022) "Conformity and content-biased cultural transmission in the evolution of altruism." Theoretical Population Biology 143: 52-61.
 
-\bibitem{anticonformity}
-Denton, Kaleda Krebs, Yoav Ram, Uri Liberman, and Marcus W. Feldman. (2020) "Cultural Evolution of Conformity and Anticonformity." Proceedings of the National Academy of Sciences 117 (24): 13603–14. 
+\bibitem{Denton2021}
+Denton, Kaleda K., Uri Liberman, and Marcus W. Feldman. (2021) "On randomly changing conformity bias in cultural transmission." Proceedings of the National Academy of Sciences 118.34: e2107204118.
+
+\bibitem{Denton2020}
+Denton, Kaleda Krebs, Yoav Ram, Uri Liberman, and Marcus W. Feldman. (2020) "Cultural evolution of conformity and anticonformity." Proceedings of the National Academy of Sciences 117 (24): 13603–14. 
 
 \bibitem{facebook_marketing}
 Lee, Woojin, Lina Xiong, and Clark Hu. (2012) "The effect of Facebook users’ arousal and valence on intention to go to the festival: Applying an extension of the technology acceptance model." International Journal of Hospitality Management 31.3: 819-827.
@@ -811,9 +816,6 @@ Truskanov, Noa, Yasmin Emery, and Redouan Bshary. (2020) "Juvenile cleaner fish 
 \bibitem{Kolodny2022}
 Kolodny, Oren, Marcus W. Feldman, Arnon Lotem, and Yoav Ram. (2022) "Differential Application of Cultural Practices at the Family and Individual Levels May Alter Heritability Estimates." Behavioral and Brain Sciences 45 (September): e167.
 
-\bibitem{Denton2021}
-Denton, Kaleda K., Uri Liberman, and Marcus W. Feldman. (2021) "On randomly changing conformity bias in cultural transmission." Proceedings of the National Academy of Sciences 118.34: e2107204118.
-
 \bibitem{Borofsky2022}
 Borofsky, Talia, and Marcus W. Feldman. (2022) "Success-biased social learning in a one-consumer, two-resource model." Theoretical Population Biology 146: 29-35.
 
@@ -823,11 +825,20 @@ Mesoudi, Alex, and Michael J. O’Brien. (2008) "The Cultural Transmission of Gr
 \bibitem{Lehmann2009}
 Lehmann, L., and M.W. Feldman. (2009) Coevolution of adaptive technology, maladaptive culture, and population size in a producer-scrounger game. Proceedings of the Royal Society B: Biological Sciences 276: 3853-3862.
 
-\bibitem{Fogarty2017}Fogarty, L., J. Y. Wakano, M. W. Feldman, and K. Aoki. (2017) The driving forces of cultural complexity: Neanderthals, modern humans, and the question of population size. Human Nature : 28: 39-52.
+\bibitem{Fogarty2017} 
+Fogarty, L., J. Y. Wakano, M. W. Feldman, and K. Aoki. (2017) The driving forces of cultural complexity: Neanderthals, modern humans, and the question of population size. Human Nature : 28: 39-52.
 
-\bibitem{cumul_culture}Denton, Kaleda K, Yoav Ram, and Marcus W. Feldman. (2023) "Conditions That Favour Cumulative Cultural Evolution." Philosophical Transactions of the Royal Society B: Biological Sciences 378 (1872).
+\bibitem{cumul_culture}
+Denton, Kaleda K, Yoav Ram, and Marcus W. Feldman. (2023) "Conditions That Favour Cumulative Cultural Evolution." Philosophical Transactions of the Royal Society B: Biological Sciences 378 (1872).
 
-\bibitem{payoff} Hong, Ze. (2022) "Combining Conformist and Payoff Bias in Cultural Evolution: An Integrated Model for Human Decision-Making." Human Nature 33.4: 463-484.
+\bibitem{payoff}
+Hong, Ze. (2022) "Combining Conformist and Payoff Bias in Cultural Evolution: An Integrated Model for Human Decision-Making." Human Nature 33.4: 463-484.
+
+\bibitem{adaptive_filtering}
+ Enquist, Magnus, and Stefano Ghirlanda. (2007) "Evolution of Social Learning Does Not Explain the Origin of Human Cumulative Culture." Journal of Theoretical Biology 246 (1): 129–35.
+
+\bibitem{Ammar2023}
+Ammar, Madeleine, Laurel Fogarty, and Anne Kandler. (2023) "Social Learning and Memory." Proceedings of the National Academy of Sciences 120 (33): e2310033120. 
 
 \end{thebibliography}
 
