@@ -166,12 +166,14 @@ Prestige bias may be more common in humans than success bias \citep{complexityPa
 In contemporary human society, social media make it especially easy to estimate the social and cultural influence individuals have over others, which can have an effect on decision making. Online social networks such as \emph{Facebook} and \emph{Instagram} are known to affect the influence of individuals \citep{social_influence,social_media,influence_analysis}, and specific marketing practices have been invented to capitalize on this effect \citep{facebook_marketing}.
 However, despite many mentions of prestige in the cultural evolution literature, there are few models of prestige bias. 
 
-Here, we develop a stochastic model of cultural transmission with both cross-domain indirect success bias and prestige bias to examine their relationship in contribution to the cultural evolution of populations.
-We find analytic approximations for this model and analyze its dynamics. We also find approximations for the probability and time to fixation of a `successful' phenotype (i.e., that is subject to success bias). Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and prestige bias play the role of natural selection and genetic drift, respectively. 
+Here, we develop a stochastic model of cultural transmission with both indirect success bias and prestige bias to examine their relationship in contribution to the cultural evolution of populations.
+We find analytic approximations for this model and analyze its dynamics. We also find approximations for the probability and time to fixation of a `successful' phenotype (i.e., that is subject to success bias) in both a constant and a cyclic changing environment.
+Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and prestige bias play the role of natural selection and genetic drift, respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
-We begin with a continuous trait model with indirect success bias, previously suggested by Boyd and Richerson~\citep{evolutionBook}. We extend this model to include prestige bias. We then develop a dichotomous trait model. Note that the indirect success bias is due to an indirect evaluation, in which a certain phenotype is used to evaluate the success of potential role-models.
+We begin with a continuous-trait model with indirect success bias, previously suggested by Boyd and Richerson~\citep{evolutionBook}. Note that the indirect success bias is due to an indirect evaluation, in which a certain phenotype is used to evaluate the success of potential role-models.
+We extend this model to include prestige bias and then develop a version of the model with a dichotomous trait to facilitate mathematical analysis.
 
 We implement our stochastic models and approximations, perform statistical analyses, and produce figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
@@ -267,23 +269,24 @@ We found two approximations for the distribution of $\vec{K}_{N}$, summarized he
 In both we assume that the bias weight is either completely homogeneous, $\alpha_{i,j}=\alpha$, or that $\alpha_{i,j}=\alpha_j$ is a bias of role-model $j$ only, meaning it does not vary between copiers.
 Note that these approximations apply for both the and the continuous trait (\cref{eq:prestige}) and the dichotomous trait (\cref{eq:binary-model}) models.
 
-\paragraph{Generalized binomial approximation.}  
-The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore,
-
-
+\paragraph{Generalized binomial distribution approximation.}  
+The number of copiers of a specific role-model at each step, $K_{i,j}$, follows the {\em generalized binomial distribution}~\citep{GBD} and therefore, 
 (i) the expected number of copiers of role-model~$j$ equals its influence in the eyes of the first copier, multiplied by the total number of copiers, that is,
 $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all copiers ($e=e_i$ for $i=1, \ldots, N$); and
 (ii) the expected number of copiers of each role-model equals its relative biased trait value, similar to the role of relative fitness in population-genetic models, that is, $\E[K_{N,j}] = \beta(A_j+e) / \overline{\beta}$ if the bias weight is uniform for all role-models ($\alpha=\alpha_j$ for $j=1,\ldots,N$), where $\overline{\beta}=1/N \sum_{j=1}^{N}{\beta(A_j+e)}$ is the population mean estimated trait value. 
 
-\paragraph{Dirichlet-Multinomial approximation.}
+\paragraph{Dirichlet-Multinomial distribution approximation.}
 The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$). 
+% TODO missing summary like GBD?
 
-\subsection*{Generalized binomial distribution}
+After finding these approximations for the role-model choice process, we focus on the dichotomous-trait model, in which mathematical analysis is simpler, and studied the fixation probability and time in both a constant and a periodically changing environment.
+
+\subsection*{Generalized binomial distribution (GBD) approximation}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is {denoted}  by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials (the latter can be estimated from data, but its value is insignificant for our approximation). Note that $\theta=0$ gives the standard binomial distribution.
 \\
 
-\begin{result}[Generalized binomial approximation]\label{res:GBD}
-The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the generalized binomial distribution, $K_{i,j} \sim GBD(i,\alpha_j\cdot\beta(A_j+e),\theta)$ if $e_i=e$ for all role-models $i=1, \ldots, N$, and $\theta$ is the correlation between successive role-model choices.
+\begin{result}[Generalized binomial distribution approximation]\label{res:GBD}
+The number of copiers of role-model $j$ after $i$ copiers have chosen a role-model follows the generalized binomial distribution, $$K_{i,j} \sim \textit{GenBin}(i,\alpha_j\cdot\beta(A_j+e),\theta)$$ if $e_i=e$ for all role-models $i=1, \ldots, N$, and $\theta$ is the correlation between successive role-model choices.
 \end{result}
 
 \begin{proof}
@@ -329,11 +332,11 @@ To validate that GBD approximation for the number of copiers of a role-model is 
 we ran $1,000$ simulations of the full model, and compared the results with \Cref{cor:GBD}.
 We compare the distribution of number of copiers by plotting the histograms of both our simulations results and the expected values based on \Cref{cor:GBD}.
 
-Although basic, \Cref{fig:GBD} shows good fit of the GB approximation.
-This validation is initial, and {we do} more extensive validations on the Dirichlet-Multinomial approximation, because {that} is what we will use in our {analysis}.
+Although basic, \Cref{fig:GBD} shows good fit of the GBD approximation.
+We perform more extensive validations on the Dirichlet-Multinomial approximation (see below), because that is what we will use in our analysis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Dirichlet-Multinomial distribution approximation}
+\subsection*{Dirichlet-Multinomial distribution (DMD) approximation}
 
 \paragraph{P\'{o}lya urn model.}
 This stochastic process consists of $N$ draws from an urn with an initial {number} of colored balls of $M$ colors. When a ball is drawn, it is then placed back in the urn together with an additional new ball of the same color.
@@ -368,24 +371,24 @@ Frigyik et al.~\citep[section 2]{dirichlet} prove that the proportion of differe
 We therefore have an approximation for the relative influence each role-model has when evaluated by copiers. Thus, choosing the role-models for all copiers is equivalent to drawing from a {multinomial} distribution where the parameters are the modified weights from a Dirichlet distribution and we have the following corollary.
 \\
 
-\begin{corollary}\label{cor:dirichlet}
-The number of copiers of each role-model {approximates} a Dirichlet-Multinomial distribution, $\vec{K_i} \sim \emph{DM}(N,\vec{G_1})$, under the conditions of \Cref{result:polya}.
+\begin{corollary}[Dirichlet-Multinomial distribution approximation]\label{cor:dirichlet}
+The number of copiers of each role-model approximates a Dirichlet-Multinomial distribution, $\vec{K_i} \sim \textit{DirMul}(N,\vec{G_1})$, under the conditions of \Cref{result:polya}.
 \end{corollary}
 
 \paragraph{Numerical validation.}
-We next validated the DM approximation of our model
-and tested its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) by comparing results of stochastic simulations of our model (\cref{eq:binary-model}) with the DM approximation (\Cref{cor:dirichlet}).
+We next validated the DMD approximation of our model
+and tested its sensitivity to the assumptions ($e_i=e$ and $\alpha_i=\alpha$ for $i=1,\ldots,N$) by comparing results of stochastic simulations of our model (\cref{eq:binary-model}) with the DMD approximation (\Cref{cor:dirichlet}).
 We used a relatively small population size, $N=100$, thus validating that the approximation is in good agreement even for small $N$, despite the assumption of large $N$ in the proof by Frigyik et al.~\citep[section 2]{dirichlet}.
 First, we computed an observed distribution of the number of copiers from the average empirical distribution of multiple simulations.
-We then compared this observed distribution with the expected theoretical DM distribution (\Cref{fig:DM_validation}A).
+We then compared this observed distribution with the expected theoretical DMD (\Cref{fig:DM_validation}A).
 The difference in distributions was not perceived when plotting both distributions on the same figure, so we used the difference instead.
 The maximum difference is 0.5 role-models, which indicates a very good fit.
-In addition, we tested the likelihood of the observed data to be drawn from the DM distribution, against a shuffle of the parameters vector of the DM distribution itself (\Cref{fig:DM_validation}B). We see that the negative log likelihood of the observed data is much higher than any other shuffled version of the parameters vector, strongly supporting our approximation.
+In addition, we tested the likelihood of the observed data to be drawn from the DMD, against a shuffle of the parameters vector of the DMD itself (\Cref{fig:DM_validation}B). We see that the negative log likelihood of the observed data is much higher than any other shuffled version of the parameters vector, strongly supporting our approximation.
 
-Next, we examined the fixation probability and fixation time of a favored phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DM approximation.
+Next, we examined the fixation probability and fixation time of a favored phenotype $\hat{A}$ when invading a population of phenotype $A$ and compared results from the full model and the DMD approximation.
 Thus, we assume the population has a single individual with phenotype $\hat{A}$ and $N-1$ individuals with phenotype $A$. 
-We find that the number of simulations needed to sufficiently approximate our model with the DM approximation is roughly $1,000$ (\Cref{fig:num_sims}).
-We examined the robustness of the DM approximation to relaxing the following assumptions.
+We find that the number of simulations needed to sufficiently approximate our model with the DMD approximation is roughly $1,000$ (\Cref{fig:num_sims}).
+We examined the robustness of the DMD approximation to relaxing the following assumptions.
 First, we relaxed our assumption of no estimation error $e$.
 Estimation error in the original model was drawn from a normal distribution, and added to the trait value before evaluation of the bias ($A_{i,j} = A_j + e_i$).
 When estimation error is applied, we sample $e_i$ for each copier $i$ from a normal distribution with expected value zero and variance $\eta^2$.
@@ -396,11 +399,12 @@ We found again that results of the DM approximation are similar to those from st
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Fixation probability and time}
-After finding that the DM distribution is a good approximation of the (within-generation) role-model choice process, we turn our attention to the (between-generation) evolutionary dynamics.
+After finding that the DMD is a good approximation of the (within-generation) role-model choice process, we turn our attention to the (between-generation) evolutionary dynamics.
 We focus on the fixation probability and conditional fixation time (conditioned on the population reaching fixation) of a favored phenotype, using a diffusion-equation approximation approach, similar to analyses of population-genetic models \citep{kimura,kimura_average,otto_fixation}.
 We are mainly interested in the effect of the bias weight, $\alpha$, which determines the relative effect of success and prestige bias, given by \cref{eq:prestige}.
-For simplicity, we use the dichotomous model, and we do not include role-model estimation error in this analysis, i.e $e_i=0$ for every copier $i$.
-As shown above, transmission in our model is approximately DM distributed (\Cref{cor:dirichlet} and \cref{eq:copier_choose}).
+
+For simplicity, we use the dichotomous-trait model, and we do not include role-model estimation error in this analysis, i.e $e_i=0$ for every copier $i$.
+As shown above, transmission in our model is approximately Dirichlet-Multinomial distributed (\Cref{cor:dirichlet} and \cref{eq:copier_choose}).
 
 \paragraph{Drift and diffusion terms in a constant environment.}
 We start by finding the expectation and variance of the change in frequency from one generation to the next, which are the drift and diffusion terms of the diffusion equation.
@@ -463,7 +467,7 @@ We find see that the two models have similar dynamics, and both are well approxi
     \includegraphics[width=\linewidth]{kimura_var.pdf}
   \caption{\textbf{Fixation probability and time in a constant environment.}
   Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row.
-  The approximation (black; \cref{eq:kimura_p}) agrees with both DM simulations (green) and Wright-Fisher simulation (orange).
+  The approximation (black; \cref{eq:kimura_p}) agrees with both DMD simulations (green) and Wright-Fisher simulation (orange).
   Fixation probability (A) is bounded by $2(1-\beta)$ (dashed line).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
    Here, Population size, $N=1,000$; phenotype values, $A=0.7$ (panels A and B), 
@@ -475,7 +479,7 @@ We find see that the two models have similar dynamics, and both are well approxi
 \end{figure}
 
 
-\paragraph*{Changing environment}. After finding a good approximation in a constant environment, where the favorable trait is always $\hat{A}$, we proceeded to find an approximation for a periodically changing environment. 
+\paragraph*{Changing environment}. After finding a good approximation in a constant environment, where the favorable trait is always $\hat{A}$, we proceeded to find an approximation for a cyclic changing environment. 
 Following \citep{changeEnv}, we denote $k$ as the number of generations in which the invading phenotype is favored by success bias, and $l$ as the number of generations in which the resident phenotype is favored by success bias.
 Thus, during the first $k$ generations of the environmental cycle, $\beta=\frac{\beta(A)}{\beta(\hat{A})}$<1, where $\hat{A}$ is the invading phenotype. During the following $l$ generations of the environmental cycle, the phenotype favored by success bias is switched, such that $\frac{\beta(A)}{\beta(\hat{A})}>1$.
 We then proceed to find expressions for the expectation and variance of the change in the frequency of phenotype $\hat{A}$ after $n=k+l$ generations. 
@@ -509,7 +513,7 @@ where $x$ is the initial frequency of the invading phenotype.
 \end{result}
 
 \paragraph{Numerical validation.}
-To validate the the approximation for the fixation probability in a changing environment (\cref{eq:ch_env}), we compare it to results of simulations that use the DM approximation (\Cref{cor:dirichlet}).
+To validate the the approximation for the fixation probability in a changing environment (\cref{eq:ch_env}), we compare it to results of simulations that use the DMD approximation (\Cref{cor:dirichlet}).
 We find that the approximation fits the simulation results well for variable bias weights, $\alpha$, which corresponds to the effective population size (\Cref{fig:ch_env_alpha_beta}A).
 
 However, the approximation is more sensitive to the value of the success bias coefficient $\beta$ (\Cref{fig:ch_env_alpha_beta}B).
@@ -576,17 +580,16 @@ One such bias is success bias, in which copiers are more likely to copy a succes
 It has been suggested that because it is hard to estimate success, a more common bias is a bias towards role-models \emph{perceived} to be successful.
 This perceived success can be determined by performance with respect to another trait, i.e., \emph{indirect success} \citep{evolutionBook,fijian_social_bias}, or by ``the amount of voluntary deference and attention received by models'' \citep{prestigeSocialLearn}, i.e., \emph{prestige} \citep{prestige_cultural_learning,prestige_evolution} (but see Chellappoo~\citep{rethinkPrestige} for a critical examination of the concept of prestige).
 
-We developed a cultural-evolutionary model that includes both indirect success and prestige biases, where the latter is a bias towards role-models with many copiers.
-We model these biases using a stochastic role-model choice process: each copier, in turn, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
-
-Hence, our model has two ``nested'' stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
-To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DM, \Cref{cor:dirichlet}).
+We developed two cultural-evolutionary models, one with continuous and one with dichotomous trait values.
+Our models include both indirect success and prestige biases, where the latter is a bias towards role-models with many copiers. We model these biases using a stochastic role-model choice process: each copier, in turn, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
+Hence, our models have two ``nested'' stochastic processes: the role-model choice process within each generation, and the cultural-evolutionary process between generations.
+To simplify the mathematical and computational analysis, we developed analytic approximations for the role-model choice process using the the {\em generalized binomial distribution} (GBD, \Cref{res:GBD}) and the {\em Dirichlet-Multinomial distribution} (DMD, \Cref{cor:dirichlet}).
 The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and prestige is a characteristic of the role-model and not the copier.
 
-Analyzing the model with the DM distribution, we found approximations for the fixation probability and fixation time of a cultural trait under biased transmission in a constant environment.
+Analyzing the dichotomous-trait model using the the DMD approximation, we found approximations for the fixation probability and fixation time of a cultural trait under biased transmission in a constant environment.
 Our approximations are similar to Kimura's evolutionary-genetic approximations, in that (i) the strength of success bias towards the invading cultural trait, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) decreasing the relative weight of success versus prestige bias, $\alpha$, decreases the effective population size, $N_e$~(\Cref{fig:var_alpha}).
 
-We also analyzed a cyclic changing environment in which the identity of the success-biased trait switches after a fixed amount of generations~(\Cref{fig:ch_env_alpha_beta}).
+We also analyzed the dichotomous--trait model in a cyclic changing environment in which the identity of the success-biased trait switches after a fixed amount of generations~(\Cref{fig:ch_env_alpha_beta}).
 We find that, similarly to the constant environment approximation, a change in the success-bias weight $\alpha$ has no negative effects on the goodness-of-fit of the approximation to simulation results.
 We also showed that this approximation is more sensitive to changes in the success coefficient $\beta$ than the constant environment approximation, and a lower value is required to have a good fit. The ratio between the number of {generations} in which the rare phenotype is under positive transmission bias and the number of generations in which it is under negative bias does not affect the goodness-of-fit of the approximation. 
 
@@ -910,7 +913,7 @@ E[x'-x] = E[x'] - E[x] = x(1-x)(1-\beta) + o(1-\beta) \;,
 \end{equation}
 which gives us the drift term of the diffusion equation.
 
-Using the variance of the DM distribution,
+Using the variance of the DMD,
 \begin{equation}
 V(X') = N\frac{\alpha_1}{\alpha_1+\alpha_2}
 \Big(1-\frac{\alpha_1}{\alpha_1+\alpha_2}\Big)
@@ -1122,9 +1125,9 @@ which proves the diffusion term.
     \includegraphics[width=\linewidth]{DM_validation.pdf}
   \caption{
   \textbf{Numerical validation of the DM approximation.}
-  We performed computational simulations of the role-model choice process (\Cref{eq:prestige}) and compared the distribution of the number of copiers to simulations when using the DM distribution approximation (\Cref{cor:dirichlet}).
+  We performed computational simulations of the role-model choice process (\Cref{eq:prestige}) and compared the distribution of the number of copiers to simulations when using the DMD approximation (\Cref{cor:dirichlet}).
   \textbf{(A)} The difference between the DM distribution (orange) and the empirical distribution of the simulations (blue) is very small. 
-  \textbf{(B)} The log-likelihood of the DM distribution for results of the simulations (red vertical line) is much higher {than} the log-likelihood of permutations of simulations (blue histogram).
+  \textbf{(B)} The log-likelihood of the DMD for results of the simulations (red vertical line) is much higher {than} the log-likelihood of permutations of simulations (blue histogram).
   Here, population size, $N=100$; number of simulations, $m=100$; phenotype values, $\hat{A}=1$, $A \sim N(0,1)$; success-bias weight, $\alpha=0.5$.
   No estimation error or bias is applied, and traits are estimated and copied perfectly.}	
   \label{fig:DM_validation}
@@ -1134,8 +1137,8 @@ which proves the diffusion term.
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{num_sims.pdf}
   \caption{
-  \textbf{DM Approximation precision as function of number of simulations.}
-  Our DM approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 or more simulations.
+  \textbf{DMD approximation precision as function of number of simulations.}
+  Our DMD approximation (orange) agrees with stochastic simulation results (blue) when using 1,000 or more simulations.
   Both fluctuate around the analytic fixation probability approximation (black; \cref{eq:kimura_p}).
   Markers are averages across simulations, error bars are 95\% confidence intervals.
   Here, population size, $N=1000$; success-bias weight, $\alpha=0.5$; phenotype values, $\hat{A}=1$, $A=0.7$; success-bias value, $\beta(A)=0.956$.}	
@@ -1146,8 +1149,8 @@ which proves the diffusion term.
 \begin{figure}
     \includegraphics[width=\linewidth]{full_vs_dm_mutation.pdf}
   \caption{
-  \textbf{Robustness of DM approximations to success estimation error.}
-  Both the DM approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
+  \textbf{Robustness of DMD approximations to success estimation error.}
+  Both the DMD approximation (orange) and our approximation (black) agree with the stochastic simulations (blue), even with a high estimation error.
   Markers are averages across simulations, error bars are 95\% confidence intervals.
   5,000 simulations per data point; population size, $N=1000$; success-bias weight, $\alpha=0.1$; phenotype values, $\hat{A}=1$,$A=0.7$; bias strength parameter $J\sim N(1,\eta^2)$ where $\eta^2$ in on the x-axis.
   }	
