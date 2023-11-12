@@ -547,7 +547,9 @@ Markers show average of $10,000$ simulations, error bars show 75\% (panels A, C,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Optimal success-bias weight}
-% TODO edit the next sentence.
+% TODO edit the next sentence -- mention this is in the continous trait model
+In the above, we assumed that $\alpha$ is homogeneous in the population. 
+Next
 We ran simulations of the role-model choice process during a single generation in which every copier evaluates its own optimal success-bias weight, $\alpha^*$, which minimizes the expected squared error between the chosen trait value and the optimal trait value $\hat{A}$,
 \begin{equation}\label{eq:optimal_alpha}
 \alpha^* = \emph{argmin} \sum_{j=1}^N\frac{\alpha A_j + (1-\alpha) K_j}{\sum_{l=1}^N\alpha A_l + (1-\alpha) K_l} (\hat{A}-A_j)^2 \;,
@@ -609,6 +611,12 @@ According to Henrich and Broesch~\citep{fijian_social_bias}, natural selection h
 The authors studied Fijian villages to examine if and how such biases emerge in a small-scale society.
 They found that Fijian villagers are more likely to learn from role-models perceived as more successful/knowledgeable, both within and across domains. Their research thus suggests that copying from those perceived as successful, rather than who are actually successful, is a common phenomenon. They show that the social networks representing copier--role-model relationships are centralized, which is consistent with the prediction that people substantially share notions about who is a good cultural model, but that individuals' role-model selections are influenced by multiple factors.
 
+Dunbar~\citep{social_brains} hypothesized that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
+Following this, Muthukrishnan and Henrich \citep{collective_brains} suggested that prestige can directly affect human physical evolution. They present a concept called \emph{cultural brains}---brains that evolved primarily for the acquisition of adaptive knowledge.
+They then develop a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. 
+They also presented the \emph{cumulative cultural brain} hypothesis, which proposes that human brains have evolved with an ability and tendency for selective, high-fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
+They suggest that one of the reasons for the extreme increase in brain size in humans is the ability to `cheaply' acquire adaptive knowledge via transmission biases such as prestige.
+
 Prestige bias can help to cheaply estimate and acquire knowledge, which may facilitate survival and reproduction. However, it is not always the case, and there could be negative repercussions to this bias, such as invasion of maladaptive traits.
 Takahashi and Ihara~\citep{best_of_k} mention that social learning not only takes the form of random copying of other individuals, but also involves learners' choice of what to learn and from whom to learn. They suggest a best-of-k model where an individual samples~$k$ role-models and chooses the one he deems most "successful". They mention that a previous mathematical analysis has shown that it may sometimes result in maladaptive cultural evolution when the payoffs associated with cultural variants vary stochastically. In such a case, learners may be selectively disfavored and in the long run replaced by unbiased learners, who simply copy someone chosen at random. They developed new mathematical models that are simpler and mathematically tractable. They found that best-of-k learning, unlike unbiased learning, can facilitate the invasion of an on average inferior variant that sometimes gives a very high payoff (see Fogarty et al.\ \citep{Fogarty2017} and references there). Our model, which includes both success and prestige bias, is consistent with this claim. When a maladaptive trait is `piggybacking' on a role-model with high influence (joint effect of success and prestige), the former could spread in the population.
 In addition, best-of-k learning can be stable against invasion by unbiased learning if social learning is sometimes combined with individual learning \citep{best_of_k}. 
@@ -620,22 +628,16 @@ They find that there are individuals who act as \emph{agents}, who are often obs
 They also suggest a way to use this phenomenon to change existing traditions in a population.
 It is very clear however, that just as it can be used to end harmful traditions, the same agents could start harmful traditions.
 
-Dunbar~\citep{social_brains} hypothesized that larger, more complex brains can store and manage more information and in turn, this information can support the costs of a larger brain.
-Following this, Muthukrishnan and Henrich \citep{collective_brains} suggested that prestige can directly affect human physical evolution. They present a concept called \emph{cultural brains}---brains that evolved primarily for the acquisition of adaptive knowledge.
-They then develop a model that predicts a strong relationship between brain size and group size, because group size also provides access to more adaptive knowledge. 
-They also presented the \emph{cumulative cultural brain} hypothesis, which proposes that human brains have evolved with an ability and tendency for selective, high-fidelity social learning. As part of this process, there are a variety of strategies and biases that have evolved to hone in on the most adaptive knowledge. These strategies and biases include direct and indirect cues of the popularity of cultural traits (e.g. success and prestige biases).
-They suggest that one of the reasons for the extreme increase in brain size in humans is the ability to `cheaply' acquire adaptive knowledge via transmission biases such as prestige.
-
-One path forward is an analysis of the dynamics of the optimal success-bias weight model, in which every copier chooses its $\alpha$. It would be interesting to see the if the mean estimation error and the varying weight, $\alpha^*$, converge to specific values, and how they are affected by the model parameters.
-It may also be possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
-Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
-
 Others have analyzed models with interactions between different transmission biases.
 Hong~\citep{payoff} studied a model with both conformity and success bias (which he calls `payoff bias'). 
 He showed that an intermediate level of conformity bias--not too little but not too much--can be adaptive and evolve to prevent invasion of low-success traits while allowing the invasion of high-success traits (for another example of adaptive filtering, see~\citep{adaptive_filtering}).
 Similar to our model (\cref{eq:prestige}), Hong~\citep{payoff} also additively combined the two transmission biases (his eq.~1). However, transmission biases can be combined in many ways. 
 For example, Denton et al.~\citep{Denton2022} combined frequency-dependent bias and genetically determined content bias multiplicatively (their eq.~1). 
 Ammar et al.~\citep{Ammar2023} studied a model in which individuals have a repertoire of cultural variants to choose from, and both variant choice and transmission via social learning are success-biased. Moreover, they also included the possibility to `forget' infrequently used variants; therefore, because usage is success-biased, memory is also success-biased. It remains to be seen how different assumptions on the mechanisms of learning and forgetting affect the evolutionary dynamics under different and interacting transmission biases.
+
+One path forward is an analysis of the dynamics of the optimal success-bias weight model, in which every copier chooses its $\alpha$. It would be interesting to see the if the mean estimation error and the varying weight, $\alpha^*$, converge to specific values, and how they are affected by the model parameters.
+It may also be possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
+Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
 
 Another way to expand our model is to account for the two types of prestige or leadership suggested by Van Vugt and Smith~\citep{dual_leadership} that are attributed to Confucius and Machiavelli. Confucius viewed leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
 In contrast, Machiavelli viewed leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence.
