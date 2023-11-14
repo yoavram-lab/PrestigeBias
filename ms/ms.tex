@@ -208,7 +208,7 @@ and $\beta(\cdot)$ is the bias function that quantifies the success bias of a ro
 \begin{equation}\label{eq:success_bias}
 \beta(A_{i,j}) = b \cdot \exp{\Big(-\frac{(A_{i,j} - \hat{A})^2}{2J}\Big)} \;,
 \end{equation} 
-with $\hat{A}$ as the arbitrary optimal trait value, and $J$ and $b$ as parameters that control the bias strength.
+with $\hat{A}$ as the arbitrary optimal trait value, and $J$ and $b$ as parameters that control the bias strength; unless otherwise mentioned, we set $b=J=1$.
 Therefore, $G_{i,j}$ is a relative success score that copier $i$ assigns to role-model $j$.
 
 Boyd and Richerson~\citep{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We {can} develop a similar stochastic model with transmission from a single random role-model where instead of \cref{eq:boydF}, we define the transmission function $F$ as a random variable with its distribution given by 
@@ -470,14 +470,11 @@ We find see that the two models have similar dynamics, and both are well approxi
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{kimura_var.pdf}
   \caption{\textbf{Fixation probability and time in a constant environment.}
-  Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis), or effective population size $N_e$ (top x-axis) in the top row, and as a function of the success coefficient, $1-\beta$, on the bottom row.
-  The approximation (black; \cref{eq:kimura_p}) agrees with both DMD simulations (green) and Wright-Fisher simulation (orange).
-  Fixation probability (A) is bounded by $2(1-\beta)$ (dashed line).
+  Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis) and effective population size, $N_e$, (top x-axis) in panels A and B, and as a function of the effective selection coefficient, $1-\beta$, in panels C and D.
+  The approximation (black; \cref{eq:kimura_p}) agrees with both DMD simulations (green) and Wright-Fisher simulations (orange).
+  The fixation probability in panel A is bounded by $2(1-\beta)$ (dashed line).
   Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
-   Here, Population size, $N=1,000$; phenotype values, $A=0.7$ (panels A and B), 
-   $A/\hat{A}$ varies between 0.01 and 0.99 (panels C and D), and $\hat{A}=1$, which affects $\beta$ via \cref{eq:drift_diff};
-   success coefficient, $1-\beta=s=0.044$ (panels A and B); 
-   success-bias weight, $\alpha=0.01$ (panels C and D).
+   Here, population size is $N=1,000$; in panels A and B, $A=0.7$, $\hat{A}=1$, and $1-\beta=0.044$; in panels C and D, $\alpha=0.01$, $\hat{A}=1$, and $0.01 < A< 0.99$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}.
    }
   \label{fig:var_alpha}
 \end{figure}
@@ -531,8 +528,6 @@ The approximation follows the trend of the simulation results for all $\alpha$ v
 Our proof and approximation in the changing environment are for a large {number} of cycles, and when the success coefficient {$\alpha$} is too high, there might be very few cycles. Either the ideal trait is copied by enough copiers so that the prestige is sufficient to negate the success bias when the cycle changes (and the trait favored by the bias becomes the disfavored), or the opposite happens, and the ideal trait {goes} extinct before there {are} enough copiers that copied it.
 We then tried to change the ratio between the number of cycles where $\hat{A}$ is favored and disfavored. We showed that the approximation fits well regardless of the ratio, but when the ratio of favored generations to disfavored ones is very high, it is very similar to a constant environment model.
 
-
-
 \begin{figure}[H]
 	\centering
     \includegraphics[width=0.6\linewidth, height=0.7\textheight,keepaspectratio]{ch_env.pdf}
@@ -544,7 +539,7 @@ simulation results (orange) are underestimated by the changing environment appro
 (\textbf{C}) The approximation (blue) is robust to changes in environmental cycle length, as it agrees with simulations (orange) for different sizes of the changing environment cycle, where $k$ and $l$ are the number of generations each trait value is under success bias. 
 When $k>l$, the approximation and the simulations are both very close to the constant environment approximation (green), because the more generations the rare phenotype is favored, the more similar it is to the constant environment model, where it is always favored by the success bias.
 Markers show average of $10,000$ simulations, error bars show 75\% (panels A and C) and 95\% (panel B) confidence intervals.
-Here, population size, $N=1,000$; phenotype values, $\hat{A}=1$ with $A=0.9$, $k=20$, $l=80$ (panels A and B) and $A=0.8$ (panel C); In panel A, the success coefficient is $1-\beta=s=0.005$; In panels B and C, the success-bias weight is $\alpha=0.1$.
+Here, population size $N=1,000$; $\hat{A}=1$, $A=0.9$, $k=20$ and $l=80$ (panels A and B); $A=0.8$, (panel C); in panel A, the success coefficient is $1-\beta=s=0.005$; in panels B and C, the success-bias weight is $\alpha=0.1$.
   }
   \label{fig:ch_env_alpha_beta}
 \end{figure}
