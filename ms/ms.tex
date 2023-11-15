@@ -173,7 +173,8 @@ Comparing these approximations to Kimura's approximations for the fixation of a 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Models}
 We begin with a continuous-trait model with indirect success bias, previously suggested by Boyd and Richerson~\citep{evolutionBook}. Note that the indirect success bias is due to an indirect evaluation, in which a certain phenotype is used to evaluate the success of potential role-models.
-We extend this model to include prestige bias and then develop a version of the model with a dichotomous trait to facilitate mathematical analysis.
+We extend this model to include prestige bias, which introduces a within-generation model-choice process.
+To facilitate mathematical analysis, we also develop a simpler version of the model with a dichotomous trait.
 
 We implement our stochastic models and approximations, perform statistical analyses, and produce figures using Python \citep{python} with NumPy \citep{numpy} and Matplotlib \citep{mathplotlib}. 
 Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{https://github.com/yoavram-lab/PrestigeBias}.
@@ -409,6 +410,7 @@ We are mainly interested in the effect of the bias weight, $\alpha$, which deter
 
 For simplicity, we use the dichotomous-trait model, which also assumes a constant success-bias weight $\alpha_{i,j}=\alpha$, and we do not include trait estimation error in this analysis, i.e., $e_i=0$.
 As shown above, transmission in our model is approximately Dirichlet-Multinomial distributed (\Cref{cor:dirichlet} and \cref{eq:copier_choose}).
+We focus on two scenarios: the first scenario is of a `constant environment' in which the same phenotype, $\hat{A}$, is always favored by success bias; the second scenario is of a `changing environment' in which the phenotype favored by success bias cycles between the invading phenotype $\hat{A}$ and the resident phenotype $A$ (i.e., $\hat{A}$ starts as the rare phenotype).
 
 \paragraph{Drift and diffusion terms in a constant environment.}
 We start by finding the expectation and variance of the change in frequency from one generation to the next, which are the drift and diffusion terms of the diffusion equation.
