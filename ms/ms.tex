@@ -153,7 +153,7 @@ Furthermore, Boyd and Richerson~\citep[Ch. 8]{evolutionBook} suggest that malada
 Indeed, helping behaviors can evolve due to horizontal transmission bias even without any benefit to the recipient~\citep{cooperation}.
 
 Henrich and Gil-White~\citep{prestige_evolution} noted that ``the most skilled/knowledgeable role-models will, on average, end up with the biggest and most lavish clienteles, so the size and lavishness of a given model's clientele size (the \emph{prestige}) provides a convenient and reliable proxy for that person's information quality''.
-Therefore, they predicted that skilled individuals have higher status, that people preferentially copy high-status individuals, and therefore that prestigious individuals may be influential even beyond their domain of expertise. 
+Thus, they predicted that skilled individuals have higher status, that people preferentially copy high-status individuals, and therefore that prestigious individuals may be influential even beyond their domain of expertise. 
 They defined prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature \citep{prestige_evolution} .
 Similarly, the New Oxford American Dictionary defines prestige as the ``widespread respect and admiration felt for someone or something on the basis of a \emph{perception} of their achievements or quality''.
 Chudek et al.~\citep{prestige_cultural_learning} have also defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'' and demonstrated its occurrence in in 3-4 year old children.
@@ -167,7 +167,7 @@ In contemporary human society, social media make it especially easy to estimate 
 However, despite many mentions of prestige in the cultural evolution literature, there are few models of prestige bias. 
 
 Here, we develop a stochastic model of cultural transmission with both indirect success bias and prestige bias to examine their relationship in contribution to the cultural evolution of populations.
-We find analytic approximations for this model and analyze its dynamics. We also find approximations for the probability and time to fixation of a `successful' phenotype (i.e., that is subject to success bias) in both a constant and a cyclic changing environment.
+We find analytic approximations for this model. We also find approximations for the probability and time to fixation of a `successful' phenotype (i.e., that is subject to success bias) in both a constant and a cyclic changing environment.
 Comparing these approximations to Kimura's approximations for the fixation of a favorable allele \citep{kimura,kimura_average}, we demonstrate that success and prestige bias play the role of natural selection and genetic drift, respectively. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,11 +182,11 @@ Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{h
 \subsection*{Continuous trait}
 We follow the Boyd and Richerson model~\citep{evolutionBook}, assuming only oblique transmission of a single trait. 
 Consider a population of $N$ individuals, described by a single trait that takes continuous values.
-Each generation, $N$ naive individuals, or copiers, each chooses a single role-model from the entire previous generation. The copier then copies its trait value from the chosen role-model.
+At each generation, $N$ naive individuals, or copiers, each choose a single role-model from the entire previous generation. Each copier then copies its trait value from the chosen role-model.
 Note that our transmission models are slightly different from those modeled before, e.g. \citep{cumul_culture,Denton2021,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
 
 Similar to a Wright-Fisher model, generations are non-overlapping, and the entire population is replaced in each generation.
-The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is trait value of individual $i$ at time $t$, and  the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
+The population at time $t$ can be described by $\vec{A}(t)=\big(A_{1}(t), \ldots, A_{N}(t)\big)$ where $A_{i}(t)$ is the trait value of individual $i$ at time $t$, and  the initial population is drawn from a standard normal distribution, $\vec{A}(0) \sim N(0,1)$ .
 Cultural transmission is modeled by a function $F$ such that 
 \begin{equation}\label{eq:transmission}
 A_{i}(t+1) = F_i(\vec{A}(t)) \;.
@@ -201,7 +201,7 @@ where $G_{i,j}$ is the success bias of role-model $j$ in the eyes of copier $i$,
 \begin{equation}\label{eq:boydG}
 G_{i,j} = \frac{\beta(A_{i,j})}{\sum_{k=1}^{N} \beta(A_{i,k})} \;,
 \end{equation}
-$A_{i,j}$ is the absolute trait value {that} copier $i$ estimates for role-model $j$ with some error $e_i \sim N(0,\eta^2)$,
+$A_{i,j}$ is the absolute trait value that copier $i$ estimates for role-model $j$ with some error $e_i \sim N(0,\eta^2)$,
 \begin{equation}\label{eq:relativeTrait}
 A_{i,j} = A_j + e_i,
 \end{equation}
@@ -212,14 +212,14 @@ and $\beta(\cdot)$ is the bias function that quantifies the success bias of a ro
 with $\hat{A}$ as the arbitrary optimal trait value, and $J$ and $b$ as parameters that control the bias strength; unless otherwise mentioned, we set $b=J=1$.
 Therefore, $G_{i,j}$ is a relative success score that copier $i$ assigns to role-model $j$.
 
-Boyd and Richerson~\citep{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We {can} develop a similar stochastic model with transmission from a single random role-model where instead of \cref{eq:boydF}, we define the transmission function $F$ as a random variable with its distribution given by 
+Boyd and Richerson~\citep{evolutionBook} note that the deterministic blended transmission algorithm they use has alternatives. We develop a similar stochastic model with transmission from a single random role-model where instead of \cref{eq:boydF} we define the transmission function $F$ as a random variable with its distribution given by 
 \begin{equation}\label{eq:ourF}
 \Pr\big(F_i(\vec{A}) = A_{j}\big) = G_{i,j} \;;
 \end{equation}
 {here $G_{i,j}$ is} the probability {that copier $i$ chooses} to copy the trait of role-model $j$.
 
 \paragraph{Prestige bias.}
-Here we introduce a new element to the model by assuming that in each generation, copiers choose their role-models one by one.
+We introduce a new element to the model by assuming that in each generation copiers choose their role-models one by one so that the choice of one copier can affect the choice of other copiers.
 We formulate this assumption in the following.
 Denote by $K_{i,j}$  the number of copiers that choose role-model $j$ after copier $i$ chose a role-model. Thus, $i$ out of $N$ copiers had already chosen a role-model, $\sum_{j=1}^N{K_{i,j}} = i$, and there are $N-i$ copiers that have yet to choose a role-model.
 The stochastic process of role-model choice, 
@@ -241,7 +241,7 @@ The influence $G_{i,j}$ of role-model~$j$ in the eyes of copier~$i$ is determine
 G_{i,j} = \frac{\alpha_{ij} \cdot \beta(A_{i,j}) + (1-\alpha_{ij}) \cdot K_{i-1,j}}{W_i} \;,
 \end{equation}
 where $W_i$ is a normalizing factor that sums the numerator over all role-models ($1\le j \le N)$ to ensure $\sum_{j=1}^{N}{G_{i,j}}=1$.
-Here, the success-bias weight $\alpha_{i,j}$ determines the relative weighting of success and prestige bias. It is a characteristic of the interaction of role-model~$j$ with copier $i$ that determines the relative significance of direct success vs. prestige in the role-model's overall influence in the eyes of the copier.
+Here, the success-bias weight $\alpha_{i,j}$ determines the relative weighting of success and prestige bias. It is a characteristic of the interaction of role-model~$j$ with copier $i$ that determines the relative significance of  success vs. prestige bias in the role-model's overall influence in the eyes of the copier.
 Different individuals may evaluate the importance of success and prestige differently. Additionally, we assume each role-model displays its prestige and success individually. For example, individuals with more followers but lacking skill may emphasize the number of their followers rather than their skill (i.e., have lower $\alpha_{i,j}$ value).
 Finally, the trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains as in \cref{eq:relativeTrait}.
 
@@ -249,7 +249,7 @@ Finally, the trait of role-model $j$ estimated by copier $i$, $A_{i,j}$, remains
 
 \subsection*{Dichotomous trait}
 We introduce a simplified version of the above model where the trait has only two phenotypes: an optimal phenotype $\hat{A}$ and a sub-optimal phenotype $A$. 
-All role-models with the same phenotype will contribute to the probability that that phenotype is transmitted and thus influence is determined by the number of copiers that have already chosen a role-model with either phenotype.
+All role-models with the same phenotype will contribute to the probability that that phenotype is transmitted and thus prestige is determined by the number of copiers that have already chosen a role-model with either phenotype.
 In addition, for simplicity and for easier mathematical analysis, we assume $\alpha$ is homogeneous and constant ($\alpha_{i,j}=\alpha$), which entails exchangeability between role-models.
 Therefore, the probability that the $i$-th copier {copies} phenotype $A$ is
 \begin{equation}\label{eq:binary-model}
@@ -278,9 +278,9 @@ $\E[K_{N,j}] = N \cdot G_{1,j}$ if trait estimation error is uniform for all cop
 
 \paragraph{Dirichlet-Multinomial distribution approximation.}
 The role-model choice process, $\{\vec{K}_{i}\}_{i=1}^{N}$, is equivalent to a {\em P\'{o}lya urn} model if trait estimation error is uniform for all copiers ($e=e_i$ for all $i=1, \ldots, N$). 
-% TODO missing summary like GBD?
+Hence, the number of copiers of each role-model $\vec{K_{N}}$ at the end of the role-model choice process follows the Dirichelet-Multinomial distribution.
 
-After finding these approximations for the role-model choice process, we focus on the dichotomous-trait model, in which mathematical analysis is simpler, and studied the fixation probability and time in both a constant and a periodically changing environment.
+After finding these approximations for the role-model choice process, we focus on the dichotomous-trait model, in which mathematical analysis is simpler, and studied the fixation probability and time in both a constant and a changing environment.
 
 \subsection*{Generalized binomial distribution (GBD) approximation}
 The generalized binomial distribution (GBD) emerges from a series of dependent Bernoulli trials (in contrast to the standard binomial distribution in which trials are independent) and is {denoted}  by $GBD(n, p, \theta)$ where $n$ is the number of trials, $p$ is the probability of success of the first trial, and $\theta$ is the correlation between trials (the latter can be estimated from data, but its value is insignificant for our approximation). Note that $\theta=0$ gives the standard binomial distribution.
@@ -320,7 +320,8 @@ Here, $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any
 The rest of the proof is in Appendix~\ref{sec:GBD}.
 \end{proof}
 
-From \Cref{cor:GBD} we see that if there is no success bias, meaning $Q_j(1,1)=q$ for $j$ in $1,...,N$, then the expected number of copiers will be Binomial distributed. This proves that prestige bias is not frequency dependent.
+% TODO this is wierd
+From \Cref{cor:GBD} we see that without success bias ($\alpha=0$), the expected number of copiers of each role-model is one. Hence, prestige bias is not frequency dependent.
 
 The special case where the bias weight is uniform for all role-models ($\alpha = \alpha_j$ for $j=1,\ldots, N$) is interesting, because we can evaluate the expected number of copiers using a linear equation
 \begin{equation}\label{eq:GBDsamelalpha}
@@ -333,11 +334,11 @@ We can then write $L = 1/\overline{\beta(A+e)}$ and
 \end{equation}
 
 \paragraph{Numerical validation.}
-To validate that GBD approximation for the number of copiers of a role-model is correct (\cref{eq:GBDsamelalpha}), % check that this is the correct equation reference. It is
+To validate that the GBD approximation for the number of copiers of a role-model is correct (\cref{eq:GBDsamelalpha}), 
 we ran $1,000$ simulations of the full model, and compared the results with \Cref{cor:GBD}.
-We compare the distribution of number of copiers by plotting the histograms of both our simulations results and the expected values based on \Cref{cor:GBD}.
+We compare the distribution of the number of copiers by plotting the histograms of both our simulation results and the expected values based on \Cref{cor:GBD}.
 
-Although basic, \Cref{fig:GBD} shows good fit of the GBD approximation.
+Although basic, \Cref{fig:GBD} shows a good fit of the GBD approximation.
 We perform more extensive validations on the Dirichlet-Multinomial approximation (see below), because that is what we will use in our analysis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -377,7 +378,7 @@ We therefore have an approximation for the relative influence each role-model ha
 \\
 
 \begin{corollary}[Dirichlet-Multinomial distribution approximation]\label{cor:dirichlet}
-The number of copiers of each role-model approximates a Dirichlet-Multinomial distribution, $\vec{K_i} \sim \textit{DirMul}(N,\vec{G_1})$, under the conditions of \Cref{result:polya}.
+The number of copiers of each role-model approximates a Dirichlet-Multinomial distribution, $\vec{K_N} \sim \textit{DirMul}(N,\vec{G_1})$, under the conditions of \Cref{result:polya}.
 \end{corollary}
 
 \paragraph{Numerical validation.}
@@ -642,7 +643,8 @@ Ammar et al.~\citep{Ammar2023} studied a model in which individuals have a reper
 
 One path forward is an analysis of the dynamics of the optimal success-bias weight model, in which every copier chooses its $\alpha$. It would be interesting to see the if the mean estimation error and the varying weight, $\alpha^*$, converge to specific values, and how they are affected by the model parameters.
 It may also be possible to relax the assumptions required for our approximations, such as homogeneous estimation error and success-bias weight.
-Lastly, it would be interesting to analyze the continuous model and determine how much it differs from the dichotomous model. 
+Another possibility is to model prestige bias in a different way. For example, using a Moran model \citep{Moran1958}, one could build model with overlapping generations, which would mix the within-generation model role-model choice process and the between-generation evolutionary dynamics.
+Lastly, it would be interesting to analyze the fixation probability and time in the continuous model and determine how the results compare to those from the dichotomous model. 
 
 Another way to expand our model is to account for the two types of prestige or leadership suggested by Van Vugt and Smith~\citep{dual_leadership} that are attributed to Confucius and Machiavelli. Confucius viewed leaders as role-models who exercise influence through possessing superior knowledge, skills, and (outstanding) personal qualities. This fits the success bias in our model. 
 In contrast, Machiavelli viewed leaders as rulers who exercise influence by imposing costs through (the threat of) punishment and violence.
@@ -849,6 +851,10 @@ Hong, Ze. (2022) "Combining Conformist and Payoff Bias in Cultural Evolution: An
 
 \bibitem{Ammar2023}
 Ammar, Madeleine, Laurel Fogarty, and Anne Kandler. (2023) "Social Learning and Memory." Proceedings of the National Academy of Sciences 120 (33): e2310033120. 
+
+\bibitem{Moran1958}
+Moran, P. A. P. (1958) "Random Processes in Genetics." Mathematical Proceedings of the Cambridge Philosophical Society 54 (1): 60–71.
+
 
 \end{thebibliography}
 
