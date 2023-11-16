@@ -157,7 +157,7 @@ Thus, they predicted that skilled individuals have higher status, that people pr
 They defined prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature \citep{prestige_evolution} .
 Similarly, the New Oxford American Dictionary defines prestige as the ``widespread respect and admiration felt for someone or something on the basis of a \emph{perception} of their achievements or quality''.
 Chudek et al.~\citep{prestige_cultural_learning} have also defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'' and demonstrated its occurrence in in 3-4 year old children.
-Henrich and Broesch \citep{fijian_social_bias} have further suggested that prestige bias can, over generations, lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits. 
+Henrich and Broesch~\citep{fijian_social_bias} have further suggested that prestige bias can, over generations, lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits. 
 
 The distinction between success and prestige bias is important, as prestige is a context-dependent bias, rather than a content-dependent bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
 Prestige bias is also frequency independent (see \Cref{cor:GBD} below), and thus it differs from conformity \citep{Denton2020,Denton2021,Denton2022}, which depends on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
@@ -320,8 +320,7 @@ Here, $Q_j(1,1)$ is the initial probability to choose role-model $j$, before any
 The rest of the proof is in Appendix~\ref{sec:GBD}.
 \end{proof}
 
-% TODO this is wierd
-From \Cref{cor:GBD} we see that without success bias ($\alpha=0$), the expected number of copiers of each role-model is one. Hence, prestige bias is not frequency dependent.
+Note that $G_{1,j} = \alpha_{i,j} \beta(A_{i,j}) / \sum_{i=1}^{N}{\alpha_{i,j} \beta(A_{i,j})}$ (see \cref{eq:prestige} with $K_{0,j}=0$). In the limit of $\alpha_{i,j} \to 0$, that is with only prestige bias, we get $G_{1,j} = 1/N$, and from \Cref{cor:GBD}, the expected number of copiers of role-model $j$ is 1. Therefore, prestige bias is frequency independent, in contrast to conformity bias.
 
 The special case where the bias weight is uniform for all role-models ($\alpha = \alpha_j$ for $j=1,\ldots, N$) is interesting, because we can evaluate the expected number of copiers using a linear equation
 \begin{equation}\label{eq:GBDsamelalpha}
@@ -466,7 +465,7 @@ J_2(x) &= \frac{-1}{(1-\beta)(e^{-2S}-1)}\int_0^x \frac{(1-e^{2S\xi})(e^{-2S\xi}
 Note that these integrals cannot be solved in closed form, and are estimated numerically.
 
 Results 4-5 lead to the following observations. 
-First, the the fixation probability increases (\Cref{fig:var_alpha}B) and the fixation time decreases (\Cref{fig:var_alpha}D) as a function of the success coefficient $1-\beta$, which acts as an effective selection coefficient.
+First, the fixation probability increases (\Cref{fig:var_alpha}B) and the fixation time decreases (\Cref{fig:var_alpha}D) as a function of the success coefficient $1-\beta$, which acts as an effective selection coefficient.
 Second, the fixation probability increases with the success-bias weight $\alpha$ (\Cref{fig:var_alpha}A), reaching a maximum at $2(1-\beta)=2s$ when there is no prestige bias ($\alpha=1$), in which case the effective population size equals the actual population size (\cref{eq:effective})
 Third, and in contrast, the fixation time conditional on fixation is actually \emph{shorter} with low values of $\alpha$, that is, when prestige bias is strong (\Cref{fig:var_alpha}D). This is because prestige bias accelerates the evolutionary dynamics due to a \emph{rich-get-richer} process. Thus, when fixation occurs with strong prestige bias, it occurs faster than it does with strong success bias.
 
@@ -483,10 +482,17 @@ We find that the two models have similar dynamics, and both are well approximate
 	Panel A shows a dashed line at $2(1-\beta)$, which is reached by our approximation when $\alpha=1$.
 	Panel B has three lines: solid for  also shows our approximation for $\alpha=0.01$, and dashed for $\alpha=0$ (bottom) and $\alpha=0.02$ (top).
 	Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
-   	Here, population size is $N=1,000$; In panels A and B, $A=0.7$, $\hat{A}=1$, and $1-\beta=0.044$; In panels C and D, $\alpha=0.01$, $0.01 < A< 0.99$, and $\hat{A}=1$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}.
+   	Here, population size is $N=1,000$; 
+	In panels A and B, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$);
+	In panels C and D, $0.01 < A< 0.99$, and $\hat{A}=1$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}, $\alpha=0.01$.
    }
   \label{fig:var_alpha}
 \end{figure}
+
+Here, population size is $N=1,000$;
+In panel A, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$), $k=20$, and $l=80$;
+In panel B, $A=0.9$, $\hat{A}=1$ and $A$ varies, $k=20$, and $l=80$, $\alpha=0.1$; 
+In panel C, $A=0.8$, $\hat{A}=1$ ($1-\beta=s=0.005$), $\alpha=0.1$.
 
 
 \paragraph*{Changing environment}. After finding a good approximation in a constant environment, where the `successful' trait is always $\hat{A}$, we proceeded to find an approximation for a periodically changing environment. 
@@ -523,7 +529,7 @@ where $x$ is the initial frequency of the invading phenotype.
 \end{result}
 
 Importantly, the average selection coefficient, $S_n/n$, has the same sign as $k-l$. Therefore, when $k>l$, the fixation probability will increase with the success-bias weight $\alpha$ (similar to a constant environment, \Cref{fig:var_alpha}A), and when $k<l$, the fixation probability will decrease with the success-bias weight $\alpha$ (\Cref{fig:ch_env_alpha_beta}A).
-Otherwise, fixation probability increases with the success coefficient ($1-\beta$, \Cref{fig:ch_env_alpha_beta}B) and becomes larger as $k-l$ increases, i.e., as the number of generations in which the invading phenotype is favored increases (\Cref{fig:ch_env_alpha_beta}C).
+Furthermore, the fixation probability increases with the success coefficient ($1-\beta$, \Cref{fig:ch_env_alpha_beta}B; see below for how simulation results compare to the constant environment and changing environment approximations) and becomes larger as $k-l$ increases, i.e., as the number of generations in which the invading phenotype is favored increases (\Cref{fig:ch_env_alpha_beta}C).
 
 \paragraph{Numerical validation.}
 To validate the approximation for the fixation probability in a changing environment (\cref{eq:ch_env}), we compare it to results of simulations that use the DMD approximation (\Cref{cor:dirichlet}).
@@ -536,7 +542,7 @@ We also changed the ratio between the number of cycles where $\hat{A}$ is favore
 \begin{figure}[H]
 	\centering
     \includegraphics[width=\linewidth]{ch_env.pdf}
-  \caption{\textbf{Fixation probability in a changing environment.}
+  \caption{\textbf{Fixation probability in a changing environment, $k<l$.}
 \textbf{(A)} Fixation probability decreases with {the} success-bias weight (bottom x-axis) and effective population size (top x-axis). The approximation (blue; \cref{eq:ch_env}) agrees with simulation results (orange). 
 \textbf{(B)} Fixation probability increases with the success coefficient, $\beta$.
 When success bias is large ($1-\beta > 0.1$),  
@@ -544,9 +550,13 @@ simulation results (orange) are underestimated by the changing environment appro
 (\textbf{C}) The approximation (blue) is robust to changes in environmental cycle length, as it agrees with simulations (orange) for different sizes of the changing environment cycle, where $k$ and $l$ are the number of generations each trait value is under success bias. 
 When $k>l$, the approximation and the simulations are both very close to the constant environment approximation (green), because the more generations the rare phenotype is favored, the more similar it is to the constant environment model, where it is always favored by the success bias.
 Markers show average of $10,000$ simulations, error bars show 75\% (panels A and C) and 95\% (panel B) confidence intervals.
-Here, population size $N=1,000$; $\hat{A}=1$, $A=0.9$, $k=20$ and $l=80$ (panels A and B); $A=0.8$, (panel C); in panel A, the success coefficient is $1-\beta=s=0.005$; in panels B and C, the success-bias weight is $\alpha=0.1$.
-  }
-  \label{fig:ch_env_alpha_beta}
+See \Cref{fig:ch_env_alpha_beta_k_large} for the scenario where $k>l$.
+Here, population size is $N=1,000$;
+In panel A, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$), $k=20$, and $l=80$;
+In panel B, $0.01 < A< 0.99$, and $\hat{A}=1$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}, $k=20$, and $l=80$, $\alpha=0.1$; 
+In panel C, $A=0.8$, $\hat{A}=1$ ($1-\beta=s=0.0198$), $\alpha=0.1$.
+}
+\label{fig:ch_env_alpha_beta}
 \end{figure}
 
 
@@ -597,11 +607,16 @@ To simplify the mathematical and computational analysis, we developed analytic a
 The latter is especially useful, as it approximates the entire role-model choice process and only requires us to assume that the relative effect of success and prestige is a characteristic of the role-model and not the copier.
 
 Analyzing the dichotomous-trait model using the DMD approximation, we found approximations for the fixation probability and fixation time of a cultural trait under biased transmission in a constant environment.
-Our approximations are similar to Kimura's evolutionary-genetic approximations, in that (i) the strength of success bias towards the invading cultural trait, $1-\beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) decreasing the relative weight of success versus prestige bias, $\alpha$, decreases the effective population size, $N_e$~(\Cref{fig:var_alpha}).
+Our approximations are similar to Kimura's evolutionary-genetic approximations, in that (i) the strength of success bias towards the invading cultural trait, $\beta=\beta(\hat{A}) / \beta(A)$, is equivalent to the selection coefficient in favor of a beneficial allele, $s$, and (ii) decreasing the relative weight of success versus prestige bias, $\alpha$, decreases the effective population size, $N_e$. Therefore, when either $\alpha$ or $1-\beta$ increases, the fixation probability increases~(\Cref{fig:var_alpha}A and \Cref{fig:var_alpha}B). However, while increasing the $s=1-\beta$ decreases the  fixation time, as `selection' is stronger (\Cref{fig:var_alpha}D), increasing the success-bias weight $\alpha$ increases the conditional fixation time (\Cref{fig:var_alpha}C). This is because, when the invading phenotype manages to fix in a population with strong prestige bias, it will do so faster compared to a population with weak prestige bias, as strong prestige leads to a \emph{rich-getting-richer} process.
 
 We also analyzed the dichotomous--trait model in a periodically changing environment in which the identity of the success-biased trait switches after a fixed amount of generations~(\Cref{fig:ch_env_alpha_beta}).
-We find that, similarly to the constant environment approximation, a change in the success-bias weight $\alpha$ has no negative effects on the goodness-of-fit of the approximation to simulation results.
-We also showed that this approximation is more sensitive to changes in the success coefficient $\beta$ than the constant environment approximation, and a lower value is required to have a good fit. The ratio between the number of {generations} in which the rare phenotype is under positive transmission bias and the number of generations in which it is under negative bias does not affect the goodness-of-fit of the approximation. 
+We again derive an approximation for the fixation probability, which works well when the success coefficient $1-\beta$ is low. 
+In the case of a changing environment, two key values are the number of generations $k$ and $l$  in which the invading and resident traits are favored by success bias, respectively.
+When $k>l$, strong success (high $\alpha$) will increase the fixation probability (\Cref{fig:ch_env_alpha_beta_k_large}),
+but when $k<l$, strong prestige (low $\alpha$) will increase the fixation probability (\Cref{fig:ch_env_alpha_beta}A).
+This is because prestige accelerates the evolutionary dynamics, which allows the invading trait to fix before the environment changes to favor the resident trait.
+In all cases increasing the success coefficient $1-\beta$, which is equivalent to increasing the strength of selection, will increase the fixation probability (\Cref{fig:ch_env_alpha_beta}B).
+
 
 Lastly, we examined a scenario in which copiers can adjust their success-bias weight, $\alpha$, to minimize their copying error, i.e., copy trait values closer to the optimal value.
 We found that as the role-model choice process proceeds (that is, more copiers make their choices), both the success-bias weight (adjusted by copiers) and the estimation error decrease. 
@@ -1184,6 +1199,24 @@ which proves the diffusion term.
   phenotype values ,$\hat{A}=1$,$A=0.7$; success bias value, $\beta(A)=0.956$.}	
   \label{fig:hetro_alpha}
 \end{figure}
+
+
+\begin{figure}
+	\centering
+    \includegraphics[width=\linewidth]{ch_env_k_large.pdf}
+  \caption{\textbf{Fixation probability in a changing environment, $k>l$.}
+\textbf{(A)} Fixation probability decreases with {the} success-bias weight (bottom x-axis) and effective population size (top x-axis). The approximation (blue; \cref{eq:ch_env}) agrees with simulation results (orange). 
+\textbf{(B)} Fixation probability increases with the success coefficient, $\beta$.
+When success bias is large ($1-\beta > 0.1$),  
+simulation results (orange) are underestimated by the changing environment approximation (blue; \cref{eq:ch_env}). With even larger success bias ($1-\beta > 0.35$), even the constant environment approximation (green; \cref{eq:kimura_p}) slightly underestimates simulation results, likely because the diffusion equation approximation assumes weak `selection'.
+Markers show average of $10,000$ simulations, error bars show 75\% (panel A) and 95\% (panel B) confidence intervals.
+Here, population size is $N=1,000$;
+In panel A, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$), $k=80$, and $l=20$;
+In panel B, $0.01 < A< 0.99$, and $\hat{A}=1$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}, $k=80$, and $l=20$, $\alpha=0.1$; 
+}
+\label{fig:ch_env_alpha_beta_k_large}
+\end{figure}
+
 
 
 \end{document}
