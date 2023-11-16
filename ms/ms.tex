@@ -463,11 +463,16 @@ J_2(x) &= \frac{-1}{(1-\beta)(e^{-2S}-1)}\int_0^x \frac{(1-e^{2S\xi})(e^{-2S\xi}
 \end{aligned}
 \end{equation}
 \end{result}
-Note that these integrals cannot be solved in closed form, {and are estimated} numerically.
+Note that these integrals cannot be solved in closed form, and are estimated numerically.
+
+Results 4-5 lead to the following observations. 
+First, the the fixation probability increases (\Cref{fig:var_alpha}B) and the fixation time decreases (\Cref{fig:var_alpha}D) as a function of the success coefficient $1-\beta$, which acts as an effective selection coefficient.
+Second, the fixation probability increases with the success-bias weight $\alpha$ ({fig:var_alpha}A), reaching a maximum at $2(1-\beta)=2s$ when there is no prestige bias ($\alpha=1$).
+However, conditional on fixation, the fixation time is actually \emph{shorter} with low values of $\alpha$, that is, when prestige bias is strong. This is because prestige bias accelerates the evolutionary dynamics due to a \emph{rich-get-richer} process  (\Cref{fig:var_alpha}D)
 
 \paragraph{Numerical validation.}
 We compare our approximations (\cref{eq:kimura_p,eq:kimura_t}) with results of simulations of our dichotomous model using various $\alpha$ and $\beta$ values, as well as simulations of the Wright-Fisher model, using the effective selection coefficient, $1-\beta$, and effective population size, $N_e=\alpha N + (1-\alpha)$. 
-We find that the two models have similar dynamics, and both are well approximated {by} our approximations (\Cref{fig:var_alpha}).
+We find that the two models have similar dynamics, and both are well approximated by our approximations (\Cref{fig:var_alpha}).
 
 
 \begin{figure}[h]
@@ -517,14 +522,13 @@ where $x$ is the initial frequency of the invading phenotype.
 \end{result}
 
 Importantly, the average selection coefficient, $S_n/n$, has the same sign as $k-l$. Therefore, when $k>l$, the fixation probability will increase with the success-bias weight $\alpha$ (similar to a constant environment, \Cref{fig:var_alpha}A), and when $k<l$, the fixation probability will decrease with the success-bias weight $\alpha$ (\Cref{fig:ch_env_alpha_beta}A).
-Similarly, when the success coefficient $1-\beta$ is large, the approximation can break, as the fixation time can be lower then the number of generations in the cycle, $n$ (see \Cref{fig:var_alpha}D), and again the average selection coefficient, $S_n/n$ is not a good estimate of the effective selection coefficient.
+Otherwise, fixation probability increases with the success coefficient ($1-\beta$, \Cref{fig:ch_env_alpha_beta}B) and becomes larger as $k-l$ increases, i.e., as the number of generations in which the invading phenotype is favored increases (\Cref{fig:ch_env_alpha_beta}C).
 
 \paragraph{Numerical validation.}
 To validate the approximation for the fixation probability in a changing environment (\cref{eq:ch_env}), we compare it to results of simulations that use the DMD approximation (\Cref{cor:dirichlet}).
 We find that the approximation fits the simulation results well for variable success-bias weights, $\alpha$, which corresponds to the effective population size (\Cref{fig:ch_env_alpha_beta}A).
 However, the approximation is more sensitive to the value of the success bias coefficient $\beta$ (\Cref{fig:ch_env_alpha_beta}B).
-On increasing the success coefficient $1-\beta$ to more than 0.15, the simulation results were located above the changing environment approximation, and below the constant environment approximation (\Cref{fig:ch_env_alpha_beta}B). This is probably because when the success coefficient is high, the number of generations may be less than $n$, the number of generations in a full cycle, and thus $S_n/n$ is not a good estimator for the `average selection coefficient'.
-With even higher success coefficient values, the fixation probability exceeds even the constant environment approximation, possibly because the diffusion-equation approximation assumes weak selection, or in our case, weak success bias.
+When the success coefficient $1-\beta$ is large, the approximation can break, as the fixation time can be lower then the number of generations in the cycle, $n$ (see \Cref{fig:var_alpha}D), and therefore the average selection coefficient, $S_n/n$ is not a good estimate of the effective selection coefficient.
 We also changed the ratio between the number of cycles where $\hat{A}$ is favored and disfavored. We found that the approximation fits well regardless of the ratio, and that for a large $k-l$ difference (with a constant cycle length, $n=k+l=100$), the changing environment approximation (\cref{eq:ch_env}) converges to the constant environment approximation (\cref{eq:kimura_p}; \Cref{fig:ch_env_alpha_beta}C). This makes sense as a constant environment can be viewed as an environment in which the cycle length is longer than the fixation time.
 
 
