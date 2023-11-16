@@ -432,7 +432,7 @@ Therefore, we have the following result.\\
 
 \begin{result}[Effective selection coefficient and population size]\label{res:selection_coef}
 The effective selection coefficient $s$ and effective population size $N_e$ can be written in terms of the success coefficient $\beta$ (\cref{eq:success_bias}), the success-bias weight $\alpha$ (\cref{eq:prestige}), and the population size $N$ as 
-\begin{equation}
+\begin{equation}\label{eq:effective}
 s=1-\beta=\frac{\beta(\hat{A})-\beta(A)}{\beta(\hat{A})}, \quad N_e=\alpha N + (1-\alpha) \;.
 \end{equation}
 \end{result}
@@ -467,8 +467,8 @@ Note that these integrals cannot be solved in closed form, and are estimated num
 
 Results 4-5 lead to the following observations. 
 First, the the fixation probability increases (\Cref{fig:var_alpha}B) and the fixation time decreases (\Cref{fig:var_alpha}D) as a function of the success coefficient $1-\beta$, which acts as an effective selection coefficient.
-Second, the fixation probability increases with the success-bias weight $\alpha$ ({fig:var_alpha}A), reaching a maximum at $2(1-\beta)=2s$ when there is no prestige bias ($\alpha=1$).
-However, conditional on fixation, the fixation time is actually \emph{shorter} with low values of $\alpha$, that is, when prestige bias is strong. This is because prestige bias accelerates the evolutionary dynamics due to a \emph{rich-get-richer} process  (\Cref{fig:var_alpha}D)
+Second, the fixation probability increases with the success-bias weight $\alpha$ (\Cref{fig:var_alpha}A), reaching a maximum at $2(1-\beta)=2s$ when there is no prestige bias ($\alpha=1$), in which case the effective population size equals the actual population size (\cref{eq:effective})
+Third, and in contrast, the fixation time conditional on fixation is actually \emph{shorter} with low values of $\alpha$, that is, when prestige bias is strong (\Cref{fig:var_alpha}D). This is because prestige bias accelerates the evolutionary dynamics due to a \emph{rich-get-richer} process. Thus, when fixation occurs with strong prestige bias, it occurs faster than it does with strong success bias.
 
 \paragraph{Numerical validation.}
 We compare our approximations (\cref{eq:kimura_p,eq:kimura_t}) with results of simulations of our dichotomous model using various $\alpha$ and $\beta$ values, as well as simulations of the Wright-Fisher model, using the effective selection coefficient, $1-\beta$, and effective population size, $N_e=\alpha N + (1-\alpha)$. 
@@ -476,13 +476,14 @@ We find that the two models have similar dynamics, and both are well approximate
 
 
 \begin{figure}[h]
-    \includegraphics[width=\linewidth]{kimura_var.pdf}
+    \includegraphics[width=0.9\linewidth]{kimura_var.pdf}
   \caption{\textbf{Fixation probability and time in a constant environment.}
-  Fixation probability and time (in generations) as a function of the success-bias weight $\alpha$ (bottom x-axis) and effective population size, $N_e$, (top x-axis) in panels A and B, and as a function of the effective selection coefficient, $1-\beta$, in panels C and D.
-  The approximation (black; \cref{eq:kimura_p}) agrees with both DMD simulations (green) and Wright-Fisher simulations (orange).
-  The fixation probability in panel A is bounded by $2(1-\beta)$ (dashed line).
-  Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
-   Here, population size is $N=1,000$; in panels A and B, $A=0.7$, $\hat{A}=1$, and $1-\beta=0.044$; in panels C and D, $\alpha=0.01$, $\hat{A}=1$, and $0.01 < A< 0.99$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}.
+	The effect of the success-bias weight $\alpha$ (bottom x-axis) and effective population size, $N_e$, (top x-axis) on the fixation probability (\textbf{A}) and the conditional fixation time (\textbf{B}), and the effect of the success coefficient, or effective selection coefficient, $1-\beta$, on the fixation probability (\textbf{B}) and the conditional fixation time (\textbf{D}).
+	Our approximation (black; \cref{eq:kimura_p}) agrees with both DMD simulations (green) and Wright-Fisher simulations (orange).
+	Panel A shows a dashed line at $2(1-\beta)$, which is reached by our approximation when $\alpha=1$.
+	Panel B has three lines: solid for  also shows our approximation for $\alpha=0.01$, and dashed for $\alpha=0$ (bottom) and $\alpha=0.02$ (top).
+	Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
+   	Here, population size is $N=1,000$; In panels A and B, $A=0.7$, $\hat{A}=1$, and $1-\beta=0.044$; In panels C and D, $\alpha=0.01$, $0.01 < A< 0.99$, and $\hat{A}=1$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}.
    }
   \label{fig:var_alpha}
 \end{figure}
