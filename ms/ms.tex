@@ -112,17 +112,18 @@ headheight=12pt
 \affil[1]{School of Computer Science, Reichman University, Herzliya, Israel}
 \affil[2]{School of Zoology, Faculty of Life Sciences, Tel Aviv University, Tel Aviv, Israel}
 \affil[3]{Sagol School of Neuroscience, Tel Aviv University, Tel Aviv, Israel}
-\affil[$\dagger$]{Corresponding author: yoav@yoavram.com}
+\affil[$\dagger$]{Corresponding author: yoavram@tauex.tau.ac.il}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
 
 \begin{abstract}
-If the traits of more successful individuals are more likely to be adopted, the resulting cultural transmission is described as being success-biased. In contrast, if the traits of `prestigious' individuals--those individuals that have already been copied many times--are more likely to be adopted, this is described as prestige-biased cultural transmission. In this case prestige can be used as a convenient proxy for success.
-Here, we study the joint effect of success and prestige bias on cultural evolutionary dynamics using mathematical analysis and stochastic simulations.
-Analytic approximations to the stochastic role-model choice process facilitate the mathematical analysis and reduce the computational complexity of simulations. Approximations are given to the fixation probability and the fixation time of an invading cultural trait in different environments. 
-We show that success bias effectively plays the role of natural selection, whereas prestige bias effectively plays the role of genetic drift.	Prestige bias, which may be strong in highly social communities, also accelerates the evolutionary dynamics, as can be expected in a rich-get-richer process.
+If the traits of more successful individuals are more likely to be adopted, the resulting cultural transmission is described as being success-biased. In contrast, if the traits of `prestigious' individuals--those individuals that have already been copied many times--are more likely to be adopted, this is described as prestige-biased cultural transmission. In this case, prestige can be used as a convenient proxy for success.
+However, it is unclear how success and prestige biases interact to determine the outcome of cultural evolutionary dynamics.
+Here, we aim to clarify this using mathematical analysis and stochastic simulations.
+We find analytic approximations to the stochastic role-model choice process that facilitate the mathematical analysis and reduce the computational complexity of simulations. Approximations are given to the fixation probability and the fixation time of an invading cultural trait in different environments. 
+Our results show that success bias effectively plays the role of natural selection, whereas prestige bias effectively plays the role of genetic drift.	Prestige bias, which may be strong in highly social communities, also accelerates the evolutionary dynamics, as can be expected in a rich-get-richer process. These results signify a step forward in understanding how different cultural transmission biases interact.
 \end{abstract}
 
 
@@ -155,9 +156,10 @@ Indeed, helping behaviors can evolve due to horizontal transmission bias even wi
 Henrich and Gil-White~\citep{prestige_evolution} noted that ``the most skilled/knowledgeable role-models will, on average, end up with the biggest and most lavish clienteles, so the size and lavishness of a given model's clientele size (the \emph{prestige}) provides a convenient and reliable proxy for that person's information quality''.
 Thus, they predicted that skilled individuals have higher status, that people preferentially copy high-status individuals, and therefore that prestigious individuals may be influential even beyond their domain of expertise. 
 They defined prestige as ``freely conferred deference'', in contrast to \emph{dominance}, and provided examples from the anthropological literature \citep{prestige_evolution} .
-Similarly, the New Oxford American Dictionary defines prestige as the ``widespread respect and admiration felt for someone or something on the basis of a \emph{perception} of their achievements or quality''.
-Chudek et al.~\citep{prestige_cultural_learning} have also defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'' and demonstrated its occurrence in in 3-4 year old children.
-Henrich and Broesch~\citep{fijian_social_bias} have further suggested that prestige bias can, over generations, lead to cultural adaptations, and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits. 
+Similarly, the New Oxford American Dictionary defines prestige as the ``widespread respect and admiration felt for someone or something on the basis of a \emph{perception} of their achievements or quality.''.
+Chudek et al.~\citep{prestige_cultural_learning} have also defined prestige bias as ``a tendency to learn from individuals to whom others have preferentially attended, learned or deferred'' and demonstrated its occurrence in 3-4 year old children.
+Nakata et al.~\citep{Nakata2024} define such a bias as a ``prestige bias based on second-order cues,'' in which ``Social learners can use the extent of attention and the amount copied from others as cues for prestige.''
+Henrich and Broesch~\citep{fijian_social_bias} have further suggested that prestige bias can, over generations, lead to cultural adaptations and that although prestige can lead to maladaptive traits spreading in the population, it can also accelerate the spread of adaptive traits. 
 
 The distinction between success and prestige bias is important, as prestige is a context-dependent bias, rather than a content-dependent bias: it does not depend on the phenotype itself but rather on the number of copiers that have already copied each role-model, which may be easier and more accurate to estimate than success. 
 Prestige bias is also frequency independent (see \Cref{cor:GBD} below), and thus it differs from conformity \citep{Denton2020,Denton2021,Denton2022}, which depends on the frequency of a trait in the population or in a sample of role-models, rather than the social dynamics of copying.
@@ -181,7 +183,8 @@ Source code is available at \href{https://github.com/yoavram-lab/PrestigeBias}{h
 
 \subsection*{Continuous trait}
 We follow the Boyd and Richerson model~\citep{evolutionBook}, assuming only oblique transmission of a single trait. 
-Consider a population of $N$ individuals, described by a single trait that takes continuous values.
+This focus on oblique transmission (copying from non-parental adults) means that we can neglect fitness differences between trait values since there is no correlation between the traits of parents and offspring.
+We consider a population of $N$ individuals, described by a single trait that takes continuous values.
 At each generation, $N$ naive individuals, or copiers, each choose a single role-model from the entire previous generation. Each copier then copies its trait value from the chosen role-model.
 Note that our transmission models are slightly different from those modeled before, e.g. \citep{cumul_culture,Denton2021,evolutionBook}, in which the population is infinite and each copier samples $n$ role-models and then copies its trait from one or more of the sampled role-models.
 
@@ -258,6 +261,7 @@ G_{i,A} = \frac{\alpha \cdot (N-X) \beta(A) + (1-\alpha) \cdot K_{i-1,A}}{\alpha
 \end{equation}
 where $X$ is the number of role-models with trait $\hat{A}$ and $K_{i-1,A}$ is the number of copiers that already chose $A$ when copier $i$ chooses a role-model, and assuming that $\beta(\hat{A})=1$ (thus the term $\alpha X$ in the denominator).
 Complementing this, the probability of the $i$-th copier to copy phenotype $\hat{A}$ is $G_{i, \hat{A}} = 1-G_{i,A}$.
+\Cref{fig:timeseries} shows some examples of model dynamics for various values of $\alpha$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -480,8 +484,8 @@ We find that the two models have similar dynamics, and both are well approximate
 	The effect of the success-bias weight $\alpha$ (bottom x-axis) and effective population size, $N_e$, (top x-axis) on the fixation probability (\textbf{A}) and the conditional fixation time (\textbf{B}), and the effect of the success coefficient, or effective selection coefficient, $1-\beta$, on the fixation probability (\textbf{B}) and the conditional fixation time (\textbf{D}).
 	Our approximation (black; \cref{eq:kimura_p}) agrees with both DMD simulations (green) and Wright-Fisher simulations (orange).
 	Panel A shows a dashed line at $2(1-\beta)$, which is reached by our approximation when $\alpha=1$.
-	Panel B has three lines: solid for  also shows our approximation for $\alpha=0.01$, and dashed for $\alpha=0$ (bottom) and $\alpha=0.02$ (top).
-	Markers are averages of $10,000$ simulations, error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
+	Panel B has three lines: solid for our approximation for $\alpha=0.01$, and dashed for $\alpha=0$ (bottom) and $\alpha=0.02$ (top).
+	Markers are averages of $10,000$ simulations. Error bars show 95\% confidence intervals for panels A and B and 75\% for panels C and D.
    	Here, population size is $N=1,000$; 
 	In panels A and B, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$);
 	In panels C and D, $0.01 < A< 0.99$, and $\hat{A}=1$, which determines $1-\beta$ via $\beta = \beta(A)/\beta(\hat{A})$ and \cref{eq:success_bias}, $\alpha=0.01$.
@@ -489,10 +493,10 @@ We find that the two models have similar dynamics, and both are well approximate
   \label{fig:var_alpha}
 \end{figure}
 
-Here, population size is $N=1,000$;
-In panel A, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$), $k=20$, and $l=80$;
-In panel B, $A=0.9$, $\hat{A}=1$ and $A$ varies, $k=20$, and $l=80$, $\alpha=0.1$; 
-In panel C, $A=0.8$, $\hat{A}=1$ ($1-\beta=s=0.005$), $\alpha=0.1$.
+%Here, population size is $N=1,000$;
+%In panel A, $A=0.9$, $\hat{A}=1$ ($1-\beta=s=0.005$), $k=20$, and $l=80$;
+%In panel B, $A=0.9$, $\hat{A}=1$ and $A$ varies, $k=20$, and $l=80$, $\alpha=0.1$; 
+%In panel C, $A=0.8$, $\hat{A}=1$ ($1-\beta=s=0.005$), $\alpha=0.1$.
 
 
 \paragraph*{Changing environment}. After finding a good approximation in a constant environment, where the `successful' trait is always $\hat{A}$, we proceeded to find an approximation for a periodically changing environment. 
@@ -562,8 +566,9 @@ In panel C, $A=0.8$, $\hat{A}=1$ ($1-\beta=s=0.0198$), $\alpha=0.1$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Optimal success-bias weight}
-In results 2-6, we assumed that $\alpha$ is homogeneous in the population and constant, that is, it does not depend on any specific context.
-Next, we examined what happens in the continuous-trait model if the $i$-th copier evaluates its own optimal success-bias weight, $\alpha^*_i$, which minimizes the expected squared error between the chosen trait value and the `successful' trait value $\hat{A}$,
+In results 2-6, we assumed that the bias weight $\alpha$ is homogeneous in the population and constant, that is, it does not depend on any specific context.
+However, rational individuals could potentially adjust their bias weight to balance between success and prestige bias depending on their context, such as the number of individuals who have already chosen a role model.
+Therefore, we examined what happens in the continuous-trait model if the $i$-th copier evaluates its own optimal success-bias weight, $\alpha^*_i$, which minimizes the expected squared error between the chosen trait value and the `successful' trait value $\hat{A}$,
 \begin{equation}\label{eq:optimal_alpha}
 \alpha^*_i = \emph{argmin} \sum_{j=1}^N\frac{\alpha A_j + (1-\alpha) K_{i-1,j}}{\sum_{l=1}^N\alpha A_l + (1-\alpha) K_{i-1,l}} (\hat{A}-A_j)^2 \;,
 \end{equation}
@@ -598,7 +603,7 @@ Here "Copier" of the x-axis is the index of the choosing copier, population size
 Some cultural traits or cultural role-models may be copied more often than others due to transmission biases. 
 One such bias is success bias, in which copiers are more likely to copy a successful role-model. 
 It has been suggested that because it is hard to estimate success, a more common bias is a bias towards role-models \emph{perceived} to be successful.
-This perceived success can be determined by performance with respect to another trait, i.e., \emph{indirect success} \citep{evolutionBook,fijian_social_bias}, or by ``the amount of voluntary deference and attention received by models'' \citep{prestigeSocialLearn}, i.e., \emph{prestige} \citep{prestige_cultural_learning,prestige_evolution} (but see Chellappoo~\citep{rethinkPrestige} for a critical examination of the concept of prestige).
+This perceived success can be determined by performance with respect to another trait, i.e., \emph{indirect success} \citep{evolutionBook,fijian_social_bias}, or by ``the amount of voluntary deference and attention received by models'' \citep{prestigeSocialLearn}, i.e., \emph{prestige} \citep{prestige_cultural_learning,prestige_evolution,Nakata2024} (but see Chellappoo~\citep{rethinkPrestige} for a critical examination of the concept of prestige).
 
 We developed two cultural-evolutionary models, one with continuous and one with dichotomous trait values.
 Our models include both indirect success and prestige biases, where the latter is a bias towards role-models with many copiers. We model these biases using a stochastic role-model choice process: each copier, in turn, randomly chooses a role-model, and this choice is affected both by the estimated success of each potential role-model and the number of copiers that already chose each role-model (eq.~\ref{eq:prestige}). 
@@ -872,6 +877,10 @@ Ammar, Madeleine, Laurel Fogarty, and Anne Kandler. (2023) "Social Learning and 
 \bibitem{Moran1958}
 Moran, P. A. P. (1958) "Random Processes in Genetics." Mathematical Proceedings of the Cambridge Philosophical Society 54 (1): 60–71.
 
+\bibitem{Nakata2024}
+Nakata, Seiya, Akira Masumi, and Genta Toya. (2024) "Formalising Prestige Bias: Differences between Models with First-Order and Second-Order Cues." Evolutionary Human Sciences 6: e21.
+
+
 
 \end{thebibliography}
 
@@ -1140,6 +1149,17 @@ which proves the diffusion term.
 \newpage
 \section*{Supplementary Figures}
 \beginsupplement % https://support.authorea.com/en-us/article/how-to-create-an-appendix-section-or-supplementary-information-1g25i5a/
+
+\begin{figure}[h]
+    \includegraphics[width=1\linewidth]{timeseries.pdf}
+  \caption{
+  \textbf{Example dynamics of the dichotomous model with varying bias weight.}
+  The dichotomous model is defined in \cref{eq:binary-model}. Shown are full dynamics without DM or GBD approximations.
+  Here, population size, $N=1,000$; ideal phenotype value, $\hat{A}=1$; success bias value, $\beta(A)=0.99$; initial phenotype frequencies are 50\%-50\%.
+  }	
+  \label{fig:timeseries}
+\end{figure}
+
 
 \begin{figure}[h]
     \includegraphics[width=0.7\linewidth]{GBD_validation.pdf}
